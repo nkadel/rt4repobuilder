@@ -1,0 +1,7 @@
+SRPM .spec and patch files for perl-HTML-Masion-1.47, required for TUSK.
+
+Do not use pure mock environments for building until 'perl(Log::Any)'
+is available in public repositories, and use mock configured with access
+to rpmforge-extras to settle other dependencies.
+
+	     	 Nico Kadel-Garcia <nico.kadel@tufts.edu>

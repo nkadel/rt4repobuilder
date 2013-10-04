@@ -1,0 +1,58 @@
+Some random notes on rt3 on Fedora:
+
+
+Finalizing the installation
+===========================
+
+The default configuration is set up for a mysql based rt3 system. 
+It requires additional steps to be performed by the sysadmin to be 
+fully functional. 
+
+If you have never set up rt3 before, proceed as follows:
+1. Log-in to the server as root
+
+2. Install a mysql server:
+# yum install mysql-server
+
+3. Startup the mysql server:
+# /sbin/service mysqld start
+
+4. Set up the mysql server.
+If not already done, at minimum, you will want to set up a mysql root 
+password:
+# mysqladmin -u root password <mysql-root-password>
+
+5. Edit /etc/rt3/RT_SiteConfig.pm to meet your demands.
+You will want to compare RT_SiteConfig.pm against RT_Config.pm and
+add customized versions of those settings from RT_Config.pm to 
+RT_SiteConfig.pm.
+
+In particular, you probably will want to add customized versions of
+those setting containing "example.com" to your RT_SiteConfig.pm.
+
+6. Initialize rt3's mysql database:
+# /usr/sbin/rt-setup-database --action init \
+  --dba root \
+  --dba-password <mysql-root-password>
+
+7. Start/restart apache/httpd:
+# /sbin/service httpd start
+rsp.
+# /sbin/service httpd restart
+
+8. Try to log in:
+At this point, you should be able to login into rt3 on your rt3-host via
+its web interface as rt3-administrator (root), from an arbitrary host with
+http:-access to your rt3-host:
+e.g.:
+<your-favorite-browser> http://<rt3-host>/rt3
+
+You should be greeted with a login window. Login with 
+Username: root, Password: password.
+
+The next step should be to change your rt3's "root" account's password,
+otherwise anybody with web access to your site will be able to abuse 
+your site.
+
+Afterwards, you should be ready to create user accounts, configure 
+the mail-interface etc.

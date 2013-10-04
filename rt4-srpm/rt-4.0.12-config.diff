@@ -1,0 +1,12 @@
+diff -Naur rt-4.0.10/etc/RT_SiteConfig.pm.orig   rt-4.0.10/etc/RT_SiteConfig.pm
+--- rt-4.0.10/etc/RT_SiteConfig.pm.orig	2013-01-24 13:06:17.000000000 -0500
++++ rt-4.0.10/etc/RT_SiteConfig.pm	2013-03-07 00:45:58.943177556 -0500
+@@ -12,7 +12,7 @@
+ # going to run into trouble. To check your SiteConfig file, use
+ # this comamnd:
+ #
+-#   perl -c /path/to/your/etc/RT_SiteConfig.pm
++#   perl -c /etc/rt4/RT_Siteconfig.pm
+ #
+ # You must restart your webserver after making changes to this file.
+ 

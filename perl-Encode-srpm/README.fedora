@@ -1,0 +1,2 @@
+perl(Encode) 2.49 is much more recent than that build into
+perl-devel. To avoid conflicts, the "man3" pages are excluded.

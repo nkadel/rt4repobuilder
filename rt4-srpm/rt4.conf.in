@@ -1,0 +1,11 @@
+Alias /rt4 "@RT4_WWWDIR@"
+
+<Directory "@RT4_WWWDIR@">
+  AllowOverride All
+  Options ExecCGI FollowSymLinks
+
+  RewriteEngine On
+  RedirectMatch permanent (.*)/$ $1/index.html
+  AddDefaultCharset UTF-8
+  SetHandler perl-script
+</Directory>
