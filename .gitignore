@@ -1,6 +1,7 @@
 #*
 *.rpm
 *~
+repodata
 rt4repo-6-x86_64.cfg
 rt4repo.repo
 rt4repo/6/SRPMS/*
