@@ -64,7 +64,11 @@ RT4PKGS+=perl-Regexp-IPv6-srpm
 RT4PKGS+=perl-Server-Starter-srpm
 RT4PKGS+=perl-Starlet-srpm
 
+# Base directory for yum repository
 REPOBASEDIR="`/bin/pwd`"
+# Base subdirectories for RPM deployment
+REPOBASESUBDIRS+=$(REPOBASEDIR)/rt4repo/6/SRPMS
+REPOBASESUBDIRS+=$(REPOBASEDIR)/rt4repo/6/x86_64
 
 # Final target
 RT4PKGS+=rt4-srpm
@@ -92,6 +96,12 @@ rt4repo.repo:: FORCE
 		(echo Warning: /etc/yum.repos.d/$@ does not match $@, exiting; exit 1)
 
 epel:: $(EPELPKGS)
+
+
+$(REPOBASESUBDIRS)::
+	mkdir -p $@
+
+epel-install:: $(REPOBASESUBDIRS)
 
 epel-install:: FORCE
 	@for name in $(EPELPKGS); do \
