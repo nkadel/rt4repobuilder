@@ -10,6 +10,7 @@
 # These build with normal mock "epel-*" setups
 EPELPKGS+=perl-Authen-Simple-srpm
 EPELPKGS+=perl-CGI-PSGI-srpm
+EPELPKGS+=perl-Crypt-Eksblowfish-srpm
 EPELPKGS+=perl-Capture-Tiny-srpm
 EPELPKGS+=perl-Class-Accessor-Lite-srpm
 EPELPKGS+=perl-Class-Accessor-srpm
@@ -70,8 +71,12 @@ REPOBASEDIR="`/bin/pwd`"
 REPOBASESUBDIRS+=$(REPOBASEDIR)/rt4repo/6/SRPMS
 REPOBASESUBDIRS+=$(REPOBASEDIR)/rt4repo/6/x86_64
 
-# Final target
+# Binary target
 RT4PKGS+=rt4-srpm
+
+# Add-on utilities
+RT4PKGS+=perl-RT-Extension-CommandByMail
+RT4PKGS+=perl-RT-Extension-MandatoryFields
 
 # Populate rt4repo with packages compatible with just EPEL
 all:: epel-install
@@ -200,7 +205,7 @@ maintainer-clean:: FORCE
 safe-clean:: maintainer-clean FORCE
 	@echo Populate rt4repo with empty, safe repodata
 	find rt4repo -noleaf -type d -name repodata | while read name; do \
-		createrepo -q $$name; \
+		createrepo -q $$name/..; \
 	done
 
 
@@ -213,7 +218,7 @@ RSYNCSAFEOPTS=-a -v --ignore-owner --ignore-group
 publish:: all
 publish:: FORCE
 	@echo Publishing RPMs to $(RSYNCTARGET)
-	rsync $(RSYNCSAFEOPTS) --exclude=repodata --exclude=repodata $(RSYNCTARGET)/
+	rsync $(RSYNCSAFEOPTS) --exclude=repodata $(RSYNCTARGET)/
 
 publish:: FORCE
 	@echo Publishing repodata to $(RSYNCTARGET)
