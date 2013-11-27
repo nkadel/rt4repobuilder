@@ -7,6 +7,12 @@
 #
 #	Set up local 
 
+# Base directory for yum repository
+REPOBASEDIR="`/bin/pwd`"
+# Base subdirectories for RPM deployment
+REPOBASESUBDIRS+=$(REPOBASEDIR)/rt4repo/6/SRPMS
+REPOBASESUBDIRS+=$(REPOBASEDIR)/rt4repo/6/x86_64
+
 # These build with normal mock "epel-*" setups
 EPELPKGS+=perl-Authen-Simple-srpm
 EPELPKGS+=perl-CGI-PSGI-srpm
@@ -32,7 +38,7 @@ EPELPKGS+=perl-Scope-Guard-srpm
 EPELPKGS+=perl-Test-Log-Dispatch-srpm
 EPELPKGS+=perl-Text-Password-Pronounceable-srpm
 EPELPKGS+=perl-Time-Duration-Parse-srpm
-EPELPKGS+=perl-Text-WWW-Mechanize
+EPELPKGS+=perl-Test-WWW-Mechanize
 EPELPKGS+=perl-URI-srpm
 
 # Require customized rt4repo local repository for dependencies
@@ -66,11 +72,8 @@ RT4PKGS+=perl-Regexp-IPv6-srpm
 RT4PKGS+=perl-Server-Starter-srpm
 RT4PKGS+=perl-Starlet-srpm
 
-# Base directory for yum repository
-REPOBASEDIR="`/bin/pwd`"
-# Base subdirectories for RPM deployment
-REPOBASESUBDIRS+=$(REPOBASEDIR)/rt4repo/6/SRPMS
-REPOBASESUBDIRS+=$(REPOBASEDIR)/rt4repo/6/x86_64
+# Needed for rt4-Test building
+RT4PKGS+=perl-Test-WWW-Mechanize-PSGI
 
 # Binary target
 RT4PKGS+=rt4-srpm
