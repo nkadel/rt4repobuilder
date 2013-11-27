@@ -36,9 +36,9 @@ EPELPKGS+=perl-Proc-Wait3-srpm
 EPELPKGS+=perl-Regexp-Common-Net-CIDR-srpm
 EPELPKGS+=perl-Scope-Guard-srpm
 EPELPKGS+=perl-Test-Log-Dispatch-srpm
+EPELPKGS+=perl-Test-WWW-Mechanize
 EPELPKGS+=perl-Text-Password-Pronounceable-srpm
 EPELPKGS+=perl-Time-Duration-Parse-srpm
-EPELPKGS+=perl-Test-WWW-Mechanize
 EPELPKGS+=perl-URI-srpm
 
 # Require customized rt4repo local repository for dependencies
@@ -80,8 +80,8 @@ RT4PKGS+=perl-Plack-Middleware-Test-StashWarnings-srpm
 RT4PKGS+=rt4-srpm
 
 # Add-on utilities
-RT4PKGS+=perl-RT-Extension-CommandByMail
-RT4PKGS+=perl-RT-Extension-MandatoryFields
+RT4PKGS+=perl-RT-Extension-CommandByMail-srpm
+RT4PKGS+=perl-RT-Extension-MandatoryFields-srpm
 
 # Populate rt4repo with packages compatible with just EPEL
 all:: epel-install
@@ -165,12 +165,13 @@ rt4:: perl-HTML-Mason-PSGIHandler-srpm
 rt4:: perl-HTML-Mason-srpm
 rt4:: perl-HTML-Quoted-srpm
 rt4:: perl-HTML-RewriteAttributes-srpm
+rt4:: perl-Plack-Middleware-Test-StashWarnings-srpm
 rt4:: perl-Plack-srpm
 rt4:: perl-Regexp-IPv6-srpm
 rt4:: perl-Text-Password-Pronounceable-srpm
 
-perl-RT-Extension-CommandByMail:: rt4
-perl-RT-Extension-MandatoryFields:: rt4
+perl-RT-Extension-CommandByMail:: rt4-srpm
+perl-RT-Extension-MandatoryFields:: rt4-srpm
 
 # Git clone operations, not normally required
 # Targets may change
