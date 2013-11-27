@@ -32,6 +32,7 @@ EPELPKGS+=perl-Scope-Guard-srpm
 EPELPKGS+=perl-Test-Log-Dispatch-srpm
 EPELPKGS+=perl-Text-Password-Pronounceable-srpm
 EPELPKGS+=perl-Time-Duration-Parse-srpm
+EPELPKGS+=perl-Text-WWW-Mechanize
 EPELPKGS+=perl-URI-srpm
 
 # Require customized rt4repo local repository for dependencies
