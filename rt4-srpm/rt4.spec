@@ -156,6 +156,7 @@ BuildRequires: perl(Regexp::Common::net::CIDR)
 BuildRequires: perl(Regexp::IPv6)
 BuildRequires: perl(Scalar::Util)
 BuildRequires: perl(Storable) >= 2.08
+%{?with_devel_mode:BuildRequires: perl(String::ShellQuote)}
 BuildRequires: perl(Term::ReadKey)
 BuildRequires: perl(Term::ReadLine)
 %{?with_devel_mode:BuildRequires: perl(Test::Builder) >= 0.77}
