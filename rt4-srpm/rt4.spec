@@ -19,11 +19,11 @@
 # --with devel_mode/--without devel_mode
 #	enable/disable building/installing devel files
 #	Default: --with
-%if 0%{?fedora}
+#%if 0%{?fedora}
 %bcond_without devel_mode
-%else
-%bcond_with devel_mode
-%endif
+#%else
+#%bcond_with devel_mode
+#%endif
 
 # --with gpg/--without gpg
 #	enable/disable building gpg support
@@ -48,7 +48,7 @@
 
 Name:		rt4
 Version:	4.0.17
-Release:	0.1%{?dist}
+Release:	0.2%{?dist}
 Summary:	Request tracker 3
 
 Group:		Applications/Internet
@@ -97,6 +97,7 @@ BuildRequires: perl(Devel::GlobalDestruction)
 BuildRequires: perl(Devel::StackTrace) >= 1.19
 BuildRequires: perl(Digest::base)
 BuildRequires: perl(Digest::MD5) >= 2.27
+%{?with_devel_mode:BuildRequires: perl(Email::Abstract)}
 BuildRequires: perl(Email::Address)
 BuildRequires: perl(Encode) >= 2.39
 BuildRequires: perl(Errno)
@@ -148,23 +149,26 @@ BuildRequires: perl(Net::SMTP)
 %{?with_gpg:BuildRequires: perl(PerlIO::eol)}
 BuildRequires: perl(Plack)
 BuildRequires: perl(Plack::Handler::Starlet)
+%{?with_devel_mode:BuildRequires: perl(Plack::Middleware::Test::StashWarnings)}
 BuildRequires: perl(Pod::Usage)
 BuildRequires: perl(Regexp::Common)
 BuildRequires: perl(Regexp::Common::net::CIDR)
 BuildRequires: perl(Regexp::IPv6)
 BuildRequires: perl(Scalar::Util)
 BuildRequires: perl(Storable) >= 2.08
-%{?with_devel_mode:BuildRequires: perl(String::ShellQuote)}
 BuildRequires: perl(Term::ReadKey)
 BuildRequires: perl(Term::ReadLine)
 %{?with_devel_mode:BuildRequires: perl(Test::Builder) >= 0.77}
 %{?with_devel_mode:BuildRequires: perl(Test::Deep)}
+%{?with_devel_mode:BuildRequires: perl(Test::Email)}
 %{?with_devel_mode:BuildRequires: perl(Test::Expect) >= 0.31}
 %{?with_devel_mode:BuildRequires: perl(Test::HTTP::Server::Simple) >= 0.09}
 %{?with_devel_mode:BuildRequires: perl(Test::HTTP::Server::Simple::StashWarnings)}
 %{?with_devel_mode:BuildRequires: perl(Test::MockTime)}
+%{?with_devel_mode:BuildRequires: perl(Test::NoWarnings)}
 %{?with_devel_mode:BuildRequires: perl(Test::Warn)}
-%{?with_devel_mode:BuildRequires: perl(Test::WWW::Mechanize)}
+%{?with_devel_mode:BuildRequires: perl(Test::WWW::Mechanize)} >= 1.30
+%{?with_devel_mode:BuildRequires: perl(Test::WWW::Mechanize::PSGI)}
 BuildRequires: perl(Text::ParseWords)
 BuildRequires: perl(Text::Password::Pronounceable)
 BuildRequires: perl(Text::Quoted) >= 2.02
@@ -567,6 +571,10 @@ fi
 %endif
 
 %changelog
+* Wed Nov 27 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.17-0.2
+- Enable "with_devel_mode" for RHEL compilation, for RT addon packagtes.
+- Add BuildRequires for devel mode.
+
 * Fri Aug  2 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.17-0.1
 - Update to 4.0.17
 
