@@ -47,8 +47,8 @@
 %{!?perl_testdir:%global perl_testdir %{_libexecdir}/perl5-tests}
 
 Name:		rt4
-Version:	4.0.17
-Release:	0.2%{?dist}
+Version:	4.0.18
+Release:	0.1%{?dist}
 Summary:	Request tracker 3
 
 Group:		Applications/Internet
@@ -133,6 +133,7 @@ BuildRequires: perl(JSON)
 BuildRequires: perl(Locale::Maketext) >= 1.06
 BuildRequires: perl(Locale::Maketext::Fuzzy)
 BuildRequires: perl(Locale::Maketext::Lexicon) >= 0.32
+%{?with_devel_mode:BuildRequires: perl(Locale::PO)}
 BuildRequires: perl(Log::Dispatch) >= 2.0
 %{?with_devel_mode:BuildRequires: perl(Log::Dispatch::Perl)}
 BuildRequires: perl(LWP)
@@ -572,6 +573,9 @@ fi
 %endif
 
 %changelog
+* Thu Nov 28 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.18-0.1
+- U[date to 4.0.18.
+
 * Wed Nov 27 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.17-0.2
 - Enable "with_devel_mode" for RHEL compilation, for RT addon packagtes.
 - Add BuildRequires for devel mode.
