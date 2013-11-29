@@ -60,17 +60,15 @@ Source3:	rt4.conf.in
 Source4:	README.fedora.in
 Source5:	rt4.logrotate.in
 
-#Patch0:		rt-%{version}-config.diff
 Patch0:		rt-4.0.12-config.diff
-#Patch1:		rt-%{version}-shebang.diff
-#Patch2:		rt-%{version}-Makefile.diff
 Patch2:		rt-4.0.12-Makefile.diff
-#Patch3:		rt-%{version}-test-dependencies.diff
 
 BuildArch:	noarch
 
 # For Debian compatibility
 Provides:	request-tracker3 = %{version}-%{release}
+# For RHEL dependencies
+Provides:	rt = %{version}-%{release}
 
 # Manage perl macro filtering
 BuildRequires: ghc-rpm-macros
@@ -296,6 +294,7 @@ Requires:	perl(HTML::TreeBuilder)
 Requires:	perl(HTML::FormatText)
 Conflicts:	rt3
 Conflicts:	rt3-mailgate
+Provides:	rt-mailgate = %{version}-%{release}
 
 %description mailgate
 %{summary}
@@ -343,8 +342,8 @@ sed -e 's,@RT4_CACHEDIR@,%{RT4_CACHEDIR},' %{SOURCE4} \
 sed -e 's,@RT4_LOGDIR@,%{RT4_LOGDIR},' %{SOURCE5} \
   > rt4.logrotate
 
-# Fixup the tarball shipping with broken permissions
-find \( -type f -a -executable \) -exec chmod a-x {} \;
+# Fixup the tarball shipping with broken permissions, don't touch symlinks
+find -type f -executable ! -type l -exec chmod a-x {} \;
 chmod +x configure install-sh
 
 # Upstream tarball contains temporary autotools-files
@@ -354,18 +353,10 @@ rm -rf autom4te.cache config.log config.status
 find bin sbin etc -name '*.in' | while read a; do d=$(echo "$a" | sed 's,\.in$,,'); rm "$d"; done
 
 %patch0 -p1
-## Add /usr/bin/perl dynamically to api tests, instead of static patch
-##%patch1 -p1
-#find t/api -name \*.t | sort | while read name; do
-#    cp $name $name.shebang
-#    echo '/usr/bin/perl' > $name
-#    cat $name.shebang >> $name
-#done
 
 %patch2 -p1
-#%patch3 -p1
 
-# Propagate rpm's directories to config.layout
+# Propagate rpm directories to config.layout
 cat << \EOF >> config.layout
 
 #   Fedora directory layout.
