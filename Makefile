@@ -89,7 +89,7 @@ all:: epel-install
 # Populate rt4repo with packages that require rt4repo
 all:: rt4-install
 
-insall:: epel-install rt4-install
+install:: epel-install rt4-install
 
 rt4repo-6-x86_64.cfg:: rt4repo-6-x86_64.cfg.in
 	sed "s|@@@REPOBASEDIR@@@|$(REPOBASEDIR)|g" $? > $@
