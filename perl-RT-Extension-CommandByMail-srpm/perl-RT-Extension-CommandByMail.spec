@@ -10,13 +10,15 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 BuildRequires:  perl >= 1:5.8.3
 # Force installation of RT version 4 components
-BuildRequires:  rt4 >= 4.0
+BuildRequires:  perl(CPAN)
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(MIME::Entity) >= 5.420
 BuildRequires:  perl(RT) >= 4.0
 BuildRequires:  perl(RT::Test)
 BuildRequires:  perl(Test::More)
 BuildRequires:  perl(UNIVERSAL::require)
+BuildRequires:  rt4 >= 4.0
+BuildRequires:  /usr/sbin/rt-mailgate
 Requires:       perl(MIME::Entity) >= 5.420
 Requires:       perl(RT)
 Requires:       perl(UNIVERSAL::require)
@@ -32,7 +34,6 @@ RT::Interface::Email::Filter::TakeAction docs.
 %setup -q -n RT-Extension-CommandByMail-%{version}
 
 %build
-#%{__perl} Makefile.PL INSTALLDIRS=vendor
 %{__perl} Makefile.PL INSTALLDIRS=vendor
 make %{?_smp_mflags}
 
