@@ -1,7 +1,7 @@
 
 Name:           perl-RT-Extension-CommandByMail
 Version:        0.10
-Release:        9%{?dist}
+Release:        0.2%{?dist}
 Summary:        Change metadata of a RT ticket via email
 License:        GPL+ or Artistic
 Group:          Development/Libraries
@@ -59,6 +59,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %changelog
+* Sat Nov 30 2013 Nico Kadel-Garcia <nkadel@gmail.com> - 0.10-0.1
+- Update to 0.10 for local chef cookbook compatibility
+
 * Sun Aug 04 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.07-9
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
 
