@@ -133,6 +133,7 @@ BuildRequires: perl(HTTP::Server::Simple::Mason) >= 0.09
 BuildRequires: perl(IPC::Run3)
 %{?with_graphviz:BuildRequires: perl(IPC::Run::SafeHandles)}
 BuildRequires: perl(JSON)
+BuildRequires: perl(JSON::PP)
 BuildRequires: perl(Locale::Maketext) >= 1.06
 BuildRequires: perl(Locale::Maketext::Fuzzy)
 BuildRequires: perl(Locale::Maketext::Lexicon) >= 0.32
