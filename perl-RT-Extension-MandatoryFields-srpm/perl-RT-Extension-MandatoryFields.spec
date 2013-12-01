@@ -12,8 +12,10 @@ BuildRequires:  perl >= 0:5.10.0
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(YAML::Tiny)
 BuildRequires:  perl(File::Remove)
-BuildRequires:  perl(RT) >= 4.0.0
-Requires:       perl(RT) >= 4.0.0
+# Note: compile inside mock with rt3 on RHEL 5, supports rt4 if needed
+BuildRequires:  perl(RT)
+BuildRequires:  rt3
+Requires:       perl(RT)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 %description
