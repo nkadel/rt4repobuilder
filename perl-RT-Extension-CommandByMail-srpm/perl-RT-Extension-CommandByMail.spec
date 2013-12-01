@@ -1,6 +1,6 @@
 
 Name:           perl-RT-Extension-CommandByMail
-Version:        0.10
+Version:        0.16
 Release:        0.2%{?dist}
 Summary:        Change metadata of a RT ticket via email
 License:        GPL+ or Artistic
@@ -16,6 +16,9 @@ BuildRequires:  perl(Test::More)
 BuildRequires:  perl(UNIVERSAL::require)
 BuildRequires:  perl(RT)
 BuildRequires:  /usr/sbin/rt-mailgate
+# Compilation with "mock" rquires rt3 for  now, not compatible with rt4
+BuildRequires:  rt3-mailgage
+BuildRequires:  rt3
 Requires:       perl(MIME::Entity) >= 5.420
 Requires:       perl(RT::Interface::Email)
 Requires:       perl(UNIVERSAL::require)
@@ -54,13 +57,14 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(-,root,root,-)
-%doc Changes README INSTALL
+%doc Changes README
 %{perl_vendorlib}/*
 %{_mandir}/man3/*
 
 %changelog
-* Sat Nov 30 2013 Nico Kadel-Garcia <nkadel@gmail.com> - 0.10-0.1
-- Update to 0.10 for local chef cookbook compatibility
+* Sat Nov 30 2013 Nico Kadel-Garcia <nkadel@gmail.com> - 0.16-0.2
+- Update to 0.16
+- Set rt3 requirement, mock compilation fails with rt4.
 
 * Sun Aug 04 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.07-9
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild

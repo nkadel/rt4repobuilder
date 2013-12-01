@@ -1,1 +1,1 @@
-../Makefile.rt4
+../Makefile.epel
