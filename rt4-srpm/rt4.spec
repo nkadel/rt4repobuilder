@@ -19,11 +19,11 @@
 # --with devel_mode/--without devel_mode
 #	enable/disable building/installing devel files
 #	Default: --with
-%if 0%{?fedora}
+#%if 0%{?fedora}
 %bcond_without devel_mode
-%else
-%bcond_with devel_mode
-%endif
+#%else
+#%bcond_with devel_mode
+#%endif
 
 # --with gpg/--without gpg
 #	enable/disable building gpg support
@@ -47,8 +47,8 @@
 %{!?perl_testdir:%global perl_testdir %{_libexecdir}/perl5-tests}
 
 Name:		rt4
-Version:	4.0.17
-Release:	0.1%{?dist}
+Version:	4.0.18
+Release:	0.2%{?dist}
 Summary:	Request tracker 3
 
 Group:		Applications/Internet
@@ -60,20 +60,23 @@ Source3:	rt4.conf.in
 Source4:	README.fedora.in
 Source5:	rt4.logrotate.in
 
-#Patch0:		rt-%{version}-config.diff
 Patch0:		rt-4.0.12-config.diff
-#Patch1:		rt-%{version}-shebang.diff
-#Patch2:		rt-%{version}-Makefile.diff
 Patch2:		rt-4.0.12-Makefile.diff
-#Patch3:		rt-%{version}-test-dependencies.diff
 
 BuildArch:	noarch
 
 # For Debian compatibility
 Provides:	request-tracker3 = %{version}-%{release}
+# For RHEL dependencies
+Provides:	rt = %{version}-%{release}
 
 # Manage perl macro filtering
 BuildRequires: ghc-rpm-macros
+
+# Needed for filert-requires "/d" syntax
+%if 0%{?rhel}
+BuildRequires: redhat-rpm-config
+%endif
 
 # This list is alpha sorted
 BuildRequires: perl(Apache::DBI)
@@ -97,6 +100,7 @@ BuildRequires: perl(Devel::GlobalDestruction)
 BuildRequires: perl(Devel::StackTrace) >= 1.19
 BuildRequires: perl(Digest::base)
 BuildRequires: perl(Digest::MD5) >= 2.27
+%{?with_devel_mode:BuildRequires: perl(Email::Abstract)}
 BuildRequires: perl(Email::Address)
 BuildRequires: perl(Encode) >= 2.39
 BuildRequires: perl(Errno)
@@ -129,9 +133,11 @@ BuildRequires: perl(HTTP::Server::Simple::Mason) >= 0.09
 BuildRequires: perl(IPC::Run3)
 %{?with_graphviz:BuildRequires: perl(IPC::Run::SafeHandles)}
 BuildRequires: perl(JSON)
+BuildRequires: perl(JSON::PP)
 BuildRequires: perl(Locale::Maketext) >= 1.06
 BuildRequires: perl(Locale::Maketext::Fuzzy)
 BuildRequires: perl(Locale::Maketext::Lexicon) >= 0.32
+%{?with_devel_mode:BuildRequires: perl(Locale::PO)}
 BuildRequires: perl(Log::Dispatch) >= 2.0
 %{?with_devel_mode:BuildRequires: perl(Log::Dispatch::Perl)}
 BuildRequires: perl(LWP)
@@ -148,6 +154,7 @@ BuildRequires: perl(Net::SMTP)
 %{?with_gpg:BuildRequires: perl(PerlIO::eol)}
 BuildRequires: perl(Plack)
 BuildRequires: perl(Plack::Handler::Starlet)
+%{?with_devel_mode:BuildRequires: perl(Plack::Middleware::Test::StashWarnings)}
 BuildRequires: perl(Pod::Usage)
 BuildRequires: perl(Regexp::Common)
 BuildRequires: perl(Regexp::Common::net::CIDR)
@@ -159,12 +166,15 @@ BuildRequires: perl(Term::ReadKey)
 BuildRequires: perl(Term::ReadLine)
 %{?with_devel_mode:BuildRequires: perl(Test::Builder) >= 0.77}
 %{?with_devel_mode:BuildRequires: perl(Test::Deep)}
+%{?with_devel_mode:BuildRequires: perl(Test::Email)}
 %{?with_devel_mode:BuildRequires: perl(Test::Expect) >= 0.31}
 %{?with_devel_mode:BuildRequires: perl(Test::HTTP::Server::Simple) >= 0.09}
 %{?with_devel_mode:BuildRequires: perl(Test::HTTP::Server::Simple::StashWarnings)}
 %{?with_devel_mode:BuildRequires: perl(Test::MockTime)}
+%{?with_devel_mode:BuildRequires: perl(Test::NoWarnings)}
 %{?with_devel_mode:BuildRequires: perl(Test::Warn)}
-%{?with_devel_mode:BuildRequires: perl(Test::WWW::Mechanize)}
+%{?with_devel_mode:BuildRequires: perl(Test::WWW::Mechanize)} >= 1.30
+%{?with_devel_mode:BuildRequires: perl(Test::WWW::Mechanize::PSGI)}
 BuildRequires: perl(Text::ParseWords)
 BuildRequires: perl(Text::Password::Pronounceable)
 BuildRequires: perl(Text::Quoted) >= 2.02
@@ -256,6 +266,11 @@ Requires: rt4-mailgate
 %endif
 
 %if 0%{?rhel}
+
+# Activate perl filtering
+%{?perl_filter_default}
+%{?filter_setup}
+
 # RPM 4.8 style:
 %{?perl_default_filter:
 # Keep SpamAssassin optional
@@ -290,6 +305,7 @@ Requires:	perl(HTML::TreeBuilder)
 Requires:	perl(HTML::FormatText)
 Conflicts:	rt3
 Conflicts:	rt3-mailgate
+Provides:	rt-mailgate = %{version}-%{release}
 
 %description mailgate
 %{summary}
@@ -337,8 +353,8 @@ sed -e 's,@RT4_CACHEDIR@,%{RT4_CACHEDIR},' %{SOURCE4} \
 sed -e 's,@RT4_LOGDIR@,%{RT4_LOGDIR},' %{SOURCE5} \
   > rt4.logrotate
 
-# Fixup the tarball shipping with broken permissions
-find \( -type f -a -executable \) -exec chmod a-x {} \;
+# Fixup the tarball shipping with broken permissions, don't touch symlinks
+find -type f -executable ! -type l -exec chmod a-x {} \;
 chmod +x configure install-sh
 
 # Upstream tarball contains temporary autotools-files
@@ -348,18 +364,10 @@ rm -rf autom4te.cache config.log config.status
 find bin sbin etc -name '*.in' | while read a; do d=$(echo "$a" | sed 's,\.in$,,'); rm "$d"; done
 
 %patch0 -p1
-## Add /usr/bin/perl dynamically to api tests, instead of static patch
-##%patch1 -p1
-#find t/api -name \*.t | sort | while read name; do
-#    cp $name $name.shebang
-#    echo '/usr/bin/perl' > $name
-#    cat $name.shebang >> $name
-#done
 
 %patch2 -p1
-#%patch3 -p1
 
-# Propagate rpm's directories to config.layout
+# Propagate rpm directories to config.layout
 cat << \EOF >> config.layout
 
 #   Fedora directory layout.
@@ -403,12 +411,12 @@ find t \( -name '*.t' -o -name '*.pl' \) -exec chmod +x {} \;
 
 %build
 %configure \
---with-apachectl=/usr/sbin/apachectl \
---with-web-user=apache --with-web-group=apache \
---with-db-type=mysql \
---enable-layout=Fedora \
---with-web-handler=modperl2 \
---libdir=%{RT4_LIBDIR} \
+    --with-apachectl=/usr/sbin/apachectl \
+    --with-web-user=apache --with-web-group=apache \
+    --with-db-type=mysql \
+    --enable-layout=Fedora \
+    --with-web-handler=modperl2 \
+    --libdir=%{RT4_LIBDIR} \
 %{?with_graphviz:--enable-graphviz}%{!?with_graphviz:--disable-graphviz} \
 %{?with_gd:--enable-gd}%{!?with_gd:--disable-gd} \
 %{?with_gpg:--enable-gpg}%{!?with_gpg:--disable-gpg}
@@ -567,6 +575,13 @@ fi
 %endif
 
 %changelog
+* Sat Nov 30 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.18-0.2
+- Add BuildRequires for redhat-rpm-config on RHEL
+
+* Wed Nov 27 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.17-0.2
+- Enable "with_devel_mode" for RHEL compilation, for RT addon packagtes.
+- Add BuildRequires for devel mode.
+
 * Fri Aug  2 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.17-0.1
 - Update to 4.0.17
 

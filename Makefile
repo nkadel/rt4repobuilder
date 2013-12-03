@@ -7,9 +7,16 @@
 #
 #	Set up local 
 
+# Base directory for yum repository
+REPOBASEDIR="`/bin/pwd`"
+# Base subdirectories for RPM deployment
+REPOBASESUBDIRS+=$(REPOBASEDIR)/rt4repo/6/SRPMS
+REPOBASESUBDIRS+=$(REPOBASEDIR)/rt4repo/6/x86_64
+
 # These build with normal mock "epel-*" setups
 EPELPKGS+=perl-Authen-Simple-srpm
 EPELPKGS+=perl-CGI-PSGI-srpm
+EPELPKGS+=perl-Crypt-Eksblowfish-srpm
 EPELPKGS+=perl-Capture-Tiny-srpm
 EPELPKGS+=perl-Class-Accessor-Lite-srpm
 EPELPKGS+=perl-Class-Accessor-srpm
@@ -29,6 +36,7 @@ EPELPKGS+=perl-Proc-Wait3-srpm
 EPELPKGS+=perl-Regexp-Common-Net-CIDR-srpm
 EPELPKGS+=perl-Scope-Guard-srpm
 EPELPKGS+=perl-Test-Log-Dispatch-srpm
+EPELPKGS+=perl-Test-WWW-Mechanize
 EPELPKGS+=perl-Text-Password-Pronounceable-srpm
 EPELPKGS+=perl-Time-Duration-Parse-srpm
 EPELPKGS+=perl-URI-srpm
@@ -64,14 +72,16 @@ RT4PKGS+=perl-Regexp-IPv6-srpm
 RT4PKGS+=perl-Server-Starter-srpm
 RT4PKGS+=perl-Starlet-srpm
 
-# Base directory for yum repository
-REPOBASEDIR="`/bin/pwd`"
-# Base subdirectories for RPM deployment
-REPOBASESUBDIRS+=$(REPOBASEDIR)/rt4repo/6/SRPMS
-REPOBASESUBDIRS+=$(REPOBASEDIR)/rt4repo/6/x86_64
+# Needed for rt4-Test building
+RT4PKGS+=perl-Test-WWW-Mechanize-PSGI
+RT4PKGS+=perl-Plack-Middleware-Test-StashWarnings-srpm
 
-# Final target
+# Binary target
 RT4PKGS+=rt4-srpm
+
+# Add-on utilities
+RT4PKGS+=perl-RT-Extension-CommandByMail-srpm
+RT4PKGS+=perl-RT-Extension-MandatoryFields-srpm
 
 # Populate rt4repo with packages compatible with just EPEL
 all:: epel-install
@@ -155,9 +165,13 @@ rt4:: perl-HTML-Mason-PSGIHandler-srpm
 rt4:: perl-HTML-Mason-srpm
 rt4:: perl-HTML-Quoted-srpm
 rt4:: perl-HTML-RewriteAttributes-srpm
+rt4:: perl-Plack-Middleware-Test-StashWarnings-srpm
 rt4:: perl-Plack-srpm
 rt4:: perl-Regexp-IPv6-srpm
 rt4:: perl-Text-Password-Pronounceable-srpm
+
+perl-RT-Extension-CommandByMail:: rt4-srpm
+perl-RT-Extension-MandatoryFields:: rt4-srpm
 
 # Git clone operations, not normally required
 # Targets may change
@@ -200,7 +214,7 @@ maintainer-clean:: FORCE
 safe-clean:: maintainer-clean FORCE
 	@echo Populate rt4repo with empty, safe repodata
 	find rt4repo -noleaf -type d -name repodata | while read name; do \
-		createrepo -q $$name; \
+		createrepo -q $$name/..; \
 	done
 
 
@@ -213,7 +227,7 @@ RSYNCSAFEOPTS=-a -v --ignore-owner --ignore-group
 publish:: all
 publish:: FORCE
 	@echo Publishing RPMs to $(RSYNCTARGET)
-	rsync $(RSYNCSAFEOPTS) --exclude=repodata --exclude=repodata $(RSYNCTARGET)/
+	rsync $(RSYNCSAFEOPTS) --exclude=repodata $(RSYNCTARGET)/
 
 publish:: FORCE
 	@echo Publishing repodata to $(RSYNCTARGET)

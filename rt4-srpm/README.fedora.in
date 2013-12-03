@@ -1,14 +1,14 @@
-Some random notes on rt3 on Fedora:
+Some random notes on rt4 on Fedora:
 
 
 Finalizing the installation
 ===========================
 
-The default configuration is set up for a mysql based rt3 system. 
+The default configuration is set up for a mysql based rt4 system. 
 It requires additional steps to be performed by the sysadmin to be 
 fully functional. 
 
-If you have never set up rt3 before, proceed as follows:
+If you have never set up rt4 before, proceed as follows:
 1. Log-in to the server as root
 
 2. Install a mysql server:
@@ -22,7 +22,7 @@ If not already done, at minimum, you will want to set up a mysql root
 password:
 # mysqladmin -u root password <mysql-root-password>
 
-5. Edit /etc/rt3/RT_SiteConfig.pm to meet your demands.
+5. Edit /etc/rt4/RT_SiteConfig.pm to meet your demands.
 You will want to compare RT_SiteConfig.pm against RT_Config.pm and
 add customized versions of those settings from RT_Config.pm to 
 RT_SiteConfig.pm.
@@ -30,7 +30,7 @@ RT_SiteConfig.pm.
 In particular, you probably will want to add customized versions of
 those setting containing "example.com" to your RT_SiteConfig.pm.
 
-6. Initialize rt3's mysql database:
+6. Initialize rt4's mysql database:
 # /usr/sbin/rt-setup-database --action init \
   --dba root \
   --dba-password <mysql-root-password>
@@ -41,16 +41,16 @@ rsp.
 # /sbin/service httpd restart
 
 8. Try to log in:
-At this point, you should be able to login into rt3 on your rt3-host via
-its web interface as rt3-administrator (root), from an arbitrary host with
-http:-access to your rt3-host:
+At this point, you should be able to login into rt4 on your rt4-host via
+its web interface as rt4-administrator (root), from an arbitrary host with
+http:-access to your rt4-host:
 e.g.:
-<your-favorite-browser> http://<rt3-host>/rt3
+<your-favorite-browser> http://<rt4-host>/rt4
 
 You should be greeted with a login window. Login with 
 Username: root, Password: password.
 
-The next step should be to change your rt3's "root" account's password,
+The next step should be to change your rt4's "root" account's password,
 otherwise anybody with web access to your site will be able to abuse 
 your site.
 

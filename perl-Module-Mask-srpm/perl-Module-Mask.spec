@@ -23,6 +23,10 @@ BuildRequires:  perl(Test::More)
 # Optional tests
 BuildRequires:  perl(Test::Pod) >= 1.14
 BuildRequires:  perl(Test::Pod::Coverage) >= 1.04
+# Needed for filter-requires "/d" syntax
+%if 0%{?rhel}
+BuildRequires:   redhat-rpm-config
+%endif
 
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 Requires:       perl(Module::Util) >= 1.00
@@ -70,6 +74,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %changelog
+* Sat Nov 30 2013 Nico  Kadel-Garcia <nkadel@gmail.com> - 0.04-0.2
+- Add BuldRequired for r redhat-rpm-config on RHEL
+
 * Wed Mar 13 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholsatic.com> - 0.04-0.1
 - Roll back release to avoid update conflicts.
 - Add PerlRequires: perl(Test::Harness) to build under mock.
