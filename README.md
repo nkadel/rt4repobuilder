@@ -43,5 +43,5 @@ Requirements: This toolkit requires the following tools:
      * "sudo" Permissions to clear the mock cache for rt4repo build
        environments without having to supply passwords. For example:
 
-	Cmnd_Alias MOCKCMDS = /bin/rm -rf /var/cache/mock/rt4repo-6-x86_64/
-	%mock	ALL=NOPASSWD: MOCKCMDS
+	Cmnd_Alias MOCKRTCLEAN = /bin/rm -rf --one-file-system /var/cache/mock/rt4repo-6-x86_64/
+	%mock	ALL=NOPASSWD: MOCKRTCLEAN

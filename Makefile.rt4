@@ -74,7 +74,7 @@ install:: $(MOCKS)
 		createrepo -q $$rpmdir/.; \
 	    done; \
 	    echo "	Deleting /var/cache/mock/$$repo/ to clear cache"; \
-	    sudo rm -rf /var/cache/mock/$$repo/; \
+	    sudo /bin/rm -rf --one-file-system /var/cache/mock/$$repo/; \
 	done
 
 clean::
