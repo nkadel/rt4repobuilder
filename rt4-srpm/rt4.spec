@@ -48,7 +48,7 @@
 
 Name:		rt4
 Version:	4.0.18
-Release:	0.1%{?dist}
+Release:	0.2%{?dist}
 Summary:	Request tracker 3
 
 Group:		Applications/Internet
@@ -72,6 +72,11 @@ Provides:	rt = %{version}-%{release}
 
 # Manage perl macro filtering
 BuildRequires: ghc-rpm-macros
+
+# Needed for filert-requires "/d" syntax
+%if 0%{?rhel}
+BuildRequires: redhat-rpm-config
+%endif
 
 # This list is alpha sorted
 BuildRequires: perl(Apache::DBI)
@@ -128,6 +133,7 @@ BuildRequires: perl(HTTP::Server::Simple::Mason) >= 0.09
 BuildRequires: perl(IPC::Run3)
 %{?with_graphviz:BuildRequires: perl(IPC::Run::SafeHandles)}
 BuildRequires: perl(JSON)
+BuildRequires: perl(JSON::PP)
 BuildRequires: perl(Locale::Maketext) >= 1.06
 BuildRequires: perl(Locale::Maketext::Fuzzy)
 BuildRequires: perl(Locale::Maketext::Lexicon) >= 0.32
@@ -260,6 +266,11 @@ Requires: rt4-mailgate
 %endif
 
 %if 0%{?rhel}
+
+# Activate perl filtering
+%{?perl_filter_default}
+%{?filter_setup}
+
 # RPM 4.8 style:
 %{?perl_default_filter:
 # Keep SpamAssassin optional
@@ -564,8 +575,8 @@ fi
 %endif
 
 %changelog
-* Thu Nov 28 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.18-0.1
-- U[date to 4.0.18.
+* Sat Nov 30 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.18-0.2
+- Add BuildRequires for redhat-rpm-config on RHEL
 
 * Wed Nov 27 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.17-0.2
 - Enable "with_devel_mode" for RHEL compilation, for RT addon packagtes.
