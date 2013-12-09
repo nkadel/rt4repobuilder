@@ -214,6 +214,7 @@ Requires(postun): %{__rm}
 # rpm doesn't catch these:
 Requires: perl(Apache::Session)
 Requires: perl(Calendar::Simple)
+Requires: perl(DBD::mysql)
 Requires: perl(Data::ICal)
 Requires: perl(Data::ICal::Entry::Event)
 Requires: perl(Email::Address)
@@ -578,6 +579,7 @@ fi
 %changelog
 * Mon Dec  9 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.18-0.3
 - Filter spurious Provides for perl(Log::Dispatch)
+- Add Requires for perl(DBD::mysql), in order to run rt-server.
 
 * Sat Nov 30 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.18-0.2
 - Add BuildRequires for redhat-rpm-config on RHEL
