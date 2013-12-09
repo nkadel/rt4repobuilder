@@ -48,4 +48,4 @@ Requirements: This toolkit requires the following tools:
     %mock	ALL=NOPASSWD: MOCKCMDS
 
     # The "NOPASSWD" has to be added after the PASSWD for admins with sudo
-    adminuser	ALL=(ALL)	PASSWD: ALL, NOPASSWD: MOCKRT4TOUCH
+    adminuser	ALL=(ALL)	NOPASSWD: MOCKCMDS, PASSWD: ALL
