@@ -73,8 +73,8 @@ install:: $(MOCKS)
 		rsync $(RSYNCSAFEOPTS) --exclude=*.src.rpm --exclude=*debuginfo*.rpm $$repo/*.rpm $$rpmdir/. || exit 1; \
 		createrepo -q $$rpmdir/.; \
 	    done; \
-	    echo "	Deleting /var/cache/mock/$$repo/ to clear cache"; \
-	    sudo rm -rf /var/cache/mock/$$repo/; \
+	    echo "	Touching mock config to force cache rebuild"; \
+	    sudo /bin/touch /etc/mock/$$repo.cfg; \
 	done
 
 clean::

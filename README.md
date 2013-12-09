@@ -31,8 +31,9 @@ Requirements: This toolkit requires the following tools:
      * Spare diskspace at /var/lib/mock and /var/cache/mock for the
        builky builds of mock chroot environments.
 
-     * Reliable access to yum repositories for CentOS repositories, for
-       the standard "mock" configuration.
+     * Reliable access to yum repositories for CentOS, RHEL, or
+       Scietific Linux repositories, for the standard "mock"
+       configuration.
 
      * Membership in the "mock" group for permissions to exucute the
        mock software.
@@ -43,5 +44,8 @@ Requirements: This toolkit requires the following tools:
      * "sudo" Permissions to clear the mock cache for rt4repo build
        environments without having to supply passwords. For example:
 
-	Cmnd_Alias MOCKCMDS = /bin/rm -rf /var/cache/mock/rt4repo-6-x86_64/
-	%mock	ALL=NOPASSWD: MOCKCMDS
+    Cmnd_Alias MOCKCMDS = /bin/touch /etc/mock/rt4repo-6-x86_64.cfg
+    %mock	ALL=NOPASSWD: MOCKCMDS
+
+    # The "NOPASSWD" has to be added after the PASSWD for admins with sudo
+    adminuser	ALL=(ALL)	PASSWD: ALL, NOPASSWD: MOCKRT4TOUCH
