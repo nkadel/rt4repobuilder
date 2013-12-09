@@ -284,7 +284,7 @@ Requires: rt4-mailgate
 # Filter bogus provides
 %filter_from_provides /^perl(HTML::Mason/d
 %filter_from_provides /^perl(IO::Handle::CRLF)$/d
-%filter_from_requires /^perl(Log::Dispatch)$/d
+%filter_from_provides /^perl(Log::Dispatch)$/d
 # Work-around rpm's depgenerator defect:
 %filter_from_requires /^perl(DBIx::SearchBuilder::Handle::)$/d
 %perl_default_filter
