@@ -520,7 +520,7 @@ fi
 
 %files
 %defattr(-,root,root,-)
-%doc COPYING README README.Oracle
+%doc COPYING README README.Oracle README.fedora
 %{_bindir}/*
 %{_sbindir}/*
 %exclude %{_sbindir}/rt-mailgate
