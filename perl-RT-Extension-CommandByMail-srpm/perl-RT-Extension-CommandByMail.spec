@@ -17,7 +17,7 @@ BuildRequires:  perl(UNIVERSAL::require)
 BuildRequires:  perl(RT)
 BuildRequires:  /usr/sbin/rt-mailgate
 # Compilation with "mock" rquires rt3 for  now, not compatible with rt4
-BuildRequires:  rt3-mailgage
+BuildRequires:  rt3-mailgate
 BuildRequires:  rt3
 Requires:       perl(MIME::Entity) >= 5.420
 Requires:       perl(RT::Interface::Email)
