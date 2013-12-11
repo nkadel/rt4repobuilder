@@ -44,8 +44,8 @@ Requirements: This toolkit requires the following tools:
      * "sudo" Permissions to clear the mock cache for rt4repo build
        environments without having to supply passwords. For example:
 
-    Cmnd_Alias MOCKCMDS = /bin/touch /etc/mock/rt4repo-6-x86_64.cfg
-    %mock	ALL=NOPASSWD: MOCKCMDS
+	 Cmnd_Alias MOCKCMDS = /bin/touch /etc/mock/rt4repo-6-x86_64.cfg
+	 %mock	ALL=NOPASSWD: MOCKCMDS
 
-    # The "NOPASSWD" has to be added after the PASSWD for admins with sudo
-    adminuser	ALL=(ALL)	NOPASSWD: MOCKCMDS, PASSWD: ALL
+	 # The "NOPASSWD" has to be added after PASSWD for admins
+	 adminuser	ALL=(ALL)	PASSWD: ALL, NOPASSWD: MOCKRT4TOUCH
