@@ -48,7 +48,7 @@
 
 Name:		rt4
 Version:	4.0.18
-Release:	0.2%{?dist}
+Release:	0.3%{?dist}
 Summary:	Request tracker 3
 
 Group:		Applications/Internet
@@ -214,6 +214,7 @@ Requires(postun): %{__rm}
 # rpm doesn't catch these:
 Requires: perl(Apache::Session)
 Requires: perl(Calendar::Simple)
+Requires: perl(DBD::mysql)
 Requires: perl(Data::ICal)
 Requires: perl(Data::ICal::Entry::Event)
 Requires: perl(Email::Address)
@@ -284,6 +285,7 @@ Requires: rt4-mailgate
 # Filter bogus provides
 %filter_from_provides /^perl(HTML::Mason/d
 %filter_from_provides /^perl(IO::Handle::CRLF)$/d
+%filter_from_provides /^perl(Log::Dispatch)$/d
 # Work-around rpm's depgenerator defect:
 %filter_from_requires /^perl(DBIx::SearchBuilder::Handle::)$/d
 %perl_default_filter
@@ -518,7 +520,7 @@ fi
 
 %files
 %defattr(-,root,root,-)
-%doc COPYING README README.Oracle
+%doc COPYING README README.Oracle README.fedora
 %{_bindir}/*
 %{_sbindir}/*
 %exclude %{_sbindir}/rt-mailgate
@@ -575,6 +577,10 @@ fi
 %endif
 
 %changelog
+* Mon Dec  9 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.18-0.3
+- Filter spurious Provides for perl(Log::Dispatch)
+- Add Requires for perl(DBD::mysql), in order to run rt-server.
+
 * Sat Nov 30 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.18-0.2
 - Add BuildRequires for redhat-rpm-config on RHEL
 
