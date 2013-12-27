@@ -204,6 +204,7 @@ BuildRequires:	/usr/sbin/apachectl
 Requires:  /usr/share/fonts/google-droid/DroidSansFallback.ttf
 Requires:  /usr/share/fonts/google-droid/DroidSans.ttf
 # ... we use symlinks to the system-wide versions ...
+BuildRequires:  google-droid-sans-fonts
 BuildRequires:  /usr/share/fonts/google-droid/DroidSansFallback.ttf
 BuildRequires:  /usr/share/fonts/google-droid/DroidSans.ttf
 
