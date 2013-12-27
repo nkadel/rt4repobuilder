@@ -41,6 +41,10 @@ EPELPKGS+=perl-Text-Password-Pronounceable-srpm
 EPELPKGS+=perl-Time-Duration-Parse-srpm
 EPELPKGS+=perl-URI-srpm
 
+# Add-on utilities, currently compile only with rt3 from EPEL
+EPELPKGS+=perl-RT-Extension-CommandByMail-srpm
+EPELPKGS+=perl-RT-Extension-MandatoryFields-srpm
+
 # Require customized rt4repo local repository for dependencies
 # Needed by various packages
 
@@ -78,10 +82,6 @@ RT4PKGS+=perl-Plack-Middleware-Test-StashWarnings-srpm
 
 # Binary target
 RT4PKGS+=rt4-srpm
-
-# Add-on utilities
-RT4PKGS+=perl-RT-Extension-CommandByMail-srpm
-RT4PKGS+=perl-RT-Extension-MandatoryFields-srpm
 
 # Populate rt4repo with packages compatible with just EPEL
 all:: epel-install
