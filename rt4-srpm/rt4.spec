@@ -57,7 +57,7 @@ URL:		http://www.bestpractical.com/rt
 Source0:	http://download.bestpractical.com/pub/rt/release/rt-%{version}.tar.gz
 Source1:        README.tests
 Source3:	rt4.conf.in
-Source4:	README.fedora.in
+Source4:	README.fedora
 Source5:	rt4.logrotate.in
 
 Patch0:		rt-4.0.12-config.diff
@@ -351,8 +351,7 @@ Requires:       perl(Log::Dispatch::Perl)
 %prep
 %setup -q -n rt-%{version}
 
-sed -e 's,@RT4_CACHEDIR@,%{RT4_CACHEDIR},' %{SOURCE4} \
-  > README.fedora
+install -m 0644 %{SOURCE4} .
 sed -e 's,@RT4_LOGDIR@,%{RT4_LOGDIR},' %{SOURCE5} \
   > rt4.logrotate
 
@@ -374,10 +373,12 @@ find bin sbin etc -name '*.in' | while read a; do d=$(echo "$a" | sed 's,\.in$,,
 cat << \EOF >> config.layout
 
 #   Fedora directory layout.
+#   RT has very odd ides of what "libdir" and "manualdir" actually are,
+#   make sure to override those
 <Layout Fedora>
   bindir:		%{RT4_BINDIR}
   sysconfdir:		%{_sysconfdir}/rt4
-  libdir:		%{RT4_LIBDIR}
+  libdir:		%{perl_vendorarch}
   manualdir:		%{_defaultdocdir}/%{name}-%{version}
   lexdir:		%{RT4_LEXDIR}
   localstatedir:	%{RT4_LOCALSTATEDIR}
