@@ -10,10 +10,10 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 BuildRequires:  perl >= 0:5.10.0
 BuildRequires:  perl(ExtUtils::MakeMaker)
-BuildRequires:  perl(YAML::Tiny)
 BuildRequires:  perl(File::Remove)
-# Note: compile inside mock with rt3 on RHEL 5, supports rt4 if needed
-BuildRequires:  perl(RT)
+BuildRequires:  perl(Test::Harness)
+BuildRequires:  perl(YAML::Tiny)
+BuildRequires:  perl(RT) >= 4.0
 BuildRequires:  rt4
 Requires:       perl(RT)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))

@@ -14,7 +14,7 @@ BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(MIME::Entity) >= 5.420
 BuildRequires:  perl(Test::More)
 BuildRequires:  perl(UNIVERSAL::require)
-BuildRequires:  perl(RT)
+BuildRequires:  perl(RT) >= 4.0
 BuildRequires:  /usr/sbin/rt-mailgate
 BuildRequires:  rt4-mailgate
 BuildRequires:  rt4
