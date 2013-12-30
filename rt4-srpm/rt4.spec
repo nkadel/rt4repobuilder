@@ -48,7 +48,7 @@
 
 Name:		rt4
 Version:	4.0.18
-Release:	0.3%{?dist}
+Release:	0.4%{?dist}
 Summary:	Request tracker 3
 
 Group:		Applications/Internet
@@ -378,7 +378,7 @@ cat << \EOF >> config.layout
 <Layout Fedora>
   bindir:		%{RT4_BINDIR}
   sysconfdir:		%{_sysconfdir}/rt4
-  libdir:		%{perl_vendorarch}
+  libdir:		%{RT4_LIBDIR}
   manualdir:		%{_defaultdocdir}/%{name}-%{version}
   lexdir:		%{RT4_LEXDIR}
   localstatedir:	%{RT4_LOCALSTATEDIR}
@@ -416,7 +416,8 @@ find t \( -name '*.t' -o -name '*.pl' \) -exec chmod +x {} \;
 %build
 %configure \
     --with-apachectl=/usr/sbin/apachectl \
-    --with-web-user=apache --with-web-group=apache \
+    --with-web-user=apache \
+    --with-web-group=apache \
     --with-db-type=mysql \
     --enable-layout=Fedora \
     --with-web-handler=modperl2 \
@@ -528,12 +529,12 @@ fi
 %exclude %{_sbindir}/rt-mailgate
 %{_mandir}/man1/*
 %exclude %{_mandir}/man1/rt-mailgate*
-%{RT4_LIBDIR}/*
-%exclude %{RT4_LIBDIR}/RT/Test*
+%{perl_vendorlib}
+%exclude %{perl_vendorlib}/RT/Test*
 %attr(0700,apache,apache) %{RT4_LOGDIR}
-%dir %{_datarootdir}/rt4/po
-%{_datarootdir}/rt4/po/*.po
-%{_datarootdir}/rt4/po/*.pot
+%dir %{_datadir}/rt4/po
+%{_datadir}/rt4/po/*.po
+%{_datadir}/rt4/po/*.pot
 
 %dir %{_sysconfdir}/rt4
 %attr(-,root,root)%{_sysconfdir}/rt4/upgrade
@@ -579,6 +580,11 @@ fi
 %endif
 
 %changelog
+* Mon Dec 30 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.18-0.4
+- Move Perl modulees correctly to perl_vendorarch, so other software can
+  find them.
+- Change '%%datarootdir' to '%%datadir' 
+
 * Mon Dec  9 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.18-0.3
 - Filter spurious Provides for perl(Log::Dispatch)
 - Add Requires for perl(DBD::mysql), in order to run rt-server.
