@@ -48,7 +48,7 @@
 
 Name:		rt4
 Version:	4.0.18
-Release:	0.3%{?dist}
+Release:	0.4%{?dist}
 Summary:	Request tracker 3
 
 Group:		Applications/Internet
@@ -57,7 +57,7 @@ URL:		http://www.bestpractical.com/rt
 Source0:	http://download.bestpractical.com/pub/rt/release/rt-%{version}.tar.gz
 Source1:        README.tests
 Source3:	rt4.conf.in
-Source4:	README.fedora.in
+Source4:	README.fedora
 Source5:	rt4.logrotate.in
 
 Patch0:		rt-4.0.12-config.diff
@@ -204,6 +204,7 @@ BuildRequires:	/usr/sbin/apachectl
 Requires:  /usr/share/fonts/google-droid/DroidSansFallback.ttf
 Requires:  /usr/share/fonts/google-droid/DroidSans.ttf
 # ... we use symlinks to the system-wide versions ...
+BuildRequires:  google-droid-sans-fonts
 BuildRequires:  /usr/share/fonts/google-droid/DroidSansFallback.ttf
 BuildRequires:  /usr/share/fonts/google-droid/DroidSans.ttf
 
@@ -350,8 +351,7 @@ Requires:       perl(Log::Dispatch::Perl)
 %prep
 %setup -q -n rt-%{version}
 
-sed -e 's,@RT4_CACHEDIR@,%{RT4_CACHEDIR},' %{SOURCE4} \
-  > README.fedora
+install -m 0644 %{SOURCE4} .
 sed -e 's,@RT4_LOGDIR@,%{RT4_LOGDIR},' %{SOURCE5} \
   > rt4.logrotate
 
@@ -373,6 +373,8 @@ find bin sbin etc -name '*.in' | while read a; do d=$(echo "$a" | sed 's,\.in$,,
 cat << \EOF >> config.layout
 
 #   Fedora directory layout.
+#   RT has very odd ides of what "libdir" and "manualdir" actually are,
+#   make sure to override those
 <Layout Fedora>
   bindir:		%{RT4_BINDIR}
   sysconfdir:		%{_sysconfdir}/rt4
@@ -414,7 +416,8 @@ find t \( -name '*.t' -o -name '*.pl' \) -exec chmod +x {} \;
 %build
 %configure \
     --with-apachectl=/usr/sbin/apachectl \
-    --with-web-user=apache --with-web-group=apache \
+    --with-web-user=apache \
+    --with-web-group=apache \
     --with-db-type=mysql \
     --enable-layout=Fedora \
     --with-web-handler=modperl2 \
@@ -526,12 +529,12 @@ fi
 %exclude %{_sbindir}/rt-mailgate
 %{_mandir}/man1/*
 %exclude %{_mandir}/man1/rt-mailgate*
-%{RT4_LIBDIR}/*
-%exclude %{RT4_LIBDIR}/RT/Test*
+%{perl_vendorlib}
+%exclude %{perl_vendorlib}/RT/Test*
 %attr(0700,apache,apache) %{RT4_LOGDIR}
-%dir %{_datarootdir}/rt4/po
-%{_datarootdir}/rt4/po/*.po
-%{_datarootdir}/rt4/po/*.pot
+%dir %{_datadir}/rt4/po
+%{_datadir}/rt4/po/*.po
+%{_datadir}/rt4/po/*.pot
 
 %dir %{_sysconfdir}/rt4
 %attr(-,root,root)%{_sysconfdir}/rt4/upgrade
@@ -577,6 +580,11 @@ fi
 %endif
 
 %changelog
+* Mon Dec 30 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.18-0.4
+- Move Perl modulees correctly to perl_vendorarch, so other software can
+  find them.
+- Change '%%datarootdir' to '%%datadir' 
+
 * Mon Dec  9 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.18-0.3
 - Filter spurious Provides for perl(Log::Dispatch)
 - Add Requires for perl(DBD::mysql), in order to run rt-server.

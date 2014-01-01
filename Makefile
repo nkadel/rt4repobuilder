@@ -79,7 +79,7 @@ RT4PKGS+=perl-Plack-Middleware-Test-StashWarnings-srpm
 # Binary target
 RT4PKGS+=rt4-srpm
 
-# Add-on utilities
+# Add-on utilities, currently compile only with rt3 from EPEL
 RT4PKGS+=perl-RT-Extension-CommandByMail-srpm
 RT4PKGS+=perl-RT-Extension-MandatoryFields-srpm
 
