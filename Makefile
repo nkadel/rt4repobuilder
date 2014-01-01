@@ -2,10 +2,7 @@
 # Makefile - build wrapper for Rt 4 on RHEL 6
 #
 #	git clone RHEL 6 SRPM building tools from
-#	https://github.com/nkadel/[package] into designated
-#	RT4PKGS below
-#
-#	Set up local 
+#	https://github.com/nkadel/rt4repo
 
 # Base directory for yum repository
 REPOBASEDIR="`/bin/pwd`"
@@ -79,7 +76,8 @@ RT4PKGS+=perl-Plack-Middleware-Test-StashWarnings-srpm
 # Binary target
 RT4PKGS+=rt4-srpm
 
-# Add-on utilities, currently compile only with rt3 from EPEL
+# Add-on utilities, can be compiled with rt3 from EPEL,
+# but use rt4 from local builds
 RT4PKGS+=perl-RT-Extension-CommandByMail-srpm
 RT4PKGS+=perl-RT-Extension-MandatoryFields-srpm
 
@@ -175,10 +173,6 @@ perl-RT-Extension-MandatoryFields:: rt4-srpm
 
 # Git clone operations, not normally required
 # Targets may change
-
-# Rt rellies on all the other components
-# krb5-1.10 is now part of RHEL 6.4, no longer needed
-#rt4-srpm:: krb5-srpm
 
 # Build EPEL compatible softwaer in place
 $(EPELPKGS):: FORCE
