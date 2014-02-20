@@ -626,7 +626,7 @@ fi
 - Upstream update.
 - Address various CVEs (BZ 824082).
 
-* Tue Feb 02 2012 Ralf Corsépius <corsepiu@fedoraproject.org> - 3.8.11-7
+* Thu Feb 02 2012 Ralf Corsépius <corsepiu@fedoraproject.org> - 3.8.11-7
 - Fix shebangs.
 - Make testsuite files executable (enables rpm's perl module dep tracking).
 - Build *-tests, iff devel_mode was given.
@@ -783,11 +783,11 @@ fi
 * Wed Oct 01 2008 Ralf Corsépius <corsepiu@fedoraproject.org> - 3.8.1-1
 - 1st rawhide release.
 
-* Mon Sep 23 2008 Ralf Corsépius <corsepiu@fedoraproject.org>
+* Tue Sep 23 2008 Ralf Corsépius <corsepiu@fedoraproject.org>
 - Add Provides for perl-deps rpm doesn't catch.
 - Treat Spamassassin optional
 
-* Mon Sep 23 2008 Ralf Corsépius <corsepiu@fedoraproject.org>
+* Tue Sep 23 2008 Ralf Corsépius <corsepiu@fedoraproject.org>
 - Don't package %%{_sysconfdir}/rt4/upgrade/*.in
 - Cleanup Requires, __perl_requires, __perl_provides.
 
@@ -796,7 +796,7 @@ fi
 - Completely rework the spec.
 - Upstream update.
 
-* Wed Jun 26 2008 Ralf Corsépius <rc040203@freenet.de> - 3.6.7-1
+* Thu Jun 26 2008 Ralf Corsépius <rc040203@freenet.de> - 3.6.7-1
 - Upstream update.
 - Add --with-testdeps.
 
@@ -843,7 +843,7 @@ fi
 - Install etc/upgrade to %%{_sysconfdir}/rt4/upgrade.
 - Add rt-3.6.0-Makefile.diff.
 
-* Mon Jul 19 2006 Ralf Corsépius <rc040203@freenet.de> - 3.6.0-3
+* Wed Jul 19 2006 Ralf Corsépius <rc040203@freenet.de> - 3.6.0-3
 - Move /var/www/rt4 to %%{_datadir}/rt4/html
 
 * Fri Jun 23 2006 Ralf Corsépius <rc040203@freenet.de> - 3.6.0-2
@@ -869,7 +869,7 @@ fi
 - Fix typo in setting up localstatedir.
 - Own %%{RT4_CACHEDIR}.
 
-* Tue Oct 24 2005 Ralf Corsépius <rc040203@freenet.de> - 3.4.4-7
+* Mon Oct 24 2005 Ralf Corsépius <rc040203@freenet.de> - 3.4.4-7
 - Apply patch from Chris Grau to README.fedora.
 - Move mason_data, session_data to /var/cache/rt4.
 - Install %%{RT4_LOGDIR}.
@@ -904,9 +904,9 @@ fi
 * Fri Sep 23 2005 Ralf Corsépius <rc040203@freenet.de> - 3.4.4-1.2
 - Use %%RT4_WWWDIR, %%_sbindir, %%_bindir in config.layout.
 
-* Thu Sep 17 2005 Ralf Corsépius <rc040203@freenet.de> - 3.4.4-1.1
+* Sat Sep 17 2005 Ralf Corsépius <rc040203@freenet.de> - 3.4.4-1.1
 - Reflect feedback from Chris Grau.
 - Remove SpeedyCGI support.
 
-* Thu Sep 16 2005 Ralf Corsépius <rc040203@freenet.de> - 3.4.4-1
+* Fri Sep 16 2005 Ralf Corsépius <rc040203@freenet.de> - 3.4.4-1
 - FE submission candidate.
