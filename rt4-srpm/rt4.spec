@@ -580,7 +580,7 @@ fi
 %endif
 
 %changelog
-* Sed Feb 19 2014 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.18-0.5
+* Wed Feb 19 2014 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.18-0.5
 - Correct dates in other ChangeLog entries
 
 
