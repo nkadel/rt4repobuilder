@@ -580,6 +580,10 @@ fi
 %endif
 
 %changelog
+* Sed Feb 19 2014 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.18-0.5
+- Correct dates in other ChangeLog entries
+
+
 * Mon Dec 30 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.18-0.4
 - Move Perl modulees correctly to perl_vendorarch, so other software can
   find them.
