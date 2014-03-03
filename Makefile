@@ -70,7 +70,7 @@ RT4PKGS+=perl-Server-Starter-srpm
 RT4PKGS+=perl-Starlet-srpm
 
 # Needed for rt4-Test building
-RT4PKGS+=perl-Test-WWW-Mechanize-PSGI
+RT4PKGS+=perl-Test-WWW-Mechanize-PSGI-srpm
 RT4PKGS+=perl-Plack-Middleware-Test-StashWarnings-srpm
 
 # Binary target
