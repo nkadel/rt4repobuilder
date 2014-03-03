@@ -47,8 +47,8 @@
 %{!?perl_testdir:%global perl_testdir %{_libexecdir}/perl5-tests}
 
 Name:		rt4
-Version:	4.0.18
-Release:	0.4%{?dist}
+Version:	4.0.19
+Release:	0.1%{?dist}
 Summary:	Request tracker 3
 
 Group:		Applications/Internet
@@ -580,9 +580,11 @@ fi
 %endif
 
 %changelog
+* Sun Mar 02 2014 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.19-0.1
+- Update to 4.0.19
+
 * Wed Feb 19 2014 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.18-0.5
 - Correct dates in other ChangeLog entries
-
 
 * Mon Dec 30 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.18-0.4
 - Move Perl modulees correctly to perl_vendorarch, so other software can
