@@ -185,6 +185,7 @@ BuildRequires: perl(Time::HiRes)
 BuildRequires: perl(Time::ParseDate)
 BuildRequires: perl(Tree::Simple) >= 1.04
 BuildRequires: perl(UNIVERSAL::require)
+BuildRequires: perl(URI) >= 1.60
 %{?with_devel_mode:BuildRequires: perl(WWW::Mechanize)}
 BuildRequires: perl(XML::RSS) >= 1.05
 %{?with_devel_mode:BuildRequires: perl(XML::Simple)}
@@ -583,6 +584,7 @@ fi
 * Sun Mar 02 2014 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.19-0.1
 - Update to 4.0.19
 - Update Makefile.in patch to skip 'fixperms' steps for 4.0.19
+- Update BuildReequries for perl(URI) >= 1.60.
 
 * Wed Feb 19 2014 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.18-0.5
 - Correct dates in other ChangeLog entries
