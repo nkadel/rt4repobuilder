@@ -61,7 +61,7 @@ Source4:	README.fedora
 Source5:	rt4.logrotate.in
 
 Patch0:		rt-4.0.12-config.diff
-Patch2:		rt-4.0.12-Makefile.diff
+Patch2:		rt-4.0.19-Makefile.diff
 
 BuildArch:	noarch
 
@@ -582,6 +582,7 @@ fi
 %changelog
 * Sun Mar 02 2014 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.19-0.1
 - Update to 4.0.19
+- Update Makefile.in patch to skip 'fixperms' steps for 4.0.19
 
 * Wed Feb 19 2014 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.18-0.5
 - Correct dates in other ChangeLog entries
