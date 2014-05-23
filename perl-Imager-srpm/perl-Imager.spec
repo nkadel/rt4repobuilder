@@ -10,7 +10,7 @@
 Summary: Perl extension for Generating 24 bit Images
 Name: perl-Imager
 Version: 0.72
-Release: 1%{?dist}
+Release: 0.1%{?dist}
 License: Artistic/GPL
 Group: Applications/CPAN
 URL: http://search.cpan.org/dist/Imager/
@@ -64,6 +64,9 @@ find samples/ -type f -exec %{__chmod} a-x {} \;
 %{perl_vendorarch}/Imager.pm
 
 %changelog
+* Fri May 23 2014 Nico Kadel-Garcia <nkdel@gmail.com> - 0.72-0.1
+- Roll back release number to avoid conflicts with rpmforge repo.
+
 * Wed Dec 23 2009 Christoph Maser <cmr@financial.com> - 0.72-1 - 8220/cmr
 - Updated to version 0.72.
 

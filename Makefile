@@ -25,6 +25,7 @@ EPELPKGS+=perl-Encode-srpm
 EPELPKGS+=perl-ExtUtils-Installed-srpm
 EPELPKGS+=perl-ExtUtils-MakeMaker-srpm
 EPELPKGS+=perl-Hash-MoreUtils-srpm
+EPELPKGS+=perl-Imager-srpm
 EPELPKGS+=perl-List-UtilsBy-srpm
 EPELPKGS+=perl-Log-Any-srpm
 EPELPKGS+=perl-Module-Util-srpm
