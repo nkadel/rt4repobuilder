@@ -1,110 +1,56 @@
-# $Id: perl-Imager.spec 8220 2009-12-23 18:15:13Z cmr $
-# Authority: dries
-# Upstream: Tony Cook <tony$imager,perl,org>
-
-%define perl_vendorlib %(eval "`%{__perl} -V:installvendorlib`"; echo $installvendorlib)
-%define perl_vendorarch %(eval "`%{__perl} -V:installvendorarch`"; echo $installvendorarch)
-
-%define real_name Imager
-
-Summary: Perl extension for Generating 24 bit Images
-Name: perl-Imager
-Version: 0.72
-Release: 0.1%{?dist}
-License: Artistic/GPL
-Group: Applications/CPAN
-URL: http://search.cpan.org/dist/Imager/
-
-Packager: Dries Verachtert <dries@ulyssis.org>
-Vendor: Dag Apt Repository, http://dag.wieers.com/apt/
-
-Source: http://search.cpan.org/CPAN/authors/id/T/TO/TONYC/Imager-%{version}.tar.gz
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root
-
-BuildRequires: perl
-BuildRequires: libpng-devel
-BuildRequires: pkgconfig
-BuildRequires: freetype-devel
-BuildRequires: libungif-devel
-BuildRequires: libtiff-devel
-BuildRequires: libjpeg-devel
-BuildRequires: perl(ExtUtils::MakeMaker)
-BuildRequires: perl(Test::More)
+Name:           perl-Imager
+Version:        0.98
+Release:        1%{?dist}
+Summary:        Perl extension for Generating 24 bit Images
+License:        GPL+ or Artistic
+Group:          Development/Libraries
+URL:            http://search.cpan.org/dist/Imager/
+Source0:        http://www.cpan.org/modules/by-module/Imager/Imager-%{version}.tar.gz
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRequires:  perl(ExtUtils::MakeMaker)
+BuildRequires:  perl(Parse::RecDescent)
+BuildRequires:  perl(Test::More) >= 0.47
+Requires:       perl(Parse::RecDescent)
+Requires:       perl(Test::More) >= 0.47
+Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 %description
-Perl extension for Generating 24 bit Images.
+Imager is a module for creating and altering images. It can read and
+write various image formats, draw primitive shapes like lines,and
+polygons, blend multiple images together in various ways, scale, crop,
+render text and more.
 
 %prep
-%setup -n %{real_name}-%{version}
+%setup -q -n Imager-%{version}
 
 %build
-echo "y" | CFLAGS="%{optflags}" %{__perl} Makefile.PL INSTALLDIRS="vendor" PREFIX="%{buildroot}%{_prefix}"
-%{__make} %{?_smp_mflags} OPTIMIZE="%{optflags}"
+%{__perl} Makefile.PL INSTALLDIRS=vendor OPTIMIZE="$RPM_OPT_FLAGS"
+make %{?_smp_mflags}
 
 %install
-%{__rm} -rf %{buildroot}
-%{__make} pure_install
+rm -rf $RPM_BUILD_ROOT
 
-### Clean up buildroot
-find %{buildroot} -name .packlist -exec %{__rm} {} \;
+make pure_install PERL_INSTALL_ROOT=$RPM_BUILD_ROOT
 
-### Clean up docs
-find samples/ -type f -exec %{__chmod} a-x {} \;
+find $RPM_BUILD_ROOT -type f -name .packlist -exec rm -f {} \;
+find $RPM_BUILD_ROOT -type f -name '*.bs' -size 0 -exec rm -f {} \;
+find $RPM_BUILD_ROOT -depth -type d -exec rmdir {} 2>/dev/null \;
+
+%{_fixperms} $RPM_BUILD_ROOT/*
+
+%check
+make test
 
 %clean
-%{__rm} -rf %{buildroot}
+rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(-, root, root, 0755)
-%doc Changes Changes.old MANIFEST MANIFEST.SKIP META.yml README samples/
-%doc %{_mandir}/man3/Imager.3pm*
-%doc %{_mandir}/man3/Imager::*.3pm*
-%{perl_vendorarch}/auto/Imager/
-%{perl_vendorarch}/Imager/
-%{perl_vendorarch}/Imager.pm
+%defattr(-,root,root,-)
+%doc adobe.txt apidocs.perl bigtest.perl Changes Changes.old combine.im compose.im convert.im conv.im doco.perl errep.perl filterlist.perl filters.im flip.im gaussian.im META.json paste.im README regops.perl render.im rotate.im rubthru.im scale.im spot.perl transform.perl typemap.local typemap.oldperl
+%{perl_vendorarch}/auto/*
+%{perl_vendorarch}/Imager*
+%{_mandir}/man3/*
 
 %changelog
-* Fri May 23 2014 Nico Kadel-Garcia <nkdel@gmail.com> - 0.72-0.1
-- Roll back release number to avoid conflicts with rpmforge repo.
-
-* Wed Dec 23 2009 Christoph Maser <cmr@financial.com> - 0.72-1 - 8220/cmr
-- Updated to version 0.72.
-
-* Mon Sep 14 2009 Christoph Maser <cmr@financial.com> - 0.69-1
-- Updated to version 0.69.
-
-* Sun Jul  5 2009 Christoph Maser <cmr@financial.com> - 0.67-1
-- Updated to version 0.67.
-
-* Mon Jun 23 2008 Dag Wieers <dag@wieers.com> - 0.65-1
-- Updated to release 0.65.
-
-* Mon May 05 2008 Dag Wieers <dag@wieers.com> - 0.64-1
-- Updated to release 0.64.
-
-* Fri Dec 14 2007 Dag Wieers <dag@wieers.com> - 0.62-1
-- Updated to release 0.62.
-
-* Tue Nov 13 2007 Dag Wieers <dag@wieers.com> - 0.61-1
-- Updated to release 0.61.
-
-* Mon Jun 18 2007 Dries Verachtert <dries@ulyssis.org> - 0.59-1
-- Updated to release 0.59.
-
-* Sun Apr 29 2007 Dries Verachtert <dries@ulyssis.org> - 0.56-1
-- Updated to release 0.56.
-
-* Wed Jan 03 2007 Dries Verachtert <dries@ulyssis.org> - 0.55-1
-- Updated to release 0.55.
-
-* Mon Sep 18 2006 Dries Verachtert <dries@ulyssis.org> - 0.54-1
-- Updated to release 0.54.
-
-* Fri Jun  2 2006 Dries Verachtert <dries@ulyssis.org> - 0.51-1
-- Updated to release 0.51.
-
-* Sun Mar 26 2006 Dries Verachtert <dries@ulyssis.org> - 0.49-1
-- Updated to release 0.49.
-
-* Wed Jan  4 2006 Dries Verachtert <dries@ulyssis.org> - 0.47-1
-- Initial package.
+* Fri May 23 2014 Nico Kadel-Garcia <nkadel@gmail.com> 0.98-1
+- Specfile autogenerated by cpanspec 1.78.
