@@ -9,7 +9,11 @@
 # --with gd/--without gd 
 #	enable/disable gd support
 #	Default: --with (had been default in rt < 3.8.0)
+#%if 0%{?fedora}
 %bcond_without gd 
+#%else
+#%bcond_with devel_mode
+#%endif
 
 # --with graphviz/--without graphviz
 #	enable/disable graphiz support
@@ -302,7 +306,6 @@ Group:   Applications/Internet
 Requires:	perl(Pod::Usage)
 Requires:	perl(HTML::TreeBuilder)
 Requires:	perl(HTML::FormatText)
-# Obsoletes:	rt3-mailgate < %{version}-%{release}
 Conflicts:	rt3
 Conflicts:	rt3-mailgate
 Provides:	rt-mailgate = %{version}-%{release}
@@ -329,7 +332,6 @@ Requires:	perl(Plack::Handler::Apache2)
 Requires:       perl(String::ShellQuote)
 Requires:       perl(Test::Deep)
 Requires:	perl(Test::MockTime)
-# Obsoletes:	rt3-tests < %{version}-%{release}
 Conflicts:	rt3-tests
 
 %description tests
