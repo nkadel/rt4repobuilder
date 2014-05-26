@@ -50,7 +50,7 @@
 
 Name:		rt4
 Version:	4.0.19
-Release:	0.1%{?dist}
+Release:	0.2%{?dist}
 Summary:	Request tracker 4
 
 Group:		Applications/Internet
@@ -595,6 +595,12 @@ fi
 %endif
 
 %changelog
+* Mon May 25 2014 Nico Kadel-Garcia <nkadel@gmail.com> - 4.0.19-0.2
+- Update to 4.0.19
+- Update patches and discard patches for permissions, no longer relevant
+- Discard all of perl-Imager requirements, as did RT 4.0.19
+- Update other perl requirements for RT-4.0.19
+
 * Sun Dec 08 2013 Ralf Corsépius <corsepiu@fedoraproject.org> - 4.0.18-0.20131208.0
 - Upgrade to rt-4.0.18.
 - BR: perl(Locale::PO).
