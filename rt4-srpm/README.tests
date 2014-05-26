@@ -4,7 +4,7 @@ RT_DBA_USER=root RT_DBA_PASSWORD=<mysql-passwd> /usr/bin/prove t/*.t t/*/*.t
 
 Notes:
 - Most (all?) tests require to be run as "root".
-- Some of these tests were not designed to work outside of rt3's source
+- Some of these tests were not designed to work outside of rt4's source
   tree and do not work when being used as a separate test package.
 - Some of these tests are quite "chatty".
 - Failing tests may leave stray files on the filesystem, which will not be

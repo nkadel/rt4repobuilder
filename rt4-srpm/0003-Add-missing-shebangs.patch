@@ -1,0 +1,1096 @@
+From cf1fce8af3fc0b5256e0e98a242bd38df3c22373 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ralf=20Cors=C3=A9pius?= <corsepiu@fedoraproject.org>
+Date: Sat, 19 Jan 2013 08:28:35 +0100
+Subject: [PATCH 3/7] Add missing shebangs.
+
+---
+ t/00-compile.t                          | 1 +
+ t/api/action-createtickets.t            | 1 +
+ t/api/attachment.t                      | 1 +
+ t/api/attachment_filename.t             | 2 ++
+ t/api/attribute-tests.t                 | 1 +
+ t/api/attribute.t                       | 1 +
+ t/api/bookmarks.t                       | 1 +
+ t/api/canonical_charset.t               | 1 +
+ t/api/cf_render_type.t                  | 1 +
+ t/api/cfsearch.t                        | 2 ++
+ t/api/condition-ownerchange.t           | 1 +
+ t/api/condition-reject.t                | 1 +
+ t/api/config.t                          | 1 +
+ t/api/currentuser.t                     | 1 +
+ t/api/customfield.t                     | 1 +
+ t/api/emailparser.t                     | 1 +
+ t/api/execute-code.t                    | 1 +
+ t/api/group-rights.t                    | 1 +
+ t/api/group.t                           | 1 +
+ t/api/groups.t                          | 1 +
+ t/api/has_rights.t                      | 1 +
+ t/api/i18n.t                            | 1 +
+ t/api/link.t                            | 1 +
+ t/api/menu.t                            | 2 ++
+ t/api/queue.t                           | 1 +
+ t/api/record.t                          | 1 +
+ t/api/reminders.t                       | 1 +
+ t/api/report_tickets.t                  | 2 ++
+ t/api/rt.t                              | 1 +
+ t/api/savedsearch.t                     | 1 +
+ t/api/scrip.t                           | 1 +
+ t/api/searchbuilder.t                   | 1 +
+ t/api/squish.t                          | 1 +
+ t/api/system.t                          | 1 +
+ t/api/template-parsing.t                | 1 +
+ t/api/template.t                        | 1 +
+ t/api/ticket.t                          | 1 +
+ t/api/tickets.t                         | 1 +
+ t/api/tickets_overlay_sql.t             | 1 +
+ t/api/txn_content.t                     | 1 +
+ t/api/uri-canonicalize.t                | 2 ++
+ t/api/uri-fsck_com_rt.t                 | 1 +
+ t/api/uri-t.t                           | 1 +
+ t/api/user.t                            | 1 +
+ t/api/users.t                           | 1 +
+ t/api/web-config.t                      | 1 +
+ t/approval/admincc.t                    | 1 +
+ t/approval/basic.t                      | 1 +
+ t/articles/cfsearch.t                   | 1 +
+ t/mail/bounce.t                         | 1 +
+ t/mail/dashboard-chart-with-utf8.t      | 1 +
+ t/mail/disposition-outgoing.t           | 1 +
+ t/mail/fake-sendmail                    | 2 +-
+ t/mail/rfc2231-attachment.t             | 1 +
+ t/mail/rfc822-attachment.t              | 1 +
+ t/mail/specials-in-encodedwords.t       | 1 +
+ t/shredder/00load.t                     | 1 +
+ t/ticket/badlinks.t                     | 2 ++
+ t/ticket/deferred_owner.t               | 1 +
+ t/ticket/googleish_search.t             | 1 +
+ t/ticket/linking.t                      | 1 +
+ t/ticket/race.t                         | 1 +
+ t/ticket/scrips_batch.t                 | 1 +
+ t/web/articles-links.t                  | 1 +
+ t/web/attachment-with-name-0.t          | 1 +
+ t/web/cf_render_type.t                  | 1 +
+ t/web/charting.t                        | 1 +
+ t/web/clickjacking-preventions.t        | 2 ++
+ t/web/command_line_link_to_articles.t   | 1 +
+ t/web/current_user_outdated_email.t     | 1 +
+ t/web/dashboards-deleted-saved-search.t | 2 ++
+ t/web/googleish_search.t                | 2 ++
+ t/web/offline.t                         | 2 ++
+ t/web/offline_messages_utf8.t           | 2 ++
+ t/web/offline_utf8.t                    | 2 ++
+ t/web/owner_disabled_group_19221.t      | 2 ++
+ t/web/path-traversal.t                  | 1 +
+ t/web/private-components.t              | 1 +
+ t/web/query_builder_queue_limits.t      | 2 ++
+ t/web/queue_caching.t                   | 1 +
+ t/web/quickcreate.t                     | 2 ++
+ t/web/quicksearch.t                     | 2 ++
+ t/web/reminders.t                       | 2 ++
+ t/web/remote_user.t                     | 1 +
+ t/web/rest-non-ascii-subject.t          | 2 ++
+ t/web/rest-sort.t                       | 2 ++
+ t/web/rest.t                            | 2 ++
+ t/web/rest_cfs_with_same_name.t         | 1 +
+ t/web/richtext-autohandler.t            | 1 +
+ t/web/saved_search_chart.t              | 2 ++
+ t/web/saved_search_context.t            | 2 ++
+ t/web/saved_search_permissions.t        | 2 ++
+ t/web/search_bulk_update_links.t        | 2 ++
+ t/web/search_cf_quotes.t                | 1 +
+ t/web/search_simple.t                   | 1 +
+ t/web/self_service.t                    | 1 +
+ t/web/sidebyside_layout.t               | 2 ++
+ t/web/squish.t                          | 1 +
+ t/web/ticket_display.t                  | 1 +
+ t/web/ticket_links.t                    | 1 +
+ t/web/ticket_modify_all.t               | 1 +
+ t/web/ticket_modify_people.t            | 1 +
+ t/web/ticket_owner_issues_16656.t       | 2 ++
+ t/web/ticket_txn_subject.t              | 1 +
+ t/web/ticket_update_without_content.t   | 2 ++
+ t/web/transaction_batch.t               | 1 +
+ 106 files changed, 133 insertions(+), 1 deletion(-)
+
+diff --git a/t/00-compile.t b/t/00-compile.t
+index 43daf70..2ecdde4 100644
+--- a/t/00-compile.t
++++ b/t/00-compile.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/api/action-createtickets.t b/t/api/action-createtickets.t
+index ceed423..f1d6f34 100644
+--- a/t/api/action-createtickets.t
++++ b/t/api/action-createtickets.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/api/attachment.t b/t/api/attachment.t
+index 8b7cb60..ad36c1a 100644
+--- a/t/api/attachment.t
++++ b/t/api/attachment.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/api/attachment_filename.t b/t/api/attachment_filename.t
+index 6bfc707..28757fe 100644
+--- a/t/api/attachment_filename.t
++++ b/t/api/attachment_filename.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ use RT::Test tests => 5;
+diff --git a/t/api/attribute-tests.t b/t/api/attribute-tests.t
+index 8489f1a..7201b9c 100644
+--- a/t/api/attribute-tests.t
++++ b/t/api/attribute-tests.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ use RT;
+diff --git a/t/api/attribute.t b/t/api/attribute.t
+index 417f015..ac9150e 100644
+--- a/t/api/attribute.t
++++ b/t/api/attribute.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/api/bookmarks.t b/t/api/bookmarks.t
+index 65b1945..2f34149 100644
+--- a/t/api/bookmarks.t
++++ b/t/api/bookmarks.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ use RT::Test tests => 36;
+diff --git a/t/api/canonical_charset.t b/t/api/canonical_charset.t
+index a426d89..c3ee91f 100644
+--- a/t/api/canonical_charset.t
++++ b/t/api/canonical_charset.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use warnings;
+ use strict;
+ 
+diff --git a/t/api/cf_render_type.t b/t/api/cf_render_type.t
+index ac09049..67db754 100644
+--- a/t/api/cf_render_type.t
++++ b/t/api/cf_render_type.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ 
+diff --git a/t/api/cfsearch.t b/t/api/cfsearch.t
+index 7a460ce..2832f5f 100644
+--- a/t/api/cfsearch.t
++++ b/t/api/cfsearch.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ 
+diff --git a/t/api/condition-ownerchange.t b/t/api/condition-ownerchange.t
+index 2cfef74..25ff9d4 100644
+--- a/t/api/condition-ownerchange.t
++++ b/t/api/condition-ownerchange.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/api/condition-reject.t b/t/api/condition-reject.t
+index c2ec8cd..65534ed 100644
+--- a/t/api/condition-reject.t
++++ b/t/api/condition-reject.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ #
+ # Check that the "On Reject" scrip condition exists and is working
+ #
+diff --git a/t/api/config.t b/t/api/config.t
+index 62b77df..6cdb68a 100644
+--- a/t/api/config.t
++++ b/t/api/config.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ use RT;
+diff --git a/t/api/currentuser.t b/t/api/currentuser.t
+index f54074a..b5911c4 100644
+--- a/t/api/currentuser.t
++++ b/t/api/currentuser.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/api/customfield.t b/t/api/customfield.t
+index 6be50bb..935f973 100644
+--- a/t/api/customfield.t
++++ b/t/api/customfield.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/api/emailparser.t b/t/api/emailparser.t
+index 7903146..14e4ed4 100644
+--- a/t/api/emailparser.t
++++ b/t/api/emailparser.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/api/execute-code.t b/t/api/execute-code.t
+index 7f72be9..7d63f8c 100644
+--- a/t/api/execute-code.t
++++ b/t/api/execute-code.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ use RT::Test tests => 17;
+diff --git a/t/api/group-rights.t b/t/api/group-rights.t
+index 0494c28..09547bf 100644
+--- a/t/api/group-rights.t
++++ b/t/api/group-rights.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ use RT::Test nodata => 1, tests => 114;
+diff --git a/t/api/group.t b/t/api/group.t
+index 2c1ca73..d38bbfc 100644
+--- a/t/api/group.t
++++ b/t/api/group.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/api/groups.t b/t/api/groups.t
+index d2dc126..ac922cf 100644
+--- a/t/api/groups.t
++++ b/t/api/groups.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ use RT::Test nodata => 1, tests => 27;
+diff --git a/t/api/has_rights.t b/t/api/has_rights.t
+index 990fc01..886a696 100644
+--- a/t/api/has_rights.t
++++ b/t/api/has_rights.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use RT::Test nodata => 1, tests => 9;
+ 
+ use strict;
+diff --git a/t/api/i18n.t b/t/api/i18n.t
+index 831532b..660b0f4 100644
+--- a/t/api/i18n.t
++++ b/t/api/i18n.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/api/link.t b/t/api/link.t
+index a9e54a7..d6062c8 100644
+--- a/t/api/link.t
++++ b/t/api/link.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ 
+diff --git a/t/api/menu.t b/t/api/menu.t
+index a9cda69..da17a48 100644
+--- a/t/api/menu.t
++++ b/t/api/menu.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ 
+diff --git a/t/api/queue.t b/t/api/queue.t
+index 07b8ed4..55f89ab 100644
+--- a/t/api/queue.t
++++ b/t/api/queue.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/api/record.t b/t/api/record.t
+index 4b6b0b8..2f68d8b 100644
+--- a/t/api/record.t
++++ b/t/api/record.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/api/reminders.t b/t/api/reminders.t
+index b035fa8..1c53000 100644
+--- a/t/api/reminders.t
++++ b/t/api/reminders.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/api/report_tickets.t b/t/api/report_tickets.t
+index 4144c60..fb994c9 100644
+--- a/t/api/report_tickets.t
++++ b/t/api/report_tickets.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ use RT::Test tests => 5;
+diff --git a/t/api/rt.t b/t/api/rt.t
+index 51c7762..19ced8b 100644
+--- a/t/api/rt.t
++++ b/t/api/rt.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/api/savedsearch.t b/t/api/savedsearch.t
+index 0aa67ee..1c3b6af 100644
+--- a/t/api/savedsearch.t
++++ b/t/api/savedsearch.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ BEGIN { $ENV{'LANG'} = 'C' }
+diff --git a/t/api/scrip.t b/t/api/scrip.t
+index eb54347..99cf550 100644
+--- a/t/api/scrip.t
++++ b/t/api/scrip.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/api/searchbuilder.t b/t/api/searchbuilder.t
+index 8456871..6f8b58f 100644
+--- a/t/api/searchbuilder.t
++++ b/t/api/searchbuilder.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/api/squish.t b/t/api/squish.t
+index 4b0fc5f..c307f5d 100644
+--- a/t/api/squish.t
++++ b/t/api/squish.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ use RT;
+diff --git a/t/api/system.t b/t/api/system.t
+index f1100d3..94180d5 100644
+--- a/t/api/system.t
++++ b/t/api/system.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/api/template-parsing.t b/t/api/template-parsing.t
+index 455b84d..18206c6 100644
+--- a/t/api/template-parsing.t
++++ b/t/api/template-parsing.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ use RT;
+diff --git a/t/api/template.t b/t/api/template.t
+index 331d9f9..28078d3 100644
+--- a/t/api/template.t
++++ b/t/api/template.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use warnings;
+ use strict;
+diff --git a/t/api/ticket.t b/t/api/ticket.t
+index da287a6..b8c08df 100644
+--- a/t/api/ticket.t
++++ b/t/api/ticket.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/api/tickets.t b/t/api/tickets.t
+index 50d08f7..55261f6 100644
+--- a/t/api/tickets.t
++++ b/t/api/tickets.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/api/tickets_overlay_sql.t b/t/api/tickets_overlay_sql.t
+index 9f91111..51da759 100644
+--- a/t/api/tickets_overlay_sql.t
++++ b/t/api/tickets_overlay_sql.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ use RT::Test tests => 20, config => 'Set( %FullTextSearch, Enable => 1 );';
+diff --git a/t/api/txn_content.t b/t/api/txn_content.t
+index 392b6a7..18c8d9f 100644
+--- a/t/api/txn_content.t
++++ b/t/api/txn_content.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use warnings;
+ use strict;
+ 
+diff --git a/t/api/uri-canonicalize.t b/t/api/uri-canonicalize.t
+index 288569c..feac864 100644
+--- a/t/api/uri-canonicalize.t
++++ b/t/api/uri-canonicalize.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ use RT::Test tests => undef;
+diff --git a/t/api/uri-fsck_com_rt.t b/t/api/uri-fsck_com_rt.t
+index 18bee7d..955dea9 100644
+--- a/t/api/uri-fsck_com_rt.t
++++ b/t/api/uri-fsck_com_rt.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ use RT;
+diff --git a/t/api/uri-t.t b/t/api/uri-t.t
+index 61b3e17..4b5a9e3 100644
+--- a/t/api/uri-t.t
++++ b/t/api/uri-t.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ use RT;
+diff --git a/t/api/user.t b/t/api/user.t
+index e6b891f..84bae4b 100644
+--- a/t/api/user.t
++++ b/t/api/user.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/api/users.t b/t/api/users.t
+index 1f3a487..c994817 100644
+--- a/t/api/users.t
++++ b/t/api/users.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ use RT::Test tests => 10;
+diff --git a/t/api/web-config.t b/t/api/web-config.t
+index fb2b362..7dbdd78 100644
+--- a/t/api/web-config.t
++++ b/t/api/web-config.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ use RT;
+diff --git a/t/approval/admincc.t b/t/approval/admincc.t
+index b439296..2c2ac0b 100644
+--- a/t/approval/admincc.t
++++ b/t/approval/admincc.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/approval/basic.t b/t/approval/basic.t
+index 2d00eb5..660d677 100644
+--- a/t/approval/basic.t
++++ b/t/approval/basic.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ use RT::Test tests => undef;
+diff --git a/t/articles/cfsearch.t b/t/articles/cfsearch.t
+index 3bfa667..0097382 100644
+--- a/t/articles/cfsearch.t
++++ b/t/articles/cfsearch.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/mail/bounce.t b/t/mail/bounce.t
+index 703e86d..92f8a8d 100644
+--- a/t/mail/bounce.t
++++ b/t/mail/bounce.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ 
+diff --git a/t/mail/dashboard-chart-with-utf8.t b/t/mail/dashboard-chart-with-utf8.t
+index 79f5f0e..db4d074 100644
+--- a/t/mail/dashboard-chart-with-utf8.t
++++ b/t/mail/dashboard-chart-with-utf8.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ 
+diff --git a/t/mail/disposition-outgoing.t b/t/mail/disposition-outgoing.t
+index cbfe43b..fd95e43 100644
+--- a/t/mail/disposition-outgoing.t
++++ b/t/mail/disposition-outgoing.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ 
+diff --git a/t/mail/fake-sendmail b/t/mail/fake-sendmail
+index 44c2377..ab3b912 100755
+--- a/t/mail/fake-sendmail
++++ b/t/mail/fake-sendmail
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ 
+ # captures command line arguments so you can validate
+ # what is being generated in sendmailpipe
+diff --git a/t/mail/rfc2231-attachment.t b/t/mail/rfc2231-attachment.t
+index fc74c47..c42ea90 100644
+--- a/t/mail/rfc2231-attachment.t
++++ b/t/mail/rfc2231-attachment.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ 
+diff --git a/t/mail/rfc822-attachment.t b/t/mail/rfc822-attachment.t
+index f498ec5..85ae397 100644
+--- a/t/mail/rfc822-attachment.t
++++ b/t/mail/rfc822-attachment.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ 
+diff --git a/t/mail/specials-in-encodedwords.t b/t/mail/specials-in-encodedwords.t
+index f9da9c6..82e0667 100644
+--- a/t/mail/specials-in-encodedwords.t
++++ b/t/mail/specials-in-encodedwords.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ 
+diff --git a/t/shredder/00load.t b/t/shredder/00load.t
+index a78e5e4..0ea1300 100644
+--- a/t/shredder/00load.t
++++ b/t/shredder/00load.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ use File::Spec;
+diff --git a/t/ticket/badlinks.t b/t/ticket/badlinks.t
+index 6fac5d5..6680ee2 100644
+--- a/t/ticket/badlinks.t
++++ b/t/ticket/badlinks.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ use RT::Test tests => 14;
+diff --git a/t/ticket/deferred_owner.t b/t/ticket/deferred_owner.t
+index fe90d53..54b168a 100644
+--- a/t/ticket/deferred_owner.t
++++ b/t/ticket/deferred_owner.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/ticket/googleish_search.t b/t/ticket/googleish_search.t
+index d372801..ad6a538 100644
+--- a/t/ticket/googleish_search.t
++++ b/t/ticket/googleish_search.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ 
+ use strict;
+diff --git a/t/ticket/linking.t b/t/ticket/linking.t
+index 1bd83d6..3f100d1 100644
+--- a/t/ticket/linking.t
++++ b/t/ticket/linking.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/ticket/race.t b/t/ticket/race.t
+index aa1150e..f620029 100644
+--- a/t/ticket/race.t
++++ b/t/ticket/race.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ 
+diff --git a/t/ticket/scrips_batch.t b/t/ticket/scrips_batch.t
+index 44d7f8e..9bf5e5d 100644
+--- a/t/ticket/scrips_batch.t
++++ b/t/ticket/scrips_batch.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/web/articles-links.t b/t/web/articles-links.t
+index eb6de51..d489734 100644
+--- a/t/web/articles-links.t
++++ b/t/web/articles-links.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/attachment-with-name-0.t b/t/web/attachment-with-name-0.t
+index 12a8dd5..37d95c9 100644
+--- a/t/web/attachment-with-name-0.t
++++ b/t/web/attachment-with-name-0.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/cf_render_type.t b/t/web/cf_render_type.t
+index 8d8efa8..4c9ebc9 100644
+--- a/t/web/cf_render_type.t
++++ b/t/web/cf_render_type.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/charting.t b/t/web/charting.t
+index e19ec41..b42ed14 100644
+--- a/t/web/charting.t
++++ b/t/web/charting.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/clickjacking-preventions.t b/t/web/clickjacking-preventions.t
+index e3f7f44..d84af67 100644
+--- a/t/web/clickjacking-preventions.t
++++ b/t/web/clickjacking-preventions.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/command_line_link_to_articles.t b/t/web/command_line_link_to_articles.t
+index 9a49145..c1a9973 100644
+--- a/t/web/command_line_link_to_articles.t
++++ b/t/web/command_line_link_to_articles.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ use Test::Expect;
+diff --git a/t/web/current_user_outdated_email.t b/t/web/current_user_outdated_email.t
+index 51fc803..86713fe 100644
+--- a/t/web/current_user_outdated_email.t
++++ b/t/web/current_user_outdated_email.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ 
+ use strict;
+ use warnings;
+diff --git a/t/web/dashboards-deleted-saved-search.t b/t/web/dashboards-deleted-saved-search.t
+index cb96aca..3bcfd5a 100644
+--- a/t/web/dashboards-deleted-saved-search.t
++++ b/t/web/dashboards-deleted-saved-search.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/googleish_search.t b/t/web/googleish_search.t
+index a5f834e..37d7a85 100644
+--- a/t/web/googleish_search.t
++++ b/t/web/googleish_search.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/offline.t b/t/web/offline.t
+index 06d5191..184e3c1 100644
+--- a/t/web/offline.t
++++ b/t/web/offline.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/offline_messages_utf8.t b/t/web/offline_messages_utf8.t
+index 4518c7b..61bbe1d 100644
+--- a/t/web/offline_messages_utf8.t
++++ b/t/web/offline_messages_utf8.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/offline_utf8.t b/t/web/offline_utf8.t
+index c317a46..02be79c 100644
+--- a/t/web/offline_utf8.t
++++ b/t/web/offline_utf8.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/owner_disabled_group_19221.t b/t/web/owner_disabled_group_19221.t
+index d41decf..7b3c89d 100644
+--- a/t/web/owner_disabled_group_19221.t
++++ b/t/web/owner_disabled_group_19221.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/path-traversal.t b/t/web/path-traversal.t
+index 5d5c954..2aa623a 100644
+--- a/t/web/path-traversal.t
++++ b/t/web/path-traversal.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/private-components.t b/t/web/private-components.t
+index 3ece854..a05fc01 100644
+--- a/t/web/private-components.t
++++ b/t/web/private-components.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/query_builder_queue_limits.t b/t/web/query_builder_queue_limits.t
+index 332cc93..0b6a423 100644
+--- a/t/web/query_builder_queue_limits.t
++++ b/t/web/query_builder_queue_limits.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/queue_caching.t b/t/web/queue_caching.t
+index d485711..16e3a0f 100644
+--- a/t/web/queue_caching.t
++++ b/t/web/queue_caching.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ use RT::Test tests => 48;
+diff --git a/t/web/quickcreate.t b/t/web/quickcreate.t
+index c49ad8c..4d0765e 100644
+--- a/t/web/quickcreate.t
++++ b/t/web/quickcreate.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/quicksearch.t b/t/web/quicksearch.t
+index 922dc31..01bfe75 100644
+--- a/t/web/quicksearch.t
++++ b/t/web/quicksearch.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/reminders.t b/t/web/reminders.t
+index 5102351..1b1ea42 100644
+--- a/t/web/reminders.t
++++ b/t/web/reminders.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ use RT::Test tests => 45;
+diff --git a/t/web/remote_user.t b/t/web/remote_user.t
+index edad6ef..30c9d10 100644
+--- a/t/web/remote_user.t
++++ b/t/web/remote_user.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ use RT;
+diff --git a/t/web/rest-non-ascii-subject.t b/t/web/rest-non-ascii-subject.t
+index 8b870a8..d88c158 100644
+--- a/t/web/rest-non-ascii-subject.t
++++ b/t/web/rest-non-ascii-subject.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ # Test ticket creation with REST using non ascii subject
+ use strict;
+ use warnings;
+diff --git a/t/web/rest-sort.t b/t/web/rest-sort.t
+index 5ddaa8e..08b501c 100644
+--- a/t/web/rest-sort.t
++++ b/t/web/rest-sort.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ use RT::Test tests => 25;
+diff --git a/t/web/rest.t b/t/web/rest.t
+index 3a84b2a..321b75b 100644
+--- a/t/web/rest.t
++++ b/t/web/rest.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ use RT::Interface::REST;
+diff --git a/t/web/rest_cfs_with_same_name.t b/t/web/rest_cfs_with_same_name.t
+index 9ab6e9a..3a116da 100644
+--- a/t/web/rest_cfs_with_same_name.t
++++ b/t/web/rest_cfs_with_same_name.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ use RT::Interface::REST;
+diff --git a/t/web/richtext-autohandler.t b/t/web/richtext-autohandler.t
+index 724a7b3..bbad9b4 100644
+--- a/t/web/richtext-autohandler.t
++++ b/t/web/richtext-autohandler.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/saved_search_chart.t b/t/web/saved_search_chart.t
+index 70111b9..d280fcd 100644
+--- a/t/web/saved_search_chart.t
++++ b/t/web/saved_search_chart.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/saved_search_context.t b/t/web/saved_search_context.t
+index 0c37a6a..966f9c1 100644
+--- a/t/web/saved_search_context.t
++++ b/t/web/saved_search_context.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/saved_search_permissions.t b/t/web/saved_search_permissions.t
+index f61c931..3f1d5de 100644
+--- a/t/web/saved_search_permissions.t
++++ b/t/web/saved_search_permissions.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/search_bulk_update_links.t b/t/web/search_bulk_update_links.t
+index ffe2efe..15f0558 100644
+--- a/t/web/search_bulk_update_links.t
++++ b/t/web/search_bulk_update_links.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/search_cf_quotes.t b/t/web/search_cf_quotes.t
+index 360fe0d..747d459 100644
+--- a/t/web/search_cf_quotes.t
++++ b/t/web/search_cf_quotes.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/search_simple.t b/t/web/search_simple.t
+index a1a3ce8..613ec9d 100644
+--- a/t/web/search_simple.t
++++ b/t/web/search_simple.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ 
+--- a/t/web/self_service.t.orig	2014-05-24 17:07:59.446322591 -0400
++++ b/t/web/self_service.t	2014-05-24 17:08:14.770287597 -0400
+@@ -1,2 +1,3 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+diff --git a/t/web/sidebyside_layout.t b/t/web/sidebyside_layout.t
+index 88ea10c..7616543 100644
+--- a/t/web/sidebyside_layout.t
++++ b/t/web/sidebyside_layout.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ use RT::Test tests => 11;
+diff --git a/t/web/squish.t b/t/web/squish.t
+index ff43e74..0b5bc13 100644
+--- a/t/web/squish.t
++++ b/t/web/squish.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ use RT;
+diff --git a/t/web/ticket_display.t b/t/web/ticket_display.t
+index 35e9217..41a0eb3 100644
+--- a/t/web/ticket_display.t
++++ b/t/web/ticket_display.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/ticket_links.t b/t/web/ticket_links.t
+index efb6151..75756b1 100644
+--- a/t/web/ticket_links.t
++++ b/t/web/ticket_links.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ use RT::Test tests => 146;
+diff --git a/t/web/ticket_modify_all.t b/t/web/ticket_modify_all.t
+index 6d19b28..4bf9b18 100644
+--- a/t/web/ticket_modify_all.t
++++ b/t/web/ticket_modify_all.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/ticket_modify_people.t b/t/web/ticket_modify_people.t
+index 750be3f..c4e85ef 100644
+--- a/t/web/ticket_modify_people.t
++++ b/t/web/ticket_modify_people.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/ticket_owner_issues_16656.t b/t/web/ticket_owner_issues_16656.t
+index c9fc783..c3e2e43 100644
+--- a/t/web/ticket_owner_issues_16656.t
++++ b/t/web/ticket_owner_issues_16656.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/ticket_txn_subject.t b/t/web/ticket_txn_subject.t
+index 5537023..41a12df 100644
+--- a/t/web/ticket_txn_subject.t
++++ b/t/web/ticket_txn_subject.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ use utf8;
+diff --git a/t/web/ticket_update_without_content.t b/t/web/ticket_update_without_content.t
+index b4247ab..5b3add7 100644
+--- a/t/web/ticket_update_without_content.t
++++ b/t/web/ticket_update_without_content.t
+@@ -1,3 +1,5 @@
++#!/usr/bin/perl
++
+ use strict;
+ use warnings;
+ 
+diff --git a/t/web/transaction_batch.t b/t/web/transaction_batch.t
+index 12d01fb..3ea6f57 100644
+--- a/t/web/transaction_batch.t
++++ b/t/web/transaction_batch.t
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ use strict;
+ use warnings;
+ use RT;
+-- 
+1.8.3.1
+

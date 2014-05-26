@@ -1,0 +1,154 @@
+From bd4790f1ee2a0f6be9494142bee5b0fddb0c4fd5 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ralf=20Cors=C3=A9pius?= <corsepiu@fedoraproject.org>
+Date: Sat, 19 Jan 2013 08:47:25 +0100
+Subject: [PATCH 6/7] Use /usr/bin/perl instead of /usr/bin/env perl.
+
+---
+ devel/tools/change-loc-msgstr            | 2 +-
+ devel/tools/extract-message-catalog      | 2 +-
+ devel/tools/factory                      | 2 +-
+ devel/tools/license_tag                  | 2 +-
+ devel/tools/merge-rosetta.pl             | 2 +-
+ devel/tools/rt-apache                    | 2 +-
+ devel/tools/rt-attributes-editor         | 2 +-
+ devel/tools/rt-static-docs               | 2 +-
+ devel/tools/tweak-template-locstring     | 2 +-
+ etc/upgrade/shrink_cgm_table.pl          | 2 +-
+ etc/upgrade/shrink_transactions_table.pl | 2 +-
+ etc/upgrade/upgrade-mysql-schema.pl      | 2 +-
+ sbin/rt-message-catalog                  | 2 +-
+ 13 files changed, 13 insertions(+), 13 deletions(-)
+
+diff --git a/devel/tools/change-loc-msgstr b/devel/tools/change-loc-msgstr
+index 9eb9ac6..4e2fc0a 100755
+--- a/devel/tools/change-loc-msgstr
++++ b/devel/tools/change-loc-msgstr
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ # BEGIN BPS TAGGED BLOCK {{{
+ #
+ # COPYRIGHT:
+diff --git a/devel/tools/extract-message-catalog b/devel/tools/extract-message-catalog
+index b95c990..31671a9 100755
+--- a/devel/tools/extract-message-catalog
++++ b/devel/tools/extract-message-catalog
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ # BEGIN BPS TAGGED BLOCK {{{
+ #
+ # COPYRIGHT:
+diff --git a/devel/tools/factory b/devel/tools/factory
+index 5f9c49b..62fb20b 100755
+--- a/devel/tools/factory
++++ b/devel/tools/factory
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ # BEGIN BPS TAGGED BLOCK {{{
+ #
+ # COPYRIGHT:
+diff --git a/devel/tools/license_tag b/devel/tools/license_tag
+index 064561e..31bb161 100755
+--- a/devel/tools/license_tag
++++ b/devel/tools/license_tag
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ 
+ 
+ # BEGIN BPS TAGGED BLOCK {{{
+diff --git a/devel/tools/merge-rosetta.pl b/devel/tools/merge-rosetta.pl
+index a0ef3e2..4c97dd2 100755
+--- a/devel/tools/merge-rosetta.pl
++++ b/devel/tools/merge-rosetta.pl
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ # BEGIN BPS TAGGED BLOCK {{{
+ #
+ # COPYRIGHT:
+diff --git a/devel/tools/rt-apache b/devel/tools/rt-apache
+index c2e2285..64582c7 100755
+--- a/devel/tools/rt-apache
++++ b/devel/tools/rt-apache
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ 
+ # BEGIN BPS TAGGED BLOCK {{{
+ #
+diff --git a/devel/tools/rt-attributes-editor b/devel/tools/rt-attributes-editor
+index d344317..89f3518 100755
+--- a/devel/tools/rt-attributes-editor
++++ b/devel/tools/rt-attributes-editor
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ # BEGIN BPS TAGGED BLOCK {{{
+ #
+ # COPYRIGHT:
+diff --git a/devel/tools/rt-static-docs b/devel/tools/rt-static-docs
+index e9bda9a..6e28003 100755
+--- a/devel/tools/rt-static-docs
++++ b/devel/tools/rt-static-docs
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ # BEGIN BPS TAGGED BLOCK {{{
+ #
+ # COPYRIGHT:
+diff --git a/devel/tools/tweak-template-locstring b/devel/tools/tweak-template-locstring
+index d77ef9e..49feef8 100755
+--- a/devel/tools/tweak-template-locstring
++++ b/devel/tools/tweak-template-locstring
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ # BEGIN BPS TAGGED BLOCK {{{
+ #
+ # COPYRIGHT:
+diff --git a/etc/upgrade/shrink_cgm_table.pl b/etc/upgrade/shrink_cgm_table.pl
+index bb6c8d4..28ee13b 100644
+--- a/etc/upgrade/shrink_cgm_table.pl
++++ b/etc/upgrade/shrink_cgm_table.pl
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ # BEGIN BPS TAGGED BLOCK {{{
+ #
+ # COPYRIGHT:
+diff --git a/etc/upgrade/shrink_transactions_table.pl b/etc/upgrade/shrink_transactions_table.pl
+index b4f07f0..80d3991 100644
+--- a/etc/upgrade/shrink_transactions_table.pl
++++ b/etc/upgrade/shrink_transactions_table.pl
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ # BEGIN BPS TAGGED BLOCK {{{
+ #
+ # COPYRIGHT:
+diff --git a/etc/upgrade/upgrade-mysql-schema.pl b/etc/upgrade/upgrade-mysql-schema.pl
+index 98eb7b4..2c6d000 100755
+--- a/etc/upgrade/upgrade-mysql-schema.pl
++++ b/etc/upgrade/upgrade-mysql-schema.pl
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ # BEGIN BPS TAGGED BLOCK {{{
+ #
+ # COPYRIGHT:
+diff --git a/sbin/rt-message-catalog b/sbin/rt-message-catalog
+index b31b58d..c724c92 100755
+--- a/sbin/rt-message-catalog
++++ b/sbin/rt-message-catalog
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl 
++#!/usr/bin/perl 
+ # BEGIN BPS TAGGED BLOCK {{{
+ #
+ # COPYRIGHT:
+-- 
+1.8.3.1
+

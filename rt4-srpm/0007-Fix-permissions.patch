@@ -1,0 +1,1481 @@
+From 023be5ac197a7bce60b21cb74c29f235861d06fe Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ralf=20Cors=C3=A9pius?= <corsepiu@fedoraproject.org>
+Date: Sat, 7 Dec 2013 07:47:34 +0100
+Subject: [PATCH 7/7] Fix permissions.
+
+---
+ Makefile.in                               | 0
+ aclocal.m4                                | 0
+ config.layout                             | 0
+ configure.ac                              | 0
+ devel/tools/change-loc-msgstr             | 0
+ devel/tools/extract-message-catalog       | 0
+ devel/tools/factory                       | 0
+ devel/tools/license_tag                   | 0
+ devel/tools/rt-apache                     | 0
+ devel/tools/rt-attributes-editor          | 0
+ devel/tools/rt-static-docs                | 0
+ docs/schema.dot                           | 0
+ etc/RT_Config.pm.in                       | 0
+ etc/RT_SiteConfig.pm                      | 0
+ etc/acl.Oracle                            | 0
+ etc/acl.Pg                                | 0
+ etc/acl.mysql                             | 0
+ etc/drop.Oracle                           | 0
+ etc/initialdata                           | 0
+ etc/schema.Oracle                         | 0
+ etc/schema.Pg                             | 0
+ etc/schema.SQLite                         | 0
+ etc/schema.mysql                          | 0
+ etc/upgrade/upgrade-mysql-schema.pl       | 0
+ etc/upgrade/vulnerable-passwords.in       | 0
+ sbin/rt-message-catalog                   | 0
+ t/00-compile.t                            | 0
+ t/00-mason-syntax.t                       | 0
+ t/api/action-createtickets.t              | 0
+ t/api/attachment.t                        | 0
+ t/api/attachment_filename.t               | 0
+ t/api/attribute-tests.t                   | 0
+ t/api/attribute.t                         | 0
+ t/api/bookmarks.t                         | 0
+ t/api/canonical_charset.t                 | 0
+ t/api/cf_render_type.t                    | 0
+ t/api/cf_rights.t                         | 0
+ t/api/cfsearch.t                          | 0
+ t/api/condition-ownerchange.t             | 0
+ t/api/condition-reject.t                  | 0
+ t/api/config.t                            | 0
+ t/api/cron.t                              | 0
+ t/api/currentuser.t                       | 0
+ t/api/customfield.t                       | 0
+ t/api/date.t                              | 0
+ t/api/emailparser.t                       | 0
+ t/api/execute-code.t                      | 0
+ t/api/group-rights.t                      | 0
+ t/api/group.t                             | 0
+ t/api/groups.t                            | 0
+ t/api/has_rights.t                        | 0
+ t/api/i18n.t                              | 0
+ t/api/i18n_guess.t                        | 0
+ t/api/link.t                              | 0
+ t/api/menu.t                              | 0
+ t/api/password-types.t                    | 0
+ t/api/queue.t                             | 0
+ t/api/record.t                            | 0
+ t/api/reminders.t                         | 0
+ t/api/report_tickets.t                    | 0
+ t/api/rights.t                            | 0
+ t/api/rights_show_ticket.t                | 0
+ t/api/rt.t                                | 0
+ t/api/rtname.t                            | 0
+ t/api/safe-run-child-util.t               | 0
+ t/api/savedsearch.t                       | 0
+ t/api/scrip.t                             | 0
+ t/api/scrip_order.t                       | 0
+ t/api/searchbuilder.t                     | 0
+ t/api/squish.t                            | 0
+ t/api/system.t                            | 0
+ t/api/template-parsing.t                  | 0
+ t/api/template.t                          | 0
+ t/api/ticket.t                            | 0
+ t/api/tickets.t                           | 0
+ t/api/tickets_overlay_sql.t               | 0
+ t/api/txn_content.t                       | 0
+ t/api/uri-canonicalize.t                  | 0
+ t/api/uri-fsck_com_rt.t                   | 0
+ t/api/uri-t.t                             | 0
+ t/api/user.t                              | 0
+ t/api/users.t                             | 0
+ t/api/versions_sorter.t                   | 0
+ t/api/web-config.t                        | 0
+ t/approval/admincc.t                      | 0
+ t/approval/basic.t                        | 0
+ t/articles/article.t                      | 0
+ t/articles/articles.t                     | 0
+ t/articles/basic-api.t                    | 0
+ t/articles/cfsearch.t                     | 0
+ t/articles/class.t                        | 0
+ t/articles/interface.t                    | 0
+ t/articles/queue-specific-class.t         | 0
+ t/articles/search-interface.t             | 0
+ t/articles/upload-customfields.t          | 0
+ t/articles/uri-a.t                        | 0
+ t/articles/uri-articles.t                 | 0
+ t/customfields/access_via_queue.t         | 0
+ t/customfields/api.t                      | 0
+ t/customfields/combo_cascade.t            | 0
+ t/customfields/date_search.t              | 0
+ t/customfields/datetime_search.t          | 0
+ t/customfields/external.t                 | 0
+ t/customfields/ip.t                       | 0
+ t/customfields/iprange.t                  | 0
+ t/customfields/iprangev6.t                | 0
+ t/customfields/ipv6.t                     | 0
+ t/customfields/pattern.t                  | 0
+ t/customfields/single_values.t            | 0
+ t/customfields/sort_order.t               | 0
+ t/customfields/transaction.t              | 0
+ t/fts/indexed_mysql.t                     | 0
+ t/fts/indexed_oracle.t                    | 0
+ t/fts/indexed_pg.t                        | 0
+ t/fts/not_indexed.t                       | 0
+ t/i18n/caching.t                          | 0
+ t/i18n/default.t                          | 0
+ t/i18n/footer.t                           | 0
+ t/lifecycles/basics.t                     | 0
+ t/lifecycles/dates.t                      | 0
+ t/lifecycles/moving.t                     | 0
+ t/lifecycles/unresolved-deps.t            | 0
+ t/lifecycles/utils.pl                     | 0
+ t/mail/bounce.t                           | 0
+ t/mail/charsets-outgoing.t                | 0
+ t/mail/crypt-gnupg.t                      | 0
+ t/mail/dashboard-chart-with-utf8.t        | 0
+ t/mail/dashboards.t                       | 0
+ t/mail/digest-attributes.t                | 0
+ t/mail/disposition-outgoing.t             | 0
+ t/mail/extractsubjecttag.t                | 0
+ t/mail/fake-sendmail                      | 0
+ t/mail/gateway.t                          | 0
+ t/mail/gnupg-bad.t                        | 0
+ t/mail/gnupg-incoming.t                   | 0
+ t/mail/gnupg-outgoing-encrypted.t         | 0
+ t/mail/gnupg-outgoing-plain.t             | 0
+ t/mail/gnupg-outgoing-signed.t            | 0
+ t/mail/gnupg-outgoing-signed_encrypted.t  | 0
+ t/mail/gnupg-realmail.t                   | 0
+ t/mail/gnupg-reverification.t             | 0
+ t/mail/gnupg-special.t                    | 0
+ t/mail/mime_decoding.t                    | 0
+ t/mail/multipart.t                        | 0
+ t/mail/one-time-recipients.t              | 0
+ t/mail/outlook.t                          | 0
+ t/mail/rfc2231-attachment.t               | 0
+ t/mail/rfc822-attachment.t                | 0
+ t/mail/sendmail.t                         | 0
+ t/mail/specials-in-encodedwords.t         | 0
+ t/mail/threading.t                        | 0
+ t/mail/verp.t                             | 0
+ t/mail/wrong_mime_charset.t               | 0
+ t/pod.t                                   | 0
+ t/shredder/00load.t                       | 0
+ t/shredder/00skeleton.t                   | 0
+ t/shredder/01basics.t                     | 0
+ t/shredder/01ticket.t                     | 0
+ t/shredder/02group_member.t               | 0
+ t/shredder/02queue.t                      | 0
+ t/shredder/02template.t                   | 0
+ t/shredder/02user.t                       | 0
+ t/shredder/03plugin.t                     | 0
+ t/shredder/03plugin_summary.t             | 0
+ t/shredder/03plugin_tickets.t             | 0
+ t/shredder/03plugin_users.t               | 0
+ t/shredder/utils.pl                       | 0
+ t/ticket/action_linear_escalate.t         | 0
+ t/ticket/add-watchers.t                   | 0
+ t/ticket/badlinks.t                       | 0
+ t/ticket/batch-upload-csv.t               | 0
+ t/ticket/cfsort-freeform-multiple.t       | 0
+ t/ticket/cfsort-freeform-single.t         | 0
+ t/ticket/clicky.t                         | 0
+ t/ticket/deferred_owner.t                 | 0
+ t/ticket/googleish_search.t               | 0
+ t/ticket/link_search.t                    | 0
+ t/ticket/linking.t                        | 0
+ t/ticket/merge.t                          | 0
+ t/ticket/race.t                           | 0
+ t/ticket/requestor-order.t                | 0
+ t/ticket/scrips_batch.t                   | 0
+ t/ticket/search.t                         | 0
+ t/ticket/search_by_cf_freeform_multiple.t | 0
+ t/ticket/search_by_cf_freeform_single.t   | 0
+ t/ticket/search_by_links.t                | 0
+ t/ticket/search_by_txn.t                  | 0
+ t/ticket/search_by_watcher.t              | 0
+ t/ticket/search_long_cf_values.t          | 0
+ t/ticket/sort-by-custom-ownership.t       | 0
+ t/ticket/sort-by-queue.t                  | 0
+ t/ticket/sort-by-user.t                   | 0
+ t/ticket/sort_by_cf.t                     | 0
+ t/validator/group_members.t               | 0
+ t/web/admin_groups.t                      | 0
+ t/web/admin_user.t                        | 0
+ t/web/articles-links.t                    | 0
+ t/web/attachment-with-name-0.t            | 0
+ t/web/attachment_encoding.t               | 0
+ t/web/attachments.t                       | 0
+ t/web/basic.t                             | 0
+ t/web/case-sensitivity.t                  | 0
+ t/web/cf_access.t                         | 0
+ t/web/cf_date.t                           | 0
+ t/web/cf_datetime.t                       | 0
+ t/web/cf_onqueue.t                        | 0
+ t/web/cf_render_type.t                    | 0
+ t/web/cf_select_one.t                     | 0
+ t/web/charting.t                          | 0
+ t/web/class_create.t                      | 0
+ t/web/clickjacking-preventions.t          | 0
+ t/web/command_line.t                      | 0
+ t/web/command_line_link_to_articles.t     | 0
+ t/web/command_line_with_unknown_field.t   | 0
+ t/web/compilation_errors.t                | 0
+ t/web/config_tab_right.t                  | 0
+ t/web/crypt-gnupg.t                       | 0
+ t/web/csrf-rest.t                         | 0
+ t/web/csrf.t                              | 0
+ t/web/current_user_outdated_email.t       | 0
+ t/web/custom_frontpage.t                  | 0
+ t/web/custom_search.t                     | 0
+ t/web/dashboards-basics.t                 | 0
+ t/web/dashboards-deleted-saved-search.t   | 0
+ t/web/dashboards-groups.t                 | 0
+ t/web/dashboards-permissions.t            | 0
+ t/web/dashboards-search-cache.t           | 0
+ t/web/gnupg-headers.t                     | 0
+ t/web/gnupg-select-keys-on-create.t       | 0
+ t/web/gnupg-select-keys-on-update.t       | 0
+ t/web/gnupg-tickyboxes.t                  | 0
+ t/web/googleish_search.t                  | 0
+ t/web/group_create.t                      | 0
+ t/web/html_template.t                     | 0
+ t/web/installer.t                         | 0
+ t/web/logout.t                            | 0
+ t/web/offline.t                           | 0
+ t/web/offline_messages_utf8.t             | 0
+ t/web/offline_utf8.t                      | 0
+ t/web/owner_disabled_group_19221.t        | 0
+ t/web/path-traversal.t                    | 0
+ t/web/private-components.t                | 0
+ t/web/query_builder.t                     | 0
+ t/web/query_builder_queue_limits.t        | 0
+ t/web/query_log.t                         | 0
+ t/web/queue_caching.t                     | 0
+ t/web/queue_create.t                      | 0
+ t/web/quickcreate.t                       | 0
+ t/web/quicksearch.t                       | 0
+ t/web/redirect-after-login.t              | 0
+ t/web/redirect.t                          | 0
+ t/web/reminders.t                         | 0
+ t/web/remote_user.t                       | 0
+ t/web/requestor_groups_edit_link.t        | 0
+ t/web/requestor_groups_limit.t            | 0
+ t/web/rest-non-ascii-subject.t            | 0
+ t/web/rest-sort.t                         | 0
+ t/web/rest.t                              | 0
+ t/web/rest_cfs_with_same_name.t           | 0
+ t/web/richtext-autohandler.t              | 0
+ t/web/rights.t                            | 0
+ t/web/rights1.t                           | 0
+ t/web/saved_search_chart.t                | 0
+ t/web/saved_search_context.t              | 0
+ t/web/saved_search_permissions.t          | 0
+ t/web/saved_search_update.t               | 0
+ t/web/scrips.t                            | 0
+ t/web/scrub.t                             | 0
+ t/web/search_bulk_update_links.t          | 0
+ t/web/search_cf_quotes.t                  | 0
+ t/web/search_rss.t                        | 0
+ t/web/search_simple.t                     | 0
+ t/web/search_tabs.t                       | 0
+ t/web/self_service.t                      | 0
+ t/web/sidebyside_layout.t                 | 0
+ t/web/squish.t                            | 0
+ t/web/template.t                          | 0
+ t/web/ticket-create-utf8.t                | 0
+ t/web/ticket_display.t                    | 0
+ t/web/ticket_forward.t                    | 0
+ t/web/ticket_links.t                      | 0
+ t/web/ticket_modify_all.t                 | 0
+ t/web/ticket_modify_people.t              | 0
+ t/web/ticket_owner.t                      | 0
+ t/web/ticket_owner_autocomplete.t         | 0
+ t/web/ticket_owner_issues_16656.t         | 0
+ t/web/ticket_seen.t                       | 0
+ t/web/ticket_txn_content.t                | 0
+ t/web/ticket_txn_subject.t                | 0
+ t/web/ticket_update_without_content.t     | 0
+ t/web/transaction_batch.t                 | 0
+ t/web/unlimited_search.t                  | 0
+ t/web/user_update.t                       | 0
+ t/web/walk.t                              | 0
+ 294 files changed, 0 insertions(+), 0 deletions(-)
+ mode change 100755 => 100644 Makefile.in
+ mode change 100755 => 100644 aclocal.m4
+ mode change 100755 => 100644 config.layout
+ mode change 100755 => 100644 configure.ac
+ mode change 100755 => 100644 devel/tools/change-loc-msgstr
+ mode change 100755 => 100644 devel/tools/extract-message-catalog
+ mode change 100755 => 100644 devel/tools/factory
+ mode change 100755 => 100644 devel/tools/license_tag
+ mode change 100755 => 100644 devel/tools/rt-apache
+ mode change 100755 => 100644 devel/tools/rt-attributes-editor
+ mode change 100755 => 100644 devel/tools/rt-static-docs
+ mode change 100755 => 100644 docs/schema.dot
+ mode change 100755 => 100644 etc/RT_Config.pm.in
+ mode change 100755 => 100644 etc/RT_SiteConfig.pm
+ mode change 100755 => 100644 etc/acl.Oracle
+ mode change 100755 => 100644 etc/acl.Pg
+ mode change 100755 => 100644 etc/acl.mysql
+ mode change 100755 => 100644 etc/drop.Oracle
+ mode change 100755 => 100644 etc/initialdata
+ mode change 100755 => 100644 etc/schema.Oracle
+ mode change 100755 => 100644 etc/schema.Pg
+ mode change 100755 => 100644 etc/schema.SQLite
+ mode change 100755 => 100644 etc/schema.mysql
+ mode change 100755 => 100644 etc/upgrade/upgrade-mysql-schema.pl
+ mode change 100755 => 100644 etc/upgrade/vulnerable-passwords.in
+ mode change 100755 => 100644 sbin/rt-message-catalog
+ mode change 100644 => 100755 t/00-compile.t
+ mode change 100644 => 100755 t/00-mason-syntax.t
+ mode change 100644 => 100755 t/api/action-createtickets.t
+ mode change 100644 => 100755 t/api/attachment.t
+ mode change 100644 => 100755 t/api/attachment_filename.t
+ mode change 100644 => 100755 t/api/attribute-tests.t
+ mode change 100644 => 100755 t/api/attribute.t
+ mode change 100644 => 100755 t/api/bookmarks.t
+ mode change 100644 => 100755 t/api/canonical_charset.t
+ mode change 100644 => 100755 t/api/cf_render_type.t
+ mode change 100644 => 100755 t/api/cf_rights.t
+ mode change 100644 => 100755 t/api/cfsearch.t
+ mode change 100644 => 100755 t/api/condition-ownerchange.t
+ mode change 100644 => 100755 t/api/condition-reject.t
+ mode change 100644 => 100755 t/api/config.t
+ mode change 100644 => 100755 t/api/cron.t
+ mode change 100644 => 100755 t/api/currentuser.t
+ mode change 100644 => 100755 t/api/customfield.t
+ mode change 100644 => 100755 t/api/date.t
+ mode change 100644 => 100755 t/api/emailparser.t
+ mode change 100644 => 100755 t/api/execute-code.t
+ mode change 100644 => 100755 t/api/group-rights.t
+ mode change 100644 => 100755 t/api/group.t
+ mode change 100644 => 100755 t/api/groups.t
+ mode change 100644 => 100755 t/api/has_rights.t
+ mode change 100644 => 100755 t/api/i18n.t
+ mode change 100644 => 100755 t/api/i18n_guess.t
+ mode change 100644 => 100755 t/api/link.t
+ mode change 100644 => 100755 t/api/menu.t
+ mode change 100644 => 100755 t/api/password-types.t
+ mode change 100644 => 100755 t/api/queue.t
+ mode change 100644 => 100755 t/api/record.t
+ mode change 100644 => 100755 t/api/reminders.t
+ mode change 100644 => 100755 t/api/report_tickets.t
+ mode change 100644 => 100755 t/api/rights.t
+ mode change 100644 => 100755 t/api/rights_show_ticket.t
+ mode change 100644 => 100755 t/api/rt.t
+ mode change 100644 => 100755 t/api/rtname.t
+ mode change 100644 => 100755 t/api/safe-run-child-util.t
+ mode change 100644 => 100755 t/api/savedsearch.t
+ mode change 100644 => 100755 t/api/scrip.t
+ mode change 100644 => 100755 t/api/scrip_order.t
+ mode change 100644 => 100755 t/api/searchbuilder.t
+ mode change 100644 => 100755 t/api/squish.t
+ mode change 100644 => 100755 t/api/system.t
+ mode change 100644 => 100755 t/api/template-parsing.t
+ mode change 100644 => 100755 t/api/template.t
+ mode change 100644 => 100755 t/api/ticket.t
+ mode change 100644 => 100755 t/api/tickets.t
+ mode change 100644 => 100755 t/api/tickets_overlay_sql.t
+ mode change 100644 => 100755 t/api/txn_content.t
+ mode change 100644 => 100755 t/api/uri-canonicalize.t
+ mode change 100644 => 100755 t/api/uri-fsck_com_rt.t
+ mode change 100644 => 100755 t/api/uri-t.t
+ mode change 100644 => 100755 t/api/user.t
+ mode change 100644 => 100755 t/api/users.t
+ mode change 100644 => 100755 t/api/versions_sorter.t
+ mode change 100644 => 100755 t/api/web-config.t
+ mode change 100644 => 100755 t/approval/admincc.t
+ mode change 100644 => 100755 t/approval/basic.t
+ mode change 100644 => 100755 t/articles/article.t
+ mode change 100644 => 100755 t/articles/articles.t
+ mode change 100644 => 100755 t/articles/basic-api.t
+ mode change 100644 => 100755 t/articles/cfsearch.t
+ mode change 100644 => 100755 t/articles/class.t
+ mode change 100644 => 100755 t/articles/interface.t
+ mode change 100644 => 100755 t/articles/queue-specific-class.t
+ mode change 100644 => 100755 t/articles/search-interface.t
+ mode change 100644 => 100755 t/articles/upload-customfields.t
+ mode change 100644 => 100755 t/articles/uri-a.t
+ mode change 100644 => 100755 t/articles/uri-articles.t
+ mode change 100644 => 100755 t/customfields/access_via_queue.t
+ mode change 100644 => 100755 t/customfields/api.t
+ mode change 100644 => 100755 t/customfields/combo_cascade.t
+ mode change 100644 => 100755 t/customfields/date_search.t
+ mode change 100644 => 100755 t/customfields/datetime_search.t
+ mode change 100644 => 100755 t/customfields/external.t
+ mode change 100644 => 100755 t/customfields/ip.t
+ mode change 100644 => 100755 t/customfields/iprange.t
+ mode change 100644 => 100755 t/customfields/iprangev6.t
+ mode change 100644 => 100755 t/customfields/ipv6.t
+ mode change 100644 => 100755 t/customfields/pattern.t
+ mode change 100644 => 100755 t/customfields/single_values.t
+ mode change 100644 => 100755 t/customfields/sort_order.t
+ mode change 100644 => 100755 t/customfields/transaction.t
+ mode change 100644 => 100755 t/fts/indexed_mysql.t
+ mode change 100644 => 100755 t/fts/indexed_oracle.t
+ mode change 100644 => 100755 t/fts/indexed_pg.t
+ mode change 100644 => 100755 t/fts/not_indexed.t
+ mode change 100644 => 100755 t/i18n/caching.t
+ mode change 100644 => 100755 t/i18n/default.t
+ mode change 100644 => 100755 t/i18n/footer.t
+ mode change 100644 => 100755 t/lifecycles/basics.t
+ mode change 100644 => 100755 t/lifecycles/dates.t
+ mode change 100644 => 100755 t/lifecycles/moving.t
+ mode change 100644 => 100755 t/lifecycles/unresolved-deps.t
+ mode change 100644 => 100755 t/lifecycles/utils.pl
+ mode change 100644 => 100755 t/mail/bounce.t
+ mode change 100644 => 100755 t/mail/charsets-outgoing.t
+ mode change 100644 => 100755 t/mail/crypt-gnupg.t
+ mode change 100644 => 100755 t/mail/dashboard-chart-with-utf8.t
+ mode change 100644 => 100755 t/mail/dashboards.t
+ mode change 100644 => 100755 t/mail/digest-attributes.t
+ mode change 100644 => 100755 t/mail/disposition-outgoing.t
+ mode change 100644 => 100755 t/mail/extractsubjecttag.t
+ mode change 100755 => 100644 t/mail/fake-sendmail
+ mode change 100644 => 100755 t/mail/gateway.t
+ mode change 100644 => 100755 t/mail/gnupg-bad.t
+ mode change 100644 => 100755 t/mail/gnupg-incoming.t
+ mode change 100644 => 100755 t/mail/gnupg-outgoing-encrypted.t
+ mode change 100644 => 100755 t/mail/gnupg-outgoing-plain.t
+ mode change 100644 => 100755 t/mail/gnupg-outgoing-signed.t
+ mode change 100644 => 100755 t/mail/gnupg-outgoing-signed_encrypted.t
+ mode change 100644 => 100755 t/mail/gnupg-realmail.t
+ mode change 100644 => 100755 t/mail/gnupg-reverification.t
+ mode change 100644 => 100755 t/mail/gnupg-special.t
+ mode change 100644 => 100755 t/mail/mime_decoding.t
+ mode change 100644 => 100755 t/mail/multipart.t
+ mode change 100644 => 100755 t/mail/one-time-recipients.t
+ mode change 100644 => 100755 t/mail/outlook.t
+ mode change 100644 => 100755 t/mail/rfc2231-attachment.t
+ mode change 100644 => 100755 t/mail/rfc822-attachment.t
+ mode change 100644 => 100755 t/mail/sendmail.t
+ mode change 100644 => 100755 t/mail/specials-in-encodedwords.t
+ mode change 100644 => 100755 t/mail/threading.t
+ mode change 100644 => 100755 t/mail/verp.t
+ mode change 100644 => 100755 t/mail/wrong_mime_charset.t
+ mode change 100644 => 100755 t/pod.t
+ mode change 100644 => 100755 t/shredder/00load.t
+ mode change 100644 => 100755 t/shredder/00skeleton.t
+ mode change 100644 => 100755 t/shredder/01basics.t
+ mode change 100644 => 100755 t/shredder/01ticket.t
+ mode change 100644 => 100755 t/shredder/02group_member.t
+ mode change 100644 => 100755 t/shredder/02queue.t
+ mode change 100644 => 100755 t/shredder/02template.t
+ mode change 100644 => 100755 t/shredder/02user.t
+ mode change 100644 => 100755 t/shredder/03plugin.t
+ mode change 100644 => 100755 t/shredder/03plugin_summary.t
+ mode change 100644 => 100755 t/shredder/03plugin_tickets.t
+ mode change 100644 => 100755 t/shredder/03plugin_users.t
+ mode change 100644 => 100755 t/shredder/utils.pl
+ mode change 100644 => 100755 t/ticket/action_linear_escalate.t
+ mode change 100644 => 100755 t/ticket/add-watchers.t
+ mode change 100644 => 100755 t/ticket/badlinks.t
+ mode change 100644 => 100755 t/ticket/batch-upload-csv.t
+ mode change 100644 => 100755 t/ticket/cfsort-freeform-multiple.t
+ mode change 100644 => 100755 t/ticket/cfsort-freeform-single.t
+ mode change 100644 => 100755 t/ticket/clicky.t
+ mode change 100644 => 100755 t/ticket/deferred_owner.t
+ mode change 100644 => 100755 t/ticket/googleish_search.t
+ mode change 100644 => 100755 t/ticket/link_search.t
+ mode change 100644 => 100755 t/ticket/linking.t
+ mode change 100644 => 100755 t/ticket/merge.t
+ mode change 100644 => 100755 t/ticket/race.t
+ mode change 100644 => 100755 t/ticket/requestor-order.t
+ mode change 100644 => 100755 t/ticket/scrips_batch.t
+ mode change 100644 => 100755 t/ticket/search.t
+ mode change 100644 => 100755 t/ticket/search_by_cf_freeform_multiple.t
+ mode change 100644 => 100755 t/ticket/search_by_cf_freeform_single.t
+ mode change 100644 => 100755 t/ticket/search_by_links.t
+ mode change 100644 => 100755 t/ticket/search_by_txn.t
+ mode change 100644 => 100755 t/ticket/search_by_watcher.t
+ mode change 100644 => 100755 t/ticket/search_long_cf_values.t
+ mode change 100644 => 100755 t/ticket/sort-by-custom-ownership.t
+ mode change 100644 => 100755 t/ticket/sort-by-queue.t
+ mode change 100644 => 100755 t/ticket/sort-by-user.t
+ mode change 100644 => 100755 t/ticket/sort_by_cf.t
+ mode change 100644 => 100755 t/validator/group_members.t
+ mode change 100644 => 100755 t/web/admin_groups.t
+ mode change 100644 => 100755 t/web/admin_user.t
+ mode change 100644 => 100755 t/web/articles-links.t
+ mode change 100644 => 100755 t/web/attachment-with-name-0.t
+ mode change 100644 => 100755 t/web/attachment_encoding.t
+ mode change 100644 => 100755 t/web/attachments.t
+ mode change 100644 => 100755 t/web/basic.t
+ mode change 100644 => 100755 t/web/case-sensitivity.t
+ mode change 100644 => 100755 t/web/cf_access.t
+ mode change 100644 => 100755 t/web/cf_date.t
+ mode change 100644 => 100755 t/web/cf_datetime.t
+ mode change 100644 => 100755 t/web/cf_onqueue.t
+ mode change 100644 => 100755 t/web/cf_render_type.t
+ mode change 100644 => 100755 t/web/cf_select_one.t
+ mode change 100644 => 100755 t/web/charting.t
+ mode change 100644 => 100755 t/web/class_create.t
+ mode change 100644 => 100755 t/web/clickjacking-preventions.t
+ mode change 100644 => 100755 t/web/command_line.t
+ mode change 100644 => 100755 t/web/command_line_link_to_articles.t
+ mode change 100644 => 100755 t/web/command_line_with_unknown_field.t
+ mode change 100644 => 100755 t/web/compilation_errors.t
+ mode change 100644 => 100755 t/web/config_tab_right.t
+ mode change 100644 => 100755 t/web/crypt-gnupg.t
+ mode change 100644 => 100755 t/web/csrf-rest.t
+ mode change 100644 => 100755 t/web/csrf.t
+ mode change 100644 => 100755 t/web/current_user_outdated_email.t
+ mode change 100644 => 100755 t/web/custom_frontpage.t
+ mode change 100644 => 100755 t/web/custom_search.t
+ mode change 100644 => 100755 t/web/dashboards-basics.t
+ mode change 100644 => 100755 t/web/dashboards-deleted-saved-search.t
+ mode change 100644 => 100755 t/web/dashboards-groups.t
+ mode change 100644 => 100755 t/web/dashboards-permissions.t
+ mode change 100644 => 100755 t/web/dashboards-search-cache.t
+ mode change 100644 => 100755 t/web/gnupg-headers.t
+ mode change 100644 => 100755 t/web/gnupg-select-keys-on-create.t
+ mode change 100644 => 100755 t/web/gnupg-select-keys-on-update.t
+ mode change 100644 => 100755 t/web/gnupg-tickyboxes.t
+ mode change 100644 => 100755 t/web/googleish_search.t
+ mode change 100644 => 100755 t/web/group_create.t
+ mode change 100644 => 100755 t/web/html_template.t
+ mode change 100644 => 100755 t/web/installer.t
+ mode change 100644 => 100755 t/web/logout.t
+ mode change 100644 => 100755 t/web/offline.t
+ mode change 100644 => 100755 t/web/offline_messages_utf8.t
+ mode change 100644 => 100755 t/web/offline_utf8.t
+ mode change 100644 => 100755 t/web/owner_disabled_group_19221.t
+ mode change 100644 => 100755 t/web/path-traversal.t
+ mode change 100644 => 100755 t/web/private-components.t
+ mode change 100644 => 100755 t/web/query_builder.t
+ mode change 100644 => 100755 t/web/query_builder_queue_limits.t
+ mode change 100644 => 100755 t/web/query_log.t
+ mode change 100644 => 100755 t/web/queue_caching.t
+ mode change 100644 => 100755 t/web/queue_create.t
+ mode change 100644 => 100755 t/web/quickcreate.t
+ mode change 100644 => 100755 t/web/quicksearch.t
+ mode change 100644 => 100755 t/web/redirect-after-login.t
+ mode change 100644 => 100755 t/web/redirect.t
+ mode change 100644 => 100755 t/web/reminders.t
+ mode change 100644 => 100755 t/web/remote_user.t
+ mode change 100644 => 100755 t/web/requestor_groups_edit_link.t
+ mode change 100644 => 100755 t/web/requestor_groups_limit.t
+ mode change 100644 => 100755 t/web/rest-non-ascii-subject.t
+ mode change 100644 => 100755 t/web/rest-sort.t
+ mode change 100644 => 100755 t/web/rest.t
+ mode change 100644 => 100755 t/web/rest_cfs_with_same_name.t
+ mode change 100644 => 100755 t/web/richtext-autohandler.t
+ mode change 100644 => 100755 t/web/rights.t
+ mode change 100644 => 100755 t/web/rights1.t
+ mode change 100644 => 100755 t/web/saved_search_chart.t
+ mode change 100644 => 100755 t/web/saved_search_context.t
+ mode change 100644 => 100755 t/web/saved_search_permissions.t
+ mode change 100644 => 100755 t/web/saved_search_update.t
+ mode change 100644 => 100755 t/web/scrips.t
+ mode change 100644 => 100755 t/web/scrub.t
+ mode change 100644 => 100755 t/web/search_bulk_update_links.t
+ mode change 100644 => 100755 t/web/search_cf_quotes.t
+ mode change 100644 => 100755 t/web/search_rss.t
+ mode change 100644 => 100755 t/web/search_simple.t
+ mode change 100644 => 100755 t/web/search_tabs.t
+ mode change 100644 => 100755 t/web/self_service.t
+ mode change 100644 => 100755 t/web/sidebyside_layout.t
+ mode change 100644 => 100755 t/web/squish.t
+ mode change 100644 => 100755 t/web/template.t
+ mode change 100644 => 100755 t/web/ticket-create-utf8.t
+ mode change 100644 => 100755 t/web/ticket_display.t
+ mode change 100644 => 100755 t/web/ticket_forward.t
+ mode change 100644 => 100755 t/web/ticket_links.t
+ mode change 100644 => 100755 t/web/ticket_modify_all.t
+ mode change 100644 => 100755 t/web/ticket_modify_people.t
+ mode change 100644 => 100755 t/web/ticket_owner.t
+ mode change 100644 => 100755 t/web/ticket_owner_autocomplete.t
+ mode change 100644 => 100755 t/web/ticket_owner_issues_16656.t
+ mode change 100644 => 100755 t/web/ticket_seen.t
+ mode change 100644 => 100755 t/web/ticket_txn_content.t
+ mode change 100644 => 100755 t/web/ticket_txn_subject.t
+ mode change 100644 => 100755 t/web/ticket_update_without_content.t
+ mode change 100644 => 100755 t/web/transaction_batch.t
+ mode change 100644 => 100755 t/web/unlimited_search.t
+ mode change 100644 => 100755 t/web/user_update.t
+ mode change 100644 => 100755 t/web/walk.t
+
+diff --git a/Makefile.in b/Makefile.in
+old mode 100755
+new mode 100644
+diff --git a/aclocal.m4 b/aclocal.m4
+old mode 100755
+new mode 100644
+diff --git a/config.layout b/config.layout
+old mode 100755
+new mode 100644
+diff --git a/configure.ac b/configure.ac
+old mode 100755
+new mode 100644
+diff --git a/devel/tools/change-loc-msgstr b/devel/tools/change-loc-msgstr
+old mode 100755
+new mode 100644
+diff --git a/devel/tools/extract-message-catalog b/devel/tools/extract-message-catalog
+old mode 100755
+new mode 100644
+diff --git a/devel/tools/factory b/devel/tools/factory
+old mode 100755
+new mode 100644
+diff --git a/devel/tools/license_tag b/devel/tools/license_tag
+old mode 100755
+new mode 100644
+diff --git a/devel/tools/rt-apache b/devel/tools/rt-apache
+old mode 100755
+new mode 100644
+diff --git a/devel/tools/rt-attributes-editor b/devel/tools/rt-attributes-editor
+old mode 100755
+new mode 100644
+diff --git a/devel/tools/rt-static-docs b/devel/tools/rt-static-docs
+old mode 100755
+new mode 100644
+diff --git a/docs/schema.dot b/docs/schema.dot
+old mode 100755
+new mode 100644
+diff --git a/etc/RT_Config.pm.in b/etc/RT_Config.pm.in
+old mode 100755
+new mode 100644
+diff --git a/etc/RT_SiteConfig.pm b/etc/RT_SiteConfig.pm
+old mode 100755
+new mode 100644
+diff --git a/etc/acl.Oracle b/etc/acl.Oracle
+old mode 100755
+new mode 100644
+diff --git a/etc/acl.Pg b/etc/acl.Pg
+old mode 100755
+new mode 100644
+diff --git a/etc/acl.mysql b/etc/acl.mysql
+old mode 100755
+new mode 100644
+diff --git a/etc/drop.Oracle b/etc/drop.Oracle
+old mode 100755
+new mode 100644
+diff --git a/etc/initialdata b/etc/initialdata
+old mode 100755
+new mode 100644
+diff --git a/etc/schema.Oracle b/etc/schema.Oracle
+old mode 100755
+new mode 100644
+diff --git a/etc/schema.Pg b/etc/schema.Pg
+old mode 100755
+new mode 100644
+diff --git a/etc/schema.SQLite b/etc/schema.SQLite
+old mode 100755
+new mode 100644
+diff --git a/etc/schema.mysql b/etc/schema.mysql
+old mode 100755
+new mode 100644
+diff --git a/etc/upgrade/upgrade-mysql-schema.pl b/etc/upgrade/upgrade-mysql-schema.pl
+old mode 100755
+new mode 100644
+diff --git a/etc/upgrade/vulnerable-passwords.in b/etc/upgrade/vulnerable-passwords.in
+old mode 100755
+new mode 100644
+diff --git a/sbin/rt-message-catalog b/sbin/rt-message-catalog
+old mode 100755
+new mode 100644
+diff --git a/t/00-compile.t b/t/00-compile.t
+old mode 100644
+new mode 100755
+diff --git a/t/00-mason-syntax.t b/t/00-mason-syntax.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/action-createtickets.t b/t/api/action-createtickets.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/attachment.t b/t/api/attachment.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/attachment_filename.t b/t/api/attachment_filename.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/attribute-tests.t b/t/api/attribute-tests.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/attribute.t b/t/api/attribute.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/bookmarks.t b/t/api/bookmarks.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/canonical_charset.t b/t/api/canonical_charset.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/cf_render_type.t b/t/api/cf_render_type.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/cf_rights.t b/t/api/cf_rights.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/cfsearch.t b/t/api/cfsearch.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/condition-ownerchange.t b/t/api/condition-ownerchange.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/condition-reject.t b/t/api/condition-reject.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/config.t b/t/api/config.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/cron.t b/t/api/cron.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/currentuser.t b/t/api/currentuser.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/customfield.t b/t/api/customfield.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/date.t b/t/api/date.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/emailparser.t b/t/api/emailparser.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/execute-code.t b/t/api/execute-code.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/group-rights.t b/t/api/group-rights.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/group.t b/t/api/group.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/groups.t b/t/api/groups.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/has_rights.t b/t/api/has_rights.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/i18n.t b/t/api/i18n.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/i18n_guess.t b/t/api/i18n_guess.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/link.t b/t/api/link.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/menu.t b/t/api/menu.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/password-types.t b/t/api/password-types.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/queue.t b/t/api/queue.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/record.t b/t/api/record.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/reminders.t b/t/api/reminders.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/report_tickets.t b/t/api/report_tickets.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/rights.t b/t/api/rights.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/rights_show_ticket.t b/t/api/rights_show_ticket.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/rt.t b/t/api/rt.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/rtname.t b/t/api/rtname.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/safe-run-child-util.t b/t/api/safe-run-child-util.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/savedsearch.t b/t/api/savedsearch.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/scrip.t b/t/api/scrip.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/scrip_order.t b/t/api/scrip_order.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/searchbuilder.t b/t/api/searchbuilder.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/squish.t b/t/api/squish.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/system.t b/t/api/system.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/template-parsing.t b/t/api/template-parsing.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/template.t b/t/api/template.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/ticket.t b/t/api/ticket.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/tickets.t b/t/api/tickets.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/tickets_overlay_sql.t b/t/api/tickets_overlay_sql.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/txn_content.t b/t/api/txn_content.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/uri-canonicalize.t b/t/api/uri-canonicalize.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/uri-fsck_com_rt.t b/t/api/uri-fsck_com_rt.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/uri-t.t b/t/api/uri-t.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/user.t b/t/api/user.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/users.t b/t/api/users.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/versions_sorter.t b/t/api/versions_sorter.t
+old mode 100644
+new mode 100755
+diff --git a/t/api/web-config.t b/t/api/web-config.t
+old mode 100644
+new mode 100755
+diff --git a/t/approval/admincc.t b/t/approval/admincc.t
+old mode 100644
+new mode 100755
+diff --git a/t/approval/basic.t b/t/approval/basic.t
+old mode 100644
+new mode 100755
+diff --git a/t/articles/article.t b/t/articles/article.t
+old mode 100644
+new mode 100755
+diff --git a/t/articles/articles.t b/t/articles/articles.t
+old mode 100644
+new mode 100755
+diff --git a/t/articles/basic-api.t b/t/articles/basic-api.t
+old mode 100644
+new mode 100755
+diff --git a/t/articles/cfsearch.t b/t/articles/cfsearch.t
+old mode 100644
+new mode 100755
+diff --git a/t/articles/class.t b/t/articles/class.t
+old mode 100644
+new mode 100755
+diff --git a/t/articles/interface.t b/t/articles/interface.t
+old mode 100644
+new mode 100755
+diff --git a/t/articles/queue-specific-class.t b/t/articles/queue-specific-class.t
+old mode 100644
+new mode 100755
+diff --git a/t/articles/search-interface.t b/t/articles/search-interface.t
+old mode 100644
+new mode 100755
+diff --git a/t/articles/upload-customfields.t b/t/articles/upload-customfields.t
+old mode 100644
+new mode 100755
+diff --git a/t/articles/uri-a.t b/t/articles/uri-a.t
+old mode 100644
+new mode 100755
+diff --git a/t/articles/uri-articles.t b/t/articles/uri-articles.t
+old mode 100644
+new mode 100755
+diff --git a/t/customfields/access_via_queue.t b/t/customfields/access_via_queue.t
+old mode 100644
+new mode 100755
+diff --git a/t/customfields/api.t b/t/customfields/api.t
+old mode 100644
+new mode 100755
+diff --git a/t/customfields/combo_cascade.t b/t/customfields/combo_cascade.t
+old mode 100644
+new mode 100755
+diff --git a/t/customfields/date_search.t b/t/customfields/date_search.t
+old mode 100644
+new mode 100755
+diff --git a/t/customfields/datetime_search.t b/t/customfields/datetime_search.t
+old mode 100644
+new mode 100755
+diff --git a/t/customfields/external.t b/t/customfields/external.t
+old mode 100644
+new mode 100755
+diff --git a/t/customfields/ip.t b/t/customfields/ip.t
+old mode 100644
+new mode 100755
+diff --git a/t/customfields/iprange.t b/t/customfields/iprange.t
+old mode 100644
+new mode 100755
+diff --git a/t/customfields/iprangev6.t b/t/customfields/iprangev6.t
+old mode 100644
+new mode 100755
+diff --git a/t/customfields/ipv6.t b/t/customfields/ipv6.t
+old mode 100644
+new mode 100755
+diff --git a/t/customfields/pattern.t b/t/customfields/pattern.t
+old mode 100644
+new mode 100755
+diff --git a/t/customfields/single_values.t b/t/customfields/single_values.t
+old mode 100644
+new mode 100755
+diff --git a/t/customfields/sort_order.t b/t/customfields/sort_order.t
+old mode 100644
+new mode 100755
+diff --git a/t/customfields/transaction.t b/t/customfields/transaction.t
+old mode 100644
+new mode 100755
+diff --git a/t/fts/indexed_mysql.t b/t/fts/indexed_mysql.t
+old mode 100644
+new mode 100755
+diff --git a/t/fts/indexed_oracle.t b/t/fts/indexed_oracle.t
+old mode 100644
+new mode 100755
+diff --git a/t/fts/indexed_pg.t b/t/fts/indexed_pg.t
+old mode 100644
+new mode 100755
+diff --git a/t/fts/not_indexed.t b/t/fts/not_indexed.t
+old mode 100644
+new mode 100755
+diff --git a/t/i18n/caching.t b/t/i18n/caching.t
+old mode 100644
+new mode 100755
+diff --git a/t/i18n/default.t b/t/i18n/default.t
+old mode 100644
+new mode 100755
+diff --git a/t/i18n/footer.t b/t/i18n/footer.t
+old mode 100644
+new mode 100755
+diff --git a/t/lifecycles/basics.t b/t/lifecycles/basics.t
+old mode 100644
+new mode 100755
+diff --git a/t/lifecycles/dates.t b/t/lifecycles/dates.t
+old mode 100644
+new mode 100755
+diff --git a/t/lifecycles/moving.t b/t/lifecycles/moving.t
+old mode 100644
+new mode 100755
+diff --git a/t/lifecycles/unresolved-deps.t b/t/lifecycles/unresolved-deps.t
+old mode 100644
+new mode 100755
+diff --git a/t/lifecycles/utils.pl b/t/lifecycles/utils.pl
+old mode 100644
+new mode 100755
+diff --git a/t/mail/bounce.t b/t/mail/bounce.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/charsets-outgoing.t b/t/mail/charsets-outgoing.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/crypt-gnupg.t b/t/mail/crypt-gnupg.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/dashboard-chart-with-utf8.t b/t/mail/dashboard-chart-with-utf8.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/dashboards.t b/t/mail/dashboards.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/digest-attributes.t b/t/mail/digest-attributes.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/disposition-outgoing.t b/t/mail/disposition-outgoing.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/extractsubjecttag.t b/t/mail/extractsubjecttag.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/fake-sendmail b/t/mail/fake-sendmail
+old mode 100755
+new mode 100644
+diff --git a/t/mail/gateway.t b/t/mail/gateway.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/gnupg-bad.t b/t/mail/gnupg-bad.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/gnupg-incoming.t b/t/mail/gnupg-incoming.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/gnupg-outgoing-encrypted.t b/t/mail/gnupg-outgoing-encrypted.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/gnupg-outgoing-plain.t b/t/mail/gnupg-outgoing-plain.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/gnupg-outgoing-signed.t b/t/mail/gnupg-outgoing-signed.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/gnupg-outgoing-signed_encrypted.t b/t/mail/gnupg-outgoing-signed_encrypted.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/gnupg-realmail.t b/t/mail/gnupg-realmail.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/gnupg-reverification.t b/t/mail/gnupg-reverification.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/gnupg-special.t b/t/mail/gnupg-special.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/mime_decoding.t b/t/mail/mime_decoding.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/multipart.t b/t/mail/multipart.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/one-time-recipients.t b/t/mail/one-time-recipients.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/outlook.t b/t/mail/outlook.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/rfc2231-attachment.t b/t/mail/rfc2231-attachment.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/rfc822-attachment.t b/t/mail/rfc822-attachment.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/sendmail.t b/t/mail/sendmail.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/specials-in-encodedwords.t b/t/mail/specials-in-encodedwords.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/threading.t b/t/mail/threading.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/verp.t b/t/mail/verp.t
+old mode 100644
+new mode 100755
+diff --git a/t/mail/wrong_mime_charset.t b/t/mail/wrong_mime_charset.t
+old mode 100644
+new mode 100755
+diff --git a/t/pod.t b/t/pod.t
+old mode 100644
+new mode 100755
+diff --git a/t/shredder/00load.t b/t/shredder/00load.t
+old mode 100644
+new mode 100755
+diff --git a/t/shredder/00skeleton.t b/t/shredder/00skeleton.t
+old mode 100644
+new mode 100755
+diff --git a/t/shredder/01basics.t b/t/shredder/01basics.t
+old mode 100644
+new mode 100755
+diff --git a/t/shredder/01ticket.t b/t/shredder/01ticket.t
+old mode 100644
+new mode 100755
+diff --git a/t/shredder/02group_member.t b/t/shredder/02group_member.t
+old mode 100644
+new mode 100755
+diff --git a/t/shredder/02queue.t b/t/shredder/02queue.t
+old mode 100644
+new mode 100755
+diff --git a/t/shredder/02template.t b/t/shredder/02template.t
+old mode 100644
+new mode 100755
+diff --git a/t/shredder/02user.t b/t/shredder/02user.t
+old mode 100644
+new mode 100755
+diff --git a/t/shredder/03plugin.t b/t/shredder/03plugin.t
+old mode 100644
+new mode 100755
+diff --git a/t/shredder/03plugin_summary.t b/t/shredder/03plugin_summary.t
+old mode 100644
+new mode 100755
+diff --git a/t/shredder/03plugin_tickets.t b/t/shredder/03plugin_tickets.t
+old mode 100644
+new mode 100755
+diff --git a/t/shredder/03plugin_users.t b/t/shredder/03plugin_users.t
+old mode 100644
+new mode 100755
+diff --git a/t/shredder/utils.pl b/t/shredder/utils.pl
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/action_linear_escalate.t b/t/ticket/action_linear_escalate.t
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/add-watchers.t b/t/ticket/add-watchers.t
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/badlinks.t b/t/ticket/badlinks.t
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/batch-upload-csv.t b/t/ticket/batch-upload-csv.t
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/cfsort-freeform-multiple.t b/t/ticket/cfsort-freeform-multiple.t
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/cfsort-freeform-single.t b/t/ticket/cfsort-freeform-single.t
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/clicky.t b/t/ticket/clicky.t
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/deferred_owner.t b/t/ticket/deferred_owner.t
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/googleish_search.t b/t/ticket/googleish_search.t
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/link_search.t b/t/ticket/link_search.t
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/linking.t b/t/ticket/linking.t
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/merge.t b/t/ticket/merge.t
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/race.t b/t/ticket/race.t
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/requestor-order.t b/t/ticket/requestor-order.t
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/scrips_batch.t b/t/ticket/scrips_batch.t
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/search.t b/t/ticket/search.t
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/search_by_cf_freeform_multiple.t b/t/ticket/search_by_cf_freeform_multiple.t
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/search_by_cf_freeform_single.t b/t/ticket/search_by_cf_freeform_single.t
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/search_by_links.t b/t/ticket/search_by_links.t
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/search_by_txn.t b/t/ticket/search_by_txn.t
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/search_by_watcher.t b/t/ticket/search_by_watcher.t
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/search_long_cf_values.t b/t/ticket/search_long_cf_values.t
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/sort-by-custom-ownership.t b/t/ticket/sort-by-custom-ownership.t
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/sort-by-queue.t b/t/ticket/sort-by-queue.t
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/sort-by-user.t b/t/ticket/sort-by-user.t
+old mode 100644
+new mode 100755
+diff --git a/t/ticket/sort_by_cf.t b/t/ticket/sort_by_cf.t
+old mode 100644
+new mode 100755
+diff --git a/t/validator/group_members.t b/t/validator/group_members.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/admin_groups.t b/t/web/admin_groups.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/admin_user.t b/t/web/admin_user.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/articles-links.t b/t/web/articles-links.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/attachment-with-name-0.t b/t/web/attachment-with-name-0.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/attachment_encoding.t b/t/web/attachment_encoding.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/attachments.t b/t/web/attachments.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/basic.t b/t/web/basic.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/case-sensitivity.t b/t/web/case-sensitivity.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/cf_access.t b/t/web/cf_access.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/cf_date.t b/t/web/cf_date.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/cf_datetime.t b/t/web/cf_datetime.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/cf_onqueue.t b/t/web/cf_onqueue.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/cf_render_type.t b/t/web/cf_render_type.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/cf_select_one.t b/t/web/cf_select_one.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/charting.t b/t/web/charting.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/class_create.t b/t/web/class_create.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/clickjacking-preventions.t b/t/web/clickjacking-preventions.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/command_line.t b/t/web/command_line.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/command_line_link_to_articles.t b/t/web/command_line_link_to_articles.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/command_line_with_unknown_field.t b/t/web/command_line_with_unknown_field.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/compilation_errors.t b/t/web/compilation_errors.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/config_tab_right.t b/t/web/config_tab_right.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/crypt-gnupg.t b/t/web/crypt-gnupg.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/csrf-rest.t b/t/web/csrf-rest.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/csrf.t b/t/web/csrf.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/current_user_outdated_email.t b/t/web/current_user_outdated_email.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/custom_frontpage.t b/t/web/custom_frontpage.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/custom_search.t b/t/web/custom_search.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/dashboards-basics.t b/t/web/dashboards-basics.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/dashboards-deleted-saved-search.t b/t/web/dashboards-deleted-saved-search.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/dashboards-groups.t b/t/web/dashboards-groups.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/dashboards-permissions.t b/t/web/dashboards-permissions.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/dashboards-search-cache.t b/t/web/dashboards-search-cache.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/gnupg-headers.t b/t/web/gnupg-headers.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/gnupg-select-keys-on-create.t b/t/web/gnupg-select-keys-on-create.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/gnupg-select-keys-on-update.t b/t/web/gnupg-select-keys-on-update.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/gnupg-tickyboxes.t b/t/web/gnupg-tickyboxes.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/googleish_search.t b/t/web/googleish_search.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/group_create.t b/t/web/group_create.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/html_template.t b/t/web/html_template.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/installer.t b/t/web/installer.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/logout.t b/t/web/logout.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/offline.t b/t/web/offline.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/offline_messages_utf8.t b/t/web/offline_messages_utf8.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/offline_utf8.t b/t/web/offline_utf8.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/owner_disabled_group_19221.t b/t/web/owner_disabled_group_19221.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/path-traversal.t b/t/web/path-traversal.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/private-components.t b/t/web/private-components.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/query_builder.t b/t/web/query_builder.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/query_builder_queue_limits.t b/t/web/query_builder_queue_limits.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/query_log.t b/t/web/query_log.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/queue_caching.t b/t/web/queue_caching.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/queue_create.t b/t/web/queue_create.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/quickcreate.t b/t/web/quickcreate.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/quicksearch.t b/t/web/quicksearch.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/redirect-after-login.t b/t/web/redirect-after-login.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/redirect.t b/t/web/redirect.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/reminders.t b/t/web/reminders.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/remote_user.t b/t/web/remote_user.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/requestor_groups_edit_link.t b/t/web/requestor_groups_edit_link.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/requestor_groups_limit.t b/t/web/requestor_groups_limit.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/rest-non-ascii-subject.t b/t/web/rest-non-ascii-subject.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/rest-sort.t b/t/web/rest-sort.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/rest.t b/t/web/rest.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/rest_cfs_with_same_name.t b/t/web/rest_cfs_with_same_name.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/richtext-autohandler.t b/t/web/richtext-autohandler.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/rights.t b/t/web/rights.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/rights1.t b/t/web/rights1.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/saved_search_chart.t b/t/web/saved_search_chart.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/saved_search_context.t b/t/web/saved_search_context.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/saved_search_permissions.t b/t/web/saved_search_permissions.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/saved_search_update.t b/t/web/saved_search_update.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/scrips.t b/t/web/scrips.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/scrub.t b/t/web/scrub.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/search_bulk_update_links.t b/t/web/search_bulk_update_links.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/search_cf_quotes.t b/t/web/search_cf_quotes.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/search_rss.t b/t/web/search_rss.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/search_simple.t b/t/web/search_simple.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/search_tabs.t b/t/web/search_tabs.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/self_service.t b/t/web/self_service.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/sidebyside_layout.t b/t/web/sidebyside_layout.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/squish.t b/t/web/squish.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/template.t b/t/web/template.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/ticket-create-utf8.t b/t/web/ticket-create-utf8.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/ticket_display.t b/t/web/ticket_display.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/ticket_forward.t b/t/web/ticket_forward.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/ticket_links.t b/t/web/ticket_links.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/ticket_modify_all.t b/t/web/ticket_modify_all.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/ticket_modify_people.t b/t/web/ticket_modify_people.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/ticket_owner.t b/t/web/ticket_owner.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/ticket_owner_autocomplete.t b/t/web/ticket_owner_autocomplete.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/ticket_owner_issues_16656.t b/t/web/ticket_owner_issues_16656.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/ticket_seen.t b/t/web/ticket_seen.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/ticket_txn_content.t b/t/web/ticket_txn_content.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/ticket_txn_subject.t b/t/web/ticket_txn_subject.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/ticket_update_without_content.t b/t/web/ticket_update_without_content.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/transaction_batch.t b/t/web/transaction_batch.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/unlimited_search.t b/t/web/unlimited_search.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/user_update.t b/t/web/user_update.t
+old mode 100644
+new mode 100755
+diff --git a/t/web/walk.t b/t/web/walk.t
+old mode 100644
+new mode 100755
+-- 
+1.8.3.1
+

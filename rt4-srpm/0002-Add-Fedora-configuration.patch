@@ -1,0 +1,34 @@
+From 3984af58365a24887a15e3a47903698c9632e28c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ralf=20Cors=C3=A9pius?= <corsepiu@fedoraproject.org>
+Date: Sat, 19 Jan 2013 08:28:35 +0100
+Subject: [PATCH 2/7] Add Fedora configuration.
+
+---
+ etc/RT_SiteConfig.pm | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/etc/RT_SiteConfig.pm b/etc/RT_SiteConfig.pm
+index 45bff0e..7875440 100755
+--- a/etc/RT_SiteConfig.pm
++++ b/etc/RT_SiteConfig.pm
+@@ -10,13 +10,14 @@
+ #
+ # The converse is also true, if this file isn't valid perl, you're
+ # going to run into trouble. To check your SiteConfig file, use
+-# this comamnd:
++# this command:
+ #
+-#   perl -c /path/to/your/etc/RT_SiteConfig.pm
++#   perl -c /etc/rt4/RT_SiteConfig.pm
+ #
+ # You must restart your webserver after making changes to this file.
+ 
+-Set( $rtname, 'example.com');
++Set($rtname, 'example.com');
++Set($WebPath, '/rt4');
+ 
+ # You must install Plugins on your own, this is only an example
+ # of the correct syntax to use when activating them.
+-- 
+1.8.3.1
+

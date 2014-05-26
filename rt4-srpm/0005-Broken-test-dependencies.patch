@@ -1,0 +1,33 @@
+From bf8bc42239296b5bbb998b0fb5dfe3166af87293 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ralf=20Cors=C3=A9pius?= <corsepiu@fedoraproject.org>
+Date: Sat, 19 Jan 2013 08:28:35 +0100
+Subject: [PATCH 5/7] Broken test-dependencies.
+
+---
+ sbin/rt-test-dependencies.in | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/sbin/rt-test-dependencies.in b/sbin/rt-test-dependencies.in
+index efa35fe..719f48f 100644
+--- a/sbin/rt-test-dependencies.in
++++ b/sbin/rt-test-dependencies.in
+@@ -179,7 +179,7 @@ sub text_to_hash {
+ }
+ 
+ $deps{'CORE'} = [ text_to_hash( << '.') ];
+-Class::Accessor 0.34
++Class::Accessor::Fast 0.34
+ DateTime 0.44
+ DateTime::Locale 0.40
+ Digest::base
+@@ -277,7 +277,6 @@ $deps{'DEV'} = [ text_to_hash( << '.') ];
+ Email::Abstract
+ Test::Email
+ HTML::Form
+-HTML::TokeParser
+ WWW::Mechanize 1.52
+ Test::WWW::Mechanize 1.30
+ Module::Refresh 0.03
+-- 
+1.8.3.1
+
