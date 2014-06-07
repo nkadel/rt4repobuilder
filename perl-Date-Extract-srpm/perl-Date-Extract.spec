@@ -10,7 +10,19 @@ Source0:        http://www.cpan.org/authors/id/S/SH/SHARYANTO/Date-Extract-%{ver
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 BuildRequires:  perl(CPAN)
+
+# This old piece of 2008 technology tries to outsmart build systems
+# and autobuild most of thest dependencies using CPAN.
+# Make sure they're *explicitly* added!!
+
+BuildRequires:  perl(Class::Data::Inheritable)
+BuildRequires:  perl(DateTime::Format::Natural)
 BuildRequires:  perl(ExtUtils::MakeMaker)
+BuildRequires:  perl(Test::Harness)
+BuildRequires:  perl(Test::MockTime)
+BuildRequires:  perl(Test::More)
+BuildRequires:  perl(Time::Piece)
+BuildRequires:  perl(parent)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 %description
