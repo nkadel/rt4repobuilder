@@ -12,6 +12,8 @@ BuildRequires:  perl(Data::UUID) >= 1.148
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(Sub::Exporter) >= 0.90
 BuildRequires:  perl(Sub::Install) >= 0.03
+# Add for mock on RHEL 6
+BuildRequires:  perl(Test::Harness)
 # Roll back for RHEL 6
 #BuildRequires:  perl(Test::More) >= 0.96
 BuildRequires:  perl(Test::More) >= 0.92
