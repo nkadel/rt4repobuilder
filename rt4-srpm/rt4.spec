@@ -65,8 +65,7 @@ Source5:	rt4.logrotate.in
 
 ##Patch1: 0001-Remove-configure-time-generated-files.patch
 #Patch2: 0002-Add-Fedora-configuration.patch
-#Patch3: 0003-Add-missing-shebangs.patch
-#Patch4: 0004-Remove-fixperms-font-install.patch
+Patch4: 0004-Remove-fixperms-font-install.patch
 #Patch5: 0005-Broken-test-dependencies.patch
 #Patch6: 0006-Use-usr-bin-perl-instead-of-usr-bin-env-perl.patch
 ## No longer needed with rt-4.0.19
@@ -220,14 +219,6 @@ BuildRequires: perl(XML::RSS) >= 1.05
 BuildRequires:	/usr/bin/pod2man
 BuildRequires:	/usr/sbin/apachectl
 
-# the original sources carry bundled versions of these ...
-BuildRequires:  google-droid-sans-fonts
-Requires:  /usr/share/fonts/google-droid/DroidSansFallback.ttf
-Requires:  /usr/share/fonts/google-droid/DroidSans.ttf
-# ... we use symlinks to the system-wide versions ...
-BuildRequires:  /usr/share/fonts/google-droid/DroidSansFallback.ttf
-BuildRequires:  /usr/share/fonts/google-droid/DroidSans.ttf
-
 Requires:  perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 Requires(postun): %{__rm}
@@ -371,13 +362,17 @@ sed -e 's,@RT4_LOGDIR@,%{RT4_LOGDIR},' %{SOURCE5} \
 find \( -type f -a -executable \) -exec chmod a-x {} \;
 chmod +x configure install-sh
 
+# Upstream tarball uses '/usr/bin/env perl', not appropriate for RHEL
+grep -rl '^#!/usr/bin/env perl$' . | while read name; do
+     sed -i.env 's|^#!/usr/bin/env perl$|#!/usr/bin/perl|g' $name
+done
+
 # Upstream tarball contains configure-time generated files
 # find bin sbin etc -name '*.in' | while read a; do d=$(echo "$a" | sed 's,\.in$,,'); rm "$d"; done
 
 ##%patch1 -p1
 #%patch2 -p1
-#%patch3 -p1
-#%patch4 -p1
+%patch4 -p1
 #%patch5 -p1
 #%patch6 -p1
 ##%patch7 -p1
@@ -508,10 +503,6 @@ install -d -m755 ${RPM_BUILD_ROOT}%{_sysconfdir}/rt4/upgrade
 cp -R etc/upgrade/* ${RPM_BUILD_ROOT}%{_sysconfdir}/rt4/upgrade
 rm -f ${RPM_BUILD_ROOT}%{_sysconfdir}/rt4/upgrade/*.in
 
-install -d -m755 ${RPM_BUILD_ROOT}%{_datadir}/rt4/fonts
-ln -s /usr/share/fonts/google-droid/DroidSans.ttf ${RPM_BUILD_ROOT}%{_datadir}/rt4/fonts
-ln -s /usr/share/fonts/google-droid/DroidSansFallback.ttf ${RPM_BUILD_ROOT}%{_datadir}/rt4/fonts
-
 install -d -m755 ${RPM_BUILD_ROOT}%{perl_testdir}/%{name}
 cp -R t ${RPM_BUILD_ROOT}%{perl_testdir}/%{name}
 cp %{SOURCE1} ${RPM_BUILD_ROOT}%{perl_testdir}/%{name}
@@ -599,6 +590,14 @@ fi
 %endif
 
 %changelog
+* Sat Jun  7 2014 Nico Kadel-Garcia <nkadel@gmail.com> - 4.2.4-0.1
+- Update BuildRequires with numerous updated components.
+- Update patch for fixperms
+- Add patch to reduce perl module requirements for RHEL 6, especually LWP 6.
+- Add script to switch '#!/usr/bin/env perl' for '#!/usr/bin/perl', replace patch.
+- Eliminatee Droid font workarounds, included in RT again
+
+
 * Mon May 25 2014 Nico Kadel-Garcia <nkadel@gmail.com> - 4.0.19-0.2
 - Update to 4.0.19
 - Update patches and discard patches for permissions, no longer relevant
