@@ -12,7 +12,9 @@ BuildRequires:  perl(Data::UUID) >= 1.148
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(Sub::Exporter) >= 0.90
 BuildRequires:  perl(Sub::Install) >= 0.03
-BuildRequires:  perl(Test::More) >= 0.96
+# Roll back for RHEL 6
+#BuildRequires:  perl(Test::More) >= 0.96
+BuildRequires:  perl(Test::More) >= 0.92
 Requires:       perl(Data::UUID) >= 1.148
 Requires:       perl(Sub::Exporter) >= 0.90
 Requires:       perl(Sub::Install) >= 0.03
