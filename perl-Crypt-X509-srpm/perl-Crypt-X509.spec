@@ -10,6 +10,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 BuildRequires:  perl(Convert::ASN1) >= 0.19
 BuildRequires:  perl(ExtUtils::MakeMaker)
+BuildRequires:  perl(Test::More)
 Requires:       perl(Convert::ASN1) >= 0.19
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
