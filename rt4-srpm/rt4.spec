@@ -49,8 +49,9 @@
 %{!?perl_testdir:%global perl_testdir %{_libexecdir}/perl5-tests}
 
 Name:		rt4
-Version:	4.0.19
-Release:	0.2%{?dist}
+#Version:	4.0.19
+Version:	4.2.4
+Release:	0.1%{?dist}
 Summary:	Request tracker 4
 
 Group:		Applications/Internet
@@ -62,14 +63,15 @@ Source3:	rt4.conf.in
 Source4:	README.fedora.in
 Source5:	rt4.logrotate.in
 
-#Patch1: 0001-Remove-configure-time-generated-files.patch
-Patch2: 0002-Add-Fedora-configuration.patch
-Patch3: 0003-Add-missing-shebangs.patch
-Patch4: 0004-Remove-fixperms-font-install.patch
-Patch5: 0005-Broken-test-dependencies.patch
-Patch6: 0006-Use-usr-bin-perl-instead-of-usr-bin-env-perl.patch
-# No longer needed with rt-4.0.19
-#Patch7: 0007-Fix-permissions.patch
+##Patch1: 0001-Remove-configure-time-generated-files.patch
+#Patch2: 0002-Add-Fedora-configuration.patch
+#Patch3: 0003-Add-missing-shebangs.patch
+#Patch4: 0004-Remove-fixperms-font-install.patch
+#Patch5: 0005-Broken-test-dependencies.patch
+#Patch6: 0006-Use-usr-bin-perl-instead-of-usr-bin-env-perl.patch
+## No longer needed with rt-4.0.19
+##Patch7: 0007-Fix-permissions.patch
+Patch8:  0008-Reduce-deps.patch
 
 BuildArch:	noarch
 
@@ -96,6 +98,7 @@ BuildRequires: perl(Cache::Simple::TimedExpiry)
 BuildRequires: perl(Calendar::Simple)
 BuildRequires: perl(CGI::Cookie) >= 1.20
 BuildRequires: perl(CGI::Emulate::PSGI)
+BuildRequires: perl(CGI::PSGI)
 BuildRequires: perl(CGI::PSGI)
 BuildRequires: perl(Class::Accessor) >= 0.34
 BuildRequires: perl(Class::ReturnValue) >= 0.40
@@ -232,7 +235,6 @@ Requires(postun): %{__rm}
 # rpm doesn't catch these:
 Requires: perl(Apache::Session)
 Requires: perl(Calendar::Simple)
-Requires: perl(CSS::Squish)
 Requires: perl(Data::ICal)
 Requires: perl(Data::ICal::Entry::Event)
 Requires: perl(Email::Address)
@@ -372,13 +374,15 @@ chmod +x configure install-sh
 # Upstream tarball contains configure-time generated files
 # find bin sbin etc -name '*.in' | while read a; do d=$(echo "$a" | sed 's,\.in$,,'); rm "$d"; done
 
-#%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-#%patch7 -p1
+##%patch1 -p1
+#%patch2 -p1
+#%patch3 -p1
+#%patch4 -p1
+#%patch5 -p1
+#%patch6 -p1
+##%patch7 -p1
+# Roll back perl module dependencies for RHEL 6
+%patch8 -p1
 
 # Propagate rpm's directories to config.layout
 cat << \EOF >> config.layout
@@ -422,8 +426,8 @@ Makefile.in
 
 %build
 %configure \
---with-apachectl=/usr/sbin/apachectl \
---with-web-user=apache --with-web-group=apache \
+--with-web-user=apache \
+--with-web-group=apache \
 --with-db-type=mysql \
 --enable-layout=Fedora \
 --with-web-handler=modperl2 \

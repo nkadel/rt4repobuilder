@@ -1,0 +1,62 @@
+--- rt-4.2.4/sbin/rt-test-dependencies.in.bak	2014-05-06 12:59:04.000000000 -0400
++++ rt-4.2.4/sbin/rt-test-dependencies.in	2014-06-07 16:39:24.192499127 -0400
+@@ -199,7 +199,7 @@
+ DateTime::Format::Natural 0.67
+ DateTime::Locale 0.40
+ DBI 1.37
+-DBIx::SearchBuilder 1.65
++DBIx::SearchBuilder
+ Devel::GlobalDestruction
+ Devel::StackTrace 1.19
+ Digest::base
+@@ -221,18 +221,18 @@
+ HTML::Quoted
+ HTML::RewriteAttributes 0.05
+ HTML::Scrubber 0.08
+-HTTP::Message 6.0
++HTTP::Message
+ IPC::Run3
+ JSON
+ LWP::Simple
+ List::MoreUtils
+ Locale::Maketext 1.06
+-Locale::Maketext::Fuzzy 0.11
++Locale::Maketext::Fuzzy
+ Locale::Maketext::Lexicon 0.32
+-Log::Dispatch 2.30
+-Mail::Header 2.12
++Log::Dispatch
++Mail::Header
+ Mail::Mailer 1.57
+-MIME::Entity 5.504
++MIME::Entity
+ Module::Refresh 0.03
+ Module::Versions::Report 1.05
+ Net::CIDR
+@@ -247,7 +247,7 @@
+ Symbol::Global::Name 0.04
+ Sys::Syslog 0.16
+ Text::Password::Pronounceable
+-Text::Quoted 2.07
++Text::Quoted
+ Text::Template 1.44
+ Text::WikiFormat 0.76
+ Text::Wrapper
+@@ -264,7 +264,7 @@
+ Crypt::SSLeay
+ Getopt::Long
+ LWP::Protocol::https
+-LWP::UserAgent 6.0
++LWP::UserAgent
+ Mozilla::CA
+ Net::SSL
+ Pod::Usage
+@@ -363,7 +363,7 @@
+ 
+ $deps{'GD'} = [ text_to_hash( << '.') ];
+ GD
+-GD::Graph 1.47
++GD::Graph
+ GD::Text
+ .
+ 
