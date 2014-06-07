@@ -9,6 +9,7 @@ URL:            http://search.cpan.org/dist/Date-Extract/
 Source0:        http://www.cpan.org/authors/id/S/SH/SHARYANTO/Date-Extract-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
+BuildRequires:  perl(CPAN)
 BuildRequires:  perl(ExtUtils::MakeMaker)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
