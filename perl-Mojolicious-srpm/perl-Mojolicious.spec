@@ -10,10 +10,12 @@ Source0:        http://www.cpan.org/authors/id/S/SR/SRI/Mojolicious-%{version}.t
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 BuildRequires:  perl >= 0:5.010001
+BuildRequires:  perl(Compress::Raw::Zlib)
 BuildRequires:  perl(Digest::SHA)
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(Test::More)
 BuildRequires:  perl(Test::Harness)
+BuildRequires:  perl(Time::HiRes)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 %description
