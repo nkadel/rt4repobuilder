@@ -39,6 +39,7 @@
 %global RT4_LIBDIR		%{perl_vendorlib}
 %global RT4_WWWDIR		%{_datadir}/rt4/html
 %global RT4_LEXDIR		%{_datadir}/rt4/po
+%global RT4_STATICDIR		%{_datadir}/rt4/static
 %global RT4_LOGDIR		%{_localstatedir}/log/rt4
 %global RT4_CACHEDIR		%{_localstatedir}/cache/rt4
 %global RT4_LOCALSTATEDIR	%{_localstatedir}/lib/rt4
@@ -379,14 +380,22 @@ done
 # Roll back perl module dependencies for RHEL 6
 %patch8 -p1
 
-# Propagate rpm's directories to config.layout
-cat << \EOF >> config.layout
+# Propagate rpm compatible directories to config.layout
+mv config.layout config.layout.default
+cat << \EOF > config.layout
 
-#   Fedora directory layout.
+#   Fedora directory layout, appended to default layout
+#   RT has fascinating re-interpretations of 'manualdir'
+#   and 'libdir'
 <Layout Fedora>
+#  prefix:		%{_prefix}
+#  exec_prefix:		%{_exec_prefix}
   bindir:		%{RT4_BINDIR}
   sysconfdir:		%{_sysconfdir}/rt4
+  mandir:		%{_mandir}
   libdir:		%{RT4_LIBDIR}
+  datadir:		%{_datarootdir}
+  staticdir:		%{RT4_STATICDIR}
   manualdir:		%{_pkgdocdir}/docs
   lexdir:		%{RT4_LEXDIR}
   localstatedir:	%{RT4_LOCALSTATEDIR}
@@ -406,8 +415,8 @@ EOF
 # Comment out the Makefile trying to change groups/owners
 # Fix DESTDIR support
 sed -i \
-	-e 's,	chgrp,	: chrgp,g' \
-	-e 's,	chown,	: chown,g' \
+	-e 's,	chgrp,	# chrgp,g' \
+	-e 's,	chown,	# chown,g' \
 	-e 's,$(DESTDIR)/,$(DESTDIR),g' \
 	-e 's,-o $(BIN_OWNER) -g $(RTGROUP),,g' \
 Makefile.in
@@ -420,6 +429,8 @@ Makefile.in
 # chmod -x bin/*.in sbin/*.in
 
 %build
+# Used to use added-on Fedora config, use RH for RHEL compilation
+
 %configure \
 --with-web-user=apache \
 --with-web-group=apache \
@@ -479,11 +490,12 @@ for file in bin/*.1 sbin/*.1; do
 install -m 0644 $file ${RPM_BUILD_ROOT}%{_mandir}/man1
 done
 
-if [ "%{_bindir}" != "%{RT4_BINDIR}" ]; then
-  mkdir -p ${RPM_BUILD_ROOT}%{_bindir}
-  mv ${RPM_BUILD_ROOT}%{RT4_BINDIR}/rt \
-    ${RPM_BUILD_ROOT}%{_bindir}
-fi
+# RT releases before 4.2 put "rt" binary in /usr/sbin
+#if [ "%{_bindir}" != "%{RT4_BINDIR}" ]; then
+#  mkdir -p ${RPM_BUILD_ROOT}%{_bindir}
+#  mv ${RPM_BUILD_ROOT}%{RT4_BINDIR}/rt \
+#    ${RPM_BUILD_ROOT}%{_bindir}
+#fi
 
 install -d -m755 ${RPM_BUILD_ROOT}%{_prefix}/local/etc/rt4
 install -d -m755 ${RPM_BUILD_ROOT}%{_prefix}/local/lib/rt4
@@ -535,13 +547,15 @@ fi
 
 %files
 %defattr(-,root,root,-)
-%doc COPYING README README.fedora
+%doc COPYING README README.fedora config.layout
+%doc config.layout config.layout.default
 %{_bindir}/*
 %{_sbindir}/*
-%exclude %{_sbindir}/rt-mailgate
+%exclude %{_bindir}/rt-mailgate
 %{_mandir}/man1/*
 %exclude %{_mandir}/man1/rt-mailgate*
 %{RT4_LIBDIR}/*
+%{RT4_STATICDIR}/*
 %exclude %{RT4_LIBDIR}/RT/Test*
 %attr(0700,apache,apache) %{RT4_LOGDIR}
 
@@ -575,7 +589,7 @@ fi
 %files mailgate
 %defattr(-,root,root,-)
 %doc COPYING
-%{_sbindir}/rt-mailgate
+%{_bindir}/rt-mailgate
 %{_mandir}/man1/rt-mailgate*
 
 %if %{with devel_mode}
