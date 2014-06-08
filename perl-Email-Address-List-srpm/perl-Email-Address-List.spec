@@ -14,6 +14,8 @@ BuildRequires:  perl(Email::Address)
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(JSON)
 BuildRequires:  perl(Test::More)
+BuildRequires:  perl(Test::Harness)
+BuildRequires:  perl(Time::HiRes)
 Requires:       perl(Email::Address)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
