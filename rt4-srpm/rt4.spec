@@ -99,15 +99,21 @@ BuildRequires: perl(Calendar::Simple)
 BuildRequires: perl(CGI::Cookie) >= 1.20
 BuildRequires: perl(CGI::Emulate::PSGI)
 BuildRequires: perl(CGI::PSGI)
-BuildRequires: perl(CGI::PSGI)
 BuildRequires: perl(Class::Accessor) >= 0.34
 BuildRequires: perl(Class::ReturnValue) >= 0.40
 BuildRequires: perl(Convert::Color)
 BuildRequires: perl(CPAN)
+BuildRequires: perl(Crypt::Eksblowfish)
+BuildRequires: perl(Crypt::SSLeay)
 BuildRequires: perl(CSS::Squish) >= 0.06
+BuildRequires: perl(Crypt::X509)
+BuildRequires: perl(Data::GUID)
 BuildRequires: perl(Data::ICal)
+BuildRequires: perl(Date::Extract) >= 0.02
 BuildRequires: perl(Date::Format)
+BuildRequires: perl(Date::Manip)
 BuildRequires: perl(DateTime) >= 0.44
+BuildRequires: perl(DateTime::Format::Natural) >= 0.67
 BuildRequires: perl(DateTime::Locale) >= 0.40
 BuildRequires: perl(DBD::mysql) >= 2.1018
 BuildRequires: perl(DBI) >= 1.37
@@ -117,6 +123,7 @@ BuildRequires: perl(Devel::StackTrace) >= 1.19
 BuildRequires: perl(Digest::base)
 BuildRequires: perl(Digest::MD5) >= 2.27
 BuildRequires: perl(Email::Address)
+BuildRequires: perl(Email::Address::List)
 BuildRequires: perl(Encode) >= 2.39
 BuildRequires: perl(Errno)
 %{?with_devel_mode:BuildRequires: perl(File::Find)}
@@ -124,6 +131,7 @@ BuildRequires: perl(File::Glob)
 BuildRequires: perl(File::ShareDir)
 BuildRequires: perl(File::Spec) >= 0.8
 BuildRequires: perl(File::Temp) >= 0.19
+BuildRequires: perl(File::Which)
 %{?with_gd:BuildRequires: perl(GD)}
 %{?with_gd:BuildRequires: perl(GD::Graph)}
 %{?with_gd:BuildRequires: perl(GD::Text)}
@@ -133,6 +141,8 @@ BuildRequires: perl(Getopt::Long) >= 2.24
 BuildRequires: perl(HTML::Entities)
 %{?with_devel_mode:BuildRequires: perl(HTML::Form)}
 BuildRequires: perl(HTML::FormatText)
+BuildRequires: perl(HTML::FormatText::WithLinks) >= 0.14
+BuildRequires: perl(HTML::FormatText::WithLinks::AndTables)
 BuildRequires: perl(HTML::Mason) >= 1.43
 #BuildRequires: perl(HTML::Mason::PSGIHandler) >= 1.43
 BuildRequires: perl(HTML::Mason::PSGIHandler) >= 0.52
@@ -143,12 +153,16 @@ BuildRequires: perl(HTML::TreeBuilder)
 BuildRequires: perl(HTTP::Request::Common)
 BuildRequires: perl(HTTP::Server::Simple) >= 0.34
 BuildRequires: perl(HTTP::Server::Simple::Mason) >= 0.09
+%{?with_gpg:BuildRequires: perl(PerlIO::eol)}
 %{?with_graphviz:BuildRequires: perl(IPC::Run)}
 BuildRequires: perl(IPC::Run3)
 %{?with_graphviz:BuildRequires: perl(IPC::Run::SafeHandles)}
 BuildRequires: perl(JavaScript::Minifier)
 BuildRequires: perl(JSON)
 BuildRequires: perl(JSON::PP)
+BuildRequires: perl(LWP)
+BuildRequires: perl(LWP::Protocol::https)
+BuildRequires: perl(LWP::UserAgent)
 BuildRequires: perl(List::MoreUtils)
 BuildRequires: perl(Locale::Maketext) >= 1.06
 BuildRequires: perl(Locale::Maketext::Fuzzy)
@@ -156,18 +170,18 @@ BuildRequires: perl(Locale::Maketext::Lexicon) >= 0.32
 BuildRequires: perl(Locale::PO)
 BuildRequires: perl(Log::Dispatch) >= 2.0
 %{?with_devel_mode:BuildRequires: perl(Log::Dispatch::Perl)}
-BuildRequires: perl(LWP)
-BuildRequires: perl(LWP::UserAgent)
 BuildRequires: perl(Mail::Mailer) >= 1.57
 BuildRequires: perl(MIME::Entity) >= 5.425
 BuildRequires: perl(MIME::Types)
 %{?with_devel_mode:BuildRequires: perl(Module::Refresh) >= 0.03}
 BuildRequires: perl(Module::Versions::Report) >= 1.05
+BuildRequires: perl(Mojo::DOM)
+BuildRequires: perl(Mozilla::CA)
 BuildRequires: perl(Net::CIDR)
+BuildRequires: perl(Net::SMTP)
+BuildRequires: perl(Net::SSL)
 BuildRequires: perl(Net::Server)
 BuildRequires: perl(Net::Server::PreFork)
-BuildRequires: perl(Net::SMTP)
-%{?with_gpg:BuildRequires: perl(PerlIO::eol)}
 BuildRequires: perl(Plack)
 BuildRequires: perl(Plack::Handler::Starlet)
 %{?with_devel_mode:BuildRequires: perl(Plack::Middleware::Test::StashWarnings) >= 0.06}
@@ -175,8 +189,11 @@ BuildRequires: perl(Pod::Usage)
 BuildRequires: perl(Regexp::Common)
 BuildRequires: perl(Regexp::Common::net::CIDR)
 BuildRequires: perl(Regexp::IPv6)
+BuildRequires: perl(Role::Basic) >= 0.12
+BuildRequires: perl(Set::Tiny)
 BuildRequires: perl(Scalar::Util)
 BuildRequires: perl(Storable) >= 2.08
+BuildRequires: perl(Symbol::Global::Name) >= 0.04
 %{?with_devel_mode:BuildRequires: perl(String::ShellQuote)}
 BuildRequires: perl(Term::ReadKey)
 BuildRequires: perl(Term::ReadLine)
@@ -188,9 +205,11 @@ BuildRequires: perl(Term::ReadLine)
 %{?with_devel_mode:BuildRequires: perl(Test::HTTP::Server::Simple) >= 0.09}
 %{?with_devel_mode:BuildRequires: perl(Test::MockTime)}
 %{?with_devel_mode:BuildRequires: perl(Test::NoWarnings)}
-%{?with_devel_mode:BuildRequires: perl(Test::Warn)}
+%{?with_devel_mode:BuildRequires: perl(Test::Pod)}
 %{?with_devel_mode:BuildRequires: perl(Test::WWW::Mechanize)} >= 1.30
 %{?with_devel_mode:BuildRequires: perl(Test::WWW::Mechanize::PSGI)}
+%{?with_devel_mode:BuildRequires: perl(Test::Warn)}
+
 BuildRequires: perl(Text::ParseWords)
 BuildRequires: perl(Text::Password::Pronounceable)
 BuildRequires: perl(Text::Quoted) >= 2.02
