@@ -13,6 +13,7 @@ BuildRequires:  perl >= 0:5.010001
 BuildRequires:  perl(Compress::Raw::Zlib)
 BuildRequires:  perl(Digest::SHA)
 BuildRequires:  perl(ExtUtils::MakeMaker)
+BuildRequires:  perl(IO::Compress::Gzip)
 BuildRequires:  perl(Test::More)
 BuildRequires:  perl(Test::Harness)
 BuildRequires:  perl(Time::HiRes)
