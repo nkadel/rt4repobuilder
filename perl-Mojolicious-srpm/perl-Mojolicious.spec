@@ -13,6 +13,7 @@ BuildRequires:  perl >= 0:5.010001
 BuildRequires:  perl(Digest::SHA)
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(Test::More)
+BuildRequires:  perl(Test::Harness)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 %description
