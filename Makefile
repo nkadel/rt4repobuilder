@@ -133,7 +133,7 @@ perl-CHI-srpm:: perl-Log-Any-Adapter-srpm
 perl-CHI-srpm:: perl-Module-Mask-srpm
 perl-CHI-srpm:: perl-Test-Log-Dispatch-srpm
 perl-CHI-srpm:: perl-Time-Duration-Parse-srpm
-perl-Convert-Color:: perl-List-UtilsBy-srpm
+perl-Convert-Color-srpm:: perl-List-UtilsBy-srpm
 perl-Devel-StackTrace-WithLexicals-srpm:: perl-Devel-StackTrace-srpm
 perl-Devel-StackTrace-WithLexicals-srpm:: perl-PadWalker-srpm
 perl-ExtUtils-MakeMaker-srpm:: perl-ExtUtils-Installed-srpm
