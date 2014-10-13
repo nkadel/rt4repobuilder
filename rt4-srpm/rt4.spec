@@ -47,9 +47,9 @@
 %{!?perl_testdir:%global perl_testdir %{_libexecdir}/perl5-tests}
 
 Name:		rt4
-Version:	4.0.19
+Version:	4.0.22
 Release:	0.1%{?dist}
-Summary:	Request tracker 3
+Summary:	Request tracker 4
 
 Group:		Applications/Internet
 License:	GPLv2+
@@ -581,6 +581,10 @@ fi
 %endif
 
 %changelog
+* Mon Oct 13  2014 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.22-0.1
+- Update to 4.0.22
+
+
 * Sun Mar 02 2014 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.19-0.1
 - Update to 4.0.19
 - Update Makefile.in patch to skip 'fixperms' steps for 4.0.19
