@@ -61,7 +61,6 @@ Source4:	README.fedora
 Source5:	rt4.logrotate.in
 
 Patch0:		rt-4.0.12-config.diff
-Patch2:		rt-4.0.19-Makefile.diff
 
 BuildArch:	noarch
 
@@ -368,7 +367,19 @@ find bin sbin etc -name '*.in' | while read a; do d=$(echo "$a" | sed 's,\.in$,,
 
 %patch0 -p1
 
-%patch2 -p1
+# Fix DESTDIR support
+cp Makefile.in Makefile.in.orig
+# Delete unneeded ownership setting options and commands
+sed -i.chgrp Makefile.in -e 's,^	chgrp,	#chgrp,g'
+sed -i.chown Makefile.in -e 's,^	chown,	#chown,g'
+sed -i.chown2 Makefile.in -e 's,; chown.*)),),g'
+sed -i.intallowner Makefile.in -e 's,-o $(BIN_OWNER) -g $(RTGROUP),,g'
+# Do not deploy unneeded fonts, use symlinked local fonts
+sed -i.font-install Makefile.in -e 's, font-install , ,g'
+# Do not run 'fixperms' with install programs
+sed -i.fixperms Makefile.in -e 's, fixperms , ,g'
+# Set DESTDIR consistently
+echo sed -i.DESTDIR Makefile.in -e 's,$$(DESTDIR)/,$$(DESTDIR),g'
 
 # Propagate rpm directories to config.layout
 cat << \EOF >> config.layout
@@ -409,7 +420,7 @@ Makefile.in
 sed -i \
  -e "s,^#!/usr/bin/env perl,#!%{__perl}," \
  -e "s,^#!/opt/perl/bin/perl,#!%{__perl}," \
-t/*/*.t sbin/rt-message-catalog t/shredder/utils.pl
+   t/*/*.t sbin/rt-message-catalog t/shredder/utils.pl
 
 # Make scripts executable
 find t \( -name '*.t' -o -name '*.pl' \) -exec chmod +x {} \;
@@ -583,6 +594,7 @@ fi
 %changelog
 * Mon Oct 13  2014 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.22-0.1
 - Update to 4.0.22
+- Use sed on Makefile.on, not patch, to disable components one at a time
 
 
 * Sun Mar 02 2014 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.19-0.1
