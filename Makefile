@@ -23,7 +23,7 @@ EPELPKGS+=perl-Devel-StackTrace-srpm
 EPELPKGS+=perl-Digest-JHash-srpm
 EPELPKGS+=perl-Encode-srpm
 EPELPKGS+=perl-ExtUtils-Installed-srpm
-EPELPKGS+=perl-ExtUtils-MakeMaker-srpm
+EPELPKGS+=perl-ExtUtils-Manifest-srpm
 EPELPKGS+=perl-Hash-MoreUtils-srpm
 EPELPKGS+=perl-List-UtilsBy-srpm
 EPELPKGS+=perl-Log-Any-srpm
@@ -33,6 +33,7 @@ EPELPKGS+=perl-Proc-Wait3-srpm
 EPELPKGS+=perl-Regexp-Common-Net-CIDR-srpm
 EPELPKGS+=perl-Scope-Guard-srpm
 EPELPKGS+=perl-Test-Log-Dispatch-srpm
+EPELPKGS+=perl-Test-Simple-srpm
 EPELPKGS+=perl-Test-WWW-Mechanize-srpm
 EPELPKGS+=perl-Text-Password-Pronounceable-srpm
 EPELPKGS+=perl-Time-Duration-Parse-srpm
@@ -43,12 +44,17 @@ EPELPKGS+=perl-URI-srpm
 
 RT4PKGS+=perl-Authen-Simple-Passwd-srpm
 
+# Dependencies fo rperl-Test-TCP-srpm
+RT4PKGS+=perl-Test-SharedFork-srpm
+RT4PKGS+=perl-Test-TCP-srpm
+
 # Deendencies for perl-CHI
 ## Dependency for perl-Log-Any-Adapter-Dispatch
 RT4PKGS+=perl-Log-Any-Adapter-srpm
 RT4PKGS+=perl-Log-Any-Adapter-Dispatch-srpm
 RT4PKGS+=perl-Module-Mask-srpm
 RT4PKGS+=perl-CHI-srpm
+RT4PKGS+=perl-ExtUtils-MakeMaker-srpm
 
 RT4PKGS+=perl-Convert-Color-srpm
 RT4PKGS+=perl-Devel-StackTrace-WithLexicals-srpm
@@ -72,6 +78,7 @@ RT4PKGS+=perl-Starlet-srpm
 # Needed for rt4-Test building
 RT4PKGS+=perl-Test-WWW-Mechanize-PSGI-srpm
 RT4PKGS+=perl-Plack-Middleware-Test-StashWarnings-srpm
+
 
 # Binary target
 RT4PKGS+=rt4-srpm
@@ -153,6 +160,8 @@ perl-Server-Starter-srpm:: perl-Encode-srpm
 perl-Server-Starter-srpm:: perl-Proc-Wait3-srpm
 perl-Starlet-srpm:: perl-Parallel-Prefork-srpm
 perl-Starlet-srpm:: perl-Server-Starter-srpm
+perl-Test-TCP-srpm:: perl-Test-SharedFork-srpm
+perl-Test-TCP-srpm:: perl-Test-Simple-srpm
 
 rt4:: perl-CGI-PSGI-srpm
 rt4:: perl-Class-Accessor-srpm
