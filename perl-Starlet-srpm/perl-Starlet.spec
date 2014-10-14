@@ -1,5 +1,5 @@
 Name:           perl-Starlet
-Version:        0.16
+Version:        0.24
 Release:        0.1%{?dist}
 Summary:        Simple, high-performance PSGI/Plack HTTP server
 License:        GPL+ or Artistic
@@ -11,6 +11,8 @@ BuildArch:      noarch
 # start_server comes ftom perl_Server_Starter_start_Server package
 BuildRequires:  /usr/bin/start_server
 BuildRequires:  perl(ExtUtils::MakeMaker)
+BuildRequires:  perl(LWP::UserAgent) >= 5.8
+BuildRequires:  perl(Net::EmptyPort)
 BuildRequires:  perl(Parallel::Prefork) >= 0.13
 BuildRequires:  perl(Plack) >= 0.992
 BuildRequires:  perl(Server::Starter) >= 0.06
@@ -20,9 +22,9 @@ BuildRequires:  perl(Test::TCP) >= 0.15
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 %description
-Starlet is a standalone HTTP/1.0 server with support for keep-alive, prefork,
-graceful shutdown, hot deploy, fast HTTP processing, and is suitable for
-running HTTP application servers behind a reverse proxy.
+Starlet is a standalone HTTP/1.1 web server, formerly known as
+Plack::Server::Standalone::Prefork and
+Plack::Server::Standalone::Prefork::Server::Starter.
 
 %prep
 %setup -q -n Starlet-%{version}
@@ -32,6 +34,8 @@ running HTTP application servers behind a reverse proxy.
 make %{?_smp_mflags}
 
 %install
+rm -rf $RPM_BUILD_ROOT
+
 make pure_install PERL_INSTALL_ROOT=$RPM_BUILD_ROOT
 
 find $RPM_BUILD_ROOT -type f -name .packlist -exec rm -f {} \;
@@ -42,9 +46,12 @@ find $RPM_BUILD_ROOT -depth -type d -exec rmdir {} 2>/dev/null \;
 %check
 make test
 
+%clean
+rm -rf $RPM_BUILD_ROOT
+
 %files
 %defattr(-,root,root,-)
-%doc Changes README
+%doc Changes MYMETA.json MYMETA.yml README
 %{perl_vendorlib}/*
 %{_mandir}/man3/*
 
