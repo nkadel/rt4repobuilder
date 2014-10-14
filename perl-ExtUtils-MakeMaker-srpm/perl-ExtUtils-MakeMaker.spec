@@ -14,7 +14,7 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 # Provide needed config.h files.
 BuildRequires:	perl-devel
-
+BuildRequires:	perl(Test::Harness)
 
 %description
 Create a module Makefile.
@@ -55,10 +55,7 @@ rm -rf $RPM_BUILD_ROOT
 %{perl_vendorlib}/*
 %{_mandir}/man1/instmodsh.1*
 %{_mandir}/man3/*
-%exclude %{_mandir}/man3/version.3pm*
-%exclude %{_mandir}/man3/version::Internals.3pm*
-%exclude %{_mandir}/man3/JSON::PP.3pm*
-%exclude %{_mandir}/man3/JSON::PP::Boolean.3pm*
+%exclude %{_mandir}/man3/*
 
 %changelog
 * Mon Mar 11 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 6.64-0.1
