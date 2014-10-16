@@ -1,11 +1,35 @@
-Alias /rt4 "@RT4_WWWDIR@"
+# Optional VirtualHost configs for dedicated server,
+# Uncomment as needed
+#<VirtualHost *:443>
+  # Optional apache logs for RT
+  #ErrorLog /var/log/httpd/rt4_error_log
+  #Transfer/kig /opt/rt4/var/log/rt4_access_log
+  #LogLevel Debug
 
-<Directory "@RT4_WWWDIR@">
-  AllowOverride All
-  Options ExecCGI FollowSymLinks
+  Alias /rt4 "@RT4_WWWDIR@"
 
-  RewriteEngine On
-  RedirectMatch permanent (.*)/$ $1/index.html
-  AddDefaultCharset UTF-8
-  SetHandler perl-script
-</Directory>
+  <Location /rt4>
+    AddDefaultCharset UTF-8
+    # SSL is recommended, RT handles passwords itself
+    #SSLRequireSSL
+
+    # Access is controlled through RT login
+    Order allow,deny
+    Allow from all
+
+    # Redirect bare / to /rt4 as desired
+    #RewriteEngine On
+    #RedirectMatch permanent (.*)/$ $1/index.html
+
+    # Needed for Perl handling
+    SetHandler modperl
+    PerlResponseHandler Plack::Handler::Apache2
+    PerlSetVar psgi_app "@RT4_BINDIR@/rt-server"
+  </Location>
+
+  # Needed for mod_perl serup
+  <Perl>
+    use Plack::Handler::Apache2
+    Plack::Handler::Apache2->preload("/usr/sbin/rt-server")
+  </Perl>
+#</VirtualHost>
