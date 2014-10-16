@@ -2,4 +2,5 @@
 *.rpm
 *~
 epel-*
+rt4.conf
 rt4repo-*
