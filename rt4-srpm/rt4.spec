@@ -48,7 +48,7 @@
 
 Name:		rt4
 Version:	4.0.22
-Release:	0.2%{?dist}
+Release:	0.3%{?dist}
 Summary:	Request tracker 4
 
 Group:		Applications/Internet
@@ -153,7 +153,7 @@ BuildRequires: perl(Net::SMTP)
 %{?with_gpg:BuildRequires: perl(PerlIO::eol)}
 BuildRequires: perl(Plack)
 BuildRequires: perl(Plack::Handler::Starlet)
-%{?with_devel_mode:BuildRequires: perl(Plack::Middleware::Test::StashWarnings)}
+%{?with_devel_mode:BuildRequires: perl(Plack::Middleware::Test::StashWarnings) >= 0.08}
 BuildRequires: perl(Pod::Usage)
 BuildRequires: perl(Regexp::Common)
 BuildRequires: perl(Regexp::Common::net::CIDR)
@@ -382,8 +382,8 @@ sed -i.fixperms Makefile.in -e 's, fixperms , ,g'
 echo sed -i.DESTDIR Makefile.in -e 's,$$(DESTDIR)/,$$(DESTDIR),g'
 
 # Propagate rpm directories to config.layout
-cat << \EOF >> config.layout
-
+mv config.layout config.layout.default
+cat << \EOF > config.layout
 #   Fedora directory layout.
 #   RT has very odd ides of what "libdir" and "manualdir" actually are,
 #   make sure to override those
@@ -445,7 +445,8 @@ find t \( -name '*.t' -o -name '*.pl' \) -exec chmod +x {} \;
 %{?with_gd:--enable-gd}%{!?with_gd:--disable-gd} \
 %{?with_gpg:--enable-gpg}%{!?with_gpg:--disable-gpg}
 
-make %{?_smp_mflags}
+# make doesn't actually do anything!!!!
+#make %{?_smp_mflags}
 
 # Explicitly check for devel-mode deps
 %{?with_devel_mode:%{__perl} ./sbin/rt-test-dependencies --verbose --with-mysql --with-modperl2 --with-dev}
@@ -543,6 +544,8 @@ fi
 %files
 %defattr(-,root,root,-)
 %doc COPYING README README.Oracle README.fedora
+# Keep config files, as used
+%doc config.layout config.layout.default
 %{_bindir}/*
 %{_sbindir}/*
 %exclude %{_sbindir}/rt-mailgate
@@ -599,6 +602,11 @@ fi
 %endif
 
 %changelog
+* Mon Feb  2 2015 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.22-0.3
+- Eliminate unused 'make' command.
+- Use completely new config.layout, keep old and new as doc files.
+- Update perl(Plack::Middleware::Test::StashWarnings) version dependency
+
 * Thu Oct 16  2014 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.22-0.2
 - Seriously rewrite rt4.conf.in, to better handle loaded /usr/sbin/rt-server
 - Add default WebPath in RT_SiteConfig.pm to match rt4.conf
