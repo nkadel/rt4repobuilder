@@ -1,0 +1,25 @@
+From 08352fe91e355ee16c8531b3ea335c060a005b17 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ralf=20Cors=C3=A9pius?= <corsepiu@fedoraproject.org>
+Date: Fri, 23 Jan 2015 04:36:45 +0100
+Subject: [PATCH 7/8] Fix translation.
+
+---
+ share/po/de.po | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/share/po/de.po b/share/po/de.po
+index 0eaf1e7..a952f0a 100644
+--- a/share/po/de.po
++++ b/share/po/de.po
+@@ -1002,7 +1002,7 @@ msgstr "Alle Tickets"
+ 
+ #: share/html/User/Prefs.html:171
+ msgid "All iCal feeds embed a secret token which authorizes you.  If the URL for one of your iCal feeds was exposed to the outside world, you can get a new secret, <b>breaking all existing iCal feeds</b>, below."
+-msgstr "Alle iCal-Feeds beinhalten einen geheimen Token durch welchen die Authorisierung erfolgt. Falls die URL für einen dieser iCal-Feeds irrtümlich nach Extern weitergegeben wurde, können Sie unterhalb einen neuen Token erstellen, welcher <b>alle exestierenden iCal-Feeds</b> ungültig werden lässt."
++msgstr "Alle iCal-Feeds beinhalten einen geheimen Token durch welchen die Authorisierung erfolgt. Falls die URL für einen dieser iCal-Feeds irrtümlich nach Extern weitergegeben wurde, können Sie unterhalb einen neuen Token erstellen, welcher <b>alle existierenden iCal-Feeds</b> ungültig werden lässt."
+ 
+ #: share/html/Admin/Queues/index.html:99
+ msgid "All queues matching search criteria"
+-- 
+2.1.0
+

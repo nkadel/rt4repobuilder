@@ -1,0 +1,6 @@
+*.log
+*.rpm
+*~
+epel-*
+rt4repo-*
+*[0-9]

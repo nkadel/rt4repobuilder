@@ -1,0 +1,86 @@
+From 83b48cfbc9dbb68e50055b6c51ec3582238e8fb1 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ralf=20Cors=C3=A9pius?= <corsepiu@fedoraproject.org>
+Date: Tue, 18 Mar 2014 10:00:00 +0100
+Subject: [PATCH 6/8] Fix permissions.
+
+---
+ Makefile.in                         | 0
+ aclocal.m4                          | 0
+ config.layout                       | 0
+ configure.ac                        | 0
+ docs/schema.dot                     | 0
+ etc/RT_Config.pm.in                 | 0
+ etc/RT_SiteConfig.pm                | 0
+ etc/acl.Oracle                      | 0
+ etc/acl.Pg                          | 0
+ etc/acl.mysql                       | 0
+ etc/schema.Oracle                   | 0
+ etc/schema.Pg                       | 0
+ etc/schema.SQLite                   | 0
+ etc/schema.mysql                    | 0
+ etc/upgrade/vulnerable-passwords.in | 0
+ 15 files changed, 0 insertions(+), 0 deletions(-)
+ mode change 100755 => 100644 Makefile.in
+ mode change 100755 => 100644 aclocal.m4
+ mode change 100755 => 100644 config.layout
+ mode change 100755 => 100644 configure.ac
+ mode change 100755 => 100644 docs/schema.dot
+ mode change 100755 => 100644 etc/RT_Config.pm.in
+ mode change 100755 => 100644 etc/RT_SiteConfig.pm
+ mode change 100755 => 100644 etc/acl.Oracle
+ mode change 100755 => 100644 etc/acl.Pg
+ mode change 100755 => 100644 etc/acl.mysql
+ mode change 100755 => 100644 etc/schema.Oracle
+ mode change 100755 => 100644 etc/schema.Pg
+ mode change 100755 => 100644 etc/schema.SQLite
+ mode change 100755 => 100644 etc/schema.mysql
+ mode change 100755 => 100644 etc/upgrade/vulnerable-passwords.in
+
+diff --git a/Makefile.in b/Makefile.in
+old mode 100755
+new mode 100644
+diff --git a/aclocal.m4 b/aclocal.m4
+old mode 100755
+new mode 100644
+diff --git a/config.layout b/config.layout
+old mode 100755
+new mode 100644
+diff --git a/configure.ac b/configure.ac
+old mode 100755
+new mode 100644
+diff --git a/docs/schema.dot b/docs/schema.dot
+old mode 100755
+new mode 100644
+diff --git a/etc/RT_Config.pm.in b/etc/RT_Config.pm.in
+old mode 100755
+new mode 100644
+diff --git a/etc/RT_SiteConfig.pm b/etc/RT_SiteConfig.pm
+old mode 100755
+new mode 100644
+diff --git a/etc/acl.Oracle b/etc/acl.Oracle
+old mode 100755
+new mode 100644
+diff --git a/etc/acl.Pg b/etc/acl.Pg
+old mode 100755
+new mode 100644
+diff --git a/etc/acl.mysql b/etc/acl.mysql
+old mode 100755
+new mode 100644
+diff --git a/etc/schema.Oracle b/etc/schema.Oracle
+old mode 100755
+new mode 100644
+diff --git a/etc/schema.Pg b/etc/schema.Pg
+old mode 100755
+new mode 100644
+diff --git a/etc/schema.SQLite b/etc/schema.SQLite
+old mode 100755
+new mode 100644
+diff --git a/etc/schema.mysql b/etc/schema.mysql
+old mode 100755
+new mode 100644
+diff --git a/etc/upgrade/vulnerable-passwords.in b/etc/upgrade/vulnerable-passwords.in
+old mode 100755
+new mode 100644
+-- 
+2.1.0
+
