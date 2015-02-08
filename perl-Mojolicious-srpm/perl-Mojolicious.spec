@@ -1,6 +1,6 @@
 Name:           perl-Mojolicious
 Version:        5.49
-Release:        1%{?dist}
+#Release:        1%{?dist}
 Release:        0.1%{?dist}
 Summary:        A next generation web framework for Perl
 License:        Artistic 2.0
@@ -41,6 +41,8 @@ mv README.md lib/Mojolicious/
 make %{?_smp_mflags}
 
 %install
+rm -rf $RPM_BUILD_ROOT
+
 make pure_install PERL_INSTALL_ROOT=$RPM_BUILD_ROOT
 
 find $RPM_BUILD_ROOT -type f -name .packlist -exec rm -f {} \;
@@ -48,10 +50,13 @@ find $RPM_BUILD_ROOT -depth -type d -exec rmdir {} 2>/dev/null \;
 
 %{_fixperms} $RPM_BUILD_ROOT/*
 
-%check
 # Disable for RHEL 6 and other environments
-#make test
+%check
+make test
 
+%clean
+rm -rf $RPM_BUILD_ROOT
+ 
 %files
 %doc Changes LICENSE examples
 %{_bindir}/mojo
@@ -63,7 +68,8 @@ find $RPM_BUILD_ROOT -depth -type d -exec rmdir {} 2>/dev/null \;
 
 %changelog
 * Sun Feb  8 2015 Nico Kadel-Garcia <emmanuel@seyman.fr> - 5.49-0.1
-- Disable for RHEL 6 and older operating systems.
+- Disable checks for RHEL 6 and older operating systems.
+- Add clean and pre-clean statements for reliable compilation.
 
 * Sun Oct 12 2014 Emmanuel Seyman <emmanuel@seyman.fr> - 5.49-1
 - Update to 5.49 (fixes a serious security issue)
