@@ -10,7 +10,8 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 BuildRequires:  perl >= 0:5.005
 BuildRequires:  perl(ExtUtils::MakeMaker)
-BuildRequries:  perl(Test::More)
+BuildRequires:  perl(Locale::Maketext)
+BuildRequires:  perl(Test::More)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 %description
