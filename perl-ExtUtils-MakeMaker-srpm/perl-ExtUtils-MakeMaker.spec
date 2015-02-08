@@ -1,6 +1,6 @@
 Name:           perl-ExtUtils-MakeMaker
 Version:        6.64
-Release:        0.1%{?dist}
+Release:        0.2%{?dist}
 Summary:        Create a module Makefile
 
 Group:          Development/Libraries
@@ -14,7 +14,6 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 # Provide needed config.h files.
 BuildRequires:	perl-devel
-BuildRequires:	perl(Test::Harness)
 
 %description
 Create a module Makefile.
@@ -25,7 +24,6 @@ Create a module Makefile.
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
 make %{?_smp_mflags}
-
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -39,14 +37,11 @@ for file in Changes; do
   mv -f "${file}_" "$file"
 done
 
-
 %check
 make test
 
-
 %clean 
 rm -rf $RPM_BUILD_ROOT
-
 
 %files
 %defattr(-,root,root,-)
@@ -55,8 +50,14 @@ rm -rf $RPM_BUILD_ROOT
 %{perl_vendorlib}/*
 %{_mandir}/man1/instmodsh.1*
 %{_mandir}/man3/*
-%exclude %{_mandir}/man3/*
+%exclude %{_mandir}/man3/version.3pm*
+%exclude %{_mandir}/man3/version::Internals.3pm*
+%exclude %{_mandir}/man3/JSON::PP.3pm*
+%exclude %{_mandir}/man3/JSON::PP::Boolean.3pm*
 
 %changelog
+* Sun Feb  8 2015 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 6.64-0.2
+- Be more specific about manpage exclusions.
+
 * Mon Mar 11 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 6.64-0.1
 - Update to 6.64, to install alongside built-in version from perl SRPM.
