@@ -1,0 +1,21 @@
+diff -ur HTML-FormatText-WithLinks-AndTables/lib/HTML/FormatText/WithLinks/AndTables.pm HTML-FormatText-WithLinks-AndTab-patched/lib/HTML/FormatText/WithLinks/AndTables.pm
+--- HTML-FormatText-WithLinks-AndTables/lib/HTML/FormatText/WithLinks/AndTables.pm	2012-06-08 10:10:37.000000000 +1000
++++ HTML-FormatText-WithLinks-AndTab-patched/lib/HTML/FormatText/WithLinks/AndTables.pm	2012-07-24 16:25:07.631985777 +1000
+@@ -208,13 +208,15 @@
+                     $new_line .= "\n" if $j != $max_col_heights[$row_count] - 1; # add a newline to all but the last text row
+                     $col_rows[$j] = $new_line; # put the line into the stack for this row
+                 }
+-                $row_text .= $_ for @col_rows;
++                $row_text .= ($_ || '') for @col_rows;  # BUGBUG this breaks on colspan in headers
+                 for (my $i = 1; $i < scalar @cols; $i++) {
+                     $cols[$i]->delete; # get rid of unneeded <td>'s
+                 }
+                 # put the fully formatted text into our accumulator
+                 $formatted_tables->[$table_count]->[$row_count] = $row_text;
+-                $cols[0]->content->[0] = "__TOKEN__${table_count}__${row_count}__"; # place a token into the row at col 0
++                if($cols[0]) { # BUGBUG this breaks on "complex" tables
++                    $cols[0]->content->[0] = "__TOKEN__${table_count}__${row_count}__"; # place a token into the row at col 0
++                }
+                 $row_count++;
+             }
+         }
