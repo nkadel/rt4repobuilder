@@ -51,8 +51,8 @@ find $RPM_BUILD_ROOT -depth -type d -exec rmdir {} 2>/dev/null \;
 %{_fixperms} $RPM_BUILD_ROOT/*
 
 # Disable for RHEL 6 and other environments
-%check
-make test
+#%check
+#make test
 
 %clean
 rm -rf $RPM_BUILD_ROOT
