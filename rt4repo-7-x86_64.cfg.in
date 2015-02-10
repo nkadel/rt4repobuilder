@@ -70,7 +70,7 @@ enabled=0
 [rt4repo]
 name=rt4repo
 enabled=1
-baseurl=file://@@@REPOBASEDIR@@@/rt4repo/6/x86_64/
+baseurl=file://@@@REPOBASEDIR@@@/rt4repo/7/x86_64/
 failovermethod=priority
 cost=100
 metadata_expire=1
