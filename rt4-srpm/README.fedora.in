@@ -14,8 +14,11 @@ If you have never set up rt4 before, proceed as follows:
 2. Install a mysql server:
 # yum install mysql-server
 
-3. Startup the mysql server:
-# /sbin/service mysqld start
+3. Startup the mysql serve (depends on Fedora release)
+  a) With init scripts
+# /sbin/service mysqld restart
+  b) With systemdmctl
+# systemctl start mysqld.service
 
 4. Set up the mysql server.
 If not already done, at minimum, you will want to set up a mysql root 
@@ -35,10 +38,11 @@ those setting containing "example.com" to your RT_SiteConfig.pm.
   --dba root \
   --dba-password <mysql-root-password>
 
-7. Start/restart apache/httpd:
-# /sbin/service httpd start
-rsp.
+7. Start/restart apache/httpd (depends on fedora release)
+  a) With init scripts
 # /sbin/service httpd restart
+  b) With systemdmctl
+# systemctl start httpd.service
 
 8. Try to log in:
 At this point, you should be able to login into rt4 on your rt4-host via
