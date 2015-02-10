@@ -76,8 +76,9 @@ BuildRequires: perl(Apache::DBI)
 BuildRequires: perl(Apache::Session) >= 1.53
 BuildRequires: perl(Cache::Simple::TimedExpiry)
 BuildRequires: perl(CGI::Cookie) >= 1.20
-BuildRequires: perl(CGI::PSGI)
+BuildRequires: perl(CGI::PSGI) >= 0.12
 BuildRequires: perl(CGI::Emulate::PSGI)
+BuildRequires: perl(Class::Accessor) >= 0.34
 BuildRequires: perl(Class::ReturnValue) >= 0.40
 BuildRequires: perl(Convert::Color)
 BuildRequires: perl(CPAN)
@@ -101,7 +102,8 @@ BuildRequires: perl(Devel::StackTrace) >= 1.19
 BuildRequires: perl(Devel::GlobalDestruction)
 BuildRequires: perl(Digest::base)
 BuildRequires: perl(Digest::MD5) >= 2.27
-BuildRequires: perl(Email::Address)
+BuildRequires: perl(Digest::SHA)
+BuildRequires: perl(Email::Address) >= 1.897
 BuildRequires: perl(Email::Address::List) >= 0.02
 BuildRequires: perl(Encode) >= 2.39
 BuildRequires: perl(Errno)
@@ -122,17 +124,19 @@ BuildRequires: perl(HTML::Entities)
 %{?with_devel_mode:BuildRequires: perl(HTML::Form)}
 BuildRequires: perl(HTML::FormatText)
 BuildRequires: perl(HTML::FormatText::WithLinks) >= 0.14
+BuildRequires: perl(HTML::FormatText::WithLinks::AndTables)
 BuildRequires: perl(HTML::Mason) >= 1.43
-BuildRequires: perl(HTML::Mason::PSGIHandler)
+BuildRequires: perl(HTML::Mason::PSGIHandler) >= 0.52
 BuildRequires: perl(HTML::Message) >= 6.0
 BuildRequires: perl(HTML::Quoted)
-BuildRequires: perl(HTML::RewriteAttributes) >= 0.02
+BuildRequires: perl(HTML::RewriteAttributes) >= 0.05
 BuildRequires: perl(HTML::Scrubber) >= 0.08
 BuildRequires: perl(HTML::TreeBuilder)
+BuildRequires: perl(HTTP::Message) >= 6.0
 BuildRequires: perl(HTTP::Request::Common)
 BuildRequires: perl(HTTP::Server::Simple) >= 0.34
 BuildRequires: perl(HTTP::Server::Simple::Mason) >= 0.09
-BuildRequires: perl(IPC::Run)
+BuildRequires: perl(IPC::Run) >= 0.90
 BuildRequires: perl(IPC::Run3)
 BuildRequires: perl(IPC::Run::SafeHandles)
 BuildRequires: perl(JSON)
@@ -145,8 +149,9 @@ BuildRequires: perl(Locale::PO)
 BuildRequires: perl(Log::Dispatch) >= 2.30
 %{?with_devel_mode:BuildRequires: perl(Log::Dispatch::Perl)}
 BuildRequires: perl(LWP)
-BuildRequires: perl(LWP::UserAgent)
 BuildRequires: perl(LWP::Protocol::https)
+BuildRequires: perl(LWP::Simple)
+BuildRequires: perl(LWP::UserAgent) >= 6.0
 BuildRequires: perl(Mail::Mailer) >= 1.57
 BuildRequires: perl(MIME::Entity) >= 5.504
 BuildRequires: perl(MIME::Types)
@@ -160,10 +165,10 @@ BuildRequires: perl(Net::Server::PreFork)
 BuildRequires: perl(Net::SMTP)
 BuildRequires: perl(Net::SSL)
 BuildRequires: perl(PerlIO::eol)
-BuildRequires: perl(Pod::Usage)
 BuildRequires: perl(Plack)
 BuildRequires: perl(Plack::Handler::Starlet)
 %{?with_devel_mode:BuildRequires: perl(Plack::Middleware::Test::StashWarnings) >= 0.06}
+BuildRequires: perl(Pod::Usage)
 BuildRequires: perl(Regexp::Common)
 BuildRequires: perl(Regexp::Common::net::CIDR)
 BuildRequires: perl(Regexp::IPv6)
@@ -173,6 +178,7 @@ BuildRequires: perl(Set::Tiny)
 BuildRequires: perl(Storable) >= 2.08
 %{?with_devel_mode:BuildRequires: perl(String::ShellQuote)}
 BuildRequires: perl(Symbol::Global::Name) >= 0.04
+BuildRequires: perl(Sys::Syslog) >= 0.16
 BuildRequires: perl(Term::ReadKey)
 BuildRequires: perl(Term::ReadLine)
 %{?with_devel_mode:BuildRequires: perl(Test::Builder) >= 0.77}
@@ -189,7 +195,7 @@ BuildRequires: perl(Term::ReadLine)
 BuildRequires: perl(Text::ParseWords)
 BuildRequires: perl(Text::Password::Pronounceable)
 BuildRequires: perl(Text::Quoted) >= 2.07
-BuildRequires: perl(Text::Template)
+BuildRequires: perl(Text::Template) >= 1.44
 BuildRequires: perl(Text::WikiFormat) >= 0.76
 BuildRequires: perl(Text::Wrapper)
 BuildRequires: perl(Time::HiRes)
@@ -205,6 +211,9 @@ BuildRequires: perl(XML::RSS) >= 1.05
 %{?with_runtests:BuildRequires: perl(Test::MockTime)}
 %{?with_runtests:BuildRequires: perl(String::ShellQuote)}
 %{?with_runtests:BuildRequires: perl(Test::Expect)}
+
+# Updated list, directly from RT itself
+
 
 BuildRequires:	/usr/bin/pod2man
 BuildRequires:	/usr/sbin/apachectl
@@ -365,8 +374,15 @@ sed -e 's,@RT_LOGDIR@,%{RT_LOGDIR},' %{SOURCE4} \
 %patch8 -p1
 %patch9 -p1
 
+# patch6 uses git based diff output, RHEL 6 'patch' command does not handle
+# Use old manual permission resetting instead for compatibility
+# Fixup the tarball shipping with broken permissions, don't touch symlinks
+find -type f -executable ! -type l -exec chmod a-x {} \;
+chmod +x configure install-sh
+
 # Propagate rpm's directories to config.layout
-cat << \EOF >> config.layout
+mv config.layout config.layout.default
+cat << \EOF > config.layout
 
 #   Fedora directory layout.
 <Layout Fedora>
@@ -446,7 +462,7 @@ done
 %install
 make install DESTDIR=${RPM_BUILD_ROOT}
 
-# We don't want CPAN
+# We do not want CPAN
 rm -f ${RPM_BUILD_ROOT}%{_sbindir}/rt-test-dependencies
 
 # Install apache configuration
@@ -531,6 +547,7 @@ fi
 
 %files
 %doc COPYING README README.fedora
+%doc config.layout config.layout.default
 %{_bindir}/*
 %{_sbindir}/*
 %exclude %{_bindir}/rt-mailgate
@@ -593,7 +610,11 @@ fi
 
 %changelog
 * Sun Feb  8 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 4.2.9-0.1
-- Correct dependencies for Mail::Header, MIME::Entity, etc.
+- List *all* reported dependencies form 'make testdeps'
+- Replace patch6 altering file permissions with 'find' script,
+  older patch does not support editing permissions from 'git diff'.
+- Move config.layout aside and store old and new config.layout
+  as docs
 
 * Tue Jan 27 2015 Ralf Corsépius <corsepiu@fedoraproject.org> - 4.2.9-2
 - Remove --with/without gpg.
