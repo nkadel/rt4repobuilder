@@ -1,6 +1,6 @@
 Name:           perl-ExtUtils-MakeMaker
 Version:        6.64
-Release:        0.2%{?dist}
+Release:        0.3%{?dist}
 Summary:        Create a module Makefile
 
 Group:          Development/Libraries
@@ -14,6 +14,9 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 # Provide needed config.h files.
 BuildRequires:	perl-devel
+
+# Needed for tests
+BuildRequires:	perl(Data::Drumper)
 
 %description
 Create a module Makefile.
@@ -56,6 +59,9 @@ rm -rf $RPM_BUILD_ROOT
 %exclude %{_mandir}/man3/JSON::PP::Boolean.3pm*
 
 %changelog
+* Tue Feb 10 2015 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 6.64-0.3
+- Add perl(Data::Dumper) build dependency.
+
 * Sun Feb  8 2015 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 6.64-0.2
 - Be more specific about manpage exclusions.
 
