@@ -1,6 +1,7 @@
 Name:           perl-HTML-Mason
 Version:        1.54
-Release:        2%{?dist}
+#Release:        2%{?dist}
+Release:        0.2%{?dist}
 Epoch:          1
 Summary:        Powerful Perl-based web site development and delivery engine
 License:        GPL+ or Artistic
@@ -90,6 +91,9 @@ make test
 %dir %{_localstatedir}/www/mason
 
 %changelog
+* Tue Feb 10 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 1:1.54-0.2
+- Roll back release to avoid conflicts with upstream on RHEL 7.
+
 * Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1:1.54-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
 
