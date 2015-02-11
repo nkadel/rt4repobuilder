@@ -1,6 +1,6 @@
 Name:           perl-Starlet
 Version:        0.24
-Release:        0.1%{?dist}
+Release:        0.2%{?dist}
 Summary:        Simple, high-performance PSGI/Plack HTTP server
 License:        GPL+ or Artistic
 Group:          Development/Libraries
@@ -15,6 +15,7 @@ BuildRequires:  perl(LWP::UserAgent) >= 5.8
 BuildRequires:  perl(Net::EmptyPort)
 BuildRequires:  perl(Parallel::Prefork) >= 0.13
 BuildRequires:  perl(Plack) >= 0.992
+BuildRequires:  perl(Plack::Test)
 BuildRequires:  perl(Server::Starter) >= 0.06
 BuildRequires:  perl(Test::Harness)
 BuildRequires:  perl(Test::More) >= 0.88
@@ -56,6 +57,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %changelog
+* Tue Feb 10 2014 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 0.16-0.2
+- Include perl(Plack::Test) as explicit build dependency.
+
 * Wed Mar 13 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 0.16-0.1
 - Rollback release number for update compatibility.
 - Add BuildRequires: perl(Test::Harness) for mock compilation.
