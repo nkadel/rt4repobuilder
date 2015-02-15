@@ -153,7 +153,7 @@ make test %{?_with_apache:TEST_APACHE2=1 TEST_FCGI_CLIENT=1}
 * Sat Nov 26 2011 Ralf Corsépius <corsepiu@fedoraproject.org> 0.9985-1
 - Upstream update.
 
-* Thu Oct 14 2011 Ralf Corsépius <corsepiu@fedoraproject.org> 0.9984-2
+* Fri Oct 14 2011 Ralf Corsépius <corsepiu@fedoraproject.org> 0.9984-2
 - Add %%bcond_with apache to work around building failures in koji.
 
 * Thu Oct 13 2011 Ralf Corsépius <corsepiu@fedoraproject.org> 0.9984-1
@@ -196,7 +196,7 @@ make test %{?_with_apache:TEST_APACHE2=1 TEST_FCGI_CLIENT=1}
 * Tue Feb 08 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.9967-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
 
-* Tue Jan 26 2011 Ralf Corsépius <corsepiu@fedoraproject.org> 0.9967-1
+* Wed Jan 26 2011 Ralf Corsépius <corsepiu@fedoraproject.org> 0.9967-1
 - Upstream update.
 
 * Tue Jan 25 2011 Ralf Corsépius <corsepiu@fedoraproject.org> 0.9964-1
