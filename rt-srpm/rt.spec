@@ -127,7 +127,6 @@ BuildRequires: perl(HTML::FormatText::WithLinks) >= 0.14
 BuildRequires: perl(HTML::FormatText::WithLinks::AndTables)
 BuildRequires: perl(HTML::Mason) >= 1.43
 BuildRequires: perl(HTML::Mason::PSGIHandler) >= 0.52
-BuildRequires: perl(HTML::Message) >= 6.0
 BuildRequires: perl(HTML::Quoted)
 BuildRequires: perl(HTML::RewriteAttributes) >= 0.05
 BuildRequires: perl(HTML::Scrubber) >= 0.08
