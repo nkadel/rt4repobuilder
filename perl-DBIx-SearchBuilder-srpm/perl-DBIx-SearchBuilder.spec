@@ -6,36 +6,40 @@
 #
 
 Name:		perl-DBIx-SearchBuilder
-Version:	1.63
+Version:	1.66
 Release:	1%{?dist}
 Summary:	Encapsulate SQL queries and rows in simple perl objects
 License:	GPL+ or Artistic
 Group:		Development/Libraries
 URL:		http://search.cpan.org/dist/DBIx-SearchBuilder/
-Source0:	http://www.cpan.org/authors/id/T/TS/TSIBLEY/DBIx-SearchBuilder-%{version}.tar.gz
+Source0:	http://www.cpan.org/authors/id/A/AL/ALEXMV/DBIx-SearchBuilder-%{version}.tar.gz
 
 Requires:	perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 BuildArch:	noarch
+
+BuildRequires:	perl(Cache::Simple::TimedExpiry) >= 0.21
+BuildRequires:	perl(Class::Accessor)
+BuildRequires:	perl(Class::ReturnValue) >= 0.4
 # Urgh ...
 BuildRequires:	perl(CPAN)
-BuildRequires:	perl(Want)
-BuildRequires:	perl(Cache::Simple::TimedExpiry) >= 0.21
-BuildRequires:	perl(Class::ReturnValue) >= 0.4
 BuildRequires:	perl(DBD::SQLite)
 BuildRequires:	perl(DBI)
-BuildRequires:	perl(ExtUtils::AutoInstall) >= 0.49
-BuildRequires:	perl(Test::More) >= 0.52
-BuildRequires:	perl(Class::Accessor)
 BuildRequires:	perl(Encode)
+BuildRequires:	perl(ExtUtils::AutoInstall) >= 0.49
 BuildRequires:	perl(ExtUtils::MakeMaker)
+BuildRequires:	perl(File::Temp)
+BuildRequires:	perl(Scalar::Util)
+BuildRequires:	perl(Test::More) >= 0.52
+BuildRequires:	perl(Want)
 
 # Improved tests:
 BuildRequires:	perl(Test::Pod)
 
 # Optional features
-BuildRequires:	perl(DBIx::DBSchema)
 BuildRequires:	perl(capitalization) >= 0.03
 BuildRequires:	perl(Clone)
+BuildRequires:	perl(DBIx::DBSchema)
+
 
 %description
 This module provides an object-oriented mechanism for retrieving and
@@ -64,7 +68,6 @@ chmod -R u+w $RPM_BUILD_ROOT/*
 make test
 
 %files
-%defattr(-,root,root,-)
 %doc Changes
 %doc README ROADMAP
 %{perl_vendorlib}/DBIx
@@ -83,12 +86,33 @@ Requires:	%name = %{version}-%{release}
 DBIx::SearchBuilder bindings for Oracle
 
 %files Oracle
-%defattr(-,root,root,-)
 %{perl_vendorlib}/DBIx/SearchBuilder/Handle/Oracle*
 %{_mandir}/man3/DBIx::SearchBuilder::Handle::Oracle*
 %endif
 
 %changelog
+* Mon Sep 08 2014 Ralf Corsépius <corsepiu@fedoraproject.org> - 1.66-1
+- Upstream update.
+- Spec cleanup.
+- Reflect Source0 having changed.
+
+* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.65-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
+* Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.65-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
+
+* Fri Aug 02 2013 Petr Pisar <ppisar@redhat.com> - 1.65-2
+- Perl 5.18 rebuild
+
+* Fri Jul 12 2013 Ralf Corsépius <corsepiu@fedoraproject.org> - 1.65-1
+- Upstream update.
+- BR: perl(Scalar::Util).
+- Fix up bogus dates in %%changelog.
+
+* Thu Feb 14 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.63-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
+
 * Sun Sep 16 2012 Ralf Corsépius <corsepiu@fedoraproject.org> - 1.63-1
 - Upstream update.
 - Reflect upstream URL having changed.
@@ -114,10 +138,10 @@ DBIx::SearchBuilder bindings for Oracle
 * Tue Feb 08 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.59-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
 
-* Mon Nov 06 2010 Ralf Corsépius <corsepiu@fedoraproject.org> - 1.59-1
+* Mon Dec 06 2010 Ralf Corsépius <corsepiu@fedoraproject.org> - 1.59-1
 - Upstream update.
 
-* Mon Nov 02 2010 Ralf Corsépius <corsepiu@fedoraproject.org> - 1.58-1
+* Tue Nov 02 2010 Ralf Corsépius <corsepiu@fedoraproject.org> - 1.58-1
 - Upstream update.
 - Spec cleanup.
 
