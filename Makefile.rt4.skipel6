@@ -12,9 +12,9 @@ RSYNCSAFEOPTS=$(RSYNCOPTS) --ignore-existing
 
 # "mock" configurations to build with, activate only as needed
 #MOCKS+=rt4repo-6-i386
-MOCKS+=rt4repo-6-x86_64
-# Disable RHEL 7 compilation, system software already fills requirement
-#MOCKS+=rt4repo-7-x86_64
+# Disable RHEL 6 compilation, system software already fills requirement
+#MOCKS+=rt4repo-6-x86_64
+MOCKS+=rt4repo-7-x86_64
 
 # Local yum compatible RPM repository
 REPOBASEDIR="`/bin/pwd | xargs dirname`/rt4repo"

@@ -8,13 +8,12 @@ LANG=C
 # Ignore ownership and group,
 RSYNCOPTS=-a --no-owner --no-group
 # Skip existing files to avoid binary churn in yum repos
-RSYNCSAFEOPTS=$(RSYNCOPTS) --ignore-existing
+RSYNCSAFEOPTS=$(RSYNCOPTS) --ignore-existing 
 
 # "mock" configurations to build with, activate only as needed
-#MOCKS+=rt4repo-6-i386
-MOCKS+=rt4repo-6-x86_64
-# Disable RHEL 7 compilation, system software already fills requirement
-#MOCKS+=rt4repo-7-x86_64
+MOCKS+=epel-7-x86_64
+#MOCKS+=epel-6-i386
+#MOCKS+=epel-6-x86_64
 
 # Local yum compatible RPM repository
 REPOBASEDIR="`/bin/pwd | xargs dirname`/rt4repo"
@@ -40,7 +39,7 @@ srpm:: verifyspec FORCE
 		-bs $(SPEC) --nodeps
 
 build:: srpm FORCE
-	rpmbuild --rebuild `ls *.src.rpm | grep -v ^rt4repo-`
+	rpmbuild --rebuild `ls *.src.rpm | grep -v ^epel-`
 
 $(MOCKS):: verifyspec FORCE
 	@if [ -n "`find $@ -name \*.rpm ! -name \*.src.rpm 2>/dev/null`" ]; then \
@@ -75,8 +74,6 @@ install:: $(MOCKS)
 		rsync $(RSYNCSAFEOPTS) --exclude=*.src.rpm --exclude=*debuginfo*.rpm $$repo/*.rpm $$rpmdir/. || exit 1; \
 		createrepo -q $$rpmdir/.; \
 	    done; \
-	    echo "	Touching /etc/mock/$$repo.cfg to force cache rebuild"; \
-	    sudo /bin/touch /etc/mock/$$repo.cfg; \
 	done
 
 clean::
