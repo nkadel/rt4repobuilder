@@ -68,8 +68,14 @@ Patch9: 0009-Work-around-testsuite-failure.patch
 
 BuildArch:	noarch
 
+# Prevent confusion with old rt3 dependencies
 Obsoletes:	rt3 < %{version}-%{release}
 Provides:	rt3 = %{version}-%{release}
+Conflicts:	rt3
+# Not prepared to obsolete rt4, but ensure compatiblity
+#Obsoletes:	rt4 < %{version}-%{release}
+Provides:	rt4 = %{version}-%{release}
+Conflicts:	rt4
 
 # This list is alpha sorted
 BuildRequires: perl(Apache::DBI)
@@ -231,7 +237,6 @@ Requires(postun): %{__rm}
 
 # rpm doesn't catch these:
 Requires: perl(Apache::Session)
-Requires: perl(Calendar::Simple)
 Requires: perl(CSS::Squish)
 Requires: perl(Data::ICal)
 Requires: perl(Data::ICal::Entry::Event)
@@ -613,7 +618,9 @@ fi
 - Replace patch6 altering file permissions with 'find' script,
   older patch does not support editing permissions from 'git diff'.
 - Move config.layout aside and store old and new config.layout
-  as docs
+  as docs.
+- Delete obsolete perl(Calendar::simple) dependency.
+- Add Provides for 'rt4' to go with 'rt' name change.
 
 * Tue Jan 27 2015 Ralf Corsépius <corsepiu@fedoraproject.org> - 4.2.9-2
 - Remove --with/without gpg.
