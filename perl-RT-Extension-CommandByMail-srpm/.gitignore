@@ -1,4 +1,5 @@
 *.rpm
 *~
+*[0-9]
 epel-*
 rt4repo-*
