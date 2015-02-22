@@ -14,7 +14,7 @@ BuildRequires:  perl(File::Remove)
 BuildRequires:  perl(Test::Harness)
 BuildRequires:  perl(YAML::Tiny)
 BuildRequires:  perl(RT) >= 4.0
-BuildRequires:  rt4
+BuildRequires:  rt
 Requires:       perl(RT)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
@@ -53,6 +53,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %changelog
+* Sat Feb 21 2015 "Nico Kadel-Garcia <nkadel@gmail.com>" 0.6-0.3
+- Roll back build number for upstream compatibilit
+- Depend on 'rt', not 'rt4', for new naming scheme
+
 * Mon Dec 30 2013 "Nico Kadel-Garcia <nkadel@gmail.com>" 0.6-2
 - Switch to using RT4
 
