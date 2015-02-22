@@ -1,7 +1,7 @@
 
 Name:           perl-RT-Extension-CommandByMail
 Version:        0.16
-Release:        0.3%{?dist}
+Release:        0.4%{?dist}
 Summary:        Change metadata of a RT ticket via email
 License:        GPL+ or Artistic
 Group:          Development/Libraries
@@ -15,9 +15,9 @@ BuildRequires:  perl(MIME::Entity) >= 5.420
 BuildRequires:  perl(Test::More)
 BuildRequires:  perl(UNIVERSAL::require)
 BuildRequires:  perl(RT) >= 4.0
-BuildRequires:  /usr/sbin/rt-mailgate
-BuildRequires:  rt4-mailgate
-BuildRequires:  rt4
+BuildRequires:  /usr/bin/rt-mailgate
+BuildRequires:  rt-mailgate
+BuildRequires:  rt
 Requires:       perl(MIME::Entity) >= 5.420
 Requires:       perl(RT::Interface::Email)
 Requires:       perl(UNIVERSAL::require)
@@ -61,7 +61,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %changelog
-* Sun Dec 30 2013 Nico Kadel-Garcia <nkadel@gmail.com> - 0.16-0.3
+* Sat Feb 21 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 0.16-0.4
+- Fix bogus changelogs
+- Update to 'rt' package dependencies for new naming scheme, not 'rt4'
+
+* Mon Dec 30 2013 Nico Kadel-Garcia <nkadel@gmail.com> - 0.16-0.3
 - Update to using rt4
 
 * Sat Nov 30 2013 Nico Kadel-Garcia <nkadel@gmail.com> - 0.16-0.2
@@ -86,7 +90,7 @@ rm -rf $RPM_BUILD_ROOT
 * Tue Jul 19 2011 Petr Sabata <contyk@redhat.com> - 0.07-4
 - Perl mass rebuild
 
-* Fri Mar 10 2011 David Nalley <david@gnsa.us> 0.07-3
+* Thu Mar 10 2011 David Nalley <david@gnsa.us> 0.07-3
 - change R perl(RT::Interface::Email) 
 - fixed spaces v tab issue
 * Fri Nov 05 2010 David Nalley <david@gnsa.us> 0.07-2
