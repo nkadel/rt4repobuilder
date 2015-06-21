@@ -1,86 +1,265 @@
-#%perl_module Encode 2.02 4
-%global	pkgname	Encode
+Name:           perl-Encode
+Epoch:          2
+Version:        2.73
+#Release:        1%{?dist}
+Release:        0.1%{?dist}
+Summary:        Character encodings in Perl
+# ucm:          UCD
+# other files:  GPL+ or Artistic
+License:        (GPL+ or Artistic) and UCD
+Group:          Development/Libraries
+URL:            http://search.cpan.org/dist/Encode/
+Source0:        http://www.cpan.org/authors/id/D/DA/DANKOGAI/Encode-%{version}.tar.gz
+BuildRequires:  perl
+BuildRequires:  perl(ExtUtils::MakeMaker)
+BuildRequires:  perl(File::Spec)
+BuildRequires:  perl(File::Spec::Functions)
+BuildRequires:  perl(strict)
+BuildRequires:  perl(warnings)
+# enc2xs is run at build-time
+# Run-time:
+BuildRequires:  perl(bytes)
+BuildRequires:  perl(Carp)
+BuildRequires:  perl(Config)
+BuildRequires:  perl(constant)
+BuildRequires:  perl(Exporter) >= 5.57
+BuildRequires:  perl(File::Basename)
+BuildRequires:  perl(File::Find)
+BuildRequires:  perl(Filter::Util::Call)
+BuildRequires:  perl(Getopt::Long)
+BuildRequires:  perl(Getopt::Std)
+# I18N::Langinfo is optional
+BuildRequires:  perl(MIME::Base64)
+BuildRequires:  perl(overload)
+BuildRequires:  perl(parent) >= 0.221
+# PerlIO::encoding is optional
+# POSIX is optional
+BuildRequires:  perl(re)
+# Storable is optional
+BuildRequires:  perl(utf8)
+BuildRequires:  perl(vars)
+BuildRequires:  perl(XSLoader)
+# Tests:
+# Benchmark not used
+BuildRequires:  perl(charnames)
+BuildRequires:  perl(File::Compare)
+BuildRequires:  perl(File::Copy)
+BuildRequires:  perl(FileHandle)
+BuildRequires:  perl(FindBin)
+BuildRequires:  perl(IO::Select)
+BuildRequires:  perl(IPC::Open3)
+# IPC::Run not used
+BuildRequires:  perl(lib)
+BuildRequires:  perl(Scalar::Util)
+BuildRequires:  perl(Symbol)
+BuildRequires:  perl(Test)
+BuildRequires:  perl(Test::More)
+BuildRequires:  perl(Tie::Scalar)
+Requires:       perl(:MODULE_COMPAT_%(eval "`perl -V:version`"; echo $version))
+Requires:       perl(parent) >= 0.221
 
-Name:		perl-%{pkgname}
-Version:	2.49
-Release:	0.1%{?dist}
+%{?perl_default_filter}
+%global __provides_exclude %{?__provides_exclude:%__provides_exclude|}^perl\\((Encode::ConfigLocal|MY)\\)
 
-Summary:       Character encodings for perl.
-License:       Artistic
-Group:         System Environment/Libraries
-URL:           http://search.cpan.org/dist/%{pkgname}
-Source:        http://search.cpan.org/CPAN/authors/id/D/DA/DANKOGAI/%{pkgname}-%{version}.tar.gz
-Source1:       README.fedora
-BuildRequires: perl(ExtUtils::MakeMaker)
-BuildRequires: perl-devel
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+# Filter under-specified dependencies
+%global __requires_exclude %{?__requires_exclude:%__requires_exclude|}^perl\\((Exporter|parent)\\)$
 
 %description
-The "Encode" module provides the interfaces between Perl's strings and
-the rest of the system.  Perl strings are sequences of characters.
+The Encode module provides the interface between Perl strings and the rest
+of the system. Perl strings are sequences of characters.
+
+%package -n perl-encoding
+Summary:        Write your Perl script in non-ASCII or non-UTF-8
+License:        GPL+ or Artistic
+Group:          Development/Libraries
+# Keeping this sub-package arch-specific because it installs files into
+# arch-specific directories.
+Requires:       perl(:MODULE_COMPAT_%(eval "`perl -V:version`"; echo $version))
+Requires:       perl(Carp)
+# Config not needed on perl ≥ 5.008
+# Consider Filter::Util::Call as mandatory, bug #1165183, CPAN RT#100427
+Requires:       perl(Filter::Util::Call)
+# I18N::Langinfo is optional
+# PerlIO::encoding is optional
+Requires:       perl(utf8)
+Conflicts:      perl-Encode < 2:2.64-2
+
+%description -n perl-encoding
+With the encoding pragma, you can write your Perl script in any encoding you
+like (so long as the Encode module supports it) and still enjoy Unicode
+support.
+
+However, this encoding module is deprecated under perl 5.18. It uses
+a mechanism provided by perl that is deprecated under 5.18 and higher, and may
+be removed in a future version.
+
+The easiest and the best alternative is to write your script in UTF-8.
+
+# To mirror files from perl-devel (bug #456534)
+# Keep architecture specific because files go into vendorarch
+%package devel
+Summary:        Perl Encode Module Generator
+Group:          Development/Libraries
+Requires:       %{name}%{?_isa} = %{epoch}:%{version}-%{release}
+Requires:       perl(:MODULE_COMPAT_%(eval "`perl -V:version`"; echo $version))
+Requires:       perl-devel
+Requires:       perl(Encode)
+
+%description devel
+enc2xs builds a Perl extension for use by Encode from either Unicode Character
+Mapping files (.ucm) or Tcl Encoding Files (.enc). You can use enc2xs to add
+your own encoding to perl. No knowledge of XS is necessary.
+
 
 %prep
-%setup -q -n %{pkgname}-%{version} 
-%{__install} -m0644 %{SOURCE1} README.fedora
+%setup -q -n Encode-%{version}
 
 %build
-#%perl_configure
-#make
-%{__perl} Makefile.PL INSTALLDIRS=vendor
+# Additional scripts can be installed by appending MORE_SCRIPTS, UCM files by
+# INSTALL_UCM.
+perl Makefile.PL INSTALLDIRS=vendor OPTIMIZE="$RPM_OPT_FLAGS"
 make %{?_smp_mflags}
-#Fails on RH9, RH8.0
-#perl_makecheck
 
 %install
-rm -rf %{buildroot}
-#%perl_makeinstall
-
-make pure_install PERL_INSTALL_ROOT=$RPM_BUILD_ROOT
-
+make pure_install DESTDIR=$RPM_BUILD_ROOT
 find $RPM_BUILD_ROOT -type f -name .packlist -exec rm -f {} \;
-find $RPM_BUILD_ROOT -depth -type d -exec rmdir {} 2>/dev/null \;
-
+find $RPM_BUILD_ROOT -type f -name '*.bs' -size 0 -exec rm -f {} \;
 %{_fixperms} $RPM_BUILD_ROOT/*
 
-%clean
-rm -rf %{buildroot}
+%check
+make test
 
 %files
-%defattr(-,root,root,-)
-%doc README* Changes AUTHORS
-#%{perl_vendorarch}/Encode.pm
-#%{perl_vendorarch}/encoding.pm
-#%{perl_vendorarch}/Encode
-#%{perl_vendorarch}/auto/Encode
-#%{perl_man1dir}/piconv.1*
-#%{perl_man1dir}/enc2xs.1*
-#%{perl_bin}/piconv
-#%{perl_bin}/enc2xs
+%doc AUTHORS Changes README
+%{_bindir}/encguess
+%{_bindir}/piconv
+%{perl_vendorarch}/auto/*
+%{perl_vendorarch}/Encode*
+%exclude %{perl_vendorarch}/Encode/*.e2x
+%exclude %{perl_vendorarch}/Encode/encode.h
+%{_mandir}/man1/encguess.*
+%{_mandir}/man1/piconv.*
+%{_mandir}/man3/Encode.*
+%{_mandir}/man3/Encode::*
 
-# Avoid conflict with perl-devel on RHEL 6
-%exclude %{_bindir}/piconv
-%exclude %{_bindir}/enc2xs
-%exclude %{_mandir}/man1/piconv.1*
-%exclude %{_mandir}/man1/enc2xs.1*
-%exclude %{_mandir}/man3/*
-
-%{_mandir}/man1/*
-%{perl_vendorarch}/Encode.pm
+%files -n perl-encoding
+%doc AUTHORS Changes README
 %{perl_vendorarch}/encoding.pm
-%{perl_vendorarch}/Encode
-%{perl_vendorarch}/auto/Encode
+%{_mandir}/man3/encoding.*
+
+%files devel
+%{_bindir}/enc2xs
+%{_mandir}/man1/enc2xs.*
+%{perl_vendorarch}/Encode/*.e2x
+%{perl_vendorarch}/Encode/encode.h
 
 %changelog
-* Mon Mar 11 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com>
-- Port from atrpms with funky macros to RHEL 6 native compilation.
-- Update to 2.49.
-- Exclude bindir and mandir components to avoid conflict with older
-  components in perl-devel.
-- Add BuildRequires: perl(ExtUtiuls::MakeMaker).
-- Add BuildRequires: perl-devel.
+* Mon Apr 20 2015 Petr Pisar <ppisar@redhat.com> - 2:2.73-1
+- 2.73 bump
 
-* Wed Sep 29 2004 Axel Thimm <Axel.Thimm@ATrpms.net>
-- Update to 2.02.
+* Mon Mar 16 2015 Petr Pisar <ppisar@redhat.com> - 2:2.72-1
+- 2.72 bump
 
-* Sun Aug 22 2004 Axel Thimm <Axel.Thimm@ATrpms.net>
-- Initial build.
+* Thu Mar 12 2015 Petr Pisar <ppisar@redhat.com> - 2:2.71-1
+- 2.71 bump
+
+* Wed Mar 04 2015 Petr Pisar <ppisar@redhat.com> - 2:2.70-2
+- Correct license from (GPL+ or Artistic) to ((GPL+ or Artistic) and UCD)
+
+* Thu Feb 05 2015 Petr Pisar <ppisar@redhat.com> - 2:2.70-1
+- 2.70 bump
+
+* Fri Jan 23 2015 Petr Pisar <ppisar@redhat.com> - 2:2.68-1
+- 2.68 bump
+
+* Fri Dec 05 2014 Petr Pisar <ppisar@redhat.com> - 2:2.67-1
+- 2.67 bump
+
+* Wed Dec 03 2014 Petr Pisar <ppisar@redhat.com> - 2:2.66-1
+- 2.66 bump
+
+* Tue Nov 18 2014 Petr Pisar <ppisar@redhat.com> - 2:2.64-2
+- Consider Filter::Util::Call dependency as mandatory (bug #1165183)
+- Sub-package encoding module
+
+* Mon Nov 03 2014 Petr Pisar <ppisar@redhat.com> - 2:2.64-1
+- 2.64 bump
+
+* Mon Oct 20 2014 Petr Pisar <ppisar@redhat.com> - 2:2.63-1
+- 2.63 bump
+
+* Wed Sep 03 2014 Jitka Plesnikova <jplesnik@redhat.com> - 2:2.62-5
+- Increase Epoch to favour standalone package
+
+* Tue Aug 26 2014 Jitka Plesnikova <jplesnik@redhat.com> - 1:2.62-4
+- Perl 5.20 rebuild
+
+* Sun Aug 17 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1:2.62-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
+
+* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1:2.62-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
+* Mon Jun 02 2014 Petr Pisar <ppisar@redhat.com> - 1:2.62-1
+- 2.62 bump
+
+* Wed Apr 30 2014 Petr Pisar <ppisar@redhat.com> - 1:2.60-1
+- 2.60 bump
+
+* Mon Apr 14 2014 Petr Pisar <ppisar@redhat.com> - 1:2.59-1
+- 2.59 bump
+
+* Mon Mar 31 2014 Petr Pisar <ppisar@redhat.com> - 1:2.58-1
+- 2.58 bump
+
+* Fri Jan 03 2014 Petr Pisar <ppisar@redhat.com> - 1:2.57-1
+- 2.57 bump
+
+* Mon Sep 16 2013 Petr Pisar <ppisar@redhat.com> - 1:2.55-1
+- 2.55 bump
+
+* Mon Sep 02 2013 Petr Pisar <ppisar@redhat.com> - 1:2.54-1
+- 2.54 bump
+
+* Wed Aug 21 2013 Jitka Plesnikova <jplesnik@redhat.com> - 1:2.52-1
+- 2.52 bump
+
+* Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1:2.51-7
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
+
+* Fri Jul 26 2013 Petr Pisar <ppisar@redhat.com> - 1:2.51-6
+- Specify more dependencies
+
+* Thu Jul 18 2013 Petr Pisar <ppisar@redhat.com> - 1:2.51-5
+- Put epoch into dependecny declaration
+
+* Fri Jul 12 2013 Petr Pisar <ppisar@redhat.com> - 1:2.51-4
+- Link minimal build-root packages against libperl.so explicitly
+
+* Fri Jul 12 2013 Petr Pisar <ppisar@redhat.com> - 1:2.51-3
+- Perl 5.18 rebuild
+
+* Fri Jul 12 2013 Petr Pisar <ppisar@redhat.com> - 1:2.51-2
+- Perl 5.18 rebuild
+
+* Fri Jul 12 2013 Petr Pisar <ppisar@redhat.com> - 1:2.51-1
+- Increase epoch to compete with perl.spec
+
+* Fri May 17 2013 Petr Pisar <ppisar@redhat.com> - 2.51-2
+- Specify all dependencies
+
+* Thu May 02 2013 Petr Pisar <ppisar@redhat.com> - 2.51-1
+- 2.51 bump
+
+* Mon Apr 29 2013 Petr Pisar <ppisar@redhat.com> - 2.50-1
+- 2.50 bump (recoding does not launders taintedness)
+
+* Tue Mar 05 2013 Petr Pisar <ppisar@redhat.com> - 2.49-1
+- 2.49 bump
+
+* Mon Feb 18 2013 Petr Pisar <ppisar@redhat.com> - 2.48-1
+- 2.48 bump
+
+* Thu Sep 20 2012 Petr Pisar <ppisar@redhat.com> 2.47-1
+- Specfile autogenerated by cpanspec 1.78.
+- Make devel sub-package architecture specific due to file location
