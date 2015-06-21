@@ -1,0 +1,142 @@
+From b39008e2f83274e4298da24b1ee4d00bea30c47b Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ralf=20Cors=C3=A9pius?= <corsepiu@fedoraproject.org>
+Date: Tue, 18 Mar 2014 14:55:18 +0100
+Subject: [PATCH 4/8] Use /usr/bin/perl instead of /usr/bin/env perl.
+
+---
+ devel/tools/change-loc-msgstr        | 2 +-
+ devel/tools/cmd-boilerplate          | 2 +-
+ devel/tools/extract-message-catalog  | 2 +-
+ devel/tools/license_tag              | 2 +-
+ devel/tools/rt-apache                | 2 +-
+ devel/tools/rt-attributes-editor     | 2 +-
+ devel/tools/rt-message-catalog       | 2 +-
+ devel/tools/rt-static-docs           | 2 +-
+ devel/tools/tweak-template-locstring | 2 +-
+ etc/upgrade/upgrade-mysql-schema.pl  | 2 +-
+ lib/RT/Interface/Web/QueryBuilder.pm | 1 +
+ t/mail/fake-sendmail                 | 2 +-
+ 12 files changed, 12 insertions(+), 11 deletions(-)
+
+diff --git a/devel/tools/change-loc-msgstr b/devel/tools/change-loc-msgstr
+index 85780de..68fa249 100755
+--- a/devel/tools/change-loc-msgstr
++++ b/devel/tools/change-loc-msgstr
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ # BEGIN BPS TAGGED BLOCK {{{
+ #
+ # COPYRIGHT:
+diff --git a/devel/tools/cmd-boilerplate b/devel/tools/cmd-boilerplate
+index 3e8c1bf..e865822 100755
+--- a/devel/tools/cmd-boilerplate
++++ b/devel/tools/cmd-boilerplate
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ 
+ 
+ # BEGIN BPS TAGGED BLOCK {{{
+diff --git a/devel/tools/extract-message-catalog b/devel/tools/extract-message-catalog
+index 5dd89b8..5dbbe79 100755
+--- a/devel/tools/extract-message-catalog
++++ b/devel/tools/extract-message-catalog
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ # BEGIN BPS TAGGED BLOCK {{{
+ #
+ # COPYRIGHT:
+diff --git a/devel/tools/license_tag b/devel/tools/license_tag
+index b9d7192..4a4f20c 100755
+--- a/devel/tools/license_tag
++++ b/devel/tools/license_tag
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ 
+ 
+ # BEGIN BPS TAGGED BLOCK {{{
+diff --git a/devel/tools/rt-apache b/devel/tools/rt-apache
+index dfbd477..942946c 100755
+--- a/devel/tools/rt-apache
++++ b/devel/tools/rt-apache
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ 
+ # BEGIN BPS TAGGED BLOCK {{{
+ #
+diff --git a/devel/tools/rt-attributes-editor b/devel/tools/rt-attributes-editor
+index 15436ac..6890e8b 100755
+--- a/devel/tools/rt-attributes-editor
++++ b/devel/tools/rt-attributes-editor
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ # BEGIN BPS TAGGED BLOCK {{{
+ #
+ # COPYRIGHT:
+diff --git a/devel/tools/rt-message-catalog b/devel/tools/rt-message-catalog
+index f1a3158..1488993 100755
+--- a/devel/tools/rt-message-catalog
++++ b/devel/tools/rt-message-catalog
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl 
++#!/usr/bin/perl
+ # BEGIN BPS TAGGED BLOCK {{{
+ #
+ # COPYRIGHT:
+diff --git a/devel/tools/rt-static-docs b/devel/tools/rt-static-docs
+index 93362e4..4f5ba33 100755
+--- a/devel/tools/rt-static-docs
++++ b/devel/tools/rt-static-docs
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ # BEGIN BPS TAGGED BLOCK {{{
+ #
+ # COPYRIGHT:
+diff --git a/devel/tools/tweak-template-locstring b/devel/tools/tweak-template-locstring
+index c2741ab..51fec1e 100755
+--- a/devel/tools/tweak-template-locstring
++++ b/devel/tools/tweak-template-locstring
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ # BEGIN BPS TAGGED BLOCK {{{
+ #
+ # COPYRIGHT:
+diff --git a/etc/upgrade/upgrade-mysql-schema.pl b/etc/upgrade/upgrade-mysql-schema.pl
+index 92d18e3..451a37c 100755
+--- a/etc/upgrade/upgrade-mysql-schema.pl
++++ b/etc/upgrade/upgrade-mysql-schema.pl
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ # BEGIN BPS TAGGED BLOCK {{{
+ #
+ # COPYRIGHT:
+diff --git a/lib/RT/Interface/Web/QueryBuilder.pm b/lib/RT/Interface/Web/QueryBuilder.pm
+index b551424..8859bb2 100644
+--- a/lib/RT/Interface/Web/QueryBuilder.pm
++++ b/lib/RT/Interface/Web/QueryBuilder.pm
+@@ -1,3 +1,4 @@
++#!/usr/bin/perl
+ # BEGIN BPS TAGGED BLOCK {{{
+ #
+ # COPYRIGHT:
+diff --git a/t/mail/fake-sendmail b/t/mail/fake-sendmail
+index 44c2377..ab3b912 100755
+--- a/t/mail/fake-sendmail
++++ b/t/mail/fake-sendmail
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env perl
++#!/usr/bin/perl
+ 
+ # captures command line arguments so you can validate
+ # what is being generated in sendmailpipe
+-- 
+2.1.0
+
