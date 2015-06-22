@@ -1,6 +1,7 @@
 Name:           perl-Class-Accessor
 Version:        0.34
-Release:        10%{?dist}
+#Release:        10%{?dist}
+Release:        0.10%{?dist}
 Summary:        Automated accessor generation
 Group:          Development/Libraries
 License:        GPL+ or Artistic
@@ -9,7 +10,9 @@ Source0:        http://search.cpan.org/CPAN/authors/id/K/KA/KASEI/Class-Accessor
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch:      noarch
-BuildRequires:  perl >= 1:5.6.1, perl(Test::More)
+BuildRequires:  perl >= 1:5.6.1
+BuildRequires:  perl(Test::More)
+BuildRequires:  perl(ExtUtils::MakeMaker)
 Requires:  perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 %description
@@ -43,6 +46,10 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %changelog
+* Sun Feb 22 2015 Nico Kadel-Garcia <nakdel@gmail.com> - 0.34-0.10
+- Roll back release number to avoid upstream conflict
+- Add perl(ExtUtils::MakeMaker) build dependency
+
 * Fri Jul 20 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.34-10
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
 
