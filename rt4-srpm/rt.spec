@@ -365,7 +365,7 @@ Requires:	perl(Mojo::DOM)
 %setup -q -n rt-%{version}
 
 sed -e 's,@RT_CACHEDIR@,%{RT_CACHEDIR},' \
-    -e 's,@RT_ETC_PATH@,%{_sysconfidir}/%{name},' \
+    -e 's,@RT_ETC_PATH@,%{_sysconfdir}/%{name},' \
     %{SOURCE3} > README.fedora
 sed -e 's,@RT_LOGDIR@,%{RT_LOGDIR},' \
     %{SOURCE4} > rt.logrotate
