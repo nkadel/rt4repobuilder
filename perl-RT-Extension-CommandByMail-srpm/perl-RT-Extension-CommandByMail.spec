@@ -1,7 +1,8 @@
 
 Name:           perl-RT-Extension-CommandByMail
-Version:        0.16
-Release:        0.4%{?dist}
+Version:        0.17
+#Release:        0.4%{?dist}
+Release:        0.1%{?dist}
 Summary:        Change metadata of a RT ticket via email
 License:        GPL+ or Artistic
 Group:          Development/Libraries
