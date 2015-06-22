@@ -1,0 +1,9 @@
+From e65fe99b030e8955f522be7202a2e76f39cc9645 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ralf=20Cors=C3=A9pius?= <corsepiu@fedoraproject.org>
+Date: Tue, 18 Mar 2014 14:47:19 +0100
+Subject: [PATCH 3/8] Broken test-dependencies.
+
+---
+ sbin/rt-test-dependencies.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+

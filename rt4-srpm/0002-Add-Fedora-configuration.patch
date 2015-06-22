@@ -1,0 +1,31 @@
+From 2eb20220b6acc85e52ff94a2293fa8ea91c6d302 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ralf=20Cors=C3=A9pius?= <corsepiu@fedoraproject.org>
+Date: Tue, 18 Mar 2014 14:44:14 +0100
+Subject: [PATCH 2/8] Add Fedora configuration.
+
+---
+ etc/RT_SiteConfig.pm | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/etc/RT_SiteConfig.pm b/etc/RT_SiteConfig.pm
+index 390a351..02495f6 100755
+--- a/etc/RT_SiteConfig.pm
++++ b/etc/RT_SiteConfig.pm
+@@ -12,11 +12,12 @@
+ # going to run into trouble. To check your SiteConfig file, use
+ # this command:
+ #
+-#   perl -c /path/to/your/etc/RT_SiteConfig.pm
++#   perl -c /etc/rt/RT_SiteConfig.pm
+ #
+ # You must restart your webserver after making changes to this file.
+ 
+-Set( $rtname, 'example.com');
++Set($rtname, 'example.com');
++Set($WebPath, '/rt');
+ 
+ # You must install Plugins on your own, this is only an example
+ # of the correct syntax to use when activating them:
+-- 
+2.1.0
+

@@ -1,6 +1,6 @@
 *.log
 *.rpm
+*[0-9]
 *~
 epel-*
-rt4.conf
 rt4repo-*

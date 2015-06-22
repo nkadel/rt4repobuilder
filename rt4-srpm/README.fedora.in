@@ -1,62 +1,71 @@
-Some random notes on rt4 on Fedora:
+Some random notes on rt on Fedora:
 
 
 Finalizing the installation
 ===========================
 
-The default configuration is set up for a mysql based rt4 system. 
-It requires additional steps to be performed by the sysadmin to be 
-fully functional. 
+The default configuration is set up for a mysql based rt system.
+It requires additional steps to be performed by the sysadmin to be
+fully functional.
 
-If you have never set up rt4 before, proceed as follows:
+If you have never set up rt before, proceed as follows:
 1. Log-in to the server as root
 
 2. Install a mysql server:
 # yum install mysql-server
 
-3. Startup the mysql serve (depends on Fedora release)
-  a) With init scripts
-# /sbin/service mysqld restart
-  b) With systemdmctl
+3. Startup the mysql server:
 # systemctl start mysqld.service
 
 4. Set up the mysql server.
-If not already done, at minimum, you will want to set up a mysql root 
+If not already done, at minimum, you will want to set up a mysql root
 password:
 # mysqladmin -u root password <mysql-root-password>
 
-5. Edit /etc/rt4/RT_SiteConfig.pm to meet your demands.
+5. Edit @RT_ETC_PATH@/RT_SiteConfig.pm to meet your demands.
 You will want to compare RT_SiteConfig.pm against RT_Config.pm and
-add customized versions of those settings from RT_Config.pm to 
+add customized versions of those settings from RT_Config.pm to
 RT_SiteConfig.pm.
 
 In particular, you probably will want to add customized versions of
 those setting containing "example.com" to your RT_SiteConfig.pm.
 
-6. Initialize rt4's mysql database:
+6. Initialize rt's mysql database:
 # /usr/sbin/rt-setup-database --action init \
   --dba root \
   --dba-password <mysql-root-password>
 
-7. Start/restart apache/httpd (depends on fedora release)
-  a) With init scripts
-# /sbin/service httpd restart
-  b) With systemdmctl
+7. Start/restart apache/httpd:
 # systemctl start httpd.service
+rsp.
+# systemctl restart httpd.service
 
 8. Try to log in:
-At this point, you should be able to login into rt4 on your rt4-host via
-its web interface as rt4-administrator (root), from an arbitrary host with
-http:-access to your rt4-host:
+At this point, you should be able to login into rt on your rt-host via
+its web interface as rt-administrator (root), from an arbitrary host with
+http:-access to your rt-host:
 e.g.:
-<your-favorite-browser> http://<rt4-host>/rt4
+<your-favorite-browser> http://<rt-host>/rt
 
-You should be greeted with a login window. Login with 
+You should be greeted with a login window. Login with
 Username: root, Password: password.
 
-The next step should be to change your rt4's "root" account's password,
-otherwise anybody with web access to your site will be able to abuse 
+The next step should be to change your rt's "root" account's password,
+otherwise anybody with web access to your site will be able to abuse
 your site.
 
-Afterwards, you should be ready to create user accounts, configure 
+Afterwards, you should be ready to create user accounts, configure
 the mail-interface etc.
+
+
+SELinux:
+Make sure @RT_CACHEDIR@ has this SELinux context:
+# ls -lZ @RT_CACHEDIR@
+drwxr-xr-x. root root system_u:object_r:httpd_cache_t:s0 @RT_CACHEDIR@
+
+If not, perform the following to add the required file context:
+# semanage fcontext -a -t httpd_cache_t '@RT_CACHEDIR@(/.*)?'
+# restorecon -R -v @RT_CACHEDIR@
+
+Depending on your email-setup you may also need to set:
+# setsebool -P httpd_can_sendmail=1

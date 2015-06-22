@@ -1,0 +1,5 @@
+@RT_LOGDIR@/rt.log {
+    missingok
+    notifempty
+    size 100k
+}
