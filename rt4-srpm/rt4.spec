@@ -47,8 +47,8 @@
 %{!?perl_testdir:%global perl_testdir %{_libexecdir}/perl5-tests}
 
 Name:		rt4
-Version:	4.0.22
-Release:	0.3%{?dist}
+Version:	4.0.24
+Release:	0.1%{?dist}
 Summary:	Request tracker 4
 
 Group:		Applications/Internet
@@ -602,6 +602,9 @@ fi
 %endif
 
 %changelog
+* Sat Sep  5 2015 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.24-0.3
+- Update to 4.0.24
+
 * Mon Feb  2 2015 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.22-0.3
 - Eliminate unused 'make' command.
 - Use completely new config.layout, keep old and new as doc files.
