@@ -89,6 +89,10 @@ DBIx::SearchBuilder bindings for Oracle
 %endif
 
 %changelog
+* Sat Sep  5 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 1.63-0.1
+- Backport for RHEL 7.
+- Fix bogus changedates.
+
 * Sun Sep 16 2012 Ralf Corsépius <corsepiu@fedoraproject.org> - 1.63-1
 - Upstream update.
 - Reflect upstream URL having changed.
@@ -114,10 +118,10 @@ DBIx::SearchBuilder bindings for Oracle
 * Tue Feb 08 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.59-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
 
-* Mon Nov 06 2010 Ralf Corsépius <corsepiu@fedoraproject.org> - 1.59-1
+* Sat Nov 06 2010 Ralf Corsépius <corsepiu@fedoraproject.org> - 1.59-1
 - Upstream update.
 
-* Mon Nov 02 2010 Ralf Corsépius <corsepiu@fedoraproject.org> - 1.58-1
+* Tue Nov 02 2010 Ralf Corsépius <corsepiu@fedoraproject.org> - 1.58-1
 - Upstream update.
 - Spec cleanup.
 
