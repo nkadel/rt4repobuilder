@@ -15,11 +15,11 @@ REPOBASESUBDIRS+=$(REPOBASEDIR)/rt4repo/7/x86_64
 # These build with normal mock "epel-*" setups
 EPELPKGS+=perl-Authen-Simple-srpm
 EPELPKGS+=perl-CGI-PSGI-srpm
-EPELPKGS+=perl-Crypt-Eksblowfish-srpm
+ELELPKGS+=perl-Class-Accessor-srpm
+EPELPKGS+=perl-Cache-Simple-TimedExpiry-srpm
 EPELPKGS+=perl-Capture-Tiny-srpm
 EPELPKGS+=perl-Class-Accessor-Lite-srpm
-EPELPKGS+=perl-Class-Accessor-srpm
-EPELPKGS+=perl-DBIx-SearchBuilder-srpm
+EPELPKGS+=perl-Crypt-Eksblowfish-srpm
 EPELPKGS+=perl-Devel-StackTrace-AsHTML-srpm
 EPELPKGS+=perl-Devel-StackTrace-srpm
 EPELPKGS+=perl-Digest-JHash-srpm
@@ -45,6 +45,9 @@ EPELPKGS+=perl-URI-srpm
 # Needed by various packages
 
 RT4PKGS+=perl-Authen-Simple-Passwd-srpm
+
+# Now rewuires perl-Cache-Simple-TimedExpiry-srpm
+RT4PKGS+=perl-DBIx-SearchBuilder-srpm
 
 # Dependencies fo rperl-Test-TCP-srpm
 RT4PKGS+=perl-Test-SharedFork-srpm
@@ -142,7 +145,9 @@ perl-CHI-srpm:: perl-Log-Any-Adapter-srpm
 perl-CHI-srpm:: perl-Module-Mask-srpm
 perl-CHI-srpm:: perl-Test-Log-Dispatch-srpm
 perl-CHI-srpm:: perl-Time-Duration-Parse-srpm
+perl-Class-Accessor-Lite-srpm:: perl-Cache-Simple-TimedExpiry-srpm
 perl-Convert-Color-srpm:: perl-List-UtilsBy-srpm
+perl-DBIx-SearchBuilder-srpm:: perl-Cache-Simple-TimedExpiry-srpm
 perl-Devel-StackTrace-WithLexicals-srpm:: perl-Devel-StackTrace-srpm
 perl-Devel-StackTrace-WithLexicals-srpm:: perl-PadWalker-srpm
 perl-ExtUtils-MakeMaker-srpm:: perl-ExtUtils-Installed-srpm
