@@ -1,6 +1,6 @@
 Name:           perl-PadWalker
 Version:        1.96
-Release:        0.1%{?dist}
+Release:        0.2%{?dist}
 Summary:        Play with other peoples' lexical variables
 License:        GPL+ or Artistic
 Group:          Development/Libraries
@@ -8,6 +8,7 @@ URL:            http://search.cpan.org/dist/PadWalker/
 Source0:        http://www.cpan.org/authors/id/R/RO/ROBIN/PadWalker-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  perl(ExtUtils::MakeMaker)
+BuildRequires:  perl(Data::Dumper)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 BuildRequires:	perl-devel
 BuildRequires:	perl(Test::Harness)
@@ -49,6 +50,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %changelog
+* Sat Sep  5 2015 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 1.96-0.2
+- Add BuildRequires: perl(Data::Dumper)
+
 * Mon Mar 11 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 1.96-0.1
 - new upstream version
 - Add BuildRequires: perl-devel to get CORE/config.h dependency.
