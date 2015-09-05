@@ -9,6 +9,8 @@ REPOBASEDIR="`/bin/pwd`"
 # Base subdirectories for RPM deployment
 REPOBASESUBDIRS+=$(REPOBASEDIR)/rt4repo/6/SRPMS
 REPOBASESUBDIRS+=$(REPOBASEDIR)/rt4repo/6/x86_64
+REPOBASESUBDIRS+=$(REPOBASEDIR)/rt4repo/7/SRPMS
+REPOBASESUBDIRS+=$(REPOBASEDIR)/rt4repo/7/x86_64
 
 # These build with normal mock "epel-*" setups
 EPELPKGS+=perl-Authen-Simple-srpm

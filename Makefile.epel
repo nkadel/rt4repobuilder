@@ -11,8 +11,7 @@ RSYNCOPTS=-a --no-owner --no-group
 RSYNCSAFEOPTS=$(RSYNCOPTS) --ignore-existing 
 
 # "mock" configurations to build with, activate only as needed
-#MOCKS+=epel-6-i386
-MOCKS+=epel-6-x86_64
+MOCKS+=epel-7-x86_64
 
 # Local yum compatible RPM repository
 REPOBASEDIR="`/bin/pwd | xargs dirname`/rt4repo"
@@ -32,13 +31,14 @@ verifyspec:: FORCE
 
 srpm:: verifyspec FORCE
 	@echo "Building $(SPEC) SRPM"
-	rm -f $(PKGNAME)*.src.rpm
-	rpmbuild --define '_sourcedir $(PWD)' \
-		--define '_srcrpmdir $(PWD)' \
+	rm -rf rpmbuild
+	rpmbuild --define '_topdir $(PWD)/rpmbuild' \
+		 --define '_sourcedir $(PWD)' \
 		-bs $(SPEC) --nodeps
 
 build:: srpm FORCE
-	rpmbuild --rebuild `ls *.src.rpm | grep -v ^epel-`
+	rpmbuild --define '_topdir $(PWD)/rpmbuild' \
+		 --rebuild rpmbuild/SRPMS/*.src.rpm
 
 $(MOCKS):: verifyspec FORCE
 	@if [ -n "`find $@ -name \*.rpm ! -name \*.src.rpm 2>/dev/null`" ]; then \
@@ -77,6 +77,7 @@ install:: $(MOCKS)
 
 clean::
 	rm -rf $(MOCKS)
+	rm -rf rpmbuild
 
 realclean distclean:: clean
 	rm -f *.src.rpm
