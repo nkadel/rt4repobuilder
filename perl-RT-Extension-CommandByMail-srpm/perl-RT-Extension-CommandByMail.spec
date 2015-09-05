@@ -1,13 +1,14 @@
 
 Name:           perl-RT-Extension-CommandByMail
-Version:        0.16
-Release:        0.3%{?dist}
+Version:        1.0
+Release:        0.1%{?dist}
 Summary:        Change metadata of a RT ticket via email
 License:        GPL+ or Artistic
 Group:          Development/Libraries
 URL:            http://search.cpan.org/dist/RT-Extension-CommandByMail/
-Source0:        http://www.cpan.org/authors/id/F/FA/FALCONE/RT-Extension-CommandByMail-%{version}.tar.gz
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+Source0:        http://www.cpan.org/authors/id/F/FA/FALCONE/RT-Extension-CommandByMail-%{version}0.tar.gz
+#BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}0-root-%(%{__id_u} -n)
 BuildArch:      noarch
 BuildRequires:  perl(CPAN)
 BuildRequires:  perl(ExtUtils::MakeMaker)
@@ -29,7 +30,7 @@ commands into beginning of a mail and extension applies them. See the list
 of commands in the RT::Interface::Email::Filter::TakeAction docs.
 
 %prep
-%setup -q -n RT-Extension-CommandByMail-%{version}
+%setup -q -n RT-Extension-CommandByMail-%{version}0
 
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
