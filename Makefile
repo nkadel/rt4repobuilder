@@ -46,14 +46,14 @@ EPELPKGS+=perl-URI-srpm
 
 RT4PKGS+=perl-Authen-Simple-Passwd-srpm
 
-# Now rewuires perl-Cache-Simple-TimedExpiry-srpm
+# Now requires perl-Cache-Simple-TimedExpiry-srpm
 RT4PKGS+=perl-DBIx-SearchBuilder-srpm
 
 # Dependencies fo rperl-Test-TCP-srpm
 RT4PKGS+=perl-Test-SharedFork-srpm
 RT4PKGS+=perl-Test-TCP-srpm
 
-# Deendencies for perl-CHI
+# Dependencies for perl-CHI
 ## Dependency for perl-Log-Any-Adapter-Dispatch
 RT4PKGS+=perl-Log-Any-Adapter-srpm
 RT4PKGS+=perl-Log-Any-Adapter-Dispatch-srpm
