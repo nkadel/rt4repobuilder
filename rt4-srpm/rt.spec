@@ -38,7 +38,7 @@
 %global RT_STATICDIR		%{_datadir}/%{name}/static
 
 Name:		rt
-Version:	4.2.11
+Version:	4.2.12
 Release:	0.1%{?dist}
 Summary:	Request tracker
 
@@ -662,6 +662,9 @@ fi
 %endif
 
 %changelog
+* Sat Sep  5 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 4.2.12-0.1
+- Update to 4.2.12
+
 * Sun Feb  8 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 4.2.9-0.1
 - List *all* reported dependencies form 'make testdeps'
 - Replace patch6 altering file permissions with 'find' script,
