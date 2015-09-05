@@ -26,7 +26,6 @@ EPELPKGS+=perl-Digest-JHash-srpm
 EPELPKGS+=perl-Encode-srpm
 EPELPKGS+=perl-ExtUtils-Installed-srpm
 EPELPKGS+=perl-ExtUtils-Manifest-srpm
-EPELPKGS+=perl-Hash-MoreUtils-srpm
 EPELPKGS+=perl-List-UtilsBy-srpm
 EPELPKGS+=perl-Log-Any-srpm
 EPELPKGS+=perl-Module-Util-srpm
@@ -34,6 +33,7 @@ EPELPKGS+=perl-PadWalker-srpm
 EPELPKGS+=perl-Proc-Wait3-srpm
 EPELPKGS+=perl-Regexp-Common-Net-CIDR-srpm
 EPELPKGS+=perl-Scope-Guard-srpm
+EPELPKGS+=perl-Test-CheckManifest-srpm
 EPELPKGS+=perl-Test-Log-Dispatch-srpm
 EPELPKGS+=perl-Test-Simple-srpm
 EPELPKGS+=perl-Test-WWW-Mechanize-srpm
@@ -48,6 +48,9 @@ RT4PKGS+=perl-Authen-Simple-Passwd-srpm
 
 # Now requires perl-Cache-Simple-TimedExpiry-srpm
 RT4PKGS+=perl-DBIx-SearchBuilder-srpm
+
+# Now requires perl-Test-CheckManifest-srpm
+RT4PKGS+=perl-Hash-MoreUtils-srpm
 
 # Dependencies fo rperl-Test-TCP-srpm
 RT4PKGS+=perl-Test-SharedFork-srpm
@@ -153,6 +156,7 @@ perl-Devel-StackTrace-WithLexicals-srpm:: perl-PadWalker-srpm
 perl-ExtUtils-MakeMaker-srpm:: perl-ExtUtils-Installed-srpm
 perl-HTML-Mason-PSGIHandler-srpm:: perl-Plack-srpm
 perl-HTML-Mason-PSGIHandler-srpm:: perl-Test-Log-Dispatch-srpm
+perl-Hash-MoreUtils-srpm:: perl-Test-CheckManifest-srpm
 perl-Log-Any-Aapter-srpm:: perl-Log-Any-srpm
 perl-Log-Any-Adapter-Dispatch-srpm:: perl-Log-Any-Adapter-srpm
 perl-Module-Mask-srpm:: perl-Module-Util-srpm
