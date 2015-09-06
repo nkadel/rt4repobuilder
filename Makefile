@@ -14,12 +14,15 @@ REPOBASESUBDIRS+=$(REPOBASEDIR)/rt4repo/7/x86_64
 
 # These build with normal mock "epel-*" setups
 EPELPKGS+=perl-Authen-Simple-srpm
-EPELPKGS+=perl-CGI-PSGI-srpm
+ELELPKGS+=perl-Carp-Assert-More-srpm
 ELELPKGS+=perl-Class-Accessor-srpm
+EPELPKGS+=perl-CGI-PSGI-srpm
 EPELPKGS+=perl-Cache-Simple-TimedExpiry-srpm
 EPELPKGS+=perl-Capture-Tiny-srpm
 EPELPKGS+=perl-Class-Accessor-Lite-srpm
+EPELPKGS+=perl-Class-ReturnValue-srpm
 EPELPKGS+=perl-Crypt-Eksblowfish-srpm
+EPELPKGS+=perl-DBIx-DBschema-srpm
 EPELPKGS+=perl-Devel-StackTrace-AsHTML-srpm
 EPELPKGS+=perl-Devel-StackTrace-srpm
 EPELPKGS+=perl-Digest-JHash-srpm
@@ -36,7 +39,6 @@ EPELPKGS+=perl-Scope-Guard-srpm
 EPELPKGS+=perl-Test-CheckManifest-srpm
 EPELPKGS+=perl-Test-Log-Dispatch-srpm
 EPELPKGS+=perl-Test-Simple-srpm
-EPELPKGS+=perl-Test-WWW-Mechanize-srpm
 EPELPKGS+=perl-Text-Password-Pronounceable-srpm
 EPELPKGS+=perl-Time-Duration-Parse-srpm
 EPELPKGS+=perl-URI-srpm
@@ -51,6 +53,9 @@ RT4PKGS+=perl-DBIx-SearchBuilder-srpm
 
 # Now requires perl-Test-CheckManifest-srpm
 RT4PKGS+=perl-Hash-MoreUtils-srpm
+
+# Now requires perl-Carp-Assert-More-srpm
+RT4PKGS+=perl-Test-WWW-Mechanize-srpm
 
 # Dependencies fo rperl-Test-TCP-srpm
 RT4PKGS+=perl-Test-SharedFork-srpm
@@ -173,9 +178,11 @@ perl-Starlet-srpm:: perl-Parallel-Prefork-srpm
 perl-Starlet-srpm:: perl-Server-Starter-srpm
 perl-Test-TCP-srpm:: perl-Test-SharedFork-srpm
 perl-Test-TCP-srpm:: perl-Test-Simple-srpm
+perl-Test-WWW-Mechanize-srpm:: perl-Carp-Assert-More-srpm
 
 rt4:: perl-CGI-PSGI-srpm
 rt4:: perl-Class-Accessor-srpm
+rt4:: perl-Class-ReturnValue-srpm
 rt4:: perl-Convert-Color-srpm
 rt4:: perl-Devel-StackTrace-srpm
 rt4:: perl-Encode-srpm
