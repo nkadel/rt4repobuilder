@@ -24,7 +24,6 @@ EPELPKGS+=perl-Class-ReturnValue-srpm
 EPELPKGS+=perl-Crypt-Eksblowfish-srpm
 EPELPKGS+=perl-DBIx-DBschema-srpm
 EPELPKGS+=perl-Devel-StackTrace-AsHTML-srpm
-EPELPKGS+=perl-Devel-StackTrace-srpm
 EPELPKGS+=perl-Digest-JHash-srpm
 EPELPKGS+=perl-Encode-srpm
 EPELPKGS+=perl-ExtUtils-Installed-srpm
@@ -168,7 +167,6 @@ perl-Class-Accessor-Lite-srpm:: perl-Cache-Simple-TimedExpiry-srpm
 perl-Convert-Color-srpm:: perl-List-UtilsBy-srpm
 perl-DBIx-SearchBuilder-srpm:: perl-Cache-Simple-TimedExpiry-srpm
 perl-DBIx-SearchBuilder-srpm:: perl-capitalization-srpm
-perl-Devel-StackTrace-WithLexicals-srpm:: perl-Devel-StackTrace-srpm
 perl-Devel-StackTrace-WithLexicals-srpm:: perl-PadWalker-srpm
 perl-ExtUtils-MakeMaker-srpm:: perl-ExtUtils-Installed-srpm
 perl-HTML-Mason-PSGIHandler-srpm:: perl-Plack-srpm
@@ -183,7 +181,6 @@ perl-Parallel-Scoreboard-srpm:: perl-Class-Accessor-Lite-srpm
 perl-Plack-srpm:: perl-Authen-Simple-Passwd-srpm
 perl-Plack-srpm:: perl-Devel-StackTrace-WithLexicals-srpm
 perl-Plack-srpm:: perl-URI-srpm
-perl-Regexp-IPv6-srpm:: perl-Devel-StackTrace-srpm
 perl-Server-Starter-srpm:: perl-Encode-srpm
 perl-Server-Starter-srpm:: perl-Proc-Wait3-srpm
 perl-Starlet-srpm:: perl-Parallel-Prefork-srpm
@@ -196,7 +193,6 @@ rt4:: perl-CGI-PSGI-srpm
 rt4:: perl-Class-Accessor-srpm
 rt4:: perl-Class-ReturnValue-srpm
 rt4:: perl-Convert-Color-srpm
-rt4:: perl-Devel-StackTrace-srpm
 rt4:: perl-Encode-srpm
 rt4:: perl-HTML-Mason-PSGIHandler-srpm
 rt4:: perl-HTML-Mason-srpm
