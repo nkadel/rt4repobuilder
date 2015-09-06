@@ -42,6 +42,7 @@ EPELPKGS+=perl-Test-Simple-srpm
 EPELPKGS+=perl-Text-Password-Pronounceable-srpm
 EPELPKGS+=perl-Time-Duration-Parse-srpm
 EPELPKGS+=perl-URI-srpm
+EPELPKGS+=perl-capitalizaton-srpm
 
 # Require customized rt4repo local repository for dependencies
 # Needed by various packages
@@ -116,6 +117,14 @@ rt4repo-6-x86_64.cfg:: FORCE
 	@cmp -s $@ /etc/mock/$@ || \
 		(echo Warning: /etc/mock/$@ does not match $@, exiting; exit 1)
 
+rt4repo-7-x86_64.cfg:: rt4repo-7-x86_64.cfg.in
+	sed "s|@@@REPOBASEDIR@@@|$(REPOBASEDIR)|g" $? > $@
+
+rt4repo-7-x86_64.cfg:: FORCE
+	@cmp -s $@ /etc/mock/$@ || \
+		(echo Warning: /etc/mock/$@ does not match $@, exiting; exit 1)
+
+# Used for make build with local components
 rt4repo.repo:: rt4repo.repo.in
 	sed "s|@@@REPOBASEDIR@@@|$(REPOBASEDIR)|g" $? > $@
 
@@ -156,6 +165,7 @@ perl-CHI-srpm:: perl-Time-Duration-Parse-srpm
 perl-Class-Accessor-Lite-srpm:: perl-Cache-Simple-TimedExpiry-srpm
 perl-Convert-Color-srpm:: perl-List-UtilsBy-srpm
 perl-DBIx-SearchBuilder-srpm:: perl-Cache-Simple-TimedExpiry-srpm
+perl-DBIx-SearchBuilder-srpm:: perl-capitalization-srpm
 perl-Devel-StackTrace-WithLexicals-srpm:: perl-Devel-StackTrace-srpm
 perl-Devel-StackTrace-WithLexicals-srpm:: perl-PadWalker-srpm
 perl-ExtUtils-MakeMaker-srpm:: perl-ExtUtils-Installed-srpm
@@ -206,6 +216,7 @@ $(EPELPKGS):: FORCE
 	(cd $@ && $(MAKE) $(MLAGS)) || exit 1
 
 $(RT4PKGS):: rt4repo-6-x86_64.cfg
+$(RT4PKGS):: rt4repo-7-x86_64.cfg
 
 $(RT4PKGS):: FORCE
 	(cd $@ && $(MAKE) $(MLAGS)) || exit 1
