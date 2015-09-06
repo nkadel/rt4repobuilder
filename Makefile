@@ -40,7 +40,6 @@ EPELPKGS+=perl-Test-CheckManifest-srpm
 EPELPKGS+=perl-Test-Log-Dispatch-srpm
 EPELPKGS+=perl-Test-Simple-srpm
 EPELPKGS+=perl-Text-Password-Pronounceable-srpm
-EPELPKGS+=perl-Time-Duration-Parse-srpm
 EPELPKGS+=perl-URI-srpm
 EPELPKGS+=perl-capitalization-srpm
 
@@ -162,7 +161,6 @@ perl-CHI-srpm:: perl-Log-Any-Adapter-srpm
 perl-CHI-srpm:: perl-Module-Mask-srpm
 perl-CHI-srpm:: perl-String-RewritePrefix-srpm
 perl-CHI-srpm:: perl-Test-Log-Dispatch-srpm
-perl-CHI-srpm:: perl-Time-Duration-Parse-srpm
 perl-Class-Accessor-Lite-srpm:: perl-Cache-Simple-TimedExpiry-srpm
 perl-Convert-Color-srpm:: perl-List-UtilsBy-srpm
 perl-DBIx-SearchBuilder-srpm:: perl-Cache-Simple-TimedExpiry-srpm
