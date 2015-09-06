@@ -36,13 +36,14 @@ EPELPKGS+=perl-PadWalker-srpm
 EPELPKGS+=perl-Proc-Wait3-srpm
 EPELPKGS+=perl-Regexp-Common-Net-CIDR-srpm
 EPELPKGS+=perl-Scope-Guard-srpm
+EPELPKGS+=perl-String-RewritePrefix-srpm
 EPELPKGS+=perl-Test-CheckManifest-srpm
 EPELPKGS+=perl-Test-Log-Dispatch-srpm
 EPELPKGS+=perl-Test-Simple-srpm
 EPELPKGS+=perl-Text-Password-Pronounceable-srpm
 EPELPKGS+=perl-Time-Duration-Parse-srpm
 EPELPKGS+=perl-URI-srpm
-EPELPKGS+=perl-capitalizaton-srpm
+EPELPKGS+=perl-capitalization-srpm
 
 # Require customized rt4repo local repository for dependencies
 # Needed by various packages
@@ -160,6 +161,7 @@ perl-CHI-srpm:: perl-Hash-MoreUtils-srpm
 perl-CHI-srpm:: perl-Log-Any-Adapter-Dispatch-srpm
 perl-CHI-srpm:: perl-Log-Any-Adapter-srpm
 perl-CHI-srpm:: perl-Module-Mask-srpm
+perl-CHI-srpm:: perl-String-RewritePrefix-srpm
 perl-CHI-srpm:: perl-Test-Log-Dispatch-srpm
 perl-CHI-srpm:: perl-Time-Duration-Parse-srpm
 perl-Class-Accessor-Lite-srpm:: perl-Cache-Simple-TimedExpiry-srpm
