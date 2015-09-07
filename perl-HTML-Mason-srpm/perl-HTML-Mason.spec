@@ -1,6 +1,6 @@
 Name:           perl-HTML-Mason
-Version:        1.48
-Release:        0.2%{?dist}
+Version:        1.56
+Release:        1%{?dist}
 Epoch:          1
 Summary:        Powerful Perl-based web site development and delivery engine
 License:        GPL+ or Artistic
@@ -8,39 +8,93 @@ Group:          Development/Libraries
 URL:            http://www.masonhq.com/
 Source0:        http://www.cpan.org/authors/id/D/DR/DROLSKY/HTML-Mason-%{version}.tar.gz
 Source1:        perl-HTML-Mason.conf
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
-BuildRequires:  perl(CGI)
+BuildRequires:  perl
+BuildRequires:  perl(ExtUtils::MakeMaker)
+BuildRequires:  perl(strict)
+BuildRequires:  perl(warnings)
+# Run-time:
+# Stick to Apache2, ignore Apache 1 modules
+BuildRequires:  perl(Apache2::Directive)
+BuildRequires:  perl(Apache2::Log)
+BuildRequires:  perl(Apache2::RequestIO)
+BuildRequires:  perl(Apache2::RequestRec)
+BuildRequires:  perl(Apache2::RequestUtil)
+BuildRequires:  perl(Apache2::ServerUtil)
+BuildRequires:  perl(APR::Table)
+BuildRequires:  perl(base)
+BuildRequires:  perl(bytes)
 BuildRequires:  perl(Cache::Cache) >= 1
+BuildRequires:  perl(CGI) >= 2.46
+BuildRequires:  perl(CHI) >= 0.21
 BuildRequires:  perl(Class::Container) >= 0.07
+BuildRequires:  perl(constant)
+BuildRequires:  perl(Cwd)
+BuildRequires:  perl(Data::Dumper)
 BuildRequires:  perl(Exception::Class) >= 1.15
+BuildRequires:  perl(Exporter)
+BuildRequires:  perl(File::Basename)
+BuildRequires:  perl(File::Find)
+BuildRequires:  perl(File::Glob)
+BuildRequires:  perl(File::Path)
+BuildRequires:  perl(File::Spec) >= 0.8
+BuildRequires:  perl(File::Temp)
+BuildRequires:  perl(Getopt::Long)
+BuildRequires:  perl(Getopt::Std)
 BuildRequires:  perl(HTML::Entities)
-BuildRequires:  perl(Log::Any)
+BuildRequires:  perl(IO::File)
+BuildRequires:  perl(Log::Any) >= 0.08
+BuildRequires:  perl(mod_perl2)
+BuildRequires:  perl(Params::Validate) >= 0.70
+BuildRequires:  perl(Scalar::Util) >= 1.01
+BuildRequires:  perl(Test::Builder)
+BuildRequires:  perl(vars)
+BuildRequires:  perl(YAML)
+# Tests:
+# Apache not used
+BuildRequires:  perl(Cache::FileCache)
+BuildRequires:  perl(Config)
+BuildRequires:  perl(FileHandle)
+BuildRequires:  perl(IO::Socket)
+BuildRequires:  perl(lib)
+BuildRequires:  perl(Log::Any::Test)
 BuildRequires:  perl(Module::Build)
-BuildRequires:  perl(Params::Validate) >= 0.7
+# Pod::Wordlist not used
+BuildRequires:  perl(Test)
 BuildRequires:  perl(Test::Deep)
 BuildRequires:  perl(Test::Harness)
+BuildRequires:  perl(Test::More) >= 0.88
+# Test::NoTabs not used
+# Test::Pod 1.41 not used
+# Test::Spelling 0.12 not used
+# Optional tests:
+BuildRequires:  perl(LWP::UserAgent)
 BuildRequires:  perl(Test::Memory::Cycle)
-BuildRequires:  perl(Test::Pod) >= 1.20
-BuildRequires:  perl(mod_perl2)
+BuildRequires:  perl(Test::Output)
+Requires:       perl(:MODULE_COMPAT_%(eval "`perl -V:version`"; echo $version))
+# Stick to Apache2, ignore Apache 1 modules
+Requires:       perl(Apache2::Directive)
+Requires:       perl(Apache2::Log)
+Requires:       perl(Apache2::RequestIO)
+Requires:       perl(Apache2::RequestRec)
+Requires:       perl(Apache2::RequestUtil)
+Requires:       perl(Apache2::ServerUtil)
+Requires:       perl(APR::Table)
 Requires:       perl(Cache::Cache) >= 1
+Requires:       perl(CHI) >= 0.21
 Requires:       perl(Class::Container) >= 0.07
 Requires:       perl(Exception::Class) >= 1.15
-Requires:       perl(HTML::Entities)
-Requires:       perl(Params::Validate) >= 0.7
+Requires:       perl(File::Spec) >= 0.8
 Requires:       perl(mod_perl2)
-Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
+Requires:       perl(Params::Validate) >= 0.70
+Requires:       perl(Scalar::Util) >= 1.01
+Requires:       perl(YAML)
 Requires:       %{_sysconfdir}/httpd/conf.d
 
-# Filter perl(MasonX::Request::PlusApacheSession).
-Source98:       HTML-Mason-filter-requires.sh
-%global real_perl_requires %{__perl_requires}
-%define __perl_requires %{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)-filter-requires
+%{?perl_default_filter}
 
-# Filter perl(MyApp::Mason) and perl(MyApp::MasonPlusSession).
-Source99:       HTML-Mason-filter-provides.sh
-%global real_perl_provides %{__perl_provides}
-%define __perl_provides %{_tmppath}/%{name}-%{version}-%{release}-%(%{__id_u} -n)-filter-provides
+# Filter out under-specified Requires:
+%global __requires_exclude %{?__requires_exclude:%__requires_exclude|}^perl\\((Class::Container|Exception::Class|File::Spec|Params::Validate)\\)$
 
 %description
 Mason is a powerful Perl-based web site development and delivery
@@ -52,22 +106,13 @@ maintaining development and production sites, and more.
 %prep
 %setup -q -n HTML-Mason-%{version}
 
-sed -e 's,@@PERL_REQ@@,%{real_perl_requires},' %{SOURCE98} > %{__perl_requires}
-chmod +x %{__perl_requires}
-
-sed -e 's,@@PERL_PROV@@,%{real_perl_provides},' %{SOURCE99} > %{__perl_provides}
-chmod +x %{__perl_provides}
-
 %build
-%{__perl} Build.PL installdirs=vendor
-./Build
+perl Makefile.PL INSTALLDIRS=vendor
+make %{?_smp_mflags}
 
 %install
-rm -rf $RPM_BUILD_ROOT
-
-./Build install destdir=$RPM_BUILD_ROOT create_packlist=0
-find $RPM_BUILD_ROOT -depth -type d -exec rmdir {} 2>/dev/null \;
-
+make pure_install DESTDIR=$RPM_BUILD_ROOT
+find $RPM_BUILD_ROOT -type f -name .packlist -exec rm -f {} ';'
 %{_fixperms} $RPM_BUILD_ROOT/*
 
 rm -f $RPM_BUILD_ROOT%{_bindir}/*.README
@@ -79,19 +124,19 @@ mv -f $RPM_BUILD_ROOT%{_bindir}/mason.pl $RPM_BUILD_ROOT%{_bindir}/mason
 mkdir -p $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d
 install -p -m 0644 %{SOURCE1} $RPM_BUILD_ROOT/%{_sysconfdir}/httpd/conf.d/
 
+# Apache:: (Apache1) module
+# Not applicable on Fedora.
+rm -rf $RPM_BUILD_ROOT%{perl_vendorlib}/HTML/Mason/Apache
+
 mkdir -p $RPM_BUILD_ROOT%{_localstatedir}/www/mason
 mkdir -p $RPM_BUILD_ROOT%{_localstatedir}/cache/mason
 
 %check
-./Build test
-
-%clean
-rm -rf $RPM_BUILD_ROOT %{__perl_requires} %{__perl_provides}
+make test
 
 %files
-%defattr(-,root,root,-)
-%doc Changes CREDITS LICENSE README UPGRADE
-%doc htdocs/ eg/ samples/
+%doc Changes CREDITS LICENSE README.md UPGRADE
+%doc eg/ samples/
 %{_bindir}/mason*
 %{perl_vendorlib}/*
 %{_mandir}/man3/*
@@ -100,16 +145,114 @@ rm -rf $RPM_BUILD_ROOT %{__perl_requires} %{__perl_provides}
 %dir %{_localstatedir}/www/mason
 
 %changelog
-* Tue Mar 12 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> 1:1.48-0.2
-- Add BuildRequires: perl(Test::Harness).
+* Fri Nov 21 2014 Petr Pisar <ppisar@redhat.com> - 1:1.56-1
+- 1.56 bump
 
-* Thu Oct 04 2012 Nico Kadel-Garcia <nico.kadel@tufts.edu> - 1:1.48-0.1
-- Update to 1.48
+* Fri Aug 29 2014 Jitka Plesnikova <jplesnik@redhat.com> - 1:1.54-3
+- Perl 5.20 rebuild
 
-* Tue Oct 02 2012 Nico Kadel-Garcia <nico.kadel@tufts.edu> - 1:1.47-0.3
-- Update to 1.47 from EPEL .spec file, instead of cpan2rpm.
-- Add BuildRequires: perl(Log::Any), perl(Test::Deep)
-- Add BuildRequires: perl(CGI) for RHEL 6
+* Sat Jun 07 2014 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1:1.54-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_21_Mass_Rebuild
+
+* Sun Mar 02 2014 Ralf Corsépius <corsepiu@fedoraproject.org> - 1:1.54-1
+- Upstream update.
+- Filter duplicate Requires:.
+
+* Tue Oct 15 2013 Ralf Corsépius <corsepiu@fedoraproject.org> - 1:1.52-1
+- Upstream update.
+
+* Fri Aug 16 2013 Ralf Corsépius <corsepiu@fedoraproject.org> - 1:1.51-1
+- Upstream update.
+
+* Fri Aug 09 2013 Petr Pisar <ppisar@redhat.com> - 1:1.50-3
+- Perl 5.18 rebuild
+
+* Sat Aug 03 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1:1.50-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_20_Mass_Rebuild
+
+* Thu Mar 21 2013 Ralf Corsépius <corsepiu@fedoraproject.org> - 1:1.50-1
+- Upstream update.
+- Reflect Source0-URL having changed.
+- Reflect upstream having switched to make.
+- Reflect upstream having dropped htdocs.
+
+* Thu Feb 14 2013 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1:1.48-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_19_Mass_Rebuild
+
+* Fri Jul 20 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1:1.48-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_18_Mass_Rebuild
+
+* Wed Jul 04 2012 Petr Pisar <ppisar@redhat.com> - 1:1.48-2
+- Perl 5.16 rebuild
+
+* Sun Feb 05 2012 Ralf Corsépius <corsepiu@fedoraproject.org> - 1:1.48-1
+- Upstream update.
+
+* Fri Jan 13 2012 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1:1.47-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
+
+* Sat Nov 26 2011 Ralf Corsépius <corsepiu@fedoraproject.org> 1:1.47-1
+- Upstream update.
+- Spec file cleanup.
+
+* Tue Jul 19 2011 Petr Sabata <contyk@redhat.com> - 1:1.45-7
+- Perl mass rebuild
+
+* Fri Apr 08 2011 Ralf Corsépius <corsepiu@fedoraproject.org> 1:1.45-6
+- Add optional testsuite requirement perl(CHI). 
+
+* Tue Feb 08 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1:1.45-5
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
+
+* Fri Feb 04 2011 Ralf Corsépius <corsepiu@fedoraproject.org> 1:1.45-4
+- Fix spec-file typo.
+- Add commented-out BR: perl(CHI).
+
+* Fri Feb 04 2011 Ralf Corsépius <corsepiu@fedoraproject.org> 1:1.45-3
+- Remove %%{perl_vendorlib}/HTML/Mason/Apache/.
+- Re-activate testsuite.
+
+* Thu Feb 03 2011 Ralf Corsépius <corsepiu@fedoraproject.org> 1:1.45-2
+- Rebuild package (Was missing in rawhide).
+- Switch to using perl_default_filter.
+- Add explicit Require:/Provides: config(perl-HTML-Mason) to work-around
+  https://bugzilla.redhat.com/show_bug.cgi?id=674765.
+
+* Fri Dec 17 2010 Steven Pritchard <steve@kspei.com> 1:1.45-1
+- Update to 1.45.
+- Drop build.patch (now in the upstream release).
+- BR CGI, Log::Any, and Test::Deep.
+
+* Fri Dec 17 2010 Marcela Maslanova <mmaslano@redhat.com> - 1:1.42-6
+- 661697 rebuild for fixing problems with vendorach/lib
+
+* Mon May 03 2010 Marcela Maslanova <mmaslano@redhat.com> - 1:1.42-5
+- switch off test for meantime, before update of this package
+
+* Sun May 02 2010 Marcela Maslanova <mmaslano@redhat.com> - 1:1.42-4
+- Mass rebuild with perl-5.12.0
+
+* Mon Dec  7 2009 Stepan Kasal <skasal@redhat.com> - 1:1.42-3
+- rebuild against perl 5.10.1
+
+* Sat Jul 25 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1:1.42-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
+
+* Sun May 10 2009 Steven Pritchard <steve@kspei.com> 1:1.42-1
+- Update to 1.42.
+
+* Thu Feb 26 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1:1.40-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_11_Mass_Rebuild
+
+* Thu Feb 26 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1:1.40-2
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_11_Mass_Rebuild
+
+* Sat Aug 02 2008 Steven Pritchard <steve@kspei.com> 1:1.40-1
+- Update to 1.40.
+- BR Test::Builder.
+
+* Fri Feb  8 2008 Tom "spot" Callaway <tcallawa@redhat.com> 1:1.39-2
+- rebuild for new perl
 
 * Wed Jan 30 2008 Steven Pritchard <steve@kspei.com> 1:1.39-1
 - Update to 1.39.
