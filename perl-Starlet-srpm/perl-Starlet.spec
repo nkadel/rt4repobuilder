@@ -15,6 +15,8 @@ BuildRequires:  perl(LWP::UserAgent) >= 5.8
 BuildRequires:  perl(Net::EmptyPort)
 BuildRequires:  perl(Parallel::Prefork) >= 0.13
 BuildRequires:  perl(Plack) >= 0.992
+BuildRequires:  perl(Plack::Test)
+BuildRequires:  perl(Plack::Test::Suite)
 BuildRequires:  perl(Server::Starter) >= 0.06
 BuildRequires:  perl(Test::Harness)
 BuildRequires:  perl(Test::More) >= 0.88
@@ -56,6 +58,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %changelog
+* Mon Sep  7 2015 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 0.16-0.2
+- Add BuildRequires: perl(Plack::Test)
+
 * Wed Mar 13 2013 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 0.16-0.1
 - Rollback release number for update compatibility.
 - Add BuildRequires: perl(Test::Harness) for mock compilation.
