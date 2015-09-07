@@ -1,0 +1,4 @@
+epel-*
+*.rpm
+*.tar.*
+rpmbuild
