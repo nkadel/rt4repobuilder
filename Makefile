@@ -69,7 +69,9 @@ RT4PKGS+=perl-DBIx-SearchBuilder-srpm
 # Now requires perl-Test-CheckManifest-srpm
 RT4PKGS+=perl-Hash-MoreUtils-srpm
 
-# Now requires perl-Carp-Assert-More-srpm
+# Handle RHEL 6 and RHEL 7 incompatible versions of perl-Test-WWW-Mechanize
+# RHEL 7 version needs libwww_perl >= 6, RHEL 6 version fails tests on RHEL 7
+RT4PKGS+=perl-Test-WWW-Mechanize_el6-srpm
 RT4PKGS+=perl-Test-WWW-Mechanize-srpm
 
 # Dependencies for perl-Test-ShardFork-srpm and perl-CHI
@@ -224,9 +226,12 @@ perl-Test-HTTP-Server-Simple-StashWarnings-srpm:: perl-Test-HTTP-Server-Simple-s
 perl-Test-SharedFork-srpm:: perl-ExtUtils-MakeMaker-srpm
 perl-Test-TCP-srpm:: perl-Test-SharedFork-srpm
 perl-Test-TCP-srpm:: perl-Test-Simple-srpm
+# Handle RHEL 6 and RHEL 7 incompatible versions of perl-Test-WWW-Mechanize
+perl-Test-WWW-Mechanize-PSGI-srpm:: perl-Test-WWW-Mechanize-srpm 
+perl-Test-WWW-Mechanize-PSGI-srpm:: perl-Test-WWW-Mechanize_el6-srpm 
 perl-Test-WWW-Mechanize-srpm:: perl-Carp-Assert-More-srpm
+perl-Test-WWW-Mechanize_el6-srpm:: perl-Carp-Assert-More-srpm
 perl-Text-vFile-asData-srpm:: perl-Class-Accessor-Chained-srpm
-
 
 
 rt4:: google-droid-sans-fonts-srpm
