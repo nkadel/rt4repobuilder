@@ -1,1 +1,1 @@
-../Makefile.epel.skipel7
+../Makefile.epel.skipel6
