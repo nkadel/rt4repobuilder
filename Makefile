@@ -34,6 +34,7 @@ EPELPKGS+=perl-Encode-srpm
 EPELPKGS+=perl-Expect-Simple-srpm
 EPELPKGS+=perl-ExtUtils-Installed-srpm
 EPELPKGS+=perl-ExtUtils-Installed-srpm
+EPELPKGS+=perl-GnuP{G-Interface-srpm
 EPELPKGS+=perl-List-UtilsBy-srpm
 EPELPKGS+=perl-Locale-Maketext-Fuzzy-srpm
 EPELPKGS+=perl-Locale-Maketext-Lexicon-srpm
@@ -242,6 +243,7 @@ rt4:: perl-Class-ReturnValue-srpm
 rt4:: perl-Convert-Color-srpm
 rt4:: perl-DBIx-DBschema-srpm
 rt4:: perl-Encode-srpm
+rt4:: perl-GnuP{G-Interface-srpm
 rt4:: perl-HTML-Mason-PSGIHandler-srpm
 rt4:: perl-HTML-Mason-srpm
 rt4:: perl-HTML-Quoted-srpm
