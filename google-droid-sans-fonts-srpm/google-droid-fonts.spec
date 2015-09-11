@@ -150,7 +150,7 @@ rm -fr %{buildroot}
 - 20090906-3
 — more Behdad-suggested fontconfig tweaks
 
-* Sun Sep  7 2009 Nicolas Mailhot <nicolas.mailhot at laposte.net>
+* Mon Sep  7 2009 Nicolas Mailhot <nicolas.mailhot at laposte.net>
 - 20090906-2
 — first-level CJK fixes (as suggested by Behdad in bug #517789, complete fix
    needs the rpm changes traced in bug #521697)
