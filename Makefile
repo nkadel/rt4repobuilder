@@ -242,6 +242,7 @@ rt4:: perl-Class-Accessor-srpm
 rt4:: perl-Class-ReturnValue-srpm
 rt4:: perl-Convert-Color-srpm
 rt4:: perl-DBIx-DBschema-srpm
+rt4:: perl-DBIx-SearchBuilder-srpm
 rt4:: perl-Encode-srpm
 rt4:: perl-GnuP{G-Interface-srpm
 rt4:: perl-HTML-Mason-PSGIHandler-srpm
