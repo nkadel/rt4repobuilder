@@ -61,6 +61,7 @@ Source4:	README.fedora
 Source5:	rt4.logrotate.in
 
 Patch0:		rt-4.0.12-config.diff
+Patch1:		rt-4.0.24-Handle.diff
 
 BuildArch:	noarch
 
@@ -258,6 +259,7 @@ Requires: rt4-mailgate
 # Filter bogus requires
 %global __requires_exclude %{?__requires_exclude:%__requires_exclude|}^perl\\(\\)
 # Work-around rpm's depgenerator defect: 
+%global __requires_exclude %{?__requires_exclude:%__requires_exclude|}^perl\\(DBIx::SearchBuilder::Handle\\)
 %global __requires_exclude %{?__requires_exclude:%__requires_exclude|}^perl\\(DBIx::SearchBuilder::Handle::\\)
 
 # Filter redundant provides
@@ -288,6 +290,7 @@ Requires: rt4-mailgate
 %filter_from_provides /^perl(IO::Handle::CRLF)$/d
 %filter_from_provides /^perl(Log::Dispatch)$/d
 # Work-around rpm's depgenerator defect:
+%filter_from_requires /^perl(DBIx::SearchBuilder::Handle)$/d
 %filter_from_requires /^perl(DBIx::SearchBuilder::Handle::)$/d
 %perl_default_filter
 }
@@ -366,6 +369,7 @@ rm -rf autom4te.cache config.log config.status
 find bin sbin etc -name '*.in' | while read a; do d=$(echo "$a" | sed 's,\.in$,,'); rm "$d"; done
 
 %patch0 -p1
+%patch1 -p1
 
 # Fix DESTDIR support
 cp Makefile.in Makefile.in.orig
