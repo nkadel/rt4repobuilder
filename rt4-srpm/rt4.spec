@@ -48,7 +48,7 @@
 
 Name:		rt4
 Version:	4.0.24
-Release:	0.1%{?dist}
+Release:	0.4%{?dist}
 Summary:	Request tracker 4
 
 Group:		Applications/Internet
@@ -258,7 +258,7 @@ Requires: rt4-mailgate
 %global __requires_exclude %{?__requires_exclude:%__requires_exclude|}^perl\\(FCGI::ProcManager\\)
 # Filter bogus requires
 %global __requires_exclude %{?__requires_exclude:%__requires_exclude|}^perl\\(\\)
-# Work-around rpm's depgenerator defect: 
+# Work-around rpm depgenerator defect:
 %global __requires_exclude %{?__requires_exclude:%__requires_exclude|}^perl\\(DBIx::SearchBuilder::Handle\\)
 %global __requires_exclude %{?__requires_exclude:%__requires_exclude|}^perl\\(DBIx::SearchBuilder::Handle::\\)
 
@@ -289,7 +289,7 @@ Requires: rt4-mailgate
 %filter_from_provides /^perl(HTML::Mason/d
 %filter_from_provides /^perl(IO::Handle::CRLF)$/d
 %filter_from_provides /^perl(Log::Dispatch)$/d
-# Work-around rpm's depgenerator defect:
+# Work-around rpm depgenerator defect:
 %filter_from_requires /^perl(DBIx::SearchBuilder::Handle)$/d
 %filter_from_requires /^perl(DBIx::SearchBuilder::Handle::)$/d
 %perl_default_filter
@@ -606,6 +606,11 @@ fi
 %endif
 
 %changelog
+* Sun Sep 13 2015 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.24-0.4
+- Patch modules to assemble DBIx::SearchBuilder::Handle + :: + Apacheversion,
+  not string DBIx::SearchBuilder::Handdle:: together, to avoid depgenerator
+  flaw.
+
 * Sat Sep  5 2015 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.24-0.3
 - Update to 4.0.24
 
