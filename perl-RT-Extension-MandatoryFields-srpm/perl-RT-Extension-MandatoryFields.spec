@@ -1,6 +1,6 @@
 Name:           perl-RT-Extension-MandatoryFields
 Version:        0.6
-Release:        0.2%{?dist}
+Release:        0.3%{?dist}
 Summary:        Enforce users to fill standard fields when creating a ticket
 License:        GPL+ or Artistic
 Group:          Development/Libraries
@@ -11,9 +11,11 @@ BuildArch:      noarch
 BuildRequires:  perl >= 0:5.10.0
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(File::Remove)
+BuildRequires:  perl(Module::CoreList)
 BuildRequires:  perl(Test::Harness)
 BuildRequires:  perl(YAML::Tiny)
 BuildRequires:  perl(RT) >= 4.0
+BuildRequires:  perl(RT::Test) >= 4.0
 BuildRequires:  rt4
 Requires:       perl(RT)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
@@ -53,7 +55,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/*
 
 %changelog
-* Mon Dec 30 2013 "Nico Kadel-Garcia <nkadel@gmail.com>" 0.6-2
+* Sun Sep 13 2015 "Nico Kadel-Garcia <nkadel@gmail.com>" 0.6-0.3
+- Add perl(Mudless::CoreList) to BuildRequires
+
+* Mon Dec 30 2013 "Nico Kadel-Garcia <nkadel@gmail.com>" 0.6-0.2
 - Switch to using RT4
 
 * Tue Nov 26 2013 "Nico Kadel-Garcia <nkadel@gmail.com>" 0.6-1
