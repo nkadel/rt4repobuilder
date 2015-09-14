@@ -1,7 +1,7 @@
 
 Name:           perl-RT-Extension-CommandByMail
 Version:        1.0
-Release:        0.1%{?dist}
+Release:        0.2%{?dist}
 Summary:        Change metadata of a RT ticket via email
 License:        GPL+ or Artistic
 Group:          Development/Libraries
@@ -16,6 +16,7 @@ BuildRequires:  perl(MIME::Entity) >= 5.420
 BuildRequires:  perl(Test::More)
 BuildRequires:  perl(UNIVERSAL::require)
 BuildRequires:  perl(RT) >= 4.0
+BuildRequires:  perl(RT::Test) >= 4.0
 BuildRequires:  /usr/sbin/rt-mailgate
 BuildRequires:  rt4-mailgate
 BuildRequires:  rt4
