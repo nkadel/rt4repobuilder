@@ -16,10 +16,10 @@ REPOBASESUBDIRS+=$(REPOBASEDIR)/rt4repo/7/x86_64
 EPELPKGS+=google-droid-sans-fonts-srpm
 EPELPKGS+=perl-Authen-Simple-srpm
 EPELPKGS+=perl-Calendar-Simple-srpm
-ELELPKGS+=perl-Carp-Assert-More-srpm
+EPELPKGS+=perl-Carp-Assert-More-srpm
 EPELPKGS+=perl-Class-Accessor-Chained-srpm
-ELELPKGS+=perl-Class-Accessor-srpm
-ELELPKGS+=perl-Class-Container-srpm
+EPELPKGS+=perl-Class-Accessor-srpm
+EPELPKGS+=perl-Class-Container-srpm
 EPELPKGS+=perl-CGI-PSGI-srpm
 EPELPKGS+=perl-Cache-Simple-TimedExpiry-srpm
 EPELPKGS+=perl-Capture-Tiny-srpm
@@ -72,8 +72,8 @@ RT4PKGS+=perl-Hash-MoreUtils-srpm
 
 # Handle RHEL 6 and RHEL 7 incompatible versions of perl-Test-WWW-Mechanize
 # RHEL 7 version needs libwww_perl >= 6, RHEL 6 version fails tests on RHEL 7
-RT4PKGS+=perl-Test-WWW-Mechanize_el6-srpm
 RT4PKGS+=perl-Test-WWW-Mechanize-srpm
+RT4PKGS+=perl-Test-WWW-Mechanize_el6-srpm
 
 # Dependencies for perl-Test-ShardFork-srpm and perl-CHI
 RT4PKGS+=perl-ExtUtils-MakeMaker-srpm

@@ -48,7 +48,7 @@
 
 Name:		rt4
 Version:	4.0.24
-Release:	0.4%{?dist}
+Release:	0.5%{?dist}
 Summary:	Request tracker 4
 
 Group:		Applications/Internet
@@ -606,6 +606,9 @@ fi
 %endif
 
 %changelog
+* Thu Sep 17 2016 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.24-0.5
+- Update upstream dependencies.
+
 * Sun Sep 13 2015 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.24-0.4
 - Patch modules to assemble DBIx::SearchBuilder::Handle + :: + Apacheversion,
   not string DBIx::SearchBuilder::Handdle:: together, to avoid depgenerator
