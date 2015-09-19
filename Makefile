@@ -36,6 +36,7 @@ EPELPKGS+=perl-Digest-JHash-srpm
 EPELPKGS+=perl-EV-srpm
 EPELPKGS+=perl-Encode-srpm
 EPELPKGS+=perl-Expect-Simple-srpm
+EPELPKGS+=perl-ExtUtils-Installed-srpm
 EPELPKGS+=perl-ExtUtils-Manifest-srpm
 EPELPKGS+=perl-GD-Graph-srpm
 EPELPKGS+=perl-GnuPG-Interface-srpm
@@ -146,8 +147,6 @@ RT4PKGS+=rt4-srpm
 RT4PKGS+=perl-RT-Extension-CommandByMail-srpm
 RT4PKGS+=perl-RT-Extension-MandatoryFields-srpm
 
-
-
 # Populate rt4repo with packages compatible with just EPEL
 all:: epel-install
 
@@ -242,7 +241,6 @@ perl-Text-vFile-asData-srpm:: perl-Class-Accessor-Chained-srpm
 perl-Test-Expect-srpm:: perl-Class-Accessor-Chained-srpm
 perl-Test-Expect-srpm:: perl-Expect-Simple-srpm
 
-
 rt4:: google-droid-sans-fonts-srpm
 rt4:: perl-CGI-PSGI-srpm
 rt4:: perl-Class-Accessor-srpm
@@ -323,7 +321,6 @@ safe-clean:: maintainer-clean FORCE
 	find rt4repo -noleaf -type d -name repodata | while read name; do \
 		createrepo -q $$name/..; \
 	done
-
 
 # This is only for upstream repository publication.
 # Modify for local use as needed, but do try to keep passwords and SSH
