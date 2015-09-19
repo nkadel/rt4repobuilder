@@ -90,7 +90,11 @@ RT4PKGS+=perl-Module-Mask-srpm
 RT4PKGS+=perl-CHI-srpm
 
 RT4PKGS+=perl-Convert-Color-srpm
+
+# Dependency for perl-Data-ICal-srpm
+RT4PKGS+=perl-Text-vFile-asData-srpm
 RT4PKGS+=perl-Data-ICal-srpm
+
 RT4PKGS+=perl-Devel-StackTrace-WithLexicals-srpm
 
 # Dependency for perl-HTML-Mason-PSGIHandler-srpm
@@ -122,9 +126,6 @@ RT4PKGS+=perl-Test-HTTP-Server-Simple-StashWarnings-srpm
 # Needed for rt4-Test building
 RT4PKGS+=perl-Test-WWW-Mechanize-PSGI-srpm
 RT4PKGS+=perl-Plack-Middleware-Test-StashWarnings-srpm
-
-# More dependencies
-RT4PKGS+=perl-Text-vFile-asData-srpm
 
 # Binary target
 RT4PKGS+=rt4-srpm
@@ -199,6 +200,7 @@ perl-Convert-Color-srpm:: perl-List-UtilsBy-srpm
 perl-DBIx-SearchBuilder-srpm:: perl-Cache-Simple-TimedExpiry-srpm
 perl-DBIx-SearchBuilder-srpm:: perl-capitalization-srpm
 perl-Data-ICal-srpm:: perl-Class-ReturnValue-srpm
+perl-Data-ICal-srpm:: perl-Text-vFile-asData-srpm
 perl-Devel-StackTrace-WithLexicals-srpm:: perl-Devel-StackTrace-srpm
 perl-Devel-StackTrace-WithLexicals-srpm:: perl-PadWalker-srpm
 perl-ExtUtils-MakeMaker-srpm:: perl-ExtUtils-Installed-srpm
