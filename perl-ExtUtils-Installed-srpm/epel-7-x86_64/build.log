@@ -1,0 +1,143 @@
+Mock Version: 1.2.12
+ENTER do(['bash', '--login', '-c', '/usr/bin/rpmbuild -bs --target x86_64 --nodeps /builddir/build/SPECS/perl-ExtUtils-Install.spec'], chrootPath='/var/lib/mock/epel-7-x86_64/root'shell=FalseprintOutput=Falseenv={'LANG': 'C', 'TERM': 'vt100', 'SHELL': '/bin/bash', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'PROMPT_COMMAND': 'printf "\x1b]0;<mock-chroot>\x07<mock-chroot>"', 'HOME': '/builddir', 'CCACHE_DIR': '/tmp/ccache', 'CCACHE_UMASK': '002'}gid=135user='mockbuild'timeout=0logger=<mockbuild.trace_decorator.getLog object at 0x1c22d50>uid=1000)
+Executing command: ['bash', '--login', '-c', '/usr/bin/rpmbuild -bs --target x86_64 --nodeps /builddir/build/SPECS/perl-ExtUtils-Install.spec'] with env {'LANG': 'C', 'TERM': 'vt100', 'SHELL': '/bin/bash', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'PROMPT_COMMAND': 'printf "\x1b]0;<mock-chroot>\x07<mock-chroot>"', 'HOME': '/builddir', 'CCACHE_DIR': '/tmp/ccache', 'CCACHE_UMASK': '002'} and shell False
+warning: Could not canonicalize hostname: sl7.lodaldomain
+Building target platforms: x86_64
+Building for target x86_64
+Wrote: /builddir/build/SRPMS/perl-ExtUtils-Install-1.54-0.1.el7.centos.src.rpm
+Child return code was: 0
+LEAVE do --> 
+
+ENTER do(['bash', '--login', '-c', '/usr/bin/rpmbuild -bb --target x86_64 --nodeps  /builddir/build/SPECS/perl-ExtUtils-Install.spec '], chrootPath='/var/lib/mock/epel-7-x86_64/root'shell=FalseprintOutput=Falseenv={'LANG': 'C', 'TERM': 'vt100', 'SHELL': '/bin/bash', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'PROMPT_COMMAND': 'printf "\x1b]0;<mock-chroot>\x07<mock-chroot>"', 'HOME': '/builddir', 'CCACHE_DIR': '/tmp/ccache', 'CCACHE_UMASK': '002'}gid=135user='mockbuild'timeout=0logger=<mockbuild.trace_decorator.getLog object at 0x1c22d50>uid=1000)
+Executing command: ['bash', '--login', '-c', '/usr/bin/rpmbuild -bb --target x86_64 --nodeps  /builddir/build/SPECS/perl-ExtUtils-Install.spec '] with env {'LANG': 'C', 'TERM': 'vt100', 'SHELL': '/bin/bash', 'HOSTNAME': 'mock', 'PATH': '/usr/bin:/bin:/usr/sbin:/sbin', 'PROMPT_COMMAND': 'printf "\x1b]0;<mock-chroot>\x07<mock-chroot>"', 'HOME': '/builddir', 'CCACHE_DIR': '/tmp/ccache', 'CCACHE_UMASK': '002'} and shell False
+Building target platforms: x86_64
+Building for target x86_64
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.2OWmUS
++ umask 022
++ cd /builddir/build/BUILD
++ cd /builddir/build/BUILD
++ rm -rf ExtUtils-Install-1.54
++ /usr/bin/gzip -dc /builddir/build/SOURCES/ExtUtils-Install-1.54.tar.gz
++ /usr/bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd ExtUtils-Install-1.54
++ /usr/bin/chmod -Rf a+rX,u+w,g-w,o-w .
++ chmod -R u+w /builddir/build/BUILD/ExtUtils-Install-1.54
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.a8LxFy
++ umask 022
++ cd /builddir/build/BUILD
++ cd ExtUtils-Install-1.54
++ grep -rsl '^#!.*perl' .
++ grep -v '.bak$'
++ xargs --no-run-if-empty /usr/bin/perl -MExtUtils::MakeMaker -e 'MY->fixin(@ARGV)'
++ /usr/bin/perl Build.PL
+Created MYMETA.yml and MYMETA.json
+Creating new 'Build' script for 'ExtUtils-Install' version '1.54'
++ /usr/bin/perl Build
+Building ExtUtils-Install
++ /usr/bin/perl Build test
+t/Install.t ........ ok
+t/InstallWithMM.t .. ok
+t/Installapi2.t .... ok
+t/Installed.t ...... ok
+t/Packlist.t ....... ok
+t/can_write_dir.t .. ok
+Use of uninitialized value in split at /usr/share/perl5/vendor_perl/TAP/Parser/SourceHandler/Perl.pm line 170.
+t/pod-coverage.t ... skipped: Skipping author tests. Set AUTHOR_TESTING=1 to run them.
+Use of uninitialized value in split at /usr/share/perl5/vendor_perl/TAP/Parser/SourceHandler/Perl.pm line 170.
+t/pod.t ............ skipped: Test::Pod 1.14 required for testing POD
+All tests successful.
+Files=8, Tests=246,  4 wallclock secs ( 0.08 usr  0.04 sys +  2.84 cusr  0.53 csys =  3.49 CPU)
+Result: PASS
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.DSG75n
++ exit 0
++ umask 022
++ cd /builddir/build/BUILD
++ '[' /builddir/build/BUILDROOT/perl-ExtUtils-Install-1.54-0.1.el7.centos.x86_64 '!=' / ']'
++ rm -rf /builddir/build/BUILDROOT/perl-ExtUtils-Install-1.54-0.1.el7.centos.x86_64
+++ dirname /builddir/build/BUILDROOT/perl-ExtUtils-Install-1.54-0.1.el7.centos.x86_64
++ mkdir -p /builddir/build/BUILDROOT
++ mkdir /builddir/build/BUILDROOT/perl-ExtUtils-Install-1.54-0.1.el7.centos.x86_64
++ cd ExtUtils-Install-1.54
++ '[' /builddir/build/BUILDROOT/perl-ExtUtils-Install-1.54-0.1.el7.centos.x86_64 '!=' / ']'
++ rm -rf /builddir/build/BUILDROOT/perl-ExtUtils-Install-1.54-0.1.el7.centos.x86_64
++ /usr/bin/perl Build install destdir=/builddir/build/BUILDROOT/perl-ExtUtils-Install-1.54-0.1.el7.centos.x86_64
+Building ExtUtils-Install
+Installing /builddir/build/BUILDROOT/perl-ExtUtils-Install-1.54-0.1.el7.centos.x86_64/usr/share/perl5/ExtUtils/Installed.pm
+Installing /builddir/build/BUILDROOT/perl-ExtUtils-Install-1.54-0.1.el7.centos.x86_64/usr/share/perl5/ExtUtils/Install.pm
+Installing /builddir/build/BUILDROOT/perl-ExtUtils-Install-1.54-0.1.el7.centos.x86_64/usr/share/perl5/ExtUtils/Packlist.pm
+Installing /builddir/build/BUILDROOT/perl-ExtUtils-Install-1.54-0.1.el7.centos.x86_64/usr/share/man/man3/ExtUtils::Packlist.3pm
+Installing /builddir/build/BUILDROOT/perl-ExtUtils-Install-1.54-0.1.el7.centos.x86_64/usr/share/man/man3/ExtUtils::Installed.3pm
+Installing /builddir/build/BUILDROOT/perl-ExtUtils-Install-1.54-0.1.el7.centos.x86_64/usr/share/man/man3/ExtUtils::Install.3pm
++ cmd=/usr/share/spec-helper/compress_files
++ '[' -x /usr/share/spec-helper/compress_files ']'
++ cmd=/usr/lib/rpm/brp-compress
++ '[' -x /usr/lib/rpm/brp-compress ']'
++ /usr/lib/rpm/brp-compress
++ '[' -e /etc/SuSE-release -o -e /etc/UnitedLinux-release ']'
++ find /builddir/build/BUILDROOT/perl-ExtUtils-Install-1.54-0.1.el7.centos.x86_64 -name perllocal.pod -o -name .packlist -o -name '*.bs'
++ xargs -i rm -f '{}'
++ find /builddir/build/BUILDROOT/perl-ExtUtils-Install-1.54-0.1.el7.centos.x86_64/usr -type d -depth -exec rmdir '{}' ';'
++ /usr/bin/perl -MFile::Find -le '
+    find({ wanted => \&wanted, no_chdir => 1}, "/builddir/build/BUILDROOT/perl-ExtUtils-Install-1.54-0.1.el7.centos.x86_64");
+    print "%doc  INSTALL.SKIP Changes README";
+    for my $x (sort @dirs, @files) {
+        push @ret, $x unless indirs($x);
+        }
+    print join "\n", sort @ret;
+    sub wanted {
+        return if /auto$/;
+        local $_ = $File::Find::name;
+        my $f = $_; s|^\Q/builddir/build/BUILDROOT/perl-ExtUtils-Install-1.54-0.1.el7.centos.x86_64\E||;
+        return unless length;
+        return $files[@files] = $_ if -f $f;
+        $d = $_;
+        /\Q$d\E/ && return for reverse sort @INC;
+        $d =~ /\Q$_\E/ && return
+            for qw|/etc /usr/man /usr/bin /usr/share|;
+        $dirs[@dirs] = $_;
+        }
+    sub indirs {
+        my $x = shift;
+        $x =~ /^\Q$_\E\// && $x ne $_ && return 1 for @dirs;
+        }
+    '
++ '[' -z ExtUtils-Install-1.54-filelist ']'
++ /usr/lib/rpm/find-debuginfo.sh --strict-build-id -m --run-dwz --dwz-low-mem-die-limit 10000000 --dwz-max-die-limit 110000000 /builddir/build/BUILD/ExtUtils-Install-1.54
+/usr/lib/rpm/sepdebugcrcfix: Updated 0 CRC32s, 0 CRC32s did match.
++ /usr/lib/rpm/check-buildroot
++ /usr/lib/rpm/redhat/brp-compress
++ /usr/lib/rpm/redhat/brp-strip-static-archive /usr/bin/strip
++ /usr/lib/rpm/brp-python-bytecompile /usr/bin/python 1
++ /usr/lib/rpm/redhat/brp-python-hardlink
++ /usr/lib/rpm/redhat/brp-java-repack-jars
+Processing files: perl-ExtUtils-Install-1.54-0.1.el7.centos.noarch
+Executing(%doc): /bin/sh -e /var/tmp/rpm-tmp.KFKe3e
++ umask 022
++ cd /builddir/build/BUILD
++ cd ExtUtils-Install-1.54
++ DOCDIR=/builddir/build/BUILDROOT/perl-ExtUtils-Install-1.54-0.1.el7.centos.x86_64/usr/share/doc/perl-ExtUtils-Install-1.54
++ export DOCDIR
++ /usr/bin/mkdir -p /builddir/build/BUILDROOT/perl-ExtUtils-Install-1.54-0.1.el7.centos.x86_64/usr/share/doc/perl-ExtUtils-Install-1.54
++ cp -pr INSTALL.SKIP /builddir/build/BUILDROOT/perl-ExtUtils-Install-1.54-0.1.el7.centos.x86_64/usr/share/doc/perl-ExtUtils-Install-1.54
++ cp -pr Changes /builddir/build/BUILDROOT/perl-ExtUtils-Install-1.54-0.1.el7.centos.x86_64/usr/share/doc/perl-ExtUtils-Install-1.54
++ cp -pr README /builddir/build/BUILDROOT/perl-ExtUtils-Install-1.54-0.1.el7.centos.x86_64/usr/share/doc/perl-ExtUtils-Install-1.54
++ exit 0
+Provides: perl(ExtUtils::Install) = 1.54 perl(ExtUtils::Install::Warn) perl(ExtUtils::Installed) = 1.999 perl(ExtUtils::Packlist) = 1.43 perl-ExtUtils-Install = 1.54-0.1.el7.centos
+Requires(rpmlib): rpmlib(CompressedFileNames) <= 3.0.4-1 rpmlib(FileDigests) <= 4.6.0-1 rpmlib(PayloadFilesHavePrefix) <= 4.0-1
+Requires: perl >= 0:5.00503 perl(AutoSplit) perl(Carp) perl(Config) perl(Cwd) perl(Exporter) perl(ExtUtils::MakeMaker) perl(ExtUtils::Packlist) perl(File::Basename) perl(File::Compare) perl(File::Copy) perl(File::Find) perl(File::Path) perl(File::Spec) perl(VMS::Filespec) perl(strict) perl(vars)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /builddir/build/BUILDROOT/perl-ExtUtils-Install-1.54-0.1.el7.centos.x86_64
+warning: Could not canonicalize hostname: sl7.lodaldomain
+Wrote: /builddir/build/RPMS/perl-ExtUtils-Install-1.54-0.1.el7.centos.noarch.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.cLlwsY
++ umask 022
++ cd /builddir/build/BUILD
++ cd ExtUtils-Install-1.54
++ '[' /builddir/build/BUILDROOT/perl-ExtUtils-Install-1.54-0.1.el7.centos.x86_64 '!=' / ']'
++ rm -rf /builddir/build/BUILDROOT/perl-ExtUtils-Install-1.54-0.1.el7.centos.x86_64
++ exit 0
+Child return code was: 0
+LEAVE do --> 
+

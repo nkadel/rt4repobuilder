@@ -7,6 +7,8 @@
 # Base directory for yum repository
 REPOBASEDIR="`/bin/pwd`"
 # Base subdirectories for RPM deployment
+REPOBASESUBDIRS+=$(REPOBASEDIR)/rt4repo/6/SRPMS
+REPOBASESUBDIRS+=$(REPOBASEDIR)/rt4repo/6/x86_64
 REPOBASESUBDIRS+=$(REPOBASEDIR)/rt4repo/7/SRPMS
 REPOBASESUBDIRS+=$(REPOBASEDIR)/rt4repo/7/x86_64
 
@@ -15,6 +17,7 @@ EPELPKGS+=google-droid-sans-fonts-srpm
 EPELPKGS+=perl-Authen-Simple-srpm
 EPELPKGS+=perl-CGI-PSGI-srpm
 EPELPKGS+=perl-Cache-Simple-TimedExpiry-srpm
+EPELPKGS+=perl-Calendar-Simple-srpm
 EPELPKGS+=perl-Capture-Tiny-srpm
 EPELPKGS+=perl-Carp-Assert-More-srpm
 EPELPKGS+=perl-Class-Accessor-Chained-srpm
@@ -25,23 +28,25 @@ EPELPKGS+=perl-Class-ReturnValue-srpm
 EPELPKGS+=perl-Crypt-Eksblowfish-srpm
 EPELPKGS+=perl-Crypt-X509-srpm
 EPELPKGS+=perl-DBIx-DBSchema-srpm
+EPELPKGS+=perl-DBIx-DBschema-srpm
 EPELPKGS+=perl-Data-UUID-srpm
 EPELPKGS+=perl-Devel-StackTrace-AsHTML-srpm
 EPELPKGS+=perl-Devel-StackTrace-srpm
 EPELPKGS+=perl-Digest-JHash-srpm
 EPELPKGS+=perl-EV-srpm
 EPELPKGS+=perl-Encode-srpm
-EPELPGKS+=perl-String-RewritePrefix-srpm
 EPELPKGS+=perl-Expect-Simple-srpm
 EPELPKGS+=perl-ExtUtils-Manifest-srpm
 EPELPKGS+=perl-GD-Graph-srpm
 EPELPKGS+=perl-GnuPG-Interface-srpm
+EPELPKGS+=perl-GnuP{G-Interface-srpm
 EPELPKGS+=perl-HTML-FormatText-WithLinks-srpm
 EPELPKGS+=perl-HTML-Lint-srpm
 EPELPKGS+=perl-IO-Socket-IP-srpm
 EPELPKGS+=perl-IPC-Run-SafeHandles-srpm
 EPELPKGS+=perl-List-UtilsBy-srpm
 EPELPKGS+=perl-Locale-Maketext-Fuzzy-srpm
+EPELPKGS+=perl-Locale-Maketext-Lexicon-srpm
 EPELPKGS+=perl-Log-Any-srpm
 EPELPKGS+=perl-Log-Dispatch-Perl-srpm
 EPELPKGS+=perl-MIME-tools-srpm
@@ -55,8 +60,10 @@ EPELPKGS+=perl-Regexp-Common-Net-CIDR-srpm
 EPELPKGS+=perl-Role-Basic-srpm
 EPELPKGS+=perl-Scope-Guard-srpm
 EPELPKGS+=perl-Set-Tiny-srpm
+EPELPKGS+=perl-String-RewritePrefix-srpm
 EPELPKGS+=perl-Symbol-Global-Name-srpm
 EPELPKGS+=perl-Test-CheckManifest-srpm
+EPELPKGS+=perl-Test-HTTP-Server-Simple-srpm
 EPELPKGS+=perl-Test-Log-Dispatch-srpm
 EPELPKGS+=perl-Test-Simple-srpm
 EPELPKGS+=perl-Text-Haml-srpm
@@ -148,6 +155,13 @@ all:: epel-install
 all:: rt4-install
 
 install:: epel-install rt4-install
+
+rt4repo-6-x86_64.cfg:: rt4repo-6-x86_64.cfg.in
+	sed "s|@@@REPOBASEDIR@@@|$(REPOBASEDIR)|g" $? > $@
+
+rt4repo-6-x86_64.cfg:: FORCE
+	@cmp -s $@ /etc/mock/$@ || \
+		(echo Warning: /etc/mock/$@ does not match $@, exiting; exit 1)
 
 rt4repo-7-x86_64.cfg:: rt4repo-7-x86_64.cfg.in
 	sed "s|@@@REPOBASEDIR@@@|$(REPOBASEDIR)|g" $? > $@

@@ -1,0 +1,13 @@
+2015-09-12 09:12:52,443 - Mock Version: 1.2.12
+2015-09-12 09:12:53,325 - Start: yum update
+2015-09-12 09:13:00,760 - Finish: yum update
+2015-09-12 09:13:00,792 - Finish: chroot init
+2015-09-12 09:13:00,799 - Start: build phase for rt4repo-7-x86_64.src.rpm
+2015-09-12 09:13:00,811 - Start: build setup for rt4repo-7-x86_64.src.rpm
+2015-09-12 09:13:14,027 - Finish: build setup for rt4repo-7-x86_64.src.rpm
+2015-09-12 09:13:14,027 - Start: rpmbuild rt4repo-7-x86_64.src.rpm
+2015-09-12 09:13:16,405 - Finish: rpmbuild rt4repo-7-x86_64.src.rpm
+2015-09-12 09:13:16,411 - Finish: build phase for rt4repo-7-x86_64.src.rpm
+2015-09-12 09:13:16,413 - Start: clean chroot
+2015-09-12 09:13:26,930 - Finish: clean chroot
+2015-09-12 09:13:26,934 - Finish: run
