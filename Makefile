@@ -166,7 +166,6 @@ rt4repo.repo:: FORCE
 
 epel:: $(EPELPKGS)
 
-
 $(REPOBASESUBDIRS)::
 	mkdir -p $@
 
@@ -234,7 +233,6 @@ perl-Test-WWW-Mechanize-PSGI-srpm:: perl-Test-WWW-Mechanize_el6-srpm
 perl-Test-WWW-Mechanize-srpm:: perl-Carp-Assert-More-srpm
 perl-Test-WWW-Mechanize_el6-srpm:: perl-Carp-Assert-More-srpm
 perl-Text-vFile-asData-srpm:: perl-Class-Accessor-Chained-srpm
-
 
 rt4:: google-droid-sans-fonts-srpm
 rt4:: perl-CGI-PSGI-srpm
@@ -309,7 +307,6 @@ safe-clean:: maintainer-clean FORCE
 	find rt4repo -noleaf -type d -name repodata | while read name; do \
 		createrepo -q $$name/..; \
 	done
-
 
 # This is only for upstream repository publication.
 # Modify for local use as needed, but do try to keep passwords and SSH
