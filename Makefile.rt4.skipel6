@@ -68,10 +68,12 @@ install:: $(MOCKS)
 		srpmdir=$(REPOBASEDIR)/$$yumrelease/SRPMS; \
 		echo "	Pusning SRPMS to $$srpmdir"; \
 		rsync $(RSYNCSAFEOPTS) $$repo/*.src.rpm $$srpmdir/. || exit 1; \
-		createrepo -q $$srpmdir/.; \
+		find $$srpmdir/ -name \*.src.rpm -newer $$srpmdir/repodata -print | grep -v -q . || \
+			createrepo -q $$srpmdir/.; \
 		echo "	Pusning RPMS to $$rpmdir"; \
 		rsync $(RSYNCSAFEOPTS) --exclude=*.src.rpm --exclude=*debuginfo*.rpm $$repo/*.rpm $$rpmdir/. || exit 1; \
-		createrepo -q $$rpmdir/.; \
+		find $$rpmdir/ -name \*.rpm -newer $$srpmdir/repodata -print | grep -v -q . || \
+			createrepo -q $$rpmdir/.; \
 	    done; \
 	    echo "	Touching /etc/mock/$$repo.cfg to force cache rebuild"; \
 	    sudo /bin/touch /etc/mock/$$repo.cfg; \
