@@ -1,5 +1,6 @@
 *.rpm
-*~
 *[0-9]
+*~
 epel-*
+rpmbuild
 rt4repo-*
