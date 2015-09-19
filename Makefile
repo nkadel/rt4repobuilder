@@ -47,7 +47,6 @@ EPELPKGS+=perl-IO-Socket-IP-srpm
 EPELPKGS+=perl-IPC-Run-SafeHandles-srpm
 EPELPKGS+=perl-List-UtilsBy-srpm
 EPELPKGS+=perl-Locale-Maketext-Fuzzy-srpm
-EPELPKGS+=perl-Locale-Maketext-Lexicon-srpm
 EPELPKGS+=perl-Log-Any-srpm
 EPELPKGS+=perl-Log-Dispatch-Perl-srpm
 EPELPKGS+=perl-MIME-tools-srpm
@@ -121,6 +120,9 @@ RT4PKGS+=perl-HTML-RewriteAttributes-srpm
 RT4PKGS+=perl-HTTP-Server-Simple-Mason-srpm
 RT4PKGS+=perl-Locale-Maketext-Lexicon-srpm
 RT4PKGS+=perl-Mojolicious-srpm
+
+# Relies on perl-Text-Haml-srpm for el7
+RT4PKGS+=perl-Locale-Maketext-Lexicon-srpm
 
 # Dependency for perl-Parallel-Prefork-srpm
 RT4PKGS+=perl-Parallel-Scoreboard-srpm
@@ -220,6 +222,7 @@ perl-Devel-StackTrace-WithLexicals-srpm:: perl-Devel-StackTrace-srpm
 perl-Devel-StackTrace-WithLexicals-srpm:: perl-PadWalker-srpm
 perl-HTML-Mason-PSGIHandler-srpm:: perl-Test-Log-Dispatch-srpm
 perl-Hash-MoreUtils-srpm:: perl-Test-CheckManifest-srpm
+perl-Locale-Maketext-Lexicon-srpm:: perl-Text-Haml-srpm
 perl-Log-Any-Aapter-srpm:: perl-Log-Any-srpm
 perl-Log-Any-Adapter-Dispatch-srpm:: perl-Log-Any-Adapter-srpm
 perl-Module-Mask-srpm:: perl-Module-Util-srpm
@@ -233,6 +236,8 @@ perl-Server-Starter-srpm:: perl-Proc-Wait3-srpm
 perl-Starlet-srpm:: perl-Parallel-Prefork-srpm
 perl-Starlet-srpm:: perl-Server-Starter-srpm
 perl-Test-Email-srpm:: perl-Mail-POP3Client-srpm
+perl-Test-Expect-srpm:: perl-Class-Accessor-Chained-srpm
+perl-Test-Expect-srpm:: perl-Expect-Simple-srpm
 perl-Test-TCP-srpm:: perl-Test-SharedFork-srpm
 perl-Test-TCP-srpm:: perl-Test-Simple-srpm
 perl-Test-WWW-Mechanize-PSGI-srpm:: perl-Test-WWW-Mechanize-srpm
@@ -240,8 +245,6 @@ perl-Test-WWW-Mechanize-srpm:: perl-Carp-Assert-More-srpm
 perl-Test-WWW-Mechanize-srpm:: perl-Test-WWW-Mechanize-srpm
 perl-Test-WWW-Mechanize_el6-srpm:: perl-Carp-Assert-More-srpm
 perl-Text-vFile-asData-srpm:: perl-Class-Accessor-Chained-srpm
-perl-Test-Expect-srpm:: perl-Class-Accessor-Chained-srpm
-perl-Test-Expect-srpm:: perl-Expect-Simple-srpm
 
 rt4:: google-droid-sans-fonts-srpm
 rt4:: perl-CGI-PSGI-srpm
