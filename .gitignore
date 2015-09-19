@@ -1,6 +1,6 @@
+*.out
 *.rpm
 *~
-*.out
 repodata
 rpmbuild
 rt4repo-6-x86_64.cfg
