@@ -33,7 +33,6 @@ EPELPKGS+=perl-Digest-JHash-srpm
 EPELPKGS+=perl-Encode-srpm
 EPELPKGS+=perl-Expect-Simple-srpm
 EPELPKGS+=perl-ExtUtils-Installed-srpm
-EPELPKGS+=perl-ExtUtils-Installed-srpm
 EPELPKGS+=perl-GnuP{G-Interface-srpm
 EPELPKGS+=perl-List-UtilsBy-srpm
 EPELPKGS+=perl-Locale-Maketext-Fuzzy-srpm
