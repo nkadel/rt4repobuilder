@@ -136,6 +136,7 @@ RT4PKGS+=perl-Test-Expect-srpm
 
 # Needed for rt-Test building
 RT4PKGS+=perl-Test-WWW-Mechanize-srpm
+RT4PKGS+=perl-Test-WWW-Mechanize_el6-srpm
 RT4PKGS+=perl-Test-WWW-Mechanize-PSGI-srpm
 RT4PKGS+=perl-Plack-Middleware-Test-StashWarnings-srpm
 
@@ -237,15 +238,20 @@ perl-Test-TCP-srpm:: perl-Test-Simple-srpm
 perl-Test-WWW-Mechanize-PSGI-srpm:: perl-Test-WWW-Mechanize-srpm
 perl-Test-WWW-Mechanize-srpm:: perl-Carp-Assert-More-srpm
 perl-Test-WWW-Mechanize-srpm:: perl-Test-WWW-Mechanize-srpm
+perl-Test-WWW-Mechanize_el6-srpm:: perl-Carp-Assert-More-srpm
 perl-Text-vFile-asData-srpm:: perl-Class-Accessor-Chained-srpm
 perl-Test-Expect-srpm:: perl-Class-Accessor-Chained-srpm
 perl-Test-Expect-srpm:: perl-Expect-Simple-srpm
 
 rt4:: google-droid-sans-fonts-srpm
 rt4:: perl-CGI-PSGI-srpm
+rt4:: perl-Calendar-Simple-srpm
 rt4:: perl-Class-Accessor-srpm
+rt4:: perl-Class-ReturnValue-srpm
 rt4:: perl-Convert-Color-srpm
 rt4:: perl-Crypt-X509-srpm
+rt4:: perl-DBIx-DBschema-srpm
+rt4:: perl-DBIx-SearchBuilder-srpm
 rt4:: perl-Data-ICal-srpm
 rt4:: perl-Date-Extract-srpm
 rt4:: perl-Devel-StackTrace-srpm
@@ -253,12 +259,14 @@ rt4:: perl-EV-srpm
 rt4:: perl-Email-Address-List-srpm
 rt4:: perl-Encode-srpm
 rt4:: perl-GD-Graph-srpm
+rt4:: perl-GnuP{G-Interface-srpm
 rt4:: perl-HTML-FormatText-WithLinks-AndTables-srpm
 rt4:: perl-HTML-FormatText-WithLinks-srpm
 rt4:: perl-HTML-Mason-PSGIHandler-srpm
 rt4:: perl-HTML-Mason-srpm
 rt4:: perl-HTML-Quoted-srpm
 rt4:: perl-HTML-RewriteAttributes-srpm
+rt4:: perl-HTTP-Server-Simple-Mason-srpm
 rt4:: perl-IPC-Run-SafeHandles-srpm
 rt4:: perl-Locale-Maketext-Fuzzy-srpm
 rt4:: perl-Locale-Maketext-Lexicon-srpm
@@ -272,10 +280,14 @@ rt4:: perl-Role-Basic-srpm
 rt4:: perl-Set-Tiny-srpm
 rt4:: perl-Symbol-Global-Name-srpm
 rt4:: perl-Test-Email-srpm
-rt4:: perl-Test-Expect-srpm
+rt4:: perl-Test-Expert-srpm
+rt4:: perl-Test-HTTP-Server-Simple-srpm
 rt4:: perl-Text-Haml-srpm
 rt4:: perl-Text-Password-Pronounceable-srpm
 rt4:: perl-Text-Quoted-srpm
+rt4:: perl-Text-WikiFormat-srpm
+rt4:: perl-Text-Wrapper-srpm
+rt4:: perl-Text-vFile-asData-srpm
 rt4:: perl-Tree-Simple-srpm
 
 perl-RT-Extension-CommandByMail:: rt4-srpm
