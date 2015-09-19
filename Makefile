@@ -228,8 +228,8 @@ perl-Test-SharedFork-srpm:: perl-ExtUtils-MakeMaker-srpm
 perl-Test-TCP-srpm:: perl-Test-SharedFork-srpm
 perl-Test-TCP-srpm:: perl-Test-Simple-srpm
 # Handle RHEL 6 and RHEL 7 incompatible versions of perl-Test-WWW-Mechanize
-perl-Test-WWW-Mechanize-PSGI-srpm:: perl-Test-WWW-Mechanize-srpm 
-perl-Test-WWW-Mechanize-PSGI-srpm:: perl-Test-WWW-Mechanize_el6-srpm 
+perl-Test-WWW-Mechanize-PSGI-srpm:: perl-Test-WWW-Mechanize-srpm
+perl-Test-WWW-Mechanize-PSGI-srpm:: perl-Test-WWW-Mechanize_el6-srpm
 perl-Test-WWW-Mechanize-srpm:: perl-Carp-Assert-More-srpm
 perl-Test-WWW-Mechanize_el6-srpm:: perl-Carp-Assert-More-srpm
 perl-Text-vFile-asData-srpm:: perl-Class-Accessor-Chained-srpm
@@ -286,7 +286,7 @@ build:: rt4repo.repo
 build clean realclean distclean:: FORCE
 	@for name in $(EPELPKGS) $(RT4PKGS); do \
 	     (cd $$name && $(MAKE) $(MFLAGS) $@); \
-	done  
+	done
 
 realclean distclean:: clean
 
