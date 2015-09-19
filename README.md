@@ -1,4 +1,4 @@
-rtbuilder-4.2.x - rt4 RPM and SRPM building toolki8t
+rt4repobuilder - rt4 RPM and SRPM building toolki8t
 
 License:  GPLv3
 	  (Except where noted in subpackages)
@@ -6,7 +6,7 @@ Maintainer:   Nico Kadel-Garcia
 Maintainer Email: nkadel@gmail.com
 
 Note: Since RT 4.2.x requires LWP version 6, it is not feasible to
-      backport to RHEL 6. Fedora 22 will have RT 4.2.x, and This is a
+      backport to RHEL 6. Fedora 22 will have RT 4.2.x: this is a
       permanent fork of the old rt4builder repository, designed only
       for RHEL 7.
 
@@ -49,8 +49,8 @@ Requirements: This toolkit requires the following tools:
      * "sudo" Permissions to clear the mock cache for rt4repo build
        environments without having to supply passwords. For example:
 
-	 Cmnd_Alias MOCKCMDS = /bin/touch /etc/mock/rt4repo-7-x86_64.cfg
-	 %mock	ALL=NOPASSWD: MOCKCMDS
+	 %mock ALL=(ALL)	NOPASSWD: /bin/touch /etc/mock/rt4repo-6-x86_64.cfg
+	 %mock ALL=(ALL)	NOPASSWD: /bin/touch /etc/mock/rt4repo-7-x86_64.cfg
 
 	 # The "NOPASSWD" has to be added after PASSWD for admins
 	 adminuser	ALL=(ALL)	PASSWD: ALL, NOPASSWD: MOCKRT4TOUCH
