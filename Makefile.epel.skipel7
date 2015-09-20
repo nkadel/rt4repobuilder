@@ -8,7 +8,7 @@ LANG=C
 # Ignore ownership and group,
 RSYNCOPTS=-a --no-owner --no-group
 # Skip existing files to avoid binary churn in yum repos
-RSYNCSAFEOPTS=$(RSYNCOPTS) --ignore-existing 
+RSYNCSAFEOPTS=$(RSYNCOPTS) --ignore-existing
 
 # "mock" configurations to build with, activate only as needed
 #MOCKS+=epel-6-x86_64
@@ -30,7 +30,7 @@ verifyspec:: FORCE
 	fi
 
 srpm:: verifyspec FORCE
-	@echo "Building $(SPEC) SRPM"
+	@echo "Building local SRPM from $(SPEC)"
 	rm -rf rpmbuild
 	rpmbuild --define '_topdir $(PWD)/rpmbuild' \
 		 --define '_sourcedir $(PWD)' \
@@ -42,16 +42,16 @@ build:: srpm FORCE
 
 $(MOCKS):: verifyspec FORCE
 	@if [ -n "`find $@ -name \*.rpm ! -name \*.src.rpm 2>/dev/null`" ]; then \
-		echo "	Skipping $(SPEC) in $@ with RPMS"; \
+		echo "	RPMS in $@, skipping"; \
 	else \
-		echo "	Building $(SPEC) SRPM in $@"; \
+		echo "	Building $@.src.rpm from $(SPEC)"; \
 		rm -rf $@; \
 		/usr/bin/mock -q -r $@ --sources=$(PWD) \
 		    --resultdir=$(PWD)/$@ \
 		    --buildsrpm --spec=$(SPEC); \
 		echo "Storing " $@/*.src.rpm "as $@.src.rpm"; \
 		/bin/mv $@/*.src.rpm $@.src.rpm; \
-		echo "Building $@.src.rpm in $@"; \
+		echo "Building RPMS: $@"; \
 		rm -rf $@; \
 		/usr/bin/mock -q -r $@ \
 		     --resultdir=$(PWD)/$@ \
@@ -75,6 +75,8 @@ install:: $(MOCKS)
 		[ $$rpmdir/repodata -nt $$rpmdir ] || \
 			createrepo -q $$rpmdir/. || exit 1; \
 	    done; \
+	    echo "	Touching /etc/mock/$$repo.cfg to force cache rebuild"; \
+	    sudo /bin/touch /etc/mock/$$repo.cfg; \
 	done
 
 clean::
