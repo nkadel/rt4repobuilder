@@ -1,6 +1,8 @@
 #
 # Build mock and local RPM versions of tools for RT
 #
+#     Note presence of "sudo touch /etc/mock/[repo].cfg",
+#     to force reload of rt4repo mock configs with new components.
 
 # Assure that sorting is case sensitive
 LANG=C
