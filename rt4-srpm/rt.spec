@@ -44,8 +44,8 @@ Summary:	Request tracker
 
 Group:		Applications/Internet
 License:	GPLv2+
-URL:		http://www.bestpractical.com/rt
-Source0:	http://www.bestpractical.com/pub/rt/release/rt-%{version}.tar.gz
+URL:		https://www.bestpractical.com/rt
+Source0:	https://www.bestpractical.com/pub/rt/release/rt-%{version}.tar.gz
 # Notes on running the testsuite
 Source1:	README.tests
 # rt's Apache configuration
@@ -662,6 +662,10 @@ fi
 %endif
 
 %changelog
+* Sat Sep 19 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 4.2.12-0.5
+- Update to 4.2.12-0.5 to reflect build structure updates and tags
+- Switch source URLs to new HTTPS targets
+
 * Sat Sep  5 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 4.2.12-0.1
 - Update to 4.2.12
 
