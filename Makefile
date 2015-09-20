@@ -41,6 +41,7 @@ EPELPKGS+=perl-ExtUtils-Manifest-srpm
 EPELPKGS+=perl-GD-Graph-srpm
 EPELPKGS+=perl-GnuPG-Interface-srpm
 EPELPKGS+=perl-GnuP{G-Interface-srpm
+EPELPKGS+=perl-HTML-FormatText-WithLinks-AndTables-srpm
 EPELPKGS+=perl-HTML-FormatText-WithLinks-srpm
 EPELPKGS+=perl-HTML-Lint-srpm
 EPELPKGS+=perl-IO-Socket-IP-srpm
@@ -109,7 +110,6 @@ RT4PKGS+=perl-Data-GUID-srpm
 RT4PKGS+=perl-DBIx-SearchBuilder-srpm
 RT4PKGS+=perl-Devel-StackTrace-WithLexicals-srpm
 RT4PKGS+=perl-Email-Address-List-srpm
-RT4PKGS+=perl-HTML-FormatText-WithLinks-AndTables-srpm
 
 # Dependency for perl-HTML-Mason-PSGIHandler-srpm
 RT4PKGS+=perl-HTML-Mason-srpm
@@ -285,7 +285,6 @@ rt4:: perl-Symbol-Global-Name-srpm
 rt4:: perl-Test-Email-srpm
 rt4:: perl-Test-Expert-srpm
 rt4:: perl-Test-HTTP-Server-Simple-srpm
-rt4:: perl-Text-Haml-srpm
 rt4:: perl-Text-Password-Pronounceable-srpm
 rt4:: perl-Text-Quoted-srpm
 rt4:: perl-Text-WikiFormat-srpm
