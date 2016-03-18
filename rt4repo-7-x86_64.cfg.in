@@ -73,10 +73,4 @@ baseurl=file://@@@REPOBASEDIR@@@/rt4repo/7/x86_64/
 failovermethod=priority
 cost=100
 metadata_expire=1
-
-[epel-rpm-macros-fix]
-name=epel-rpm-macros-fix
-baseurl=http://127.0.0.1/linux/epel-rpm-macros-7-fix/7/x86_64/
-failovermethod=priority
-enabled=1
 """
