@@ -606,7 +606,7 @@ fi
 %endif
 
 %changelog
-* Thu Sep 17 2016 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.24-0.5
+* Thu Sep 17 2015 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.24-0.5
 - Update upstream dependencies.
 
 * Sun Sep 13 2015 Nico Kadel-Garcia <nkadelgarcia-consultant@scholastic.com> - 4.0.24-0.4
