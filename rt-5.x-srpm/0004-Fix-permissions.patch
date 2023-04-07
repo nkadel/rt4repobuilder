@@ -1,0 +1,16 @@
+From c2c63263ff820a2f9c6c3874c1d2969e30981951 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ralf=20Cors=C3=A9pius?= <corsepiu@fedoraproject.org>
+Date: Tue, 18 Mar 2014 10:00:00 +0100
+Subject: [PATCH 4/4] Fix permissions.
+
+---
+ configure.ac | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+ mode change 100755 => 100644 configure.ac
+
+diff --git a/configure.ac b/configure.ac
+old mode 100755
+new mode 100644
+-- 
+2.31.1
+

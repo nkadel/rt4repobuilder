@@ -1,0 +1,24 @@
+From c48e1d5fe9bddd9b6265ecc5c3b7a675aedd2ed5 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ralf=20Cors=C3=A9pius?= <corsepiu@fedoraproject.org>
+Date: Sun, 19 Jul 2020 08:35:59 +0200
+Subject: [PATCH 5/5] Do not install cpanfile
+
+---
+ Makefile.in | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/Makefile.in b/Makefile.in
+index 37a88dacb..977af0e14 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -173,7 +173,6 @@ ETC_FILES		=	acl.Pg \
+ 				schema.Oracle \
+ 				schema.mysql \
+ 				schema.SQLite \
+-				cpanfile \
+ 				initialdata
+ 
+ 
+-- 
+2.31.1
+
