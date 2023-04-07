@@ -1,7 +1,8 @@
-*.log
+*.out
 *.rpm
+*.tar.*
+*.zip
+*/
 *[0-9]
+*\#*
 *~
-epel-*
-rpmbuild
-rt4repo-*

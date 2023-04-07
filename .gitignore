@@ -1,12 +1,9 @@
+*.cfg
 *.out
+*.repo
 *.rpm
+*[0-9]
+*\#*
 *~
-repodata
+rt4repo
 rpmbuild
-rt4repo-6-x86_64.cfg
-rt4repo-7-x86_64.cfg
-rt4repo.repo
-rt4repo/6/SRPMS/*
-rt4repo/6/x86_64/*
-rt4repo/7/SRPMS/*
-rt4repo/7/x86_64/*
