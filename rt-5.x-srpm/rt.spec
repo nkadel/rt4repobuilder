@@ -26,7 +26,7 @@
 %global with_mysql 1
 %endif
 
-%if 0%{fedora} >= 37
+%if 0%{?fedora} >= 37
 %global web_handler	fcgid
 %else
 %global web_handler	modperl2
