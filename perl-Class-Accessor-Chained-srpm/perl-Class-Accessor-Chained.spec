@@ -8,7 +8,10 @@ URL:            http://search.cpan.org/dist/Class-Accessor-Chained/
 Source0:        http://search.cpan.org/CPAN/authors/id/R/RC/RCLAMP/Class-Accessor-Chained-%{version}.tar.gz
 Patch0:         Class-Accessor-Chained-0.01-pod.patch
 BuildArch:      noarch
+
 BuildRequires:  /usr/bin/pod2text
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl(base)
 BuildRequires:  perl(Carp)
 BuildRequires:  perl(Class::Accessor)
