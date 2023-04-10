@@ -11,6 +11,9 @@ Source0:        http://www.cpan.org/authors/id/C/CH/CHROMATIC/Text-WikiFormat-%{
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch:      noarch
+
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl(Module::Build)
 BuildRequires:  perl(URI::Escape)
 BuildRequires:  perl(Scalar::Util) >= 1.14
