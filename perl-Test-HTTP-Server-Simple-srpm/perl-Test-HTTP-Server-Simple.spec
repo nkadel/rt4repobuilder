@@ -10,11 +10,15 @@ URL:            http://search.cpan.org/dist/Test-HTTP-Server-Simple/
 Source0:        http://www.cpan.org/authors/id/A/AL/ALEXMV/Test-HTTP-Server-Simple-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
+
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(HTTP::Server::Simple)
 BuildRequires:  perl(Test::Builder)
 BuildRequires:  perl(Test::Builder::Tester) >= 1.04
 BuildRequires:  perl(Test::More)
+BuildRequires:  perl(NEXT)
 
 # for improved tests
 BuildRequires:  perl(Test::Pod) >= 1.14
