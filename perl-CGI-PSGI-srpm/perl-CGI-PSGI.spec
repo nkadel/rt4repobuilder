@@ -16,6 +16,8 @@ BuildRequires:  perl(Module::Install)
 BuildRequires:  perl(Test::More)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
+Provides: perl(CGI::PSGI)
+
 %{?perl_default_filter}
 
 %description
