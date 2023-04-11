@@ -13,13 +13,14 @@ BuildArch:      noarch
 BuildRequires:  perl
 BuildRequires:  perl-macros
 BuildRequires:  perl(ExtUtils::MakeMaker)
-#BuildRequires:  perl(Mail::POP3Client)
-BuildRequires:  perl-Mail-POP3Client
+BuildRequires:  perl(Mail::POP3Client)
 BuildRequires:  perl(Mail::Sendmail)
 BuildRequires:  perl(MIME::Entity)
 BuildRequires:  perl(MIME::Parser)
 BuildRequires:  perl(Test::Builder)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
+
+Provides: perl(Test::Email)
 
 %description
 Test::Email is a subclass of MIME::Entity, with the above methods.
