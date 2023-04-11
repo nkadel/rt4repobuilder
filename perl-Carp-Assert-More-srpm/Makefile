@@ -1,1 +1,1 @@
-../Makefile.epel
+../Makefile.rt48-9

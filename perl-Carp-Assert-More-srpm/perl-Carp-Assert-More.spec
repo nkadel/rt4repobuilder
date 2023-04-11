@@ -11,10 +11,15 @@ Source0:        http://www.cpan.org/authors/id/P/PE/PETDANCE/Carp-Assert-More-%{
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch:      noarch
+
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl(Carp::Assert), perl(Test::Exception)
 BuildRequires:  perl(Test::Pod), perl(Test::Pod::Coverage)
 BuildRequires:  perl(ExtUtils::MakeMaker)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
+
+Provides: perl(Carp::Assert::More) = %{version}
 
 %description
 Carp::Assert::More is a set of wrappers around the Carp::Assert
