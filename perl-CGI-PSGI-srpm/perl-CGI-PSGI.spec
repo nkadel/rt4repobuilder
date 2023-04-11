@@ -7,9 +7,12 @@ Group:          Development/Libraries
 URL:            http://search.cpan.org/dist/CGI-PSGI/
 Source0:        http://www.cpan.org/authors/id/M/MI/MIYAGAWA/CGI-PSGI-%{version}.tar.gz
 BuildArch:      noarch
+
 BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl(CGI)
 BuildRequires:  perl(ExtUtils::MakeMaker)
+BuildRequires:  perl(Module::Install)
 BuildRequires:  perl(Test::More)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
