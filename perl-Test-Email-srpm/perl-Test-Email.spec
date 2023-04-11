@@ -1,6 +1,6 @@
 Name:           perl-Test-Email
 Version:        0.04
-#Release:        3%{?dist}
+#Release:        3%%{?dist}
 Release:        0.3%{?dist}
 Summary:        Test Email Contents
 License:        GPL+ or Artistic
@@ -9,8 +9,12 @@ URL:            http://search.cpan.org/dist/Test-Email/
 Source0:        http://www.cpan.org/authors/id/J/JA/JAMES/Test-Email-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
+
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl(ExtUtils::MakeMaker)
-BuildRequires:  perl(Mail::POP3Client)
+#BuildRequires:  perl(Mail::POP3Client)
+BuildRequires:  perl-Mail-POP3Client
 BuildRequires:  perl(Mail::Sendmail)
 BuildRequires:  perl(MIME::Entity)
 BuildRequires:  perl(MIME::Parser)
