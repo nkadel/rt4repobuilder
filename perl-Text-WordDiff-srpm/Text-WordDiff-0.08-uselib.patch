@@ -1,0 +1,11 @@
+--- t/htmltwolines.t
++++ t/htmltwolines.t
+@@ -8,8 +8,6 @@
+ use File::Spec::Functions qw(catfile);
+ use IO::File;
+ 
+-use lib qw( /Users/gwg/Text-WordDiff-0.05/lib );
+-
+ # BEGIN {
+     use_ok 'Text::WordDiff'       or die;
+     use_ok 'Text::WordDiff::HTMLTwoLines' or die;
