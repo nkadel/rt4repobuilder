@@ -10,12 +10,17 @@ Source0: 	http://www.cpan.org/modules/by-module/Tree/Tree-Simple-%{version}.tar.
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch: 	noarch
 
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(Scalar::Util) >= 1.18
 BuildRequires:  perl(Test::Exception) >= 0.15 
 BuildRequires:  perl(Test::Pod) >=  1.14
 BuildRequires:  perl(Test::Pod::Coverage) >= 1.04
 BuildRequires:  perl(Test::Memory::Cycle)
+
+# Added manually
+Provides: perl(Test::Simple) = %{version}
 
 Requires:  	perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
