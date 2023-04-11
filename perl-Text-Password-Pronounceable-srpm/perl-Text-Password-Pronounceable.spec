@@ -9,9 +9,14 @@ Source0:    http://search.cpan.org/CPAN/authors/id/T/TS/TSIBLEY/Text-Password-Pr
 Url:        http://search.cpan.org/dist/Text-Password-Pronounceable
 Requires:   perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 BuildArch:  noarch
+BuildRequires: perl
+BuildRequires: perl-macros
 BuildRequires: perl(Carp)
 BuildRequires: perl(ExtUtils::MakeMaker)
+BuildRequires: perl(Module::Install)
 BuildRequires: perl(Test::More)
+
+Provides: perl(Text::Password::Pronounceable)
 
 %description
 This module generates pronuceable passwords, based on the English
