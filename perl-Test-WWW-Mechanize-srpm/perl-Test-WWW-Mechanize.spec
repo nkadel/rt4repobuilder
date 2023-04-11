@@ -8,7 +8,9 @@ URL:            http://search.cpan.org/dist/Test-WWW-Mechanize/
 Source0:        http://www.cpan.org/authors/id/P/PE/PETDANCE/Test-WWW-Mechanize-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
+
 BuildRequires:  perl >= 0:5.008
+BuildRequires:  perl-macros
 BuildRequires:  perl(Carp::Assert::More)
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(HTML::TreeBuilder)
@@ -31,6 +33,8 @@ Requires:       perl(Test::More) >= 0.96
 Requires:       perl(URI::file)
 Requires:       perl(WWW::Mechanize) >= 1.68
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
+
+Provides: perl(Test::WWW::Mechanize)
 
 %description
 my $mech = Test::WWW::Mechanize->new; $mech->get_ok( $page ); $mech-
