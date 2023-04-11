@@ -8,12 +8,18 @@ URL:            http://search.cpan.org/dist/HTML-Quoted/
 Source0:        http://www.cpan.org/authors/id/R/RU/RUZ/HTML-Quoted-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
+
+BuildRequires:  perl
+BuildRequires:  perl-macros
+BuildRequires:  perl(Data::Dumper)
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(HTML::Parser) >= 3.0
+BuildRequires:  perl(Module::Install)
 BuildRequires:  perl(Test::Harness)
 BuildRequires:  perl(Test::More)
-BuildRequires:  perl(Data::Dumper)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
+
+Provides: perl(HTML::Quoted)
 
 %description
 Extract structure of quoted HTML mail message.
