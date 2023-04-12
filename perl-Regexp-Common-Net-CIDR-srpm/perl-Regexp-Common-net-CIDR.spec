@@ -16,6 +16,8 @@ BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(Regexp::Common)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
+Provides: perl(Regexp::Common::Net::CIDR) = %{version}
+
 %description
 Patterns for CIDR blocks.
 
