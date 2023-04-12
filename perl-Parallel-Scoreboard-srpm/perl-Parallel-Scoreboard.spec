@@ -1,6 +1,6 @@
 Name:           perl-Parallel-Scoreboard
 Version:        0.07
-#Release:        4%{?dist}
+#Release:        4%%{?dist}
 Release:        0.4%{?dist}
 Summary:        Scoreboard for monitoring status of many processes
 License:        GPL+ or Artistic
