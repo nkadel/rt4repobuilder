@@ -12,6 +12,9 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 Requires:  perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
+BuildRequires:  perl
+BuildRequires:  perl-macros
+BuildRequires:  perl(Module::Install)
 BuildRequires:	perl(ExtUtils::MakeMaker)
 # Required by the tests
 BuildRequires:  /usr/bin/msgunfmt
