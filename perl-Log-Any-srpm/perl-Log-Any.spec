@@ -24,9 +24,14 @@ buildroot: %{_tmppath}/%{name}-%{version}-%(id -u -n)
 buildarch: noarch
 prefix:    %(echo %{_prefix})
 source:    http://search.cpan.org//CPAN/authors/id/J/JS/JSWARTZ/Log-Any-0.14.tar.gz
+
+BuildRequires: perl
+BuildRequires: perl-macros
 # Added for RHEL 6
 BuildRequires: perl(ExtUtils::MakeMaker)
 BuildRequires: perl(Test::Simple)
+
+Provides: perl(Log::Any) = %{version}
 
 %description
     `Log::Any' allows CPAN modules to safely and efficiently log messages,
