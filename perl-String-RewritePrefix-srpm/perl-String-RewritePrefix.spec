@@ -19,6 +19,7 @@ BuildRequires:  perl(Test::More) >= 0.47
 
 Requires:       perl(Sub::Exporter)
 
+Provides: perl(String::RewritePrefix) = %{version}
 
 %{?perl_default_filter}
 %{?perl_default_subpackage_tests}
