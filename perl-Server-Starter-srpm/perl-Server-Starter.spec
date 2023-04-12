@@ -20,6 +20,8 @@ BuildRequires:  perl(Test::TCP) >= 0.11
 BuildRequires:  perl(Encode) >= 2.39
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
+Provides: perl(Server::Starter) = %{version}
+
 %package start_server
 Summary:       	perl-Server-Starter start_server script
 # FIXME: This doesn't make much sense. If at all, then this should be 
