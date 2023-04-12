@@ -8,7 +8,11 @@ URL:            http://search.cpan.org/dist/Plack-Middleware-Test-StashWarnings/
 Source0:        http://www.cpan.org/modules/by-module/Plack/Plack-Middleware-Test-StashWarnings-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
+
 BuildRequires:  perl >= 1:5.8.1
+BuildRequires:  perl-macros
+BuildRequires:  perl(Module::Install)
+
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(HTTP::Request::Common)
 BuildRequires:  perl(Plack)
