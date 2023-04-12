@@ -1,0 +1,71 @@
+From 7fd8a51f2fcd362e390a94fb2fbef6ccef0e0a45 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Petr=20P=C3=ADsa=C5=99?= <ppisar@redhat.com>
+Date: Wed, 3 May 2017 16:57:52 +0200
+Subject: [PATCH] Adapt to changes in Cache-FastMmap-1.45
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Cache-FastMmap-1.45 deprecated raw_values constructor argument in
+favor of new serializer argument. This changes caused
+t/smoke-Driver-CacheCache.t to fail.
+
+This patch uses serializer with Cache::FastMmap >= 1.45, otherwise the old
+raw_values.
+
+CPAN RT#120705
+
+Signed-off-by: Petr Písař <ppisar@redhat.com>
+---
+ lib/CHI/Driver/FastMmap.pm   | 10 +++++++---
+ lib/CHI/t/Driver/FastMmap.pm |  6 +++++-
+ 2 files changed, 12 insertions(+), 4 deletions(-)
+
+diff --git a/lib/CHI/Driver/FastMmap.pm b/lib/CHI/Driver/FastMmap.pm
+index 521306c..4cadd13 100644
+--- a/lib/CHI/Driver/FastMmap.pm
++++ b/lib/CHI/Driver/FastMmap.pm
+@@ -21,7 +21,11 @@ sub BUILD {
+     mkpath( $self->root_dir, 0, $self->dir_create_mode )
+       if !-d $self->root_dir;
+     $self->{fm_params} = {
+-        raw_values     => 1,
++        (
++            ($Cache::FastMmap::VERSION >= 1.45) ?
++            (serializer     => '') :
++            (raw_values     => 1)
++        ),
+         unlink_on_exit => 0,
+         share_file     => catfile(
+             $self->root_dir,
+@@ -107,8 +111,8 @@ though not between hosts.
+ To support namespaces, this driver takes a directory parameter rather than a
+ file, and creates one Cache::FastMMap file for each namespace.
+ 
+-Because CHI handles serialization automatically, we pass the C<raw_values> flag
+-as 1; and to conform to the CHI API, we pass C<unlink_on_exit> as 0, so that
++Because CHI handles serialization automatically, we pass the C<serializer> flag
++as ''; and to conform to the CHI API, we pass C<unlink_on_exit> as 0, so that
+ all cache files are permanent.
+ 
+ =head1 REQUIREMENTS
+diff --git a/lib/CHI/t/Driver/FastMmap.pm b/lib/CHI/t/Driver/FastMmap.pm
+index dd71ab2..2cc835d 100644
+--- a/lib/CHI/t/Driver/FastMmap.pm
++++ b/lib/CHI/t/Driver/FastMmap.pm
+@@ -35,7 +35,11 @@ sub test_fm_cache : Tests {
+     my %defaults = (
+         unlink_on_exit => 0,
+         empty_on_exit  => 0,
+-        raw_values     => 1,
++        (
++            ($Cache::FastMmap::VERSION >= 1.45) ?
++            (serialize      => 0) :
++            (raw_values     => 1)
++        ),
+     );
+     while ( my ( $key, $value ) = each(%defaults) ) {
+         is( $fm_cache->{$key} || 0, $value, "$key = $value by default" );
+-- 
+2.7.4
+
