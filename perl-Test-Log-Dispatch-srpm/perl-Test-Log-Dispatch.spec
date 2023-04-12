@@ -11,6 +11,7 @@ BuildArch:      noarch
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(List::MoreUtils)
 BuildRequires:  perl(Log::Dispatch::Array)
+BuildRequires:  perl(Module::Install)
 BuildRequires:  perl(Test::More)
 BuildRequires:  perl(Test::Tester)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
