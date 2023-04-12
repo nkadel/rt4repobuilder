@@ -9,8 +9,11 @@ URL:            http://search.cpan.org/dist/Parallel-Scoreboard/
 Source0:        http://www.cpan.org/authors/id/K/KA/KAZUHO/Parallel-Scoreboard-%{version}.tar.gz
 BuildArch:      noarch
 
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(File::Temp)
+BuildRequires:  perl(Module::Install)
 BuildRequires:  perl(Spiffy)
 BuildRequires:  perl(Test::Warn)
 BuildRequires:  perl(Test::More)
