@@ -6,6 +6,9 @@ License:        GPL+ or Artistic
 Group:          Development/Libraries
 URL:            http://search.cpan.org/dist/Proc-Wait3/
 Source0:        http://www.cpan.org/authors/id/C/CT/CTILMES/Proc-Wait3-%{version}.tar.gz
+
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl(ExtUtils::MakeMaker)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
