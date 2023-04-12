@@ -10,6 +10,10 @@ Source0:        http://www.cpan.org/modules/by-module/Locale/Locale-Maketext-Fuz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch:      noarch
+
+BuildRequires:  perl
+BuildRequires:  perl-macros
+BuildRequires:  perl(Module::Install)
 BuildRequires:  perl(Locale::Maketext)
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(ExtUtils::MakeMaker)
