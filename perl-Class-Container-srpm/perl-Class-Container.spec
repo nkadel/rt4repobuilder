@@ -1,6 +1,6 @@
 Name:           perl-Class-Container
 Version:        0.12
-#Release:        9%{?dist}
+#Release:        9%%{?dist}
 Release:        0.9%{?dist}
 Summary:        Class::Container Perl module
 License:        GPL+ or Artistic
@@ -9,6 +9,9 @@ URL:            http://search.cpan.org/dist/Class-Container/
 Source0:        http://www.cpan.org/authors/id/K/KW/KWILLIAMS/Class-Container-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
+
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(Params::Validate) >= 0.23
 Requires:       perl(Params::Validate) >= 0.23
