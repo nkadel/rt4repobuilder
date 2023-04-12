@@ -32,6 +32,7 @@ BuildRequires: perl(ExtUtils::MakeMaker)
 BuildRequires: perl(Test::Simple)
 
 Provides: perl(Log::Any) = %{version}
+Provides: perl(Log::Any::Test) = %{version}
 
 %description
     `Log::Any' allows CPAN modules to safely and efficiently log messages,
