@@ -7,6 +7,9 @@ Group:          Development/Libraries
 URL:            http://search.cpan.org/dist/Log-Any-Adapter/
 Source0:        http://www.cpan.org/authors/id/J/JS/JSWARTZ/Log-Any-Adapter-%{version}.tar.gz
 BuildArch:      noarch
+
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl(Carp)
 BuildRequires:  perl(Capture::Tiny) >= 0.12
 BuildRequires:  perl(Devel::GlobalDestruction)
@@ -17,6 +20,8 @@ BuildRequires:  perl(Test::More)
 BuildRequires:  perl(Test::Harness)
 
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
+
+Provides: perl(Log::Any::Adapter)
 
 %description
 The Log-Any-Adapter distribution implements Log::Any class methods to
