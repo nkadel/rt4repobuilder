@@ -21,7 +21,7 @@ BuildRequires:  perl(Test::Harness)
 
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
-Provides: perl(Log::Any::Adapter)
+Provides: perl(Log::Any::Adapter) = %{version}
 
 %description
 The Log-Any-Adapter distribution implements Log::Any class methods to
