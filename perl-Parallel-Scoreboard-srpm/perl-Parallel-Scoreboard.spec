@@ -36,6 +36,8 @@ BuildRequires: perl(warnings)
 
 Requires:      perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
+Provides: perl(Parallel::Scoreboard) = %{version}
+
 %description
 Parallel::Scoreboard is a pure-perl implementation of a process scoreboard.
 By using the module it is easy to create a monitor for many worker process,
