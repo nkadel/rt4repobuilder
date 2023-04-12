@@ -14,6 +14,7 @@ BuildArch: noarch
 
 BuildRequires:  perl
 BuildRequires:  perl-macros
+BuildRequires:  perl(Module::Install)
 BuildRequires:	perl(HTML::Mason) >= 1.25
 BuildRequires:	perl(HTTP::Server::Simple) >= 0.04
 BuildRequires:	perl(Hook::LexWrap)
