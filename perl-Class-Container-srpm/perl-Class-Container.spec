@@ -17,6 +17,8 @@ BuildRequires:  perl(Params::Validate) >= 0.23
 Requires:       perl(Params::Validate) >= 0.23
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
+Provides: perl(Class::Container) %{version}
+
 %description
 This class facilitates building frameworks of several classes that
 inter-operate. It was first designed and built for "HTML::Mason", in
