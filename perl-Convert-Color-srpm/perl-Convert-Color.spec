@@ -9,6 +9,8 @@ Source0:        http://www.cpan.org/authors/id/P/PE/PEVANS/Convert-Color-%{versi
 Patch0:         Convert-Color-0.07.diff
 BuildArch:      noarch
 
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl(List::UtilsBy)
 BuildRequires:  perl(Module::Build)
 BuildRequires:  perl(Module::Pluggable)
@@ -19,6 +21,8 @@ BuildRequires:  perl(Test::Pod) >= 1.00
 BuildRequires:  /usr/share/X11/rgb.txt
 
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
+
+Provides: perl(Convert::Color) = %{version}
 
 %description
 This module provides conversions between commonly used ways to express
