@@ -9,11 +9,12 @@ Source0:        http://www.cpan.org/authors/id/C/CT/CTILMES/Proc-Wait3-%{version
 
 BuildRequires:  perl
 BuildRequires:  perl-macros
-BuildRequires:  perl(Proc::Wait3)
 BuildRequires:  perl(ExtUtils::MakeMaker)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 %{?perl_default_filter}
+
+Provides:  perl(Proc::Wait3) = %{version}
 
 %description
 If any child processes have exited, this call will "reap" the zombies
