@@ -9,8 +9,10 @@ Source0:        http://www.cpan.org/authors/id/K/KA/KAZUHO/Server-Starter-%{vers
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
+BuildRequires:  perl-macros
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(List::MoreUtils)
+BuildRequires:  perl(Module::Install)
 BuildRequires:  perl(Proc::Wait3)
 BuildRequires:  perl(Scope::Guard)
 BuildRequires:  perl(Test::Harness)
