@@ -12,6 +12,7 @@ BuildArch:      noarch
 BuildRequires:  /usr/bin/start_server
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(LWP::UserAgent) >= 5.8
+BuildRequires:  perl(Module::Install)
 BuildRequires:  perl(Net::EmptyPort)
 BuildRequires:  perl(Parallel::Prefork) >= 0.13
 BuildRequires:  perl(Plack) >= 0.992
