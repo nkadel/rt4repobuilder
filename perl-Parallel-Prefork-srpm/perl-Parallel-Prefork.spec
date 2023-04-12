@@ -8,6 +8,10 @@ URL:            http://search.cpan.org/dist/Parallel-Prefork/
 Source0:        http://www.cpan.org/authors/id/K/KA/KAZUHO/Parallel-Prefork-%{version}.tar.gz
 BuildArch:      noarch
 
+BuildRequires:  perl
+BuildRequires:  perl-macros
+BuildRequires:  perl(Module::Install)
+
 BuildRequires:  perl(Class::Accessor::Lite) >= 0.04
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(List::MoreUtils)
