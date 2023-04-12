@@ -11,6 +11,7 @@ BuildArch:      noarch
 
 BuildRequires:  perl >= 0:5.008
 BuildRequires:  perl-macros
+BuildRequires:  perl(Carp::Assert)
 BuildRequires:  perl(Carp::Assert::More)
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(HTML::TreeBuilder)
@@ -34,7 +35,7 @@ Requires:       perl(URI::file)
 Requires:       perl(WWW::Mechanize) >= 1.68
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
-Provides: perl(Test::WWW::Mechanize)
+Provides: perl(Test::WWW::Mechanize) = %{version}
 
 %description
 my $mech = Test::WWW::Mechanize->new; $mech->get_ok( $page ); $mech-
