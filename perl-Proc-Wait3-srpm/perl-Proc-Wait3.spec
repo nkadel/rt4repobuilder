@@ -9,6 +9,7 @@ Source0:        http://www.cpan.org/authors/id/C/CT/CTILMES/Proc-Wait3-%{version
 
 BuildRequires:  perl
 BuildRequires:  perl-macros
+BuildRequires:  perl(Proc::Wait3)
 BuildRequires:  perl(ExtUtils::MakeMaker)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
