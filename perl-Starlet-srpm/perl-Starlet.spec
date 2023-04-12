@@ -8,16 +8,19 @@ URL:            http://search.cpan.org/dist/Starlet/
 Source0:        http://www.cpan.org/authors/id/K/KA/KAZUHO/Starlet-%{version}.tar.gz
 BuildArch:      noarch
 
+
 # start_server comes ftom perl_Server_Starter_start_Server package
 BuildRequires:  /usr/bin/start_server
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(LWP::UserAgent) >= 5.8
+BuildRequires:  perl(List::MoreUtils)
 BuildRequires:  perl(Module::Install)
 BuildRequires:  perl(Net::EmptyPort)
 BuildRequires:  perl(Parallel::Prefork) >= 0.13
 BuildRequires:  perl(Plack) >= 0.992
 BuildRequires:  perl(Plack::Test)
 BuildRequires:  perl(Plack::Test::Suite)
+BuildRequires:  perl(Proc::Wait3)
 BuildRequires:  perl(Server::Starter) >= 0.06
 BuildRequires:  perl(Test::Harness)
 BuildRequires:  perl(Test::More) >= 0.88
