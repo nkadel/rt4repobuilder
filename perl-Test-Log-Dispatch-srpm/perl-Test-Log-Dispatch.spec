@@ -16,6 +16,8 @@ BuildRequires:  perl(Test::More)
 BuildRequires:  perl(Test::Tester)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
+Provides: perl(Test::Log::Dispatch) = %{version}
+
 %if 0%{?fedora} < 15
 # Fedora < 15's rpm misses this
 Requires:	perl(Log::Dispatch)
