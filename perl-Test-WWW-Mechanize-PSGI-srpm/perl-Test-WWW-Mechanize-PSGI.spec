@@ -22,6 +22,8 @@ Requires:       perl(Test::WWW::Mechanize)
 Requires:       perl(Try::Tiny)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
+Provides: perl(Test::WWW::Mechanize::PSGI) = %{version}
+
 %description
 PSGI is a specification to decouple web server environments from web
 application framework code. Test::WWW::Mechanize is a subclass of
