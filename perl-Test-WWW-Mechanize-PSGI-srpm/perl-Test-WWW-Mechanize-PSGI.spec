@@ -8,6 +8,9 @@ URL:            http://search.cpan.org/dist/Test-WWW-Mechanize-PSGI/
 Source0:        http://www.cpan.org/modules/by-module/Test/Test-WWW-Mechanize-PSGI-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
+
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl(Carp::Assert)
 BuildRequires:  perl(CGI::Cookie)
 BuildRequires:  perl(ExtUtils::MakeMaker)
