@@ -12,6 +12,8 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:  perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 BuildArch: noarch
 
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:	perl(HTML::Mason) >= 1.25
 BuildRequires:	perl(HTTP::Server::Simple) >= 0.04
 BuildRequires:	perl(Hook::LexWrap)
