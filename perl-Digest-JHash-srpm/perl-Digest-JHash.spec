@@ -7,6 +7,9 @@ Group:          Development/Libraries
 URL:            http://search.cpan.org/dist/Digest-JHash/
 Source0:        http://www.cpan.org/authors/id/S/SH/SHLOMIF/Digest-JHash-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl(ExtUtils::MakeMaker)
 
 # For improved testing
@@ -14,6 +17,8 @@ BuildRequires:  perl(Test::Pod) >= 1.00
 BuildRequires:  perl(Test::Pod::Coverage) >= 1.00
 
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
+
+Provides: perl(Digest::JHash::srpm) = %{version}
 
 %{?perl_default_filter}
 
