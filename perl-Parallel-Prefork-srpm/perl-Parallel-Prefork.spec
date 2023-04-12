@@ -24,6 +24,8 @@ BuildRequires:  perl(Test::SharedFork)
 BuildRequires:  perl(Time::HiRes)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
+Provides: perl(Parallel::Prefork) = %{version}
+
 %description
 Parallel::Prefork is much like Parallel::ForkManager, but supports graceful
 shutdown and run-time reconfiguration.
