@@ -9,12 +9,17 @@ URL:            http://search.cpan.org/dist/Log-Dispatch-Perl/
 Source0:        http://www.cpan.org/authors/id/E/EL/ELIZABETH/Log-Dispatch-Perl-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
+
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(Test::More)
 BuildRequires:  perl(Log::Dispatch) >= 1.16
 Requires:       perl(Log::Dispatch) >= 1.16
 Requires:	perl(Carp)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
+
+Provides: perl(Log::Dispatch::Perl) = %{version}
 
 %description
 The "Log::Dispatch::Perl" module offers a logging alternative using
