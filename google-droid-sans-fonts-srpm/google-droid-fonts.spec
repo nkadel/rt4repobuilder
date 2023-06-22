@@ -1,84 +1,70 @@
-%global fontname google-droid
+# SPDX-License-Identifier: MIT
+BuildArch: noarch
 
-%global download_root http://android.git.kernel.org/?p=platform/frameworks/base.git;a=blob_plain;f=data/fonts/
+# No sane versionning upstream, use git clone timestamp
+Version: 20200215
+Release: 11%{?dist}.2
+License: ASL 2.0 and OFL
+## DroidSansDevanagari is licensed under OFL
+URL:     https://android.googlesource.com/
 
-%global common_desc \
-The Droid typeface family was designed in the fall of 2006 by Ascender's \
-Steve Matteson, as a commission from Google to create a set of system fonts \
-for its Android platform. The goal was to provide optimal quality and comfort \
-on a mobile handset when rendered in application menus, web browsers and for \
-other screen text.
+%global source_name       google-droid-fonts
 
-Name:    %{fontname}-fonts
-# No sane versionning upstream, use the most recent file datestamp
-Version: 20100409
-#Release: 1%{?dist}
-Release: 0.1%{?dist}
-Summary: General-purpose fonts released by Google as part of Android
+%global foundry           Google
+%global fontlicenses      NOTICE
+%global fontdocs          *.txt
 
-Group:     User Interface/X
-License:   ASL 2.0
-URL:       http://android.git.kernel.org/?p=platform/frameworks/base.git;a=tree;f=data/fonts
-Source0:   %{download_root}NOTICE
-Source1:   %{download_root}README.txt
-Source10:  %{download_root}DroidSans.ttf
-Source11:  %{download_root}DroidSans-Bold.ttf
-Source12:  %{download_root}DroidSansJapanese.ttf
-#DroidSansFallbackLegacy.ttf is an old version with less coverage
-Source13:  %{download_root}DroidSansFallback.ttf
-Source14:  %{download_root}DroidSansArabic.ttf
-Source15:  %{download_root}DroidSansHebrew.ttf
-Source16:  %{download_root}DroidSansThai.ttf
-Source20:  %{download_root}DroidSansMono.ttf
-Source30:  %{download_root}DroidSerif-Regular.ttf
-Source31:  %{download_root}DroidSerif-Bold.ttf
-Source32:  %{download_root}DroidSerif-Italic.ttf
-Source33:  %{download_root}DroidSerif-BoldItalic.ttf
-Source41:  %{name}-sans-fontconfig.conf
-Source42:  %{name}-sans-mono-fontconfig.conf
-Source43:  %{name}-serif-fontconfig.conf
+%global common_description %{expand:
+The Droid font family was designed in the fall of 2006 by Ascender’s Steve
+Matteson, as a commission from Google to create a set of system fonts for its
+Android platform. The goal was to provide optimal quality and comfort on a
+mobile handset when rendered in application menus, web browsers and for other
+screen text.
 
+The family was later extended in collaboration with other designers such as
+Pascal Zoghbi of 29ArabicLetters.}
 
-BuildArch:     noarch
-BuildRequires: fontpackages-devel
+%global fontfamily1       Droid Sans
+%global fontsummary1      Droid Sans, a humanist sans-serif font family
+%global fontpkgheader1   %{expand:
+Obsoletes: google-droid-kufi-fonts < %{version}-%{release}
+Suggests: font(notosans)
+}
+%global fonts1            DroidSans*ttf DroidKufi*ttf
+%global fontsex1          DroidSansMono*ttf DroidSansFallback.ttf DroidSansHebrew.ttf
+%global fontconfngs1      %{SOURCE11}
+%global fontdescription1  %{expand:
+%{common_description}
 
-%description
-%common_desc
+Droid Sans is a humanist sans serif font family designed for user interfaces and electronic communication.
 
+The Arabic block was initially designed by Steve Matteson of Ascender under the
+Droid Kufi name, with consulting by Pascal Zoghbi of 29ArabicLetters to
+finalize the font family.}
 
-%package -n %{fontname}-sans-fonts
-Summary:   A humanist sans serif typeface
-Requires:  fontpackages-filesystem
-Obsoletes: %{name}-common <= 20090906-5.fc12
+%global fontfamily2       Droid Sans Mono
+%global fontsummary2      Droid Sans Mono, a humanist mono-space sans-serif font family
+%global fontpkgheader2    %{expand:
+Suggests: font(notosansmono)
+}
+%global fonts2            DroidSansMono*ttf
+%global fontconfngs2      %{SOURCE12}
+%global fontdescription2  %{expand:
+%{common_description}
 
-%description -n %{fontname}-sans-fonts
-%common_desc
+Droid Sans Mono is a humanist mono-space sans serif font family designed for
+user interfaces and electronic communication.}
 
-Droid Sans is a humanist sans serif typeface designed for user interfaces and
-electronic communication.
-
-%_font_pkg -n sans -f ??-%{fontname}-sans.conf DroidSans.ttf DroidSans-Bold.ttf DroidSansArabic.ttf DroidSansHebrew.ttf DroidSansJapanese.ttf DroidSansThai.ttf DroidSansFallback.ttf
-%doc *.txt
-
-%package -n %{fontname}-sans-mono-fonts
-Summary:  A humanist monospace sans serif typeface
-Requires: fontpackages-filesystem
-
-%description -n %{fontname}-sans-mono-fonts
-%common_desc
-
-Droid Sans Mono is a humanist monospace sans serif typeface designed for user
-interfaces and electronic communication.
-
-%_font_pkg -n sans-mono -f ??-%{fontname}-sans-mono.conf DroidSansMono.ttf
-%doc *.txt
-
-%package -n %{fontname}-serif-fonts
-Summary:  A contemporary serif typeface
-Requires: fontpackages-filesystem
-
-%description -n %{fontname}-serif-fonts
-%common_desc
+%global fontfamily3       Droid Serif
+%global fontsummary3      Droid Serif, a contemporary serif font family
+%global fontpkgheader3    %{expand:
+Suggests: font(notoserif)
+}
+%global fonts3            DroidSerif*ttf DroidNaskh*ttf
+%global fontsex3          DroidNaskhUI-Regular.ttf DroidNaskh-Regular-Shift.ttf
+%global fontconfngs3      %{SOURCE13}
+%global fontdescription3  %{expand:
+%{common_description}
 
 Droid Serif is a contemporary serif typeface family designed for comfortable
 reading on screen. Droid Serif is slightly condensed to maximize the amount of
@@ -86,111 +72,93 @@ text displayed on small screens. Vertical stress and open forms contribute to
 its readability while its proportion and overall design complement its
 companion Droid Sans.
 
-%_font_pkg -n serif -f ??-%{fontname}-serif.conf DroidSerif*ttf
-%doc *.txt
+The Arabic block was designed by Pascal Zoghbi of 29ArabicLetters under the
+Droid Naskh name.}
+
+%global archivename google-droid-fonts-%{version}
+
+
+Source0:  %{archivename}.tar.xz
+# Brutal script used to pull sources from upstream git
+# Needs at least 2 Gib of space in /var/tmp
+Source1:  getdroid.sh
+Source11: 65-%{fontpkgname1}.xml
+Source12: 60-%{fontpkgname2}.xml
+Source13: 65-%{fontpkgname3}.xml
+
+Name:     google-droid-fonts
+Summary:  A set of general-purpose font families released by Google as part of Android
+# Added for RHEL 8 compilation
+BuildRequires: fonts-rpm-macros
+
+%description
+%wordwrap -v common_description
+
+%fontpkg -a
+
+%fontmetapkg
 
 %prep
-%setup -q -c -T
-install -m 0644 -p %{SOURCE0} notice.txt
-install -m 0644 -p %{SOURCE1} readme.txt
-
+%setup -q -n %{archivename}
 
 %build
-
+%fontbuild -a
 
 %install
-rm -fr %{buildroot}
+%fontinstall -a
 
-install -m 0755 -d %{buildroot}%{_fontdir}
+%check
+%fontcheck -a
 
-install -m 0644 -p  %{SOURCE10} %{SOURCE11} %{SOURCE12} %{SOURCE13} \
-                    %{SOURCE14} %{SOURCE15} %{SOURCE16} \
-                    %{SOURCE20} \
-                    %{SOURCE30} %{SOURCE31} %{SOURCE32} %{SOURCE33}\
-                    %{buildroot}%{_fontdir}
-
-install -m 0755 -d %{buildroot}%{_fontconfig_templatedir} \
-                   %{buildroot}%{_fontconfig_confdir}
-
-install -m 0644 -p %{SOURCE41} \
-        %{buildroot}%{_fontconfig_templatedir}/65-%{fontname}-sans.conf
-install -m 0644 -p %{SOURCE42} \
-        %{buildroot}%{_fontconfig_templatedir}/60-%{fontname}-sans-mono.conf
-install -m 0644 -p %{SOURCE43} \
-        %{buildroot}%{_fontconfig_templatedir}/59-%{fontname}-serif.conf
-
-for fontconf in 65-%{fontname}-sans.conf \
-                60-%{fontname}-sans-mono.conf \
-                59-%{fontname}-serif.conf ; do
-  ln -s %{_fontconfig_templatedir}/$fontconf \
-        %{buildroot}%{_fontconfig_confdir}/$fontconf
-done
-
-
-%clean
-rm -fr %{buildroot}
-
+%fontfiles -a
 
 %changelog
-* Sat Sep  5 2015 Nico Kadel-Garcia <nkadel@gmail.com> - 20100409-0.1
-- Port to RHEL 7, roll back release to avoid upstream repository
+* Mon Aug 09 2021 Mohan Boddu <mboddu@redhat.com> - 20200215-11.1
+- Rebuilt for IMA sigs, glibc 2.34, aarch64 flags
+  Related: rhbz#1991688
 
-* Sun Jul 25 2010 Nicolas Mailhot <nicolas.mailhot at laposte.net>
-- 20100409-1
-— Update to upstream's latest data dump
-— Add Arabic, Hebrew, Thai coverage to Sans
+* Tue Jun 15 2021 Akira TAGOH <tagoh@redhat.com> - 20200215-10.1
+- Add OFL to License tag for DroidSansDevanagari font.
+  Resolves: rhbz#1972027
 
-* Mon Sep 28 2009 Nicolas Mailhot <nicolas.mailhot at laposte.net>
-- 20090906-5
-— Tweak the fontconfig fixing
+* Thu Apr 15 2021 Mohan Boddu <mboddu@redhat.com> - 20200215-10
+- Rebuilt for RHEL 9 BETA on Apr 15th 2021. Related: rhbz#1947937
 
-* Sun Sep 13 2009 Nicolas Mailhot <nicolas.mailhot at laposte.net>
-- 20090906-4
-— follow the fontpackages template more closely
-- 20090906-3
-— more Behdad-suggested fontconfig tweaks
+* Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 20200215-9
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
 
-* Mon Sep  7 2009 Nicolas Mailhot <nicolas.mailhot at laposte.net>
-- 20090906-2
-— first-level CJK fixes (as suggested by Behdad in bug #517789, complete fix
-   needs the rpm changes traced in bug #521697)
+* Fri Sep 11 2020 Parag Nemade <pnemade AT redhat DOT com>
+- 20200215-8
+- Fix this spec file to build for F33+
 
-* Sun Sep  6 2009 Nicolas Mailhot <nicolas.mailhot at laposte.net>
-- 20090906-1
-— upstream stealth update
+* Tue Jul 28 2020 Fedora Release Engineering <releng@fedoraproject.org>
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
 
-* Sat Jul 25 2009 Nicolas Mailhot <nicolas.mailhot at laposte.net>
-- 20090320-3
-— try to fit Japanese in
+* Mon Apr 27 2020 Nicolas Mailhot <nim@fedoraproject.org>
+- 20200215-6
+🐞 Workaround Fedora problems created by rpm commit 93604e2
 
-* Fri Jul 24 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org>
-- 1.0.112-7
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
+* Thu Apr 02 2020 Nicolas Mailhot <nim@fedoraproject.org>
+- 20200215-5
+💥 Actually rebuild with fonts-rpm-macros 2.0.4 to make sure fontconfig files are
+  valid
 
-* Tue Feb 24 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 1.0.112-6
-- Rebuilt for https://fedoraproject.org/wiki/Fedora_11_Mass_Rebuild
+* Thu Apr 02 2020 Nicolas Mailhot <nim@fedoraproject.org>
+- 20200215-4
+👻 Rebuild with fonts-rpm-macros 2.0.4 to make sure fontconfig files are valid
 
-* Mon Feb 16 2009 Nicolas Mailhot <nicolas.mailhot at laposte.net>
-- 1.0.112-5
-— prepare for F11 mass rebuild, new rpm and new fontpackages
+* Mon Mar 02 2020 Nicolas Mailhot <nim@fedoraproject.org>
+- 20200215-3
+✅ Lint, lint, lint and lint again
 
-* Sat Jan 31 2009 Nicolas Mailhot <nicolas.mailhot at laposte.net>
-- 1.0.112-4
-⬨ fix-up fontconfig installation for sans and mono
+* Sat Feb 22 2020 Nicolas Mailhot <nim@fedoraproject.org>
+- 20200215-2
+✅ Rebuild with fonts-rpm-macros 2.0.2
 
-* Fri Jan 16 2009 Nicolas Mailhot <nicolas.mailhot at laposte.net>
-- 1.0.112-3
-⁉ Workaround RHEL5 rpmbuild UTF-8 handling bug
-- 1.0.112-2
-⁍ Convert to new naming guidelines
-⁍ Do strange stuff with Sans Fallback (CJK users please check)
+* Sat Feb 15 2020 Nicolas Mailhot <nim@fedoraproject.org>
+- 20200215-1
+✅ Convert to fonts-rpm-macros use
 
-* Tue Dec  9 2008 Nicolas Mailhot <nicolas.mailhot at laposte.net>
-- 1.0.112-1
-փ Licensing bit clarified in bug #472635
-շ Fedora submission
-
-* Sun Nov 23 2008 Nicolas Mailhot <nicolas.mailhot at laposte.net>
+* Sun Nov 23 2008 Nicolas Mailhot <nim@fedoraproject.org>
 - 1.0.107-1
-Ϫ Initial built using “fontpackages”
-
+✅ Initial packaging

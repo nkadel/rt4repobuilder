@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<!-- SPDX-License-Identifier: MIT -->
+<fontconfig>
+  <group>
+    <target>Droid Serif</target>
+    <match>
+      <family>Droid Arabic Naskh</family>
+      <good-lang>ar</good-lang>
+      <good-lang>az-ir</good-lang>
+      <good-lang>fa</good-lang>
+      <good-lang>ku-iq</good-lang>
+      <good-lang>ku-ir</good-lang>
+      <good-lang>lah</good-lang>
+      <good-lang>ota</good-lang>
+      <good-lang>pa-pk</good-lang>
+      <good-lang>ps-af</good-lang>
+      <good-lang>ps-pk</good-lang>
+      <good-lang>sd</good-lang>
+      <good-lang>ug</good-lang>
+      <good-lang>ur</good-lang>
+    </match>
+    <like>
+      <family>Noto Serif</family>
+      <family>Droid Naskh Shift Alt</family>
+      <family>serif</family>
+    </like>
+  </group>
+</fontconfig>
+

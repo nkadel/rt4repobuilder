@@ -1,16 +1,18 @@
 #
-# Build mock and local RPM versions of tools for Rt4
+# Build mock and local RPM versions of tools for Ansible
 #
 
 # Assure that sorting is case sensitive
 LANG=C
+#MOCKS+=rt4repo-7-x86_64
 MOCKS+=rt4repo-8-x86_64
 MOCKS+=rt4repo-9-x86_64
-MOCKS+=rt4repo-f38-x86_64
+#MOCKS+=rt4repo-f38-x86_64
 #MOCKS+=rt4repo-amz2-x86_64
 
 MOCKCFGS+=$(MOCKS)
 
+#REPOBASEDIR=/var/www/linux/rt4repo
 REPOBASEDIR:=`/bin/pwd`/../rt4repo
 
 SPEC := `ls *.spec`

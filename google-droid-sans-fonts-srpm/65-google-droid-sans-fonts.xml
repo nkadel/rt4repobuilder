@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+<!-- SPDX-License-Identifier: MIT -->
+<fontconfig>
+  <group>
+    <target>Droid Sans</target>
+    <match>
+      <family>Droid Sans Hebrew</family>
+      <good-lang>he</good-lang>
+      <good-lang>yi</good-lang>
+    </match>
+    <match>
+      <family>Droid Sans Armenian</family>
+      <good-lang>hy</good-lang>
+    </match>
+    <match>
+      <family>Droid Sans Georgian</family>
+      <good-lang>ka</good-lang>
+    </match>
+    <match>
+      <family>Droid Sans Ethiopic</family>
+      <good-lang>am</good-lang>
+      <good-lang>byn</good-lang>
+      <good-lang>gez</good-lang>
+      <good-lang>sid</good-lang>
+      <good-lang>ti-er</good-lang>
+      <good-lang>ti-et</good-lang>
+      <good-lang>tig</good-lang>
+      <good-lang>wal</good-lang>
+    </match>
+    <match>
+      <family>Droid Sans Devanagari</family>
+      <good-lang>bh</good-lang>
+      <good-lang>bho</good-lang>
+      <good-lang>brx</good-lang>
+      <good-lang>doi</good-lang>
+      <good-lang>hi</good-lang>
+      <good-lang>hne</good-lang>
+      <good-lang>kok</good-lang>
+      <good-lang>mai</good-lang>
+      <good-lang>mr</good-lang>
+      <good-lang>ne</good-lang>
+      <good-lang>sa</good-lang>
+      <good-lang>sat</good-lang>
+    </match>
+    <match>
+      <family>Droid Sans Tamil</family>
+      <good-lang>ta</good-lang>
+    </match>
+    <match>
+      <family>Droid Sans Thai</family>
+      <good-lang>th</good-lang>
+    </match>
+    <match>
+      <family>Droid Arabic Kufi</family>
+      <good-lang>ar</good-lang>
+      <good-lang>az-ir</good-lang>
+      <good-lang>fa</good-lang>
+      <good-lang>ku-iq</good-lang>
+      <good-lang>ku-ir</good-lang>
+      <good-lang>lah</good-lang>
+      <good-lang>ota</good-lang>
+      <good-lang>pa-pk</good-lang>
+      <good-lang>ps-af</good-lang>
+      <good-lang>ps-pk</good-lang>
+      <good-lang>sd</good-lang>
+      <good-lang>ug</good-lang>
+      <good-lang>ur</good-lang>
+    </match>
+    <match>
+      <family>Droid Sans Japanese</family>
+      <good-lang>ja</good-lang>
+    </match>
+    <family>Droid Sans Fallback</family>
+    <like>
+      <family>Droid Sans Arabic</family>
+      <family>Noto Sans</family>
+      <family>Open Sans</family>
+      <family>sans-serif</family>
+    </like>
+  </group>
+</fontconfig>
+
