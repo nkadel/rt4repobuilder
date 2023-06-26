@@ -1,0 +1,70 @@
+From 0a397e7c8ff649364fe6c9a8dc7e3a61fbf02c9a Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ralf=20Cors=C3=A9pius?= <corsepiu@fedoraproject.org>
+Date: Mon, 15 May 2023 22:12:28 +0200
+Subject: [PATCH 8/8] Apply $RT::StaticPath to pickup scripts
+
+---
+ t/api/attachment_filename.t  | 6 +++---
+ t/externalstorage/basic.t    | 6 +++---
+ t/externalstorage/encoding.t | 2 +-
+ 3 files changed, 7 insertions(+), 7 deletions(-)
+
+diff --git a/t/api/attachment_filename.t b/t/api/attachment_filename.t
+index aa8acd2d92..cf4bdcc54b 100644
+--- a/t/api/attachment_filename.t
++++ b/t/api/attachment_filename.t
+@@ -10,18 +10,18 @@ my $mime   = MIME::Entity->build(
+ );
+ 
+ $mime->attach(
+-    Path     => 'share/static/images/bpslogo.png',
++    Path     => $RT::StaticPath . '/images/bpslogo.png',
+     Type     => 'image/png',
+ );
+ 
+ $mime->attach(
+-    Path     => 'share/static/images/bpslogo.png',
++    Path     => $RT::StaticPath . '/images/bpslogo.png',
+     Type     => 'image/png',
+     Filename => 'bpslogo.png',
+ );
+ 
+ $mime->attach(
+-    Path     => 'share/static/images/bpslogo.png',
++    Path     => $RT::StaticPath . '/images/bpslogo.png',
+     Filename => 'images/bpslogo.png',
+     Type     => 'image/png',
+ );
+diff --git a/t/externalstorage/basic.t b/t/externalstorage/basic.t
+index 1c88589c84..934355c0ad 100644
+--- a/t/externalstorage/basic.t
++++ b/t/externalstorage/basic.t
+@@ -62,9 +62,9 @@ my $dir = RT::Test::ExternalStorage->attachments_dir;
+ ok !<$dir/*>, "Attachments directory is empty";
+ 
+ 
+-ok -e 'sbin/rt-externalize-attachments', "Found rt-externalize-attachments script";
+-ok -x 'sbin/rt-externalize-attachments', "rt-externalize-attachments is executable";
+-ok( RT::Test->run_singleton_command('sbin/rt-externalize-attachments'), "rt-externalize-attachments ran successfully" );
++ok -e $RT::SbinPath . '/rt-externalize-attachments', "Found rt-externalize-attachments script";
++ok -x $RT::SbinPath . '/rt-externalize-attachments', "rt-externalize-attachments is executable";
++ok( RT::Test->run_singleton_command($RT::SbinPath . '/rt-externalize-attachments'), "rt-externalize-attachments ran successfully" );
+ 
+ @attachs = @{ $ticket->Transactions->First->Attachments->ItemsArrayRef };
+ is $attachs[1]->Content, 'test', "Can still get the text part content";
+diff --git a/t/externalstorage/encoding.t b/t/externalstorage/encoding.t
+index 667a487d78..a5af438c00 100644
+--- a/t/externalstorage/encoding.t
++++ b/t/externalstorage/encoding.t
+@@ -32,7 +32,7 @@ is scalar @attachments, 1, "Found one attachment";
+ is $attachments[0]->ContentType, "text/plain", "Found the text part";
+ is $attachments[0]->Content, $non_english_text, "Can get the text part content";
+ 
+-ok( RT::Test->run_singleton_command('sbin/rt-externalize-attachments'), "rt-externalize-attachments ran successfully" );
++ok( RT::Test->run_singleton_command($RT::SbinPath . '/rt-externalize-attachments'), "rt-externalize-attachments ran successfully" );
+ 
+ @attachments = @{ $ticket->Transactions->First->Attachments->ItemsArrayRef };
+ is scalar @attachments, 1, "Found one attachment";
+-- 
+2.40.1
+

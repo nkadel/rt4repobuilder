@@ -1,0 +1,24 @@
+From a695a24393fc88b1d7dfc6a228f6a0c258da3b5b Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ralf=20Cors=C3=A9pius?= <corsepiu@fedoraproject.org>
+Date: Mon, 15 May 2023 22:10:44 +0200
+Subject: [PATCH 7/8] Install rt-clean-shorteners
+
+---
+ Makefile.in | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/Makefile.in b/Makefile.in
+index a906bf5650..a35759e3f9 100644
+--- a/Makefile.in
++++ b/Makefile.in
+@@ -142,6 +142,7 @@ SYSTEM_BINARIES		=	rt-attributes-viewer \
+ 				rt-munge-attachments \
+ 				rt-clean-attributes \
+ 				rt-clean-sessions \
++				rt-clean-shorteners \
+ 				rt-dump-initialdata \
+ 				rt-dump-metadata \
+ 				rt-email-dashboards \
+-- 
+2.40.1
+

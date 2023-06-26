@@ -1,0 +1,80 @@
+From 87080173a1f3e8e4361fd7d62c36c2a88551c8f6 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Ralf=20Cors=C3=A9pius?= <corsepiu@fedoraproject.org>
+Date: Tue, 16 May 2023 11:54:44 +0200
+Subject: [PATCH 9/9] Fedora testsuite hacks
+
+---
+ t/web/basic.t                      | 2 +-
+ t/web/compilation_errors.t         | 8 ++++----
+ t/web/helpers-http-cache-headers.t | 2 +-
+ 3 files changed, 6 insertions(+), 6 deletions(-)
+
+diff --git a/t/web/basic.t b/t/web/basic.t
+index 535b54033c..d8d4e03031 100644
+--- a/t/web/basic.t
++++ b/t/web/basic.t
+@@ -79,7 +79,7 @@ my $url = $agent->rt_base_url;
+ $agent->get( $url."static/images/test.png" );
+ my $file = RT::Test::get_relocatable_file(
+   File::Spec->catfile(
+-    qw(.. .. share static images test.png)
++    qw(.. .. .. .. .. share rt static images test.png)
+   )
+ );
+ is(
+diff --git a/t/web/compilation_errors.t b/t/web/compilation_errors.t
+index 29801f0767..0c486e5f48 100644
+--- a/t/web/compilation_errors.t
++++ b/t/web/compilation_errors.t
+@@ -10,7 +10,7 @@ BEGIN {
+         -f && /\.html$/ && $_ !~ /Logout.html$/ && $File::Find::dir !~ /RichText/;
+     }
+     my $tests = 7;
+-    find( sub { wanted() and $tests += 4 }, 'share/html/', 'share/html/SelfService/' );
++    find( sub { wanted() and $tests += 4 }, '/usr/share/rt/html/', '/usr/share/rt/html/SelfService/' );
+     plan tests => $tests + 1; # plus one for warnings check
+ }
+ 
+@@ -39,7 +39,7 @@ is($agent->status, HTTP::Status::HTTP_OK, "Fetched the page ok");
+ $agent->content_contains('Logout', "Found a logout link");
+ 
+ 
+-find ( { wanted => sub { wanted() and test_get($agent, $File::Find::name) }, no_chdir => 1 } , 'share/html/');
++find ( { wanted => sub { wanted() and test_get($agent, $File::Find::name) }, no_chdir => 1 } , '/usr/share/rt/html/');
+ 
+ my $customer = RT::Test->load_or_create_user(
+     Name         => 'user1',
+@@ -51,7 +51,7 @@ my $customer = RT::Test->load_or_create_user(
+ RT::Test->add_rights( { Principal => 'Everyone', Right => [qw(CreateTicket SeeQueue)] } );
+ 
+ $agent->login( user1 => 'password', logout => 1 );
+-find( { wanted => sub { wanted() and test_get( $agent, $File::Find::name ) }, no_chdir => 1 }, 'share/html/SelfService' );
++find( { wanted => sub { wanted() and test_get( $agent, $File::Find::name ) }, no_chdir => 1 }, '/usr/share/rt/html/SelfService' );
+ 
+ # We expect to spew a lot of warnings; toss them away
+ $agent->get_warnings;
+@@ -60,7 +60,7 @@ sub test_get {
+     my $agent = shift;
+         my $file = shift;
+ 
+-        $file =~ s#^share/html/##;
++        $file =~ s#^share/rt/html/##;
+         diag( "testing $url/$file" );
+ 
+         $agent->get("$url/$file");
+diff --git a/t/web/helpers-http-cache-headers.t b/t/web/helpers-http-cache-headers.t
+index 2e661a231b..674b4f80cb 100644
+--- a/t/web/helpers-http-cache-headers.t
++++ b/t/web/helpers-http-cache-headers.t
+@@ -20,7 +20,7 @@ BEGIN {
+ my ($base, $m) = RT::Test->started_ok;
+ ok $m->login, 'logged in';
+ 
+-my $docroot = join '/', qw(share html);
++my $docroot = '/usr/share/rt/html' ;
+ 
+ # files to exclude from testing headers
+ my @exclude = (
+-- 
+2.40.1
+
