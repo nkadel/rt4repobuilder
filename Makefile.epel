@@ -1,5 +1,5 @@
 #
-# Build mock and local RPM versions of tools for rt4
+# Build mock and local RPM versions of tools for rt5
 #
 
 # Assure that sorting is case sensitive
@@ -7,13 +7,13 @@ LANG=C
 
 MOCKS+=centos-stream+epel-8-x86_64
 MOCKS+=centos-stream+epel-9-x86_64
-MOCKS+=fedora-38-x86_64
+#MOCKS+=fedora-38-x86_64
 
-MOCKCFGS+=rt4repo-8-x86_64
-MOCKCFGS+=rt4repo-9-x86_64
-MOCKCFGS+=rt4repo-f38-x86_64
+MOCKCFGS+=rt5repo-8-x86_64
+MOCKCFGS+=rt5repo-9-x86_64
+#MOCKCFGS+=rt5repo-f38-x86_64
 
-REPOBASEDIR:=`/bin/pwd`/../rt4repo
+REPOBASEDIR:=`/bin/pwd`/../rt5repo
 
 SPEC := `ls *.spec`
 

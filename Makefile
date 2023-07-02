@@ -24,69 +24,69 @@ CFGS+=fedora-38-x86_64.cfg
 REPOBASEDIR:=`/bin/pwd`/../rt5repo
 
 # These build with normal mock "epel-*" setups
-#EPELPKGS+=google-droid-sans-fonts-srpm
-#EPELPKGS+=perl-Authen-Simple-srpm
 EPELPKGS+=perl-CGI-PSGI-srpm
+EPELPKGS+=perl-CSS-Minifier-srpm
 EPELPKGS+=perl-CSS-Squish-srpm
-#EPELPKGS+=perl-Cache-Simple-TimedExpiry-srpm
-#EPELPKGS+=perl-Calendar-Simple-srpm
 EPELPKGS+=perl-Capture-Tiny-srpm
 EPELPKGS+=perl-Carp-Assert-srpm
 EPELPKGS+=perl-Class-Accessor-Chained-srpm
-#EPELPKGS+=perl-Class-Accessor-Lite-srpm
-#EPELPKGS+=perl-Class-Accessor-srpm
 EPELPKGS+=perl-Class-Container-srpm
-#EPELPKGS+=perl-Class-ReturnValue-srpm
-EPELPKGS+=perl-CSS-Minifier-srpm
-#EPELPKGS+=perl-Crypt-Eksblowfish-srpm
-#EPELPKGS+=perl-DBIx-DBschema-srpm
-#EPELPKGS+=perl-Devel-StackTrace-AsHTML-srpm
-#EPELPKGS+=perl-Devel-StackTrace-srpm
 EPELPKGS+=perl-Digest-JHash-srpm
-#EPELPKGS+=perl-Encode-srpm
 EPELPKGS+=perl-Expect-Simple-srpm
-#EPELPKGS+=perl-ExtUtils-Installed-srpm
-#EPELPKGS+=perl-GnuP{G-Interface-srpm
 EPELPKGS+=perl-Guard-srpm
-EPELPKGS+=perl-Hash-MoreUtils-srpm
 EPELPKGS+=perl-HTTP-Entity-Parser-srpm
 EPELPKGS+=perl-HTTP-Headers-ActionPack-srpm
 EPELPKGS+=perl-HTTP-Server-Simple-srpm
+EPELPKGS+=perl-Hash-MoreUtils-srpm
 EPELPKGS+=perl-IO-Compress-Brotli-srpm
 EPELPKGS+=perl-Lingua-EN-Sentence-srpm
-#EPELPKGS+=perl-List-UtilsBy-srpm
 EPELPKGS+=perl-Locale-Maketext-Fuzzy-srpm
 EPELPKGS+=perl-Log-Any-srpm
 EPELPKGS+=perl-Log-Dispatch-Perl-srpm
 EPELPKGS+=perl-Mail-POP3Client-srpm
-#EPELPKGS+=perl-Module-Util-srpm
 EPELPKGS+=perl-Moox-Types-MooseLike-Numeric-srpm
-#EPELPKGS+=perl-PadWalker-srpm
 EPELPKGS+=perl-PerlIP-eol-srpm
 EPELPKGS+=perl-Proc-Wait3-srpm
 EPELPKGS+=perl-Regexp-Common-net-CIDR-srpm
 EPELPKGS+=perl-Regexp-IPv6-srpm
 EPELPKGS+=perl-Role-Basic-srpm
-#EPELPKGS+=perl-Scope-Guard-srpm
-EPELPKGS+=perl-Set-Tiny-srpm
 EPELPKGS+=perl-Set-IntSpan-srpm
+EPELPKGS+=perl-Set-Tiny-srpm
 EPELPKGS+=perl-String-RewritePrefix-srpm
 EPELPKGS+=perl-Symbol-Global-Name-srpm
-#EPELPKGS+=perl-Test-CheckManifest-srpm
 EPELPKGS+=perl-Test-DiagINC-srpm
 EPELPKGS+=perl-Test-Log-Dispatch-srpm
-#EPELPKGS+=perl-Test-Simple-srpm
 EPELPKGS+=perl-Text-Haml-srpm
 EPELPKGS+=perl-Text-Password-Pronounceable-srpm
 EPELPKGS+=perl-Text-Quoted-srpm
 EPELPKGS+=perl-Text-WikiFormat-srpm
 EPELPKGS+=perl-Text-WordDiff-srpm
 EPELPKGS+=perl-Text-Wrapper-srpm
-EPELPKGS+=perl-Text-WikiFormat-srpm
 EPELPKGS+=perl-Time-Duration-Parse-srpm
 EPELPKGS+=perl-Tree-Simple-srpm
-#EPELPKGS+=perl-URI-srpm
 EPELPKGS+=perl-XML-RSS-srpm
+
+#EPELPKGS+=google-droid-sans-fonts-srpm
+#EPELPKGS+=perl-Authen-Simple-srpm
+#EPELPKGS+=perl-Cache-Simple-TimedExpiry-srpm
+#EPELPKGS+=perl-Calendar-Simple-srpm
+#EPELPKGS+=perl-Class-Accessor-Lite-srpm
+#EPELPKGS+=perl-Class-Accessor-srpm
+#EPELPKGS+=perl-Class-ReturnValue-srpm
+#EPELPKGS+=perl-Crypt-Eksblowfish-srpm
+#EPELPKGS+=perl-DBIx-DBschema-srpm
+#EPELPKGS+=perl-Devel-StackTrace-AsHTML-srpm
+#EPELPKGS+=perl-Devel-StackTrace-srpm
+#EPELPKGS+=perl-Encode-srpm
+#EPELPKGS+=perl-ExtUtils-Installed-srpm
+#EPELPKGS+=perl-GnuP{G-Interface-srpm
+#EPELPKGS+=perl-List-UtilsBy-srpm
+#EPELPKGS+=perl-Module-Util-srpm
+#EPELPKGS+=perl-PadWalker-srpm
+#EPELPKGS+=perl-Scope-Guard-srpm
+#EPELPKGS+=perl-Test-CheckManifest-srpm
+#EPELPKGS+=perl-Test-Simple-srpm
+#EPELPKGS+=perl-URI-srpm
 #EPELPKGS+=perl-capitalization-srpm
 
 ## Require customized rt5repo local repository for dependencies
@@ -210,12 +210,10 @@ $(CFGS)::
 	@echo Generating $@ from $?
 	@echo "include('/etc/mock/$@')" | tee $@
 
-
 ## This will only work with DNF and when repo is configured with modules=1 for repo in dnf.conf.
 ## This is executed just before 'chroot_setup_cmd'.
 # config_opts['module_enable'] = ['list', 'of', 'modules']
 # config_opts['module_install'] = ['module1/profile', 'module2/profile']
-
 
 #mock -r fedora-30-x86_64 --config-opts module_enable=postgresql:9.6 --config-opts module_enable= --install postgresql-server
 rt5repo-8-x86_64.cfg: /etc/mock/centos-stream+epel-8-x86_64.cfg
