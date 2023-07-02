@@ -2,31 +2,32 @@
 # Makefile - build wrapper for Rt 4 on RHEL 6
 #
 #	git clone RHEL 6 SRPM building tools from
-#	https://github.com/nkadel/rt4repo
+#	https://github.com/nkadel/rt5repo
 
 REPOBASE=file://$(PWD)
 
 # Base subdirectories for RPM deployment
-REPOS+=rt4repo/el/8
-REPOS+=rt4repo/el/9
-REPOS+=rt4repo/fedora/38
+REPOS+=rt5repo/el/8
+REPOS+=rt5repo/el/9
+REPOS+=rt5repo/fedora/38
 
 REPODIRS := $(patsubst %,%/x86_64/repodata,$(REPOS)) $(patsubst %,%/SRPMS/repodata,$(REPOS))
 
-MOCKCFGS+=rt4repo-8-x86_64.cfg
-MOCKCFGS+=rt4repo-9-x86_64.cfg
-MOCKCFGS+=rt4repo-f38-x86_64.cfg
+MOCKCFGS+=rt5repo-8-x86_64.cfg
+MOCKCFGS+=rt5repo-9-x86_64.cfg
+MOCKCFGS+=rt5repo-f38-x86_64.cfg
 
 CFGS+=centos-stream+epel-8-x86_64.cfg
 CFGS+=centos-stream+epel-9-x86_64.cfg
 CFGS+=fedora-38-x86_64.cfg
 
-REPOBASEDIR:=`/bin/pwd`/../rt4repo
+REPOBASEDIR:=`/bin/pwd`/../rt5repo
 
 # These build with normal mock "epel-*" setups
 #EPELPKGS+=google-droid-sans-fonts-srpm
 #EPELPKGS+=perl-Authen-Simple-srpm
 EPELPKGS+=perl-CGI-PSGI-srpm
+EPELPKGS+=perl-CSS-Squish-srpm
 #EPELPKGS+=perl-Cache-Simple-TimedExpiry-srpm
 #EPELPKGS+=perl-Calendar-Simple-srpm
 EPELPKGS+=perl-Capture-Tiny-srpm
@@ -51,6 +52,7 @@ EPELPKGS+=perl-Hash-MoreUtils-srpm
 EPELPKGS+=perl-HTTP-Entity-Parser-srpm
 EPELPKGS+=perl-HTTP-Headers-ActionPack-srpm
 EPELPKGS+=perl-HTTP-Server-Simple-srpm
+EPELPKGS+=perl-IO-Compress-Brotli-srpm
 EPELPKGS+=perl-Lingua-EN-Sentence-srpm
 #EPELPKGS+=perl-List-UtilsBy-srpm
 EPELPKGS+=perl-Locale-Maketext-Fuzzy-srpm
@@ -87,103 +89,105 @@ EPELPKGS+=perl-Tree-Simple-srpm
 EPELPKGS+=perl-XML-RSS-srpm
 #EPELPKGS+=perl-capitalization-srpm
 
-## Require customized rt4repo local repository for dependencies
+## Require customized rt5repo local repository for dependencies
 ## Needed by various packages
 #
-RT4PKGS+=perl-Locale-Maketext-Lexicon-srpm
+RT5PKGS+=perl-Locale-Maketext-Lexicon-srpm
 
-#RT4PKGS+=perl-Authen-Simple-Passwd-srpm
-RT4PKGS+=perl-Business-Hours-srpm
+#RT5PKGS+=perl-Authen-Simple-Passwd-srpm
+RT5PKGS+=perl-Business-Hours-srpm
 
 # Requires HTTP::Headers::ActionPack
-RT4PKGS+=perl-Web-Machine-srpm
+RT5PKGS+=perl-Web-Machine-srpm
 
 # Requires HTTP::Server::Simple
-RT4PKGS+=perl-Test-HTTP-Server-Simple-srpm
+RT5PKGS+=perl-Test-HTTP-Server-Simple-srpm
 
 ## Now requires perl-Cache-Simple-TimedExpiry-srpm
-#RT4PKGS+=perl-DBIx-SearchBuilder-srpm
+#RT5PKGS+=perl-DBIx-SearchBuilder-srpm
 #
 ## Dependencies for perl-Test-ShardFork-srpm and perl-CHI
-#RT4PKGS+=perl-ExtUtils-MakeMaker-srpm
+#RT5PKGS+=perl-ExtUtils-MakeMaker-srpm
 #
 ## Dependencies for perl-Test-TCP-srpm
-#RT4PKGS+=perl-Test-SharedFork-srpm
-#RT4PKGS+=perl-Test-TCP-srpm
+#RT5PKGS+=perl-Test-SharedFork-srpm
+#RT5PKGS+=perl-Test-TCP-srpm
 #
 # Dependencies for perl-CHI
 # Dependency for perl-Log-Any-Adapter-Dispatch
 # Reuqires perl-Log-Any-srpm
-RT4PKGS+=perl-Log-Any-Adapter-srpm
-#RT4PKGS+=perl-Log-Any-Adapter-Dispatch-srpm
-RT4PKGS+=perl-Module-Mask-srpm
-RT4PKGS+=perl-CHI-srpm
+RT5PKGS+=perl-Log-Any-Adapter-srpm
+#RT5PKGS+=perl-Log-Any-Adapter-Dispatch-srpm
+RT5PKGS+=perl-Module-Mask-srpm
+RT5PKGS+=perl-CHI-srpm
 #
-#RT4PKGS+=perl-Convert-Color-srpm
+#RT5PKGS+=perl-Convert-Color-srpm
 #
 ## Dependency for perl-Data-ICal-srpm
-#RT4PKGS+=perl-Text-vFile-asData-srpm
-#RT4PKGS+=perl-Data-ICal-srpm
+#RT5PKGS+=perl-Text-vFile-asData-srpm
+#RT5PKGS+=perl-Data-ICal-srpm
 #
-#RT4PKGS+=perl-Devel-StackTrace-WithLexicals-srpm
+#RT5PKGS+=perl-Devel-StackTrace-WithLexicals-srpm
 #
+# Reauires perl-IO-Compress-Brotli-srpm
+RT5PKGS+=perl-HTTP-Message-srpm
 ## Dependency for perl-HTML-Mason-PSGIHandler-srpm
-#RT4PKGS+=perl-Plack-srpm
-RT4PKGS+=perl-HTML-Mason-srpm
-#RT4PKGS+=perl-HTML-Mason-PSGIHandler-srpm
+#RT5PKGS+=perl-Plack-srpm
+RT5PKGS+=perl-HTML-Mason-srpm
+#RT5PKGS+=perl-HTML-Mason-PSGIHandler-srpm
 #
-RT4PKGS+=perl-HTML-Quoted-srpm
-#RT4PKGS+=perl-HTML-RewriteAttributes-srpm
+RT5PKGS+=perl-HTML-Quoted-srpm
+#RT5PKGS+=perl-HTML-RewriteAttributes-srpm
 #
 # Requires perl-HTTP-Server-Simple-srpm
-RT4PKGS+=perl-HTTP-Server-Simple-Mason-srpm
+RT5PKGS+=perl-HTTP-Server-Simple-Mason-srpm
 #
 # Dependency for perl-Parallel-Prefork-srpm
-RT4PKGS+=perl-Parallel-Scoreboard-srpm
-RT4PKGS+=perl-Parallel-Prefork-srpm
+RT5PKGS+=perl-Parallel-Scoreboard-srpm
+RT5PKGS+=perl-Parallel-Prefork-srpm
 #
-RT4PKGS+=perl-Server-Starter-srpm
-RT4PKGS+=perl-Starlet-srpm
+RT5PKGS+=perl-Server-Starter-srpm
+RT5PKGS+=perl-Starlet-srpm
 #
-RT4PKGS+=perl-Test-Expert-srpm
+RT5PKGS+=perl-Test-Expert-srpm
 #
 # Dependencies for perl-Test-Email-srpm
-RT4PKGS+=perl-Test-Email-srpm
+RT5PKGS+=perl-Test-Email-srpm
 #
 # Requires perl-Carp-Assert
-RT4PKGS+=perl-Carp-Assert-More-srpm
+RT5PKGS+=perl-Carp-Assert-More-srpm
 
-#RT4PKGS+=perl-Test-HTTP-Server-Simple-StashWarnings-srpm
+#RT5PKGS+=perl-Test-HTTP-Server-Simple-StashWarnings-srpm
 #
-RT4PKGS+=perl-Test-WWW-Mechanize-srpm
+RT5PKGS+=perl-Test-WWW-Mechanize-srpm
 #
 # Requiresperl-CSS-MinifieS-srpm
-RT4PKGS+=perl-CSS-Minifier-XS-srpm
+RT5PKGS+=perl-CSS-Minifier-XS-srpm
 
-## Needed for rt4-Test building
-RT4PKGS+=perl-Test-WWW-Mechanize-PSGI-srpm
-RT4PKGS+=perl-Plack-Middleware-Test-StashWarnings-srpm
+## Needed for rt5-Test building
+RT5PKGS+=perl-Test-WWW-Mechanize-PSGI-srpm
+RT5PKGS+=perl-Plack-Middleware-Test-StashWarnings-srpm
 #
 ## Add-on utilities, can be compiled with rt3 from EPEL,
-## but use rt4 from local builds
-#RT4PKGS+=perl-RT-Extension-CommandByMail-srpm
-#RT4PKGS+=perl-RT-Extension-MandatoryFields-srpm
+## but use rt5 from local builds
+#RT5PKGS+=perl-RT-Extension-CommandByMail-srpm
+#RT5PKGS+=perl-RT-Extension-MandatoryFields-srpm
 
-RT4PKGS+=perl-Business-Hours-srpm
+RT5PKGS+=perl-Business-Hours-srpm
 
 # Final product
-RT4PKGS+=rt-srpm
+RT5PKGS+=rt-srpm
 
-# Populate rt4repo with packages compatible with just EPEL
+# Populate rt5repo with packages compatible with just EPEL
 all:: epel-install
 
-# Populate rt4repo with packages that require rt4repo
-all:: rt4-install
+# Populate rt5repo with packages that require rt5repo
+all:: rt5-install
 
 install:: $(CFGS)
 install:: $(MOCKCFGS)
 install:: $(REPODIRS)
-install:: $(RT4PKGS)
+install:: $(RT5PKGS)
 
 repodirs: $(REPOS) $(REPODIRS)
 repos: $(REPOS) $(REPODIRS)
@@ -206,17 +210,25 @@ $(CFGS)::
 	@echo Generating $@ from $?
 	@echo "include('/etc/mock/$@')" | tee $@
 
-rt4repo-8-x86_64.cfg: /etc/mock/centos-stream+epel-8-x86_64.cfg
+
+## This will only work with DNF and when repo is configured with modules=1 for repo in dnf.conf.
+## This is executed just before 'chroot_setup_cmd'.
+# config_opts['module_enable'] = ['list', 'of', 'modules']
+# config_opts['module_install'] = ['module1/profile', 'module2/profile']
+
+
+#mock -r fedora-30-x86_64 --config-opts module_enable=postgresql:9.6 --config-opts module_enable= --install postgresql-server
+rt5repo-8-x86_64.cfg: /etc/mock/centos-stream+epel-8-x86_64.cfg
 	@echo Generating $@ from $?
 	@echo "include('$?')" | tee $@
-	@echo "config_opts['root'] = 'rt4repo-{{ releasever }}-{{ target_arch }}'" | tee -a $@
+	@echo "config_opts['root'] = 'rt5repo-{{ releasever }}-{{ target_arch }}'" | tee -a $@
 	@echo "# Disable best" | tee -a $@
 	@echo "config_opts['dnf_vars'] = { 'best': 'False' }" | tee -a $@
 	@echo "config_opts['dnf.conf'] += \"\"\"" | tee -a $@
-	@echo '[rt4repo]' | tee -a $@
-	@echo 'name=rt4repo' | tee -a $@
+	@echo '[rt5repo]' | tee -a $@
+	@echo 'name=rt5repo' | tee -a $@
 	@echo 'enabled=1' | tee -a $@
-	@echo 'baseurl=$(REPOBASE)/rt4repo/el/8/x86_64/' | tee -a $@
+	@echo 'baseurl=$(REPOBASE)/rt5repo/el/8/x86_64/' | tee -a $@
 	@echo 'skip_if_unavailable=False' | tee -a $@
 	@echo 'metadata_expire=1s' | tee -a $@
 	@echo 'gpgcheck=0' | tee -a $@
@@ -229,17 +241,17 @@ rt4repo-8-x86_64.cfg: /etc/mock/centos-stream+epel-8-x86_64.cfg
 	@echo 'gpgkey=https://packages.microsoft.com/keys/microsoft.asc' | tee -a $@
 	@echo '"""' | tee -a $@
 
-rt4repo-9-x86_64.cfg: /etc/mock/centos-stream+epel-9-x86_64.cfg
+rt5repo-9-x86_64.cfg: /etc/mock/centos-stream+epel-9-x86_64.cfg
 	@echo Generating $@ from $?
 	@echo "include('$?')" | tee $@
-	@echo "config_opts['root'] = 'rt4repo-{{ releasever }}-{{ target_arch }}'" | tee -a $@
+	@echo "config_opts['root'] = 'rt5repo-{{ releasever }}-{{ target_arch }}'" | tee -a $@
 	@echo "# Disable best" | tee -a $@
 	@echo "config_opts['dnf_vars'] = { 'best': 'False' }" | tee -a $@
 	@echo "config_opts['dnf.conf'] += \"\"\"" | tee -a $@
-	@echo '[rt4repo]' | tee -a $@
-	@echo 'name=rt4repo' | tee -a $@
+	@echo '[rt5repo]' | tee -a $@
+	@echo 'name=rt5repo' | tee -a $@
 	@echo 'enabled=1' | tee -a $@
-	@echo 'baseurl=$(REPOBASE)/rt4repo/el/9/x86_64/' | tee -a $@
+	@echo 'baseurl=$(REPOBASE)/rt5repo/el/9/x86_64/' | tee -a $@
 	@echo 'skip_if_unavailable=False' | tee -a $@
 	@echo 'metadata_expire=1s' | tee -a $@
 	@echo 'gpgcheck=0' | tee -a $@
@@ -252,40 +264,40 @@ rt4repo-9-x86_64.cfg: /etc/mock/centos-stream+epel-9-x86_64.cfg
 	@echo 'gpgkey=https://packages.microsoft.com/keys/microsoft.asc' | tee -a $@
 	@echo '"""' | tee -a $@
 
-rt4repo-f38-x86_64.cfg: /etc/mock/fedora-38-x86_64.cfg
+rt5repo-f38-x86_64.cfg: /etc/mock/fedora-38-x86_64.cfg
 	@echo Generating $@ from $?
 	@echo "include('$?')" | tee $@
-	@echo "config_opts['root'] = 'rt4repo-f{{ releasever }}-{{ target_arch }}'" | tee -a $@
+	@echo "config_opts['root'] = 'rt5repo-f{{ releasever }}-{{ target_arch }}'" | tee -a $@
 	@echo "config_opts['dnf.conf'] += \"\"\"" | tee -a $@
-	@echo '[rt4repo]' | tee -a $@
-	@echo 'name=rt4repo' | tee -a $@
+	@echo '[rt5repo]' | tee -a $@
+	@echo 'name=rt5repo' | tee -a $@
 	@echo 'enabled=1' | tee -a $@
-	@echo 'baseurl=$(REPOBASE)/rt4repo/fedora/38/x86_64/' | tee -a $@
+	@echo 'baseurl=$(REPOBASE)/rt5repo/fedora/38/x86_64/' | tee -a $@
 	@echo 'skip_if_unavailable=False' | tee -a $@
 	@echo 'metadata_expire=1s' | tee -a $@
 	@echo 'gpgcheck=0' | tee -a $@
 	@echo '"""' | tee -a $@
 
-rt4repo-rawhide-x86_64.cfg: /etc/mock/fedora-rawhide-x86_64.cfg
+rt5repo-rawhide-x86_64.cfg: /etc/mock/fedora-rawhide-x86_64.cfg
 	@echo Generating $@ from $?
 	@echo "include('$?')" | tee $@
-	@echo "config_opts['root'] = 'rt4repo-rawhide-{{ target_arch }}'" | tee -a $@
+	@echo "config_opts['root'] = 'rt5repo-rawhide-{{ target_arch }}'" | tee -a $@
 	@echo "config_opts['dnf.conf'] += \"\"\"" | tee -a $@
-	@echo '[rt4repo]' | tee -a $@
-	@echo 'name=rt4repo' | tee -a $@
+	@echo '[rt5repo]' | tee -a $@
+	@echo 'name=rt5repo' | tee -a $@
 	@echo 'enabled=1' | tee -a $@
-	@echo 'baseurl=$(REPOBASE)/rt4repo/fedora/rawhide/x86_64/' | tee -a $@
+	@echo 'baseurl=$(REPOBASE)/rt5repo/fedora/rawhide/x86_64/' | tee -a $@
 	@echo 'skip_if_unavailable=False' | tee -a $@
 	@echo 'metadata_expire=1s' | tee -a $@
 	@echo 'gpgcheck=0' | tee -a $@
 	@echo '"""' | tee -a $@
 
 # Used for make build with local components
-rt4repo.repo:: rt4repo.repo.in
+rt5repo.repo:: rt5repo.repo.in
 	sed "s|@@@REPOBASE@@@|$(REPOBASE)|g" $? > $@
 
-.PHONY: rt4repo.rep
-rt4repo.repo::
+.PHONY: rt5repo.rep
+rt5repo.repo::
 	@cmp -s $@ /etc/yum.repos.d/$@ || \
 		(echo Warning: /etc/yum.repos.d/$@ does not match $@, exiting; exit 1)
 
@@ -302,11 +314,11 @@ epel-install::
 		(cd $$name && $(MAKE) all install) || exit 1; \
 	done
 
-rt4:: $(RT4PKGS)
+rt5:: $(RT5PKGS)
 
-.PHONY: rt4-install
-rt4-install::
-	@for name in $(RT4PKGS); do \
+.PHONY: rt5-install
+rt5-install::
+	@for name in $(RT5PKGS); do \
 		(cd $$name && $(MAKE) all install) || exit 1; \
 	done
 
@@ -318,16 +330,16 @@ rt4-install::
 $(EPELPKGS)::
 	(cd $@ && $(MAKE) $(MLAGS)) || exit 1
 
-.PHONY: $(RT4PKGS)
-$(RT4PKGS)::
+.PHONY: $(RT5PKGS)
+$(RT5PKGS)::
 	(cd $@ && $(MAKE) $(MLAGS)) || exit 1
 
 # Needed for local compilation, only use for dev environments
-build:: rt4repo.repo
+build:: rt5repo.repo
 
 .PHONY: build clean realclean distclean
 build clean realclean distclean::
-	@for name in $(EPELPKGS) $(RT4PKGS); do \
+	@for name in $(EPELPKGS) $(RT5PKGS); do \
 	     (cd $$name && $(MAKE) $(MFLAGS) $@); \
 	done
 
@@ -335,12 +347,14 @@ realclean distclean:: clean
 
 clean::
 	find . -name \*~ -exec rm -f {} \;
+	rm -f *.cfg
+	rm -rf rt5repo/
 
 # Use this only to build completely from scratch
-# Leave the rest of rt4repo alone.
+# Leave the rest of rt5repo alone.
 maintainer-clean:: clean
 	@echo Clearing local yum repository
-	find rt4repo -type f ! -type l -exec rm -f {} \; -print
+	find rt5repo -type f ! -type l -exec rm -f {} \; -print
 
 # Leave a safe repodata subdirectory
 .PHONY: maintainer-clean
@@ -348,15 +362,15 @@ maintainer-clean::
 
 .PHONY: safe-clean
 safe-clean:: maintainer-clean
-	@echo Populate rt4repo with empty, safe repodata
-	find rt4repo -noleaf -type d -name repodata | while read name; do \
+	@echo Populate rt5repo with empty, safe repodata
+	find rt5repo -noleaf -type d -name repodata | while read name; do \
 		createrepo -q $$name/..; \
 	done
 
 # This is only for upstream repository publication.
 # Modify for local use as needed, but do try to keep passwords and SSH
 # keys out of the git repository fo this software.
-RSYNCTARGET=rsync://localhost/rt4repo
+RSYNCTARGET=rsync://localhost/rt5repo
 RSYNCOPTS=-a -v --ignore-owner --ignore-group --ignore-existing
 RSYNCSAFEOPTS=-a -v --ignore-owner --ignore-group
 .PHONY: publish
