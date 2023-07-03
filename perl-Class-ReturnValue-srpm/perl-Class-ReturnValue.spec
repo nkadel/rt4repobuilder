@@ -11,8 +11,12 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 Requires:  	perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 BuildArch: 	noarch
 Source:    	http://search.cpan.org/CPAN/authors/id/J/JE/JESSE/Class-ReturnValue-%{version}.tar.gz
+
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:	perl(Devel::StackTrace)
 BuildRequires:	perl(ExtUtils::MakeMaker)
+BuildRequires:	perl(Module::Install)
 BuildRequires:	perl(Test::More)
 
 %description
