@@ -28,6 +28,9 @@ BuildRequires:  perl(Test::More) >= 0.88
 BuildRequires:  perl(Test::TCP) >= 0.15
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
+# Added for rt dependencies
+Provides: perl(Plack::Handler::Starlet) = %{version}-%{release}
+
 %description
 Starlet is a standalone HTTP/1.1 web server, formerly known as
 Plack::Server::Standalone::Prefork and

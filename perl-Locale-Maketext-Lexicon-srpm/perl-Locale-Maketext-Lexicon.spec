@@ -10,6 +10,9 @@ Source0:        https://cpan.metacpan.org/authors/id/D/DR/DRTECH/Locale-Maketext
 
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 Requires:       perl(Encode)
+%if 0%{?el8}
+BuildRequires:  perl(Encode) >= 3.19
+%endif
 Requires:       perl(File::Glob)
 Requires:       perl(File::Spec)
 Requires:       perl(FileHandle)

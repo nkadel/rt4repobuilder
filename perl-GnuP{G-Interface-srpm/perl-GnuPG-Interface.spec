@@ -9,9 +9,15 @@ URL:            http://search.cpan.org/dist/GnuPG-Interface
 Source0:        http://cpan.org/modules/by-module/GnuPG/GnuPG-Interface-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
-BuildRequires:  gpg, perl(Any::Moose), perl(ExtUtils::MakeMaker)
-Requires:  gpg, perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
-Requires:       perl(Any::Moose)
+
+BuildRequires:  perl
+BuildRequires:  perl-macros
+BuildRequires:  perl(Any::Moose)
+BuildRequires:  perl(ExtUtils::MakeMaker)
+BuildRequires:  gpg
+Requires:  gpg
+Requires:  perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
+Requires:  perl(Any::Moose)
 
 
 %description

@@ -26,7 +26,7 @@
 %global with_mysql 1
 %endif
 
-%if 0%{fedora} >= 37
+%if 0%{?fedora} >= 37
 %global web_handler	fcgid
 %else
 %global web_handler	modperl2
@@ -135,6 +135,10 @@ BuildRequires: perl(Digest::MD5) >= 2.27
 BuildRequires: perl(Email::Address) >= 1.912
 BuildRequires: perl(Email::Address::List) >= 0.06
 BuildRequires: perl(Encode) >= 2.64
+# Deal with fracturn RHEL 8 modules
+%if 0%{?el8}
+BuildRequires:  perl(Encode) >= 3.19
+%endif
 BuildRequires: perl(Encode::Detect::Detector)
 BuildRequires: perl(Encode::HanExtra)
 # In rt-test-dependencies, but seemingly unused

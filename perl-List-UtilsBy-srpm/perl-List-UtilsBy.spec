@@ -7,6 +7,9 @@ Group:          Development/Libraries
 URL:            http://search.cpan.org/dist/List-UtilsBy/
 Source0:        http://www.cpan.org/authors/id/P/PE/PEVANS/List-UtilsBy-%{version}.tar.gz
 BuildArch:      noarch
+
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl(Module::Build)
 BuildRequires:  perl(Test::More)
 

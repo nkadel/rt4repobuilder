@@ -7,7 +7,9 @@ Group:          Development/Libraries
 URL:            http://search.cpan.org/dist/Crypt-Eksblowfish/
 Source0:        http://www.cpan.org/modules/by-module/Crypt/Crypt-Eksblowfish-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
+
 BuildRequires:  perl >= 0:5.006
+BuildRequires:  perl-macros
 BuildRequires:  perl(Class::Mix) >= 0.001
 BuildRequires:  perl(ExtUtils::CBuilder) >= 0.15
 BuildRequires:  perl(Module::Build)

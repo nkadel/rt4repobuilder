@@ -12,14 +12,19 @@ BuildArch:      noarch
 # build requirements
 BuildRequires:  coreutils
 BuildRequires:  make
+BuildRequires:  perl
 BuildRequires:  perl-generators
 BuildRequires:  perl-interpreter
+BuildRequires:  perl-macros
 BuildRequires:  perl(ExtUtils::MakeMaker) >= 6.76
 # runtime requirements
 BuildRequires:  perl(B)
 BuildRequires:  perl(Carp)
 BuildRequires:  perl(Data::Dumper)
 BuildRequires:  perl(Encode)
+%if 0%{?el8}
+BuildRequires:  perl(Encode) >= 3.19
+%endif
 BuildRequires:  perl(HTTP::Headers::ActionPack) >= 0.07
 BuildRequires:  perl(HTTP::Status)
 BuildRequires:  perl(Hash::MultiValue)

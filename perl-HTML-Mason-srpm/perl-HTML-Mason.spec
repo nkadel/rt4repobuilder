@@ -93,8 +93,6 @@ Requires:       perl(Params::Validate) >= 0.70
 Requires:       perl(Scalar::Util) >= 1.01
 Requires:       perl(YAML)
 
-Provides: perl(HTML::Mason) = %{version}
-
 %{?perl_default_filter}
 
 # Filter out under-specified Requires:

@@ -13,6 +13,8 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 #BuildArch:      noarch
 
 # Provide needed config.h files.
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:	perl-devel
 BuildRequires:	perl(Test::Harness)
 

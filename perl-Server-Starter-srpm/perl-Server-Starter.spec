@@ -18,6 +18,9 @@ BuildRequires:  perl(Scope::Guard)
 BuildRequires:  perl(Test::Harness)
 BuildRequires:  perl(Test::TCP) >= 0.11
 BuildRequires:  perl(Encode) >= 2.39
+%if 0%{?el8}
+BuildRequires:  perl(Encode) >= 3.19
+%endif
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
 Provides: perl(Server::Starter) = %{version}

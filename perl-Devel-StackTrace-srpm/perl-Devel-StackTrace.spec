@@ -11,6 +11,8 @@ Source:    	http://search.cpan.org/CPAN/authors/id/D/DR/DROLSKY/Devel-StackTrace
 
 Buildarch: 	noarch
 
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(Scalar::Util)
 

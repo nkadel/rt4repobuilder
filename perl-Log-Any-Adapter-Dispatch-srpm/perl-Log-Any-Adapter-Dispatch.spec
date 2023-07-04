@@ -8,6 +8,9 @@ URL:            http://search.cpan.org/dist/Log-Any-Adapter-Dispatch/
 Source0:        http://www.cpan.org/authors/id/J/JS/JSWARTZ/Log-Any-Adapter-Dispatch-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
+
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(Log::Any::Adapter)
 BuildRequires:  perl(Log::Any::Adapter::Util)

@@ -19,6 +19,9 @@ BuildRequires:  perl(Carp)
 BuildRequires:  perl(Data::Section::Simple)
 BuildRequires:  perl(Digest::MD5)
 BuildRequires:  perl(Encode)
+%if 0%{?el8}
+BuildRequires:  perl(Encode) >= 3.19
+%endif
 BuildRequires:  perl(File::Basename)
 BuildRequires:  perl(File::Spec)
 BuildRequires:  perl(IO::File)

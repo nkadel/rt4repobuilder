@@ -6,6 +6,9 @@ Group:          Development/Libraries
 License:        GPL+ or Artistic
 URL:            http://search.cpan.org/dist/Class-Accessor/
 Source0:        http://search.cpan.org/CPAN/authors/id/K/KA/KASEI/Class-Accessor-%{version}.tar.gz
+
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:	perl(ExtUtils::MakeMaker)
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 

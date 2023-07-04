@@ -18,7 +18,7 @@ BuildRequires:  perl(Test::Pod::Coverage) >= 1.00
 
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
-Provides: perl(Digest::JHash::srpm) = %{version}
+Provides: perl(Digest::JHash) = %{version}
 
 %{?perl_default_filter}
 

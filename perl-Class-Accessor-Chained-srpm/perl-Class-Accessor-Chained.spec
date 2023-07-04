@@ -1,17 +1,18 @@
 Name:           perl-Class-Accessor-Chained
 Version:        0.01
-Release:        24%{?dist}
+#Release:        47%{?dist}
+Release:        0.47%{?dist}
 Summary:        Make chained accessors
-Group:          Development/Libraries
 License:        GPL+ or Artistic
-URL:            http://search.cpan.org/dist/Class-Accessor-Chained/
-Source0:        http://search.cpan.org/CPAN/authors/id/R/RC/RCLAMP/Class-Accessor-Chained-%{version}.tar.gz
+URL:            https://metacpan.org/release/Class-Accessor-Chained
+Source0:        https://cpan.metacpan.org/authors/id/R/RC/RCLAMP/Class-Accessor-Chained-%{version}.tar.gz
 Patch0:         Class-Accessor-Chained-0.01-pod.patch
 BuildArch:      noarch
 
 BuildRequires:  /usr/bin/pod2text
-BuildRequires:  perl
+BuildRequires:  make
 BuildRequires:  perl-macros
+BuildRequires:  perl-generators
 BuildRequires:  perl(base)
 BuildRequires:  perl(Carp)
 BuildRequires:  perl(Class::Accessor)
@@ -57,6 +58,75 @@ make test
 %{_mandir}/man3/Class::Accessor::Chained::Fast.3pm*
 
 %changelog
+* Fri Jul 22 2022 Fedora Release Engineering <releng@fedoraproject.org> - 0.01-47
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_37_Mass_Rebuild
+
+* Tue May 31 2022 Jitka Plesnikova <jplesnik@redhat.com> - 0.01-46
+- Perl 5.36 rebuild
+
+* Fri Jan 21 2022 Fedora Release Engineering <releng@fedoraproject.org> - 0.01-45
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_36_Mass_Rebuild
+
+* Thu Jul 22 2021 Fedora Release Engineering <releng@fedoraproject.org> - 0.01-44
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_35_Mass_Rebuild
+
+* Fri May 21 2021 Jitka Plesnikova <jplesnik@redhat.com> - 0.01-43
+- Perl 5.34 rebuild
+
+* Tue Jan 26 2021 Fedora Release Engineering <releng@fedoraproject.org> - 0.01-42
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_34_Mass_Rebuild
+
+* Tue Dec 08 2020 Charles R. Anderson <cra@alum.wpi.edu> - 0.01-41
+- BR make
+
+* Tue Jul 28 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.01-40
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_33_Mass_Rebuild
+
+* Tue Jun 23 2020 Jitka Plesnikova <jplesnik@redhat.com> - 0.01-39
+- Perl 5.32 rebuild
+
+* Wed Jan 29 2020 Fedora Release Engineering <releng@fedoraproject.org> - 0.01-38
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_32_Mass_Rebuild
+
+* Fri Jul 26 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.01-37
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_31_Mass_Rebuild
+
+* Fri May 31 2019 Jitka Plesnikova <jplesnik@redhat.com> - 0.01-36
+- Perl 5.30 rebuild
+
+* Fri Feb 01 2019 Fedora Release Engineering <releng@fedoraproject.org> - 0.01-35
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+
+* Fri Jul 13 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.01-34
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_29_Mass_Rebuild
+
+* Thu Jun 28 2018 Jitka Plesnikova <jplesnik@redhat.com> - 0.01-33
+- Perl 5.28 rebuild
+
+* Thu Feb 08 2018 Fedora Release Engineering <releng@fedoraproject.org> - 0.01-32
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
+
+* Thu Jul 27 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.01-31
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
+
+* Sun Jun 04 2017 Jitka Plesnikova <jplesnik@redhat.com> - 0.01-30
+- Perl 5.26 rebuild
+
+* Sat Feb 11 2017 Fedora Release Engineering <releng@fedoraproject.org> - 0.01-29
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_26_Mass_Rebuild
+
+* Sun May 15 2016 Jitka Plesnikova <jplesnik@redhat.com> - 0.01-28
+- Perl 5.24 rebuild
+
+* Thu Feb 04 2016 Fedora Release Engineering <releng@fedoraproject.org> - 0.01-27
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_24_Mass_Rebuild
+
+* Thu Jun 18 2015 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.01-26
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_23_Mass_Rebuild
+
+* Thu Jun 04 2015 Jitka Plesnikova <jplesnik@redhat.com> - 0.01-25
+- Perl 5.22 rebuild
+
 * Thu Aug 28 2014 Jitka Plesnikova <jplesnik@redhat.com> - 0.01-24
 - Perl 5.20 rebuild
 

@@ -10,6 +10,8 @@ Url:        http://search.cpan.org/dist/Module-Util
 Requires:   perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 BuildArch:  noarch
 
+BuildRequires: perl
+BuildRequires: perl-macros
 BuildRequires: perl(Module::Build)
 BuildRequires: perl(Test::Harness)
 BuildRequires: perl(Test::More)

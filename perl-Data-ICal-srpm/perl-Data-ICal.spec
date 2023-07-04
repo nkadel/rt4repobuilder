@@ -12,6 +12,8 @@ Patch0:         Data-ICal-%{version}.diff
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
 
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl(CPAN) perl(YAML::Tiny) perl(File::Remove)
 
 BuildRequires:  perl(Class::Accessor)

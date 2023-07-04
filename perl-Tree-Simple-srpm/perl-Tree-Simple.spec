@@ -20,7 +20,7 @@ BuildRequires:  perl(Test::Pod::Coverage) >= 1.04
 BuildRequires:  perl(Test::Memory::Cycle)
 
 # Added manually
-Provides: perl(Test::Simple) = %{version}
+Provides: perl(Tree::Simple) = %{version}
 
 Requires:  	perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 

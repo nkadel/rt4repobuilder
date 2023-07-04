@@ -20,6 +20,8 @@ BuildRequires:  perl(Scalar::Util) >= 1.14
 BuildRequires:  perl(Test::Pod), perl(Test::Pod::Coverage)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 
+Provides: perl(Text::WikiFormat)
+
 %description
 The original Wiki web site had a very simple interface to edit and to
 add pages.  Its formatting rules are simple and easy to use.  They are

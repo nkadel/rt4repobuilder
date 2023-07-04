@@ -7,7 +7,9 @@ Group:          Development/Libraries
 URL:            http://search.cpan.org/dist/Devel-StackTrace-WithLexicals/
 Source0:        http://www.cpan.org/authors/id/S/SA/SARTAK/Devel-StackTrace-WithLexicals-%{version}.tar.gz
 BuildArch:      noarch
+
 BuildRequires:  perl >= 1:5.8.1
+BuildRequires:  perl-macros
 BuildRequires:  perl(Devel::StackTrace) >= 1.25
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(PadWalker) >= 1.92

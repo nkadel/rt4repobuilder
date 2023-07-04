@@ -25,6 +25,8 @@ buildarch: noarch
 prefix:    %(echo %{_prefix})
 source:    ExtUtils-Install-1.54.tar.gz
 
+BuildRequires: perl
+BuildRequires: perl-macros
 buildrequires: perl(Module::Build)
 buildrequires: perl(Test::Harness)
 buildrequires: perl(Test::More)

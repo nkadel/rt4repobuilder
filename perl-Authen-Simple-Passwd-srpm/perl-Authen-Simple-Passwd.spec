@@ -8,6 +8,9 @@ URL:            http://search.cpan.org/dist/Authen-Simple-Passwd/
 Source0:        http://www.cpan.org/authors/id/C/CH/CHANSEN/Authen-Simple-Passwd-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
+
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl(Authen::Simple) >= 0.3
 BuildRequires:  perl(Module::Build)
 

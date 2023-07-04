@@ -8,6 +8,8 @@ URL:            http://search.cpan.org/dist/HTML-RewriteAttributes/
 Source0:        http://www.cpan.org/authors/id/T/TS/TSIBLEY/HTML-RewriteAttributes-%{version}.tar.gz
 BuildArch:      noarch
 
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl(base)
 BuildRequires:  perl(strict)
 BuildRequires:  perl(warnings)

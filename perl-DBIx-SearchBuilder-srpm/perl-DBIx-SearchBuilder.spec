@@ -16,7 +16,10 @@ Source0:	http://www.cpan.org/authors/id/T/TS/TSIBLEY/DBIx-SearchBuilder-%{versio
 
 Requires:	perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 BuildArch:	noarch
+
 # Urgh ...
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:	perl(CPAN)
 BuildRequires:	perl(Want)
 BuildRequires:	perl(Cache::Simple::TimedExpiry) >= 0.21
@@ -27,6 +30,9 @@ BuildRequires:	perl(ExtUtils::AutoInstall) >= 0.49
 BuildRequires:	perl(Test::More) >= 0.52
 BuildRequires:	perl(Class::Accessor)
 BuildRequires:	perl(Encode)
+%if 0%{?el8}
+BuildRequires:  perl(Encode) >= 3.19
+%endif
 BuildRequires:	perl(ExtUtils::MakeMaker)
 
 # Improved tests:

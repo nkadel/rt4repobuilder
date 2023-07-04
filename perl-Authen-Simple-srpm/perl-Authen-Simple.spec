@@ -9,6 +9,8 @@ Source0:        http://www.cpan.org/authors/id/C/CH/CHANSEN/Authen-Simple-%{vers
 BuildArch:      noarch
 
 BuildRequires:	dos2unix
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl(Class::Accessor::Fast)
 BuildRequires:  perl(Class::Data::Inheritable)
 BuildRequires:  perl(Crypt::PasswdMD5)

@@ -10,6 +10,8 @@ Source0:        http://www.cpan.org/authors/id/G/GA/GAAS/URI-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch:      noarch
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl(MIME::Base64)
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(Test::Harness)

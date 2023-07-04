@@ -25,6 +25,9 @@ BuildRequires:  perl(Term::ANSIColor)
 BuildRequires:  perl(vars)
 # Test Suite
 BuildRequires:  perl(Encode) >= 1.20
+%if 0%{?el8}
+BuildRequires:  perl(Encode) >= 3.19
+%endif
 BuildRequires:  perl(File::Spec::Functions)
 BuildRequires:  perl(Test::More)
 # Runtime

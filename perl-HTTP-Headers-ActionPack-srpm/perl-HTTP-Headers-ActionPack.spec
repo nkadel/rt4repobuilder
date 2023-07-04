@@ -18,6 +18,9 @@ BuildRequires:  perl(ExtUtils::MakeMaker) >= 6.76
 # runtime requirements
 BuildRequires:  perl(Carp)
 BuildRequires:  perl(Encode)
+%if 0%{?el8}
+BuildRequires:  perl(Encode) >= 3.19
+%endif
 BuildRequires:  perl(HTTP::Date)
 BuildRequires:  perl(HTTP::Headers::Util)
 BuildRequires:  perl(List::Util)

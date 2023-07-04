@@ -17,6 +17,9 @@ BuildRequires:  perl-generators
 BuildRequires:  perl(Carp)
 BuildRequires:  perl(Cwd)
 BuildRequires:  perl(Encode)
+%if 0%{?el8}
+BuildRequires:  perl(Encode) >= 3.19
+%endif
 BuildRequires:  perl(Exporter)
 BuildRequires:  perl(Fcntl)
 BuildRequires:  perl(File::Basename)

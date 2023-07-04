@@ -9,6 +9,8 @@ Source0:        https://cpan.metacpan.org/authors/id/D/DJ/DJERIUS/Expect-Simple-
 BuildArch:      noarch
 # Build
 BuildRequires:  make
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl-generators
 BuildRequires:  perl-interpreter
 BuildRequires:  perl(ExtUtils::MakeMaker) >= 6.76

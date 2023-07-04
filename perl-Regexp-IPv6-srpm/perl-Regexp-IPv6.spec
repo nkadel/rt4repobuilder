@@ -8,10 +8,15 @@ URL:            http://search.cpan.org/dist/Regexp-IPv6/
 Source0:        http://www.cpan.org/authors/id/S/SA/SALVA/Regexp-IPv6-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
+
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl(ExtUtils::MakeMaker)
 BuildRequires:  perl(Test::Harness)
 BuildRequires:  perl(Test::More)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
+
+Provides: perl(Regexp::IPv6) = %{version}
 
 %description
 This module exports the $IPv6_re regular expression that matches any valid

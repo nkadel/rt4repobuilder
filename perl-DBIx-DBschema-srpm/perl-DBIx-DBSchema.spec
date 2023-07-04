@@ -12,6 +12,9 @@ BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildArch:      noarch
 Requires:  perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
+
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:	perl(ExtUtils::MakeMaker)
 BuildRequires:	perl(DBI)
 BuildRequires:	perl(FreezeThaw)

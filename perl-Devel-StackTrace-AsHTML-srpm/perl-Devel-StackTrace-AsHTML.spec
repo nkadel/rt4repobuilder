@@ -9,6 +9,8 @@ URL:            http://search.cpan.org/dist/Devel-StackTrace-AsHTML
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
 BuildArch:      noarch
 
+BuildRequires:  perl
+BuildRequires:  perl-macros
 BuildRequires:  perl(Data::Dumper)
 BuildRequires:  perl(Devel::StackTrace)
 BuildRequires:  perl(ExtUtils::MakeMaker) >= 6.42

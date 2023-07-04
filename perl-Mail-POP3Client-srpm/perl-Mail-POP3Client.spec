@@ -1,6 +1,6 @@
 Name:           perl-Mail-POP3Client
 Version:        2.18
-#Release:        6%{?dist}
+#Release:        6%%{?dist}
 Release:        0.6%{?dist}
 Summary:        Perl 5 module to talk to a POP3 (RFC1939) server
 License:        GPL+ or Artistic
@@ -9,9 +9,15 @@ URL:            http://search.cpan.org/dist/Mail-POP3Client/
 Source0:        http://www.cpan.org/authors/id/S/SD/SDOWD/Mail-POP3Client-%{version}.tar.gz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildArch:      noarch
-BuildRequires:  perl(ExtUtils::MakeMaker)
+
 BuildRequires:  make
+BuildRequires:  perl
+BuildRequires:  perl-macros
+BuildRequires:  perl(ExtUtils::MakeMaker)
 Requires:       perl(:MODULE_COMPAT_%(eval "`%{__perl} -V:version`"; echo $version))
+
+# Manual dependency needed
+Provides: perl(Mail::POP3Client) = %{version}
 
 %description
 This module implements an Object-Oriented interface to a POP3 server. It
