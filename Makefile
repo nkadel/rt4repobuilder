@@ -31,7 +31,11 @@ EPELPKGS+=perl-Capture-Tiny-srpm
 EPELPKGS+=perl-Carp-Assert-srpm
 EPELPKGS+=perl-Class-Accessor-Chained-srpm
 EPELPKGS+=perl-Class-Container-srpm
+EPELPKGS+=perl-Class-ReturnValue-srpm
+EPELPKGS+=perl-Clone-srpm
 EPELPKGS+=perl-Digest-JHash-srpm
+# Avoid RHEL 8 mudularity screwups with fedora version for RHEL 8
+EPELPKGS+=perl-Encode-srpm
 EPELPKGS+=perl-Expect-Simple-srpm
 EPELPKGS+=perl-Guard-srpm
 EPELPKGS+=perl-HTTP-Entity-Parser-srpm
@@ -72,12 +76,10 @@ EPELPKGS+=perl-XML-RSS-srpm
 #EPELPKGS+=perl-Calendar-Simple-srpm
 #EPELPKGS+=perl-Class-Accessor-Lite-srpm
 #EPELPKGS+=perl-Class-Accessor-srpm
-#EPELPKGS+=perl-Class-ReturnValue-srpm
 #EPELPKGS+=perl-Crypt-Eksblowfish-srpm
 #EPELPKGS+=perl-DBIx-DBschema-srpm
 #EPELPKGS+=perl-Devel-StackTrace-AsHTML-srpm
 #EPELPKGS+=perl-Devel-StackTrace-srpm
-#EPELPKGS+=perl-Encode-srpm
 #EPELPKGS+=perl-ExtUtils-Installed-srpm
 #EPELPKGS+=perl-GnuP{G-Interface-srpm
 #EPELPKGS+=perl-List-UtilsBy-srpm
@@ -95,41 +97,42 @@ EPELPKGS+=perl-XML-RSS-srpm
 RT5PKGS+=perl-Locale-Maketext-Lexicon-srpm
 
 #RT5PKGS+=perl-Authen-Simple-Passwd-srpm
+# Requires perl-Set-IntSpan-srpm
 RT5PKGS+=perl-Business-Hours-srpm
 
-# Requires HTTP::Headers::ActionPack
+# Requires perl-HTTP-Headers-ActionPack-srpm
 RT5PKGS+=perl-Web-Machine-srpm
 
-# Requires HTTP::Server::Simple
+# Requires perl-HTTP-Server-Simple-srpm
 RT5PKGS+=perl-Test-HTTP-Server-Simple-srpm
 
-## Now requires perl-Cache-Simple-TimedExpiry-srpm
+## Requires perl-Cache-Simple-TimedExpiry-srpm
 #RT5PKGS+=perl-DBIx-SearchBuilder-srpm
 #
-## Dependencies for perl-Test-ShardFork-srpm and perl-CHI
+## Requires perl-Test-ShardFork-srpm and perl-CHI-srpm
 #RT5PKGS+=perl-ExtUtils-MakeMaker-srpm
 #
-## Dependencies for perl-Test-TCP-srpm
+## Requires for perl-Test-TCP-srpm
 #RT5PKGS+=perl-Test-SharedFork-srpm
 #RT5PKGS+=perl-Test-TCP-srpm
 #
 # Dependencies for perl-CHI
-# Dependency for perl-Log-Any-Adapter-Dispatch
-# Reuqires perl-Log-Any-srpm
+# Requires perl-Log-Any-srpm
 RT5PKGS+=perl-Log-Any-Adapter-srpm
+# Requires perl-Log-Any-Adapter-Dispatch-srpm
 #RT5PKGS+=perl-Log-Any-Adapter-Dispatch-srpm
 RT5PKGS+=perl-Module-Mask-srpm
 RT5PKGS+=perl-CHI-srpm
 #
 #RT5PKGS+=perl-Convert-Color-srpm
 #
-## Dependency for perl-Data-ICal-srpm
+## Requires perl-Data-ICal-srpm
 #RT5PKGS+=perl-Text-vFile-asData-srpm
 #RT5PKGS+=perl-Data-ICal-srpm
 #
 #RT5PKGS+=perl-Devel-StackTrace-WithLexicals-srpm
 #
-# Reauires perl-IO-Compress-Brotli-srpm
+# Requires perl-IO-Compress-Brotli-srpm
 RT5PKGS+=perl-HTTP-Message-srpm
 ## Dependency for perl-HTML-Mason-PSGIHandler-srpm
 #RT5PKGS+=perl-Plack-srpm
@@ -151,14 +154,15 @@ RT5PKGS+=perl-Starlet-srpm
 #
 RT5PKGS+=perl-Test-Expert-srpm
 #
-# Dependencies for perl-Test-Email-srpm
+# Requires perl-Mail-POP3Client-srpm
 RT5PKGS+=perl-Test-Email-srpm
 #
-# Requires perl-Carp-Assert
+# Requires perl-Carp-Assert-srpm
 RT5PKGS+=perl-Carp-Assert-More-srpm
 
 #RT5PKGS+=perl-Test-HTTP-Server-Simple-StashWarnings-srpm
 #
+# Requires perl-HTTP-Message-srpm
 RT5PKGS+=perl-Test-WWW-Mechanize-srpm
 #
 # Requiresperl-CSS-MinifieS-srpm
@@ -210,12 +214,18 @@ $(CFGS)::
 	@echo Generating $@ from $?
 	@echo "include('/etc/mock/$@')" | tee $@
 
-## This will only work with DNF and when repo is configured with modules=1 for repo in dnf.conf.
-## This is executed just before 'chroot_setup_cmd'.
-# config_opts['module_enable'] = ['list', 'of', 'modules']
-# config_opts['module_install'] = ['module1/profile', 'module2/profile']
+centos-stream+epel-8-x86_64.cfg:: /etc/mock/centos-stream+epel-8-x86_64.cfg
+	@echo Generating $@ from $?
+	@echo "include('$?')" | tee $@
+	@echo "# Disable best" | tee -a $@
+	@echo "config_opts['dnf_vars'] = { 'best': 'False' }" | tee -a $@
 
-#mock -r fedora-30-x86_64 --config-opts module_enable=postgresql:9.6 --config-opts module_enable= --install postgresql-server
+centos-stream+epel-9-x86_64.cfg:: /etc/mock/centos-stream+epel-9-x86_64.cfg
+	@echo Generating $@ from $?
+	@echo "include('$?')" | tee $@
+	@echo "# Disable best" | tee -a $@
+	@echo "config_opts['dnf_vars'] = { 'best': 'False' }" | tee -a $@
+
 rt5repo-8-x86_64.cfg: /etc/mock/centos-stream+epel-8-x86_64.cfg
 	@echo Generating $@ from $?
 	@echo "include('$?')" | tee $@
