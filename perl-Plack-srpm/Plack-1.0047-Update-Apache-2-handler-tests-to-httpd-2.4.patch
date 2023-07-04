@@ -1,0 +1,93 @@
+From 36c7c9397150af95e6f0656243a0ed13d05e7017 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Petr=20P=C3=ADsa=C5=99?= <ppisar@redhat.com>
+Date: Mon, 26 Nov 2018 09:30:16 +0100
+Subject: [PATCH] Update Apache 2 handler tests to httpd 2.4
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signed-off-by: Petr Písař <ppisar@redhat.com>
+---
+ t/Plack-Handler/apache2-registry.t |  7 +++++--
+ t/Plack-Handler/apache2.t          | 21 +++++++++++++++------
+ 2 files changed, 20 insertions(+), 8 deletions(-)
+
+diff --git a/t/Plack-Handler/apache2-registry.t b/t/Plack-Handler/apache2-registry.t
+index b6ab542..bd44b7c 100644
+--- a/t/Plack-Handler/apache2-registry.t
++++ b/t/Plack-Handler/apache2-registry.t
+@@ -94,11 +94,14 @@ EOF
+ sub _render_conf {
+     my ($tmpdir, $port) = @_;
+     <<"END";
+-LoadModule perl_module libexec/apache2/mod_perl.so
++LoadModule unixd_module modules/mod_unixd.so
++LoadModule authn_core_module modules/mod_authn_core.so
++LoadModule authz_core_module modules/mod_authz_core.so
++LoadModule mpm_event_module modules/mod_mpm_event.so
++LoadModule perl_module modules/mod_perl.so
+ ServerRoot $tmpdir
+ DocumentRoot $tmpdir
+ PidFile $tmpdir/httpd.pid
+-LockFile $tmpdir/httpd.lock
+ ErrorLog $tmpdir/error_log
+ Listen $port
+ 
+diff --git a/t/Plack-Handler/apache2.t b/t/Plack-Handler/apache2.t
+index f5ea803..701dcf3 100644
+--- a/t/Plack-Handler/apache2.t
++++ b/t/Plack-Handler/apache2.t
+@@ -55,11 +55,14 @@ EOF
+ sub _render_conf {
+     my ($tmpdir, $port, $psgi_path) = @_;
+     <<"END";
+-LoadModule perl_module libexec/apache2/mod_perl.so
++LoadModule unixd_module modules/mod_unixd.so
++LoadModule authn_core_module modules/mod_authn_core.so
++LoadModule authz_core_module modules/mod_authz_core.so
++LoadModule mpm_event_module modules/mod_mpm_event.so
++LoadModule perl_module modules/mod_perl.so
+ ServerRoot $tmpdir
+ DocumentRoot $tmpdir
+ PidFile $tmpdir/httpd.pid
+-LockFile $tmpdir/httpd.lock
+ ErrorLog $tmpdir/error_log
+ Listen $port
+ 
+@@ -79,11 +82,14 @@ END
+ sub _render_conf_location {
+     my ($tmpdir, $port, $psgi_path) = @_;
+     <<"END";
+-LoadModule perl_module libexec/apache2/mod_perl.so
++LoadModule unixd_module modules/mod_unixd.so
++LoadModule authn_core_module modules/mod_authn_core.so
++LoadModule authz_core_module modules/mod_authz_core.so
++LoadModule mpm_event_module modules/mod_mpm_event.so
++LoadModule perl_module modules/mod_perl.so
+ ServerRoot $tmpdir
+ DocumentRoot $tmpdir
+ PidFile $tmpdir/httpd.pid
+-LockFile $tmpdir/httpd.lock
+ ErrorLog $tmpdir/error_log
+ Listen $port
+ 
+@@ -103,11 +109,14 @@ END
+ sub _render_conf_location_match {
+     my ($tmpdir, $port, $psgi_path) = @_;
+     <<"END";
+-LoadModule perl_module libexec/apache2/mod_perl.so
++LoadModule unixd_module modules/mod_unixd.so
++LoadModule authn_core_module modules/mod_authn_core.so
++LoadModule authz_core_module modules/mod_authz_core.so
++LoadModule mpm_event_module modules/mod_mpm_event.so
++LoadModule perl_module modules/mod_perl.so
+ ServerRoot $tmpdir
+ DocumentRoot $tmpdir
+ PidFile $tmpdir/httpd.pid
+-LockFile $tmpdir/httpd.lock
+ ErrorLog $tmpdir/error_log
+ Listen $port
+ 
+-- 
+2.17.2
+
